@@ -1,5 +1,7 @@
 package dev.it22.kmitl.reg.model;
 
+import dev.it22.kmitl.reg.utils.Database;
+
 public class Users {
     private String username;
     private String password;
