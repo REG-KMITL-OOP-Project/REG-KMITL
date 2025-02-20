@@ -1,0 +1,40 @@
+package dev.it22.kmitl.reg.controller;
+
+import dev.it22.kmitl.reg.utils.Database;
+import dev.it22.kmitl.reg.utils.PasswordHash;
+
+import java.sql.ResultSet;
+
+public class Register {
+    private  String username;
+    private  String password;
+
+    public Register(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public void registerWithUsernameAndPassword() {
+        String passwordHash = new PasswordHash(this.password).hashPassword();
+        System.out.println("Register with username: " + this.username );
+        Database db = new Database();
+        try {
+
+            ResultSet isExist = db.getQuery("SELECT * FROM user WHERE username = '" + this.username + "';");
+            if (isExist.next()) {
+               throw new Exception("🔥ERROR : Username already exist");
+            }
+
+            int res = db.postQuery("INSERT INTO user (username, password) VALUES ('" + this.username + "', '" + passwordHash + "');");
+            System.out.println("Register success : " + this.username + "status: " + res);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        Register register = new Register("test1234567", "test");
+        register.registerWithUsernameAndPassword();
+    }
+}

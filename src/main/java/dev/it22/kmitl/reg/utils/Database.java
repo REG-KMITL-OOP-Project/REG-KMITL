@@ -8,6 +8,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class Database {
     Dotenv dotenv = Dotenv.load();
 
+    private Connection conn;
     private String hostname;
     private int port;
     private String databaseName;
@@ -49,33 +50,40 @@ public class Database {
         this.databaseName = dotenv.get("DATABASE_DBNAME");
         this.username = dotenv.get("DATABASE_USERNAME");
         this.password = dotenv.get("DATABASE_PASSWORD");
-    }
 
-    public Connection getConnection() throws SQLException {
-        Connection conn = null;
         String dbStringConnect = "jdbc:mysql://" + this.hostname + ":" + this.port + "/" + this.databaseName;
         System.out.println("💛Try to connect to " + dbStringConnect);
         try {
-            conn = DriverManager.getConnection(dbStringConnect, this.username, this.password);
+            this.conn = DriverManager.getConnection(dbStringConnect, this.username, this.password);
         }
         catch (Exception e) {
             System.out.println("❤️‍🔥 Error connecting to " + dbStringConnect + ": " + e.getMessage());
-            throw new SQLException(e);
         }
-
-        return conn;
     }
+
 
     public ResultSet getQuery(String query) throws SQLException {
         System.out.println("💗 Try to execute query " + query);
         try{
-            Connection conn = getConnection();
-            Statement stmt = conn.createStatement();
+
+            Statement stmt = this.conn.createStatement();
             return stmt.executeQuery(query);
         }
         catch (Exception e) {
             System.out.println("❤️‍🔥 Error executing query " + query + " : " + e.getMessage());
         }
         return null;
+    }
+
+    public int postQuery(String query) throws SQLException {
+        System.out.println("💗 Try to execute query " + query);
+        try{
+            Statement stmt = conn.createStatement();
+            return stmt.executeUpdate(query);
+        }
+        catch (Exception e) {
+            System.out.println("❤️‍🔥 Error executing query " + query + " : " + e.getMessage());
+        }
+        return 0;
     }
 }
