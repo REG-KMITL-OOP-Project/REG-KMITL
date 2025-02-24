@@ -19,9 +19,9 @@ public class HomePage implements ActionListener {
     JLabel label[];
     JPanel bottomPanel;
 
-    public HomePage() {
+    public HomePage(JFrame frame) {
 
-        frame = Config.createAndShowGUI();
+        this.frame = frame;
         frame.setLayout(new GridLayout(2,1));
 
         upperPanel = new JPanel();
@@ -84,9 +84,6 @@ public class HomePage implements ActionListener {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new HomePage();
-    }
 
     public JPanel createWelcomePanel() {
         JPanel panel = new JPanel();
@@ -127,16 +124,34 @@ public class HomePage implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(button[0])) {
             System.out.println("btn0");
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
         }else if (e.getSource().equals(button[1])) {
             System.out.println("btn1");
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
         }else if (e.getSource().equals(button[2])) {
             System.out.println("btn2");
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
         }else if (e.getSource().equals(button[3])) {
             System.out.println("btn3");
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
         }else if (e.getSource().equals(button[4])) {
             System.out.println("btn4");
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
         }else if (e.getSource().equals(button[5])) {
             System.out.println("btn5");
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
         }
 
     }
