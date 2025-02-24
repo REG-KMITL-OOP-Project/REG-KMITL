@@ -11,25 +11,29 @@ public class Config {
     public static final Color primaryColor_base = new Color(255,137,5);
     public static final Color primaryColor_hard = new Color(255,105,0);
     public static final Color primaryColor_harder = new Color(245,73,0);
-    public static Font HEADER_1;
-    public static Font HEADER_2;
-    public static Font HEADER_3;
-    public static Font HEADER_4;
-    public static Font NORMAL;
+    public static Font HEADER_REGULAR[];
+    public static Font HEADER_SEMIBOLD[];
+    public static Font NORMAL_REGULAR;
+    public static Font NORMAL_LIGHT;
+    public static int size[] = {27,24,18,15};
     static {
+        HEADER_REGULAR = new Font[4];
+        HEADER_SEMIBOLD = new Font[4];
         try {
-            NORMAL = Font.createFont(Font.TRUETYPE_FONT, new File("source/Noto_Sans_Thai_Looped/NotoSansThaiLooped-Medium.ttf")).deriveFont(Font.BOLD, 12);
-            HEADER_1 = Font.createFont(Font.TRUETYPE_FONT, new File("source/Noto_Sans_Thai_Looped/NotoSansThaiLooped-SemiBold.ttf")).deriveFont(Font.BOLD, 27);
-            HEADER_2 = Font.createFont(Font.TRUETYPE_FONT, new File("source/Noto_Sans_Thai_Looped/NotoSansThaiLooped-SemiBold.ttf")).deriveFont(Font.BOLD, 24);
-            HEADER_3 = Font.createFont(Font.TRUETYPE_FONT, new File("source/Noto_Sans_Thai_Looped/NotoSansThaiLooped-SemiBold.ttf")).deriveFont(Font.BOLD, 18);
-            HEADER_4 = Font.createFont(Font.TRUETYPE_FONT, new File("source/Noto_Sans_Thai_Looped/NotoSansThaiLooped-SemiBold.ttf")).deriveFont(Font.BOLD, 15);
+            for (int i = 0; i < HEADER_REGULAR.length; i++) {
+                HEADER_REGULAR[i] = Font.createFont(Font.TRUETYPE_FONT, new File("source/Noto_Sans_Thai/NotoSansThai-Regular.ttf")).deriveFont(Font.PLAIN, size[i]);
+                HEADER_SEMIBOLD[i] = Font.createFont(Font.TRUETYPE_FONT, new File("source/Noto_Sans_Thai/NotoSansThai-SemiBold.ttf")).deriveFont(Font.PLAIN, size[i]);
+            }
+            NORMAL_REGULAR = Font.createFont(Font.TRUETYPE_FONT, new File("source/Noto_Sans_Thai_Looped/NotoSansThaiLooped-Regular.ttf")).deriveFont(Font.PLAIN, 12);
+            NORMAL_LIGHT = Font.createFont(Font.TRUETYPE_FONT, new File("source/Noto_Sans_Thai_Looped/NotoSansThaiLooped-Light.ttf")).deriveFont(Font.PLAIN, 12);
         } catch (Exception e) {
             e.printStackTrace();
-            NORMAL = new Font("Noto Sans Thai Looped",Font.PLAIN,12);
-            HEADER_1 = new Font("Noto Sans Thai Looped",Font.BOLD,27);
-            HEADER_2 = new Font("Noto Sans Thai Looped",Font.BOLD,24);
-            HEADER_3 = new Font("Noto Sans Thai Looped",Font.BOLD,18);
-            HEADER_4 = new Font("Noto Sans Thai Looped",Font.BOLD,15);
+            for (int i = 0; i < HEADER_REGULAR.length; i++) {
+                HEADER_REGULAR[i] = new Font("Arial", Font.PLAIN, size[i]);
+                HEADER_SEMIBOLD[i] = new Font("Arial", Font.BOLD, size[i]);
+            }
+            NORMAL_REGULAR = new Font("Arial", Font.BOLD, 12);
+            NORMAL_LIGHT = new Font("Arial", Font.PLAIN, 12);
         }
     }
 
@@ -43,11 +47,10 @@ public class Config {
         frame.setSize(new Dimension(screenSize.width * 4/5,screenSize.height *4/5));
         frame.setIconImage(new ImageIcon("source/Logo.png").getImage());
         frame.setLocation(screenSize.width/9,screenSize.height/9);
-        frame.setVisible(true);
         System.out.println(screenSize);
         return frame;
     }
-    public static JPanel createLogoAndTitle() {
+    public static JPanel createLogoAndTitle(Font font,int squareSize) {
 
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -59,9 +62,9 @@ public class Config {
         title.setEditable(false);
         title.setBackground(null);
         title.setForeground(Color.WHITE);
-        title.setFont(Config.HEADER_4);
+        title.setFont(font);
 
-        ImageIcon logo = new ImageIcon(new ImageIcon("source/Logo.png").getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+        ImageIcon logo = new ImageIcon(new ImageIcon("source/Logo.png").getImage().getScaledInstance(squareSize,squareSize,Image.SCALE_SMOOTH));
         JLabel regLabel = new JLabel(logo);
 
         topPanel.add(regLabel);

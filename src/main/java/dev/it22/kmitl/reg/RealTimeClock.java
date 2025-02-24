@@ -11,7 +11,7 @@ public class RealTimeClock {
     public RealTimeClock() {
         clock = new JTextArea();
 //        Font font = Config.HEADER_1;
-        clock.setFont(Config.HEADER_1);
+        clock.setFont(Config.HEADER_SEMIBOLD[0]);
         clock.setForeground(Color.WHITE);
 //        clock.setLineWrap(true);
         clock.setEditable(false);

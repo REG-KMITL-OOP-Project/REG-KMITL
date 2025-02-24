@@ -29,7 +29,7 @@ public class HomePage implements ActionListener {
         upperPanel.setLayout(new BorderLayout());
 
         innerUpperPanel.setLayout(new BorderLayout());
-        innerUpperPanel.add(Config.createLogoAndTitle(), BorderLayout.NORTH);
+        innerUpperPanel.add(Config.createLogoAndTitle(Config.HEADER_SEMIBOLD[3],50), BorderLayout.NORTH);
         innerUpperPanel.add(createWelcomePanel(), BorderLayout.CENTER);
         innerUpperPanel.setPreferredSize(new Dimension(frame.getWidth() * 2/3 , upperPanel.getHeight()));
         innerUpperPanel.setBackground(null);
@@ -56,24 +56,32 @@ public class HomePage implements ActionListener {
             inPanel[i] = new JPanel();
             button[i] = new RoundedButton("",20);
             button[i].setIcon(new ImageIcon(new ImageIcon(source[i]).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH)));
-            label[i] = new JLabel(name[i]);
 
             inPanel[i].setLayout(new BoxLayout(inPanel[i], BoxLayout.Y_AXIS));
             inPanel[i].setBackground(null);
-            inPanel[i].setPreferredSize(new Dimension(180,225));
+            inPanel[i].setPreferredSize(new Dimension((frame.getWidth()-150)/6,(frame.getHeight() / 2) - 120));
+
+            button[i] = new RoundedButton("",20);
+            button[i].setIcon(new ImageIcon(new ImageIcon(source[i]).getImage().getScaledInstance(inPanel[i].getPreferredSize().width-60,inPanel[i].getPreferredSize().width-60,Image.SCALE_SMOOTH)));
+
             button[i].setBackground(Config.primaryColor_base);
             button[i].setAlignmentX(Component.CENTER_ALIGNMENT);
             button[i].addActionListener(this);
-            label[i].setFont(Config.HEADER_3);
+
+            label[i] = new JLabel(name[i]);
+            label[i].setFont(Config.HEADER_SEMIBOLD[2]);
             label[i].setForeground(Color.WHITE);
             label[i].setAlignmentX(Component.CENTER_ALIGNMENT);
+
             inPanel[i].add(button[i]);
             inPanel[i].add(Box.createVerticalStrut(15));
             inPanel[i].add(label[i]);
+
             bottomPanel.add(inPanel[i]);
         }
 
         frame.add(bottomPanel);
+        frame.setVisible(true);
     }
 
     public static void main(String[] args) {
@@ -96,11 +104,11 @@ public class HomePage implements ActionListener {
 
         JLabel welcome = new JLabel("ยินดีต้อนรับ ");
         welcome.setForeground(Color.WHITE);
-        welcome.setFont(Config.HEADER_2);
+        welcome.setFont(Config.HEADER_SEMIBOLD[1]);
 
         JLabel idLabel = new JLabel("XX07XXXX");
         idLabel.setForeground(Config.primaryColor_base);
-        idLabel.setFont(Config.HEADER_2);
+        idLabel.setFont(Config.HEADER_SEMIBOLD[1]);
 
         topPanel.add(welcome);
         topPanel.add(idLabel);
@@ -108,7 +116,7 @@ public class HomePage implements ActionListener {
         JLabel nameLabel = new JLabel(" คุณXXXXXXXXXX XXXXXXXXX");
         nameLabel.setBackground(null);
         nameLabel.setForeground(Config.primaryColor_base);
-        nameLabel.setFont(Config.HEADER_2);
+        nameLabel.setFont(Config.HEADER_SEMIBOLD[1]);
         nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         panel.add(topPanel);
