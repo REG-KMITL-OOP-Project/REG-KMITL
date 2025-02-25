@@ -1,4 +1,4 @@
-package dev.it22.kmitl.reg.controller;
+package dev.it22.kmitl.reg.controller.auth;
 
 import dev.it22.kmitl.reg.utils.Database;
 import dev.it22.kmitl.reg.utils.PasswordHash;
