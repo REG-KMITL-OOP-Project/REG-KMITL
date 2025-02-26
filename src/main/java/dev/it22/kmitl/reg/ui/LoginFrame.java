@@ -1,33 +1,35 @@
 package dev.it22.kmitl.reg.ui;
 
+import dev.it22.kmitl.reg.utils.Config;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginFrame extends JFrame {
+public class LoginFrame {
     private final JTextField usernameField;
     private final JPasswordField passwordField;
     private final JButton loginButton;
     private final JButton registerButton;
 
-    public LoginFrame() {
-        super("Login");
-        setSize(300, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(3, 2));
+    public LoginFrame(JFrame config) {
+        config.setTitle("Login");
+        config.setLayout(new GridLayout(3, 2));
 
-        add(new JLabel("Username:"));
+        config.add(new JLabel("Username:"));
         usernameField = new JTextField();
-        add(usernameField);
+        config.add(usernameField);
 
-        add(new JLabel("Password:"));
+        config.add(new JLabel("Password:"));
         passwordField = new JPasswordField();
-        add(passwordField);
+        config.add(passwordField);
 
         loginButton = new JButton("Login");
-        add(loginButton);
+        config.add(loginButton);
 
         registerButton = new JButton("Register");
-        add(registerButton);
+        config.add(registerButton);
+
+        config.setVisible(true);
     }
 
     public JTextField getUsernameField() {
@@ -45,4 +47,11 @@ public class LoginFrame extends JFrame {
     public JButton getRegisterButton() {
         return registerButton;
     }
+
+
+    public static void main(String[] args) {
+        JFrame config = Config.createAndShowGUI();
+        new LoginFrame(config);
+    }
 }
+

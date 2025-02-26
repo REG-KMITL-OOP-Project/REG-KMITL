@@ -1,4 +1,4 @@
-package dev.it22.kmitl.reg;
+package dev.it22.kmitl.reg.utils;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import javax.imageio.ImageIO;

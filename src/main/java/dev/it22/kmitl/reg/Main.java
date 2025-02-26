@@ -1,8 +1,8 @@
 package dev.it22.kmitl.reg;
 
-import dev.it22.kmitl.reg.utils.Database;
+import dev.it22.kmitl.reg.ui.HomePage;
+import dev.it22.kmitl.reg.utils.Config;
 
-import java.sql.ResultSet;
 import javax.swing.*;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
