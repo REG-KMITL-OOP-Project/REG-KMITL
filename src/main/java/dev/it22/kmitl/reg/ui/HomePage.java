@@ -1,4 +1,8 @@
-package dev.it22.kmitl.reg;
+package dev.it22.kmitl.reg.ui;
+
+import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.RealTimeClock;
+import dev.it22.kmitl.reg.utils.RoundedButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -154,5 +158,10 @@ public class HomePage implements ActionListener {
             frame.repaint();
         }
 
+    }
+
+    public static void main(String[] args) {
+        JFrame config = Config.createAndShowGUI();
+        new HomePage(config);
     }
 }

@@ -1,4 +1,4 @@
-package dev.it22.kmitl.reg.provider.auth;
+package dev.it22.kmitl.reg.model.auth;
 import java.util.*;
 
 public class Prof extends Account{

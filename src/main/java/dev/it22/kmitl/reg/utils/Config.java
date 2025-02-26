@@ -1,8 +1,6 @@
-package dev.it22.kmitl.reg;
+package dev.it22.kmitl.reg.utils;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import javax.swing.*;
 public class Config {
     public static final Color bgColor_base = new Color(63,63,71);
