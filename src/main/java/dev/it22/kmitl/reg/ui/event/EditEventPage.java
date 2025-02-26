@@ -1,8 +1,7 @@
-package dev.it22.kmitl.reg;
+package dev.it22.kmitl.reg.ui.event;
 import dev.it22.kmitl.reg.utils.Config;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 public class EditEventPage {
