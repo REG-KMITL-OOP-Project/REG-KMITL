@@ -1,4 +1,6 @@
 package dev.it22.kmitl.reg;
+import dev.it22.kmitl.reg.utils.Config;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

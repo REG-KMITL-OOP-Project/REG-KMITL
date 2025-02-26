@@ -1,4 +1,4 @@
-package dev.it22.kmitl.reg.ui;
+package dev.it22.kmitl.reg.ui.profile;
 
 import dev.it22.kmitl.reg.utils.Config;
 
