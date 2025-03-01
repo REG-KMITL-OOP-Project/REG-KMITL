@@ -19,25 +19,28 @@ public class Login {
         ResultSet rs = null;
         try {
             ResultSet userCheck = db.getQuery("SELECT * FROM user WHERE username = '" + this.username + "';");
-            if (userCheck == null) {
+
+            if (!userCheck.next()) {
                 throw new Exception("??ERROR : Username not found");
             }
-            while (userCheck.next()) {
-                String hashedPassword = userCheck.getString("password");
-                if (new PasswordHash(this.password).checkPassword(hashedPassword)) {
-                    System.out.println("Login success");
-                } else {
-                    throw new Exception("??ERROR : Password not match");
-                }
+
+            // ตรวจสอบรหัสผ่าน
+            String hashedPassword = userCheck.getString("password");
+            if (!new PasswordHash(this.password).checkPassword(hashedPassword)) {
+                throw new Exception("??ERROR : Password not match");
             }
+
+            // สร้าง User object
+            User user = new User(userCheck);
+            System.out.println("Login success");
         }
         catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("😳 Error Login : "+e.getMessage());
         }
     }
 
     public static void main(String[] args) {
-        Login login = new Login("test1234567", "test");
+        Login login = new Login("test", "test");
         login.loginWithUsernameAndPassword();
     }
 }
