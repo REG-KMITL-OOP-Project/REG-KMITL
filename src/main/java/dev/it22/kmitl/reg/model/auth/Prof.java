@@ -10,16 +10,18 @@ public class Prof extends Account{
     private String phone;
     private ArrayList<String> subject;
 
-    public Prof(ResultSet userData) throws SQLException {
-        String id = userData.getString("id");
-        UserRole role = UserRole.PROF;
-        String email = userData.getString("email");
-        String username = userData.getString("username");
-        UserPrefix prefix = UserPrefix.valueOf(userData.getString("prefix"));
-        String firstName = userData.getString("first_name");
-        String lastName = userData.getString("last_name");
-        this.phone = userData.getString("phone");
-        this.subject = new ArrayList<>(Arrays.asList(userData.getString("subject").split(",")));
+    public Prof(
+            String id,
+            UserRole role,
+            String email,
+            String username,
+            UserPrefix prefix,
+            String firstName,
+            String lastName,
+            String phone,
+            ArrayList<String> subject
+    ) throws SQLException {
+
 
         super(id, role, email, username, prefix, firstName, lastName);
         this.phone = phone;

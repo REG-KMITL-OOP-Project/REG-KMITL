@@ -29,6 +29,7 @@ public class User {
         String faculty = account.getString("faculty");
         String major = account.getString("major");
         String section = account.getString("section");
+        String address = account.getString("address");
 
         if (userRole == UserRole.STUDENT.getLevel()) {
             userAccount = new Student(
@@ -39,15 +40,34 @@ public class User {
                     prefix,
                     firstName,
                     lastName,
+                    address,
                     phone,
                     studentId,
                     faculty,
                     major,
                     section);
         } else if (userRole == UserRole.PROF.getLevel()) {
-            userAccount = new Prof(account);
+            userAccount = new Prof(
+                    id,
+                    UserRole.PROF,
+                    email,
+                    username,
+                    prefix,
+                    firstName,
+                    lastName,
+                    phone,
+                    new ArrayList<>()
+            );
         } else if (userRole == UserRole.ADMIN.getLevel()) {
-            userAccount = new Admin(account);
+            userAccount = new Admin(
+                    id,
+                    UserRole.ADMIN,
+                    email,
+                    username,
+                    prefix,
+                    firstName,
+                    lastName
+            );
         } else {
             throw new Exception("🔥ERROR : User role not found");
         }
