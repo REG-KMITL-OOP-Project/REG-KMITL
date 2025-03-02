@@ -14,7 +14,7 @@ public class Login {
         this.password = password;
     }
 
-    public void loginWithUsernameAndPassword() {
+    public void loginWithUsernameAndPassword() throws Exception {
         Database db = new Database();
         ResultSet rs = null;
         try {
@@ -24,23 +24,27 @@ public class Login {
                 throw new Exception("??ERROR : Username not found");
             }
 
-            // ตรวจสอบรหัสผ่าน
             String hashedPassword = userCheck.getString("password");
             if (!new PasswordHash(this.password).checkPassword(hashedPassword)) {
                 throw new Exception("??ERROR : Password not match");
             }
 
-            // สร้าง User object
             User user = new User(userCheck);
             System.out.println("Login success");
         }
         catch (Exception e) {
             System.out.println("😳 Error Login : "+e.getMessage());
+            throw new Exception("😳 Error Login : "+e.getMessage());
         }
     }
 
     public static void main(String[] args) {
         Login login = new Login("test", "test");
-        login.loginWithUsernameAndPassword();
+        try{
+            login.loginWithUsernameAndPassword();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

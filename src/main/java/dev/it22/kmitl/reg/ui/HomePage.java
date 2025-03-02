@@ -1,5 +1,7 @@
 package dev.it22.kmitl.reg.ui;
 
+import dev.it22.kmitl.reg.controller.auth.Login;
+import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -158,10 +160,18 @@ public class HomePage implements ActionListener {
             frame.repaint();
         }
 
+
     }
 
     public static void main(String[] args) {
         JFrame config = Config.createAndShowGUI();
+        try {
+            new Login("test","test").loginWithUsernameAndPassword();
+            System.out.println(new User().getUserAccount());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         new HomePage(config);
     }
 }
