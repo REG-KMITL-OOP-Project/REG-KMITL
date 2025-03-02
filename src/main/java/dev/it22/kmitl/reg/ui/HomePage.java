@@ -2,7 +2,7 @@ package dev.it22.kmitl.reg.ui;
 
 import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
-import dev.it22.kmitl.reg.model.auth.Student;
+import dev.it22.kmitl.reg.model.auth.*;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -106,27 +106,48 @@ public class HomePage implements ActionListener {
         topPanel.setMaximumSize(new Dimension(1000,40));
         topPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JLabel welcome = new JLabel("ยินดีต้อนรับ ");
-        welcome.setForeground(Color.WHITE);
-        welcome.setFont(Config.HEADER_SEMIBOLD[1]);
+        User user = new User();
+        Account acc = user.getUserAccount();
 
-        JLabel idLabel = new JLabel("XX07XXXX");
-        idLabel.setForeground(Config.primaryColor_base);
-        idLabel.setFont(Config.HEADER_SEMIBOLD[1]);
+        if (acc instanceof Student) {
+            JLabel welcome = new JLabel("ยินดีต้อนรับ ");
+            welcome.setForeground(Color.WHITE);
+            welcome.setFont(Config.HEADER_SEMIBOLD[1]);
 
-        topPanel.add(welcome);
-        topPanel.add(idLabel);
+            JLabel idLabel = new JLabel(((Student) acc).getStudentId());
+            idLabel.setForeground(Config.primaryColor_base);
+            idLabel.setFont(Config.HEADER_SEMIBOLD[1]);
 
-        JLabel nameLabel = new JLabel(" คุณXXXXXXXXXX XXXXXXXXX");
-        nameLabel.setBackground(null);
-        nameLabel.setForeground(Config.primaryColor_base);
-        nameLabel.setFont(Config.HEADER_SEMIBOLD[1]);
-        nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+            topPanel.add(welcome);
+            topPanel.add(idLabel);
 
-        panel.add(topPanel);
-        panel.add(nameLabel);
+            JLabel nameLabel = new JLabel(" คุณ"+acc.getFirstName()+" "+acc.getLastName());
+            nameLabel.setBackground(null);
+            nameLabel.setForeground(Config.primaryColor_base);
+            nameLabel.setFont(Config.HEADER_SEMIBOLD[1]);
+            nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            panel.add(topPanel);
+            panel.add(nameLabel);
+        } else if (acc instanceof Prof || acc instanceof Admin) {
+            JLabel welcome = new JLabel("ยินดีต้อนรับ ");
+            welcome.setForeground(Color.WHITE);
+            welcome.setFont(Config.HEADER_SEMIBOLD[1]);
+
+            topPanel.add(welcome);
+
+            JLabel nameLabel = new JLabel(" คุณ"+acc.getFirstName()+" "+acc.getLastName());
+            nameLabel.setBackground(null);
+            nameLabel.setForeground(Config.primaryColor_base);
+            nameLabel.setFont(Config.HEADER_SEMIBOLD[1]);
+            nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            panel.add(topPanel);
+            panel.add(nameLabel);
+        }
         return panel;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(button[0])) {
@@ -167,7 +188,7 @@ public class HomePage implements ActionListener {
     public static void main(String[] args) {
         JFrame config = Config.createAndShowGUI();
         try {
-            new Login("test","test").loginWithUsernameAndPassword();
+            new Login("Student01","Student1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         }
         catch (Exception e) {

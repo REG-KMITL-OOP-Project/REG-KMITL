@@ -108,23 +108,6 @@ public class LoginFrame {
         frame.setVisible(true);
     }
 
-//    public JTextField getUsernameField() {
-//        return usernameField;
-//    }
-//
-//    public JPasswordField getPasswordField() {
-//        return passwordField;
-//    }
-//
-//    public JButton getLoginButton() {
-//        return loginButton;
-//    }
-//
-//    public JButton getRegisterButton() {
-//        return registerButton;
-//    }
-//
-
     public static void main(String[] args) {
         JFrame config = Config.createAndShowGUI();
         new LoginFrame(config);
