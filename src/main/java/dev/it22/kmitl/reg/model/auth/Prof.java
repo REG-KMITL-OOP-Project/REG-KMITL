@@ -18,11 +18,10 @@ public class Prof extends Account{
         UserPrefix prefix = UserPrefix.valueOf(userData.getString("prefix"));
         String firstName = userData.getString("first_name");
         String lastName = userData.getString("last_name");
-        Date dateOfBirth = userData.getDate("date_of_birth");
         this.phone = userData.getString("phone");
         this.subject = new ArrayList<>(Arrays.asList(userData.getString("subject").split(",")));
 
-        super(id, role, email, username, prefix, firstName, lastName, dateOfBirth);
+        super(id, role, email, username, prefix, firstName, lastName);
         this.phone = phone;
         this.subject = subject;
     }

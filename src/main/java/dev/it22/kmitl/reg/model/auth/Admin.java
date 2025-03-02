@@ -16,8 +16,7 @@ public class Admin extends Account {
         UserPrefix prefix = UserPrefix.valueOf(userData.getString("prefix"));
         String firstName = userData.getString("first_name");
         String lastName = userData.getString("last_name");
-        Date dateOfBirth = userData.getDate("date_of_birth");
 
-        super(id, role, email, username, prefix, firstName, lastName, dateOfBirth);
+        super(id, role, email, username, prefix, firstName, lastName);
     }
 }

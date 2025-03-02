@@ -13,9 +13,14 @@ public abstract class Account {
     protected UserPrefix prefix;
     protected String firstName;
     protected String lastName;
-    protected Date dateOfBirth;
 
-    public Account(String id, UserRole role, String email, String username, UserPrefix prefix, String firstName, String lastName, Date dateOfBirth) {
+    public Account(String id,
+                   UserRole role,
+                   String email,
+                   String username,
+                   UserPrefix prefix,
+                   String firstName,
+                   String lastName) {
         this.id = id;
         this.role = role;
         this.email = email;
@@ -23,7 +28,6 @@ public abstract class Account {
         this.prefix = prefix;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
     }
 
     public String getId() {
@@ -54,9 +58,6 @@ public abstract class Account {
         return lastName;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
 
     public void setId(String id) {
         this.id = id;
@@ -86,9 +87,6 @@ public abstract class Account {
         this.lastName = lastName;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
 
     public String getFullName() {
         return prefix + " " + firstName + " " + lastName;
