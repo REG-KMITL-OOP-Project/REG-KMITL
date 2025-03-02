@@ -10,9 +10,16 @@ public class ClassSchedulePage {
     //all
     private JPanel pn1;
     //head
-    private JPanel head, header;
-    private JLabel tarangrian;
-    private JButton home, etc;
+        //head-menubar
+        private JMenuBar bar;
+        private JMenu ETC;
+        private JMenuItem savePDF, saveIMG, share;
+        private JLabel classSche;
+        private JLabel tarangrian;
+        private JButton home;
+
+                //private JPanel head, header;
+                //private JButton etc;
     //body-information
     private JPanel allInfo, testFormat, blank, chosen, stdInfo;
     private JLabel ID, name, faculty, branch;
@@ -28,11 +35,18 @@ public class ClassSchedulePage {
 
         pn1 = new JPanel();
         //head
-        head = new JPanel();
-        header = new JPanel();
-        tarangrian = new JLabel("ตารางเรียน");
-        home = new JButton("Home"); //temp
-        etc = new JButton("Etc"); //temp
+            //head-menubar
+                bar = new JMenuBar();
+                ETC = new JMenu("ETC");
+                savePDF = new JMenuItem("Save PDF");
+                saveIMG = new JMenuItem("Save IMG");
+                share = new JMenuItem("Share");
+                classSche = new JLabel("Class Schedule");
+                tarangrian = new JLabel("Class Schedule");
+                home = new JButton("Home"); //temp
+                    //head = new JPanel();
+                    //header = new JPanel();
+                    //etc = new JButton("Etc"); //temp
         //body-information
         allInfo = new JPanel();
         testFormat = new JPanel();
@@ -40,28 +54,47 @@ public class ClassSchedulePage {
         chosen = new JPanel();
         stdInfo = new JPanel();
 
-        ID = new JLabel("รหัสนักศึกษา : ");
-        name = new JLabel("ชื่อ : ");
-        faculty = new JLabel("คณะ : ");
-        branch = new JLabel("สาขา : ");
+        ID = new JLabel("Student ID : ");
+        name = new JLabel("Name : ");
+        faculty = new JLabel("Faculty : ");
+        branch = new JLabel("Branch : ");
 
         year = new JComboBox(years);
         semester = new JComboBox(semesters);
 
-        //panel-header
-        header.setBackground(null);
-        header.add(home);
-        header.add(etc);
-        header.add(tarangrian);
 
-        head.setLayout(new BorderLayout());
-        head.add(header, BorderLayout.WEST);
+        //place components
+        //head
+            //head-menubar
+                bar.add(home);
+                bar.add(ETC);
+                bar.add(tarangrian);
+                ETC.add(classSche);
+                ETC.add(savePDF);
+                ETC.add(saveIMG);
+                ETC.add(share);
+                    //un use
+                        //head.setBackground(null);
+                        //header.setBackground(null);
+                        //allInfo.setBackground(null);
+                        //testFormat.setBackground(null);
+                        //blank.setBackground(null);
+                        //chosen.setBackground(null);
+                        //stdInfo.setBackground(null);
+
+                        //panel-header
+                        //header.add(home);
+                        //header.add(etc);
+                        //header.add(tarangrian);
+                        //head.setLayout(new BorderLayout());
+                        //head.add(header, BorderLayout.WEST);
+
 
         //panel-year and semester button
-        chosen.setBackground(null);
         chosen.setLayout(new GridLayout(2, 1));
         chosen.add(year);
         chosen.add(semester);
+
         //panel-studentInfo
         stdInfo.setLayout(new GridLayout(2, 2));
         stdInfo.add(ID);
@@ -77,10 +110,12 @@ public class ClassSchedulePage {
         allInfo.add(stdInfo, BorderLayout.CENTER);
 
         pn1.setLayout(new BorderLayout());
-        pn1.add(head, BorderLayout.NORTH);
+            //pn1.add(head, BorderLayout.NORTH);
         pn1.add(allInfo, BorderLayout.SOUTH);
 
+        //set panels on frame
         frame.setLayout(new BorderLayout());
+        frame.setJMenuBar(bar);
         frame.add(pn1, BorderLayout.NORTH);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
