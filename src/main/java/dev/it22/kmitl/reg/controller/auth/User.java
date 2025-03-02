@@ -15,17 +15,31 @@ public class User {
 
     private static Account userAccount;
 
+    public User(){
+        if(userAccount == null){
+            throw new NullPointerException("💦 User account is null. Please Login again.");
+        }
+    }
+
     public User(ResultSet account) throws Exception {
         int userRole = (int) account.getObject("role");
         System.out.println("Login with : " + account.getString("username"));
         String id = account.getString("id");
         String email = account.getString("email");
         String username = account.getString("username");
-        String firstName = account.getString("first_name");
-        String lastName = account.getString("last_name");
-        UserPrefix prefix = UserPrefix.valueOf(String.valueOf(account.getInt("prefix")));
+        String firstName = account.getString("fname");
+        String lastName = account.getString("lname");
+        int prefixValue = account.getInt("prefix");
+        UserPrefix prefix;
+        switch(prefixValue) {
+            case 0: prefix = UserPrefix.NONE; break;
+            case 1: prefix = UserPrefix.MR; break;
+            case 2: prefix = UserPrefix.MRS; break;
+            case 3: prefix = UserPrefix.MS; break;
+            default: throw new IllegalArgumentException("Invalid prefix value: " + prefixValue);
+        }
         String phone = account.getString("phone");
-        String studentId = account.getString("student_id");
+        String studentId = account.getString("studentid");
         String faculty = account.getString("faculty");
         String major = account.getString("major");
         String section = account.getString("section");
@@ -71,6 +85,10 @@ public class User {
         } else {
             throw new Exception("🔥ERROR : User role not found");
         }
+    }
+
+    public Account getUserAccount() {
+        return userAccount;
     }
 
 
