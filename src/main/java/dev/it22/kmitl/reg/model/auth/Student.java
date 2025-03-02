@@ -41,4 +41,30 @@ public class Student extends Account {
         this.major = major;
         this.section = section;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+
 }

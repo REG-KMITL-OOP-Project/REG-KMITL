@@ -2,6 +2,7 @@ package dev.it22.kmitl.reg.ui;
 
 import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
+import dev.it22.kmitl.reg.model.auth.Student;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -171,6 +172,13 @@ public class HomePage implements ActionListener {
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
+
+
+        }
+        System.out.println(new User().getUserAccount().getUsername());
+
+        if (new User().getUserAccount() instanceof Student){
+            System.out.println("Student");
         }
         new HomePage(config);
     }
