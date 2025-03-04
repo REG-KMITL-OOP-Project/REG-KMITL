@@ -1,12 +1,14 @@
+
 package dev.it22.kmitl.reg.ui.event;
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.CustomCombobox;
 
 import java.awt.*;
 import javax.swing.*;
 
 public class EditEventPage {
     private  JFrame frame;
-    private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelEdit;
+    private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelEdit,panelSave,panelDel;
     private JButton save,delete;
     private JLabel editEvent,to;
     private JTextField eventName,dateStart,dateEnd;
@@ -22,13 +24,15 @@ public class EditEventPage {
         panelRek4 = new JPanel();
         panelRek5 = new JPanel();
         panelEdit = new JPanel();
+        panelSave = new JPanel();
+        panelDel = new JPanel();
         save = new JButton("SAVE CHANGE");
         delete = new JButton("DELETE");
-        editEvent = new JLabel("EDIT EVENT");
+        editEvent = new JLabel("              EDIT EVENT");
         to = new JLabel("To");
-        eventName = new JTextField(25);
-        dateStart = new JTextField(6);
-        dateEnd = new JTextField(6);
+        eventName = new JTextField();
+        dateStart = new JTextField();
+        dateEnd = new JTextField();
         description = new JTextArea(2,25);
         eventType = new JComboBox();
 
@@ -40,50 +44,81 @@ public class EditEventPage {
         panelRek5.setBackground(null);
         panelEdit.setBackground(null);
         panelBig.setBackground(null);
+        panelSave.setBackground(null);
+        panelDel.setBackground(null);
 
         frame.add(panelEdit);
         panelEdit.setLayout( new BorderLayout());
             editEvent.setForeground(new Color(255,247,237));
-            editEvent.setFont(Config.HEADER_SEMIBOLD[1]);;
+            editEvent.setFont(Config.HEADER_SEMIBOLD[1]);
+        editEvent.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
         panelEdit.add(editEvent,BorderLayout.NORTH);
-        panelEdit.add(panelBig,BorderLayout.WEST);
-        panelBig.setLayout( new GridLayout(5,1));
+        panelEdit.add(panelBig);
+        panelBig.setLayout(new BoxLayout(panelBig, BoxLayout.Y_AXIS));
+        panelBig.add(Box.createVerticalStrut(10));
 
         panelBig.add(panelRek1);
             eventName.setText("Event Name");
+            eventName.setFont(Config.NORMAL_REGULAR);
             eventName.setForeground(Color.GRAY);
+            eventName.setPreferredSize(new Dimension((int)(frame.getWidth() / 1.2),(frame.getHeight() / 4) - 120));
         panelRek1.add(eventName);
 
         panelBig.add(panelRek2);
             description.setText("DESCRIPTION");
+            description.setPreferredSize(new Dimension((int)(frame.getWidth() / 1.2),(frame.getHeight() / 4)));
+            description.setFont(Config.NORMAL_REGULAR);
             description.setForeground(Color.GRAY);
         panelRek2.add(description);
 
         panelBig.add(panelRek3);
-        panelRek3.setLayout( new FlowLayout());
+        panelRek3.setLayout( new FlowLayout(FlowLayout.CENTER, 190, 0));
         panelRek3.add(dateStart);
             dateStart.setText("DD/MM/YY");
+            dateStart.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/3.4),(frame.getHeight() / 4) - 120));
+            dateStart.setFont(Config.NORMAL_REGULAR);
             dateStart.setForeground(Color.GRAY);
         panelRek3.add(to);
+            to.setOpaque(true);
+            to.setBackground(Config.primaryColor_hard);
+            to.setFont(Config.HEADER_SEMIBOLD[3]);
             to.setForeground(Color.WHITE);
+            to.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/3.4),(frame.getHeight() / 4) - 120));
+            to.setHorizontalAlignment(SwingConstants.CENTER);
         panelRek3.add(dateEnd);
             dateEnd.setText("DD/MM/YY");
+            dateEnd.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/3.4),(frame.getHeight() / 4) - 120));
+            dateEnd.setFont(Config.NORMAL_REGULAR);
             dateEnd.setForeground(Color.GRAY);
 
         panelBig.add(panelRek4);
-        eventType.addItem("CHOOSE CATEGORY");
+        eventType.addItem("   CHOOSE CATEGORY");
+        eventType.addItem("   CHOOSE CATEGORY");
+        eventType.addItem("   CHOOSE CATEGORY");
+        eventType.addItem("   CHOOSE CATEGORY");
+        eventType.addItem("   CHOOSE CATEGORY");
+        eventType.setRenderer(new CustomCombobox());
+        eventType.setMaximumRowCount(3);
+        eventType.setFont(Config.NORMAL_REGULAR);
+        eventType.setPreferredSize(new Dimension((int)(frame.getWidth() / 1.2),(frame.getHeight() / 4) - 120));
         panelRek4.add(eventType);
 
         panelBig.add(panelRek5);
-        panelRek5.setLayout( new FlowLayout());
+        panelRek5.setLayout(new GridLayout(1,2));
+        panelRek5.add(panelSave);
+        panelSave.setLayout( new FlowLayout(FlowLayout.LEFT,93,0));
         save.setForeground(Color.BLACK);
         save.setBackground(new Color(255,247,237));
-        save.setPreferredSize(new Dimension((frame.getWidth()-500)/6,(frame.getHeight() / 4) - 120));
-        panelRek5.add(save);
+        save.setFont(Config.HEADER_SEMIBOLD[3]);
+        save.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
+        panelSave.add(save);
+        panelRek5.add(panelDel);
+        panelDel.setLayout( new FlowLayout(FlowLayout.RIGHT,93,0));
         delete.setForeground(Color.WHITE);
-        delete.setBackground( new Color(245,73,0));
-        delete.setPreferredSize(new Dimension((frame.getWidth()-500)/6,(frame.getHeight() / 4) - 120));
-        panelRek5.add(delete);
+        delete.setBackground(Config.primaryColor_harder);
+        delete.setFont(Config.HEADER_SEMIBOLD[3]);
+        delete.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
+        panelDel.add(delete);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
