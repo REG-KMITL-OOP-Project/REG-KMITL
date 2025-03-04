@@ -19,8 +19,11 @@ public class HomePage implements ActionListener {
     private RealTimeClock clock;
     private JTextArea clockLabel;
 
-    String[] name = {"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"};
-    String source[] = {"source/calendar.png","source/book-open-check.png","source/star.png","source/scroll-text.png","source/scroll-text-1.png","source/settings.png"};
+    private final User user = new User();
+    private final Account acc = user.getUserAccount();
+    private int border = 60;
+    String name[];
+    String source[];
     JPanel inPanel[];
     RoundedButton button[];
     JLabel label[];
@@ -51,6 +54,20 @@ public class HomePage implements ActionListener {
         upperPanel.add(clockLabel, BorderLayout.EAST);
         frame.add(upperPanel);
 
+        if (acc instanceof Student) {
+            border = 60;
+            name  = new String[]{"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"};
+            source = new String[]{"source/calendar.png", "source/book-open-check.png", "source/star.png", "source/scroll-text.png", "source/scroll-text-1.png", "source/settings.png"};
+        }else if(acc instanceof Prof){
+            border = 80;
+            name  = new String[]{"Example 1","Example 2","Example 3","Example 4","Example 5"};
+            source = new String[]{"source/calendar.png", "source/book-open-check.png", "source/scroll-text.png", "source/scroll-text-1.png", "source/settings.png"};
+        }else if(acc instanceof Admin){
+            border = 100;
+            name  = new String[]{"Example 1","Example 2","Example 3","Example 4"};
+            source = new String[]{"source/calendar.png", "source/book-open-check.png", "source/scroll-text.png", "source/settings.png"};
+        }
+
         inPanel = new JPanel[name.length];
         button = new RoundedButton[name.length];
         label = new JLabel[name.length];
@@ -66,10 +83,10 @@ public class HomePage implements ActionListener {
 
             inPanel[i].setLayout(new BoxLayout(inPanel[i], BoxLayout.Y_AXIS));
             inPanel[i].setBackground(null);
-            inPanel[i].setPreferredSize(new Dimension((frame.getWidth()-150)/6,(frame.getHeight() / 2) - 120));
+            inPanel[i].setPreferredSize(new Dimension((frame.getWidth()-150)/ name.length,(frame.getHeight() / 2) - 120));
 
-            button[i] = new RoundedButton("",20);
-            button[i].setIcon(new ImageIcon(new ImageIcon(source[i]).getImage().getScaledInstance(inPanel[i].getPreferredSize().width-60,inPanel[i].getPreferredSize().width-60,Image.SCALE_SMOOTH)));
+
+            button[i].setIcon(new ImageIcon(new ImageIcon(source[i]).getImage().getScaledInstance(inPanel[i].getPreferredSize().width-border,inPanel[i].getPreferredSize().width-border,Image.SCALE_SMOOTH)));
 
             button[i].setBackground(Config.primaryColor_base);
             button[i].setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -105,9 +122,6 @@ public class HomePage implements ActionListener {
         topPanel.setBackground(null);
         topPanel.setMaximumSize(new Dimension(1000,40));
         topPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        User user = new User();
-        Account acc = user.getUserAccount();
 
         if (acc instanceof Student) {
             JLabel welcome = new JLabel("ยินดีต้อนรับ ");
@@ -150,45 +164,54 @@ public class HomePage implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(button[0])) {
-            System.out.println("btn0");
-            frame.getContentPane().removeAll();
-            frame.revalidate();
-            frame.repaint();
-        }else if (e.getSource().equals(button[1])) {
-            System.out.println("btn1");
-            frame.getContentPane().removeAll();
-            frame.revalidate();
-            frame.repaint();
-        }else if (e.getSource().equals(button[2])) {
-            System.out.println("btn2");
-            frame.getContentPane().removeAll();
-            frame.revalidate();
-            frame.repaint();
-        }else if (e.getSource().equals(button[3])) {
-            System.out.println("btn3");
-            frame.getContentPane().removeAll();
-            frame.revalidate();
-            frame.repaint();
-        }else if (e.getSource().equals(button[4])) {
-            System.out.println("btn4");
-            frame.getContentPane().removeAll();
-            frame.revalidate();
-            frame.repaint();
-        }else if (e.getSource().equals(button[5])) {
-            System.out.println("btn5");
-            frame.getContentPane().removeAll();
-            frame.revalidate();
-            frame.repaint();
+//        frame.getContentPane().removeAll();
+//        frame.revalidate();
+//        frame.repaint();
+        if(acc instanceof Student) {
+            if (e.getSource().equals(button[0])) {
+                System.out.println("Student1");
+            } else if (e.getSource().equals(button[1])) {
+                System.out.println("Student2");
+            } else if (e.getSource().equals(button[2])) {
+                System.out.println("Student3");
+            } else if (e.getSource().equals(button[3])) {
+                System.out.println("Student4");
+            } else if (e.getSource().equals(button[4])) {
+                System.out.println("Student5");
+            } else if (e.getSource().equals(button[5])) {
+                System.out.println("Student6");
+            }
+        }else if(acc instanceof Prof) {
+            if (e.getSource().equals(button[0])) {
+                System.out.println("Prof1");
+            } else if (e.getSource().equals(button[1])) {
+                System.out.println("Prof2");
+            } else if (e.getSource().equals(button[2])) {
+                System.out.println("Prof3");
+            } else if (e.getSource().equals(button[3])) {
+                System.out.println("Prof4");
+            } else if (e.getSource().equals(button[4])) {
+                System.out.println("Prof5");
+            }
+        } else if(acc instanceof Admin) {
+            if (e.getSource().equals(button[0])) {
+                System.out.println("Admin1");
+            } else if (e.getSource().equals(button[1])) {
+                System.out.println("Admin2");
+            } else if (e.getSource().equals(button[2])) {
+                System.out.println("Admin3");
+            } else if (e.getSource().equals(button[3])) {
+                System.out.println("Admin4");
+            }
         }
-
-
     }
 
     public static void main(String[] args) {
         JFrame config = Config.createAndShowGUI();
         try {
             new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
+//            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         }
         catch (Exception e) {
