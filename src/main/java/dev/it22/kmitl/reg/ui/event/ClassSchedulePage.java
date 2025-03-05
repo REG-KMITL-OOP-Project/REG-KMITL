@@ -3,6 +3,7 @@ package dev.it22.kmitl.reg.ui.event;
 import dev.it22.kmitl.reg.utils.Config;
 
 import java.awt.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class ClassSchedulePage {
@@ -34,6 +35,7 @@ public class ClassSchedulePage {
         this.frame = frame;
 
         pn1 = new JPanel();
+        pn1.setBackground(null);
         //head
             //head-menubar
                 bar = new JMenuBar();
@@ -43,7 +45,14 @@ public class ClassSchedulePage {
                 share = new JMenuItem("Share");
                 classSche = new JLabel("Class Schedule");
                 tarangrian = new JLabel("Class Schedule");
-                home = new JButton("Home"); //temp
+                home = new JButton(); //temp
+        try{
+            Image img = ImageIO.read(getClass().getResource("resourse/home.png"));
+            home.setIcon(new ImageIcon(img));
+        }catch(Exception e){
+            System.out.println(e);
+        }
+
                     //head = new JPanel();
                     //header = new JPanel();
                     //etc = new JButton("Etc"); //temp
@@ -53,14 +62,24 @@ public class ClassSchedulePage {
         blank = new JPanel();
         chosen = new JPanel();
         stdInfo = new JPanel();
+        allInfo.setBackground(null);
+        testFormat.setBackground(null);
+        blank.setBackground(null);
+        chosen.setBackground(null);
+        stdInfo.setBackground(Config.bgColor_base.darker());
 
         ID = new JLabel("Student ID : ");
         name = new JLabel("Name : ");
         faculty = new JLabel("Faculty : ");
         branch = new JLabel("Branch : ");
+        ID.setForeground(Color.WHITE);
+        name.setForeground(Color.WHITE);
+        faculty.setForeground(Color.WHITE);
+        branch.setForeground(Color.WHITE);
 
         year = new JComboBox(years);
         semester = new JComboBox(semesters);
+
 
 
         //place components
@@ -93,6 +112,8 @@ public class ClassSchedulePage {
         //panel-year and semester button
         chosen.setLayout(new GridLayout(2, 1));
         chosen.add(year);
+        semester.setForeground(Color.WHITE);
+        semester.setBackground(Config.primaryColor_base);
         chosen.add(semester);
 
         //panel-studentInfo
