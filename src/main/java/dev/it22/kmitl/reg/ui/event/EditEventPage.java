@@ -3,6 +3,7 @@ package dev.it22.kmitl.reg.ui.event;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.CustomCombobox;
 import dev.it22.kmitl.reg.utils.RoundedButton;
+import dev.it22.kmitl.reg.utils.RoundedTextField;
 
 import java.awt.*;
 import javax.swing.*;
@@ -12,7 +13,7 @@ public class EditEventPage {
     private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelEdit,panelSave,panelDel;
     private RoundedButton save,delete;
     private JLabel editEvent,to;
-    private JTextField eventName,dateStart,dateEnd;
+    private RoundedTextField eventName,dateStart,dateEnd;
     private JTextArea description;
     private JComboBox eventType;
     private Font innerFont, regularFont;
@@ -32,9 +33,9 @@ public class EditEventPage {
         delete = new RoundedButton("DELETE", 22);
         editEvent = new JLabel("              EDIT EVENT");
         to = new JLabel("TO");
-        eventName = new JTextField();
-        dateStart = new JTextField();
-        dateEnd = new JTextField();
+        eventName = new RoundedTextField(22);
+        dateStart = new RoundedTextField(22);
+        dateEnd = new RoundedTextField(22);
         description = new JTextArea(2,25);
         eventType = new JComboBox();
         regularFont = Config.NORMAL_REGULAR;
