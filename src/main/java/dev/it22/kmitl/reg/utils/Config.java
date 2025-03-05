@@ -70,14 +70,16 @@ public class Config {
 
         return topPanel;
     }
-    public static void openFrame() {
+    public static JDialog openFrame(int width, int height) {
         JDialog dialog = new JDialog();
         dialog.setLayout(new FlowLayout());
         dialog.setTitle("");
         dialog.setUndecorated(true);
-        dialog.setSize(300, 150);
+        dialog.setResizable(false);
+        dialog.setSize(width, height);
         dialog.setLocationRelativeTo(null);
         dialog.setModal(true);
-        dialog.setVisible(true);
+        dialog.getContentPane().setBackground(Config.bgColor_harder);
+        return dialog;
     }
 }

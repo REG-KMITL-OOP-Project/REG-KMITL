@@ -58,15 +58,15 @@ public class HomePage implements ActionListener {
         if (acc instanceof Student) {
             border = 60;
             name  = new String[]{"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"};
-            source = new String[]{"source/calendar.png", "source/book-open-check.png", "source/star.png", "source/scroll-text.png", "source/scroll-text-1.png", "source/settings.png"};
+            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/user-round.png", "source/calendar-days.png", "source/scroll-text.png", "source/settings.png"};
         }else if(acc instanceof Prof){
             border = 80;
             name  = new String[]{"Example 1","Example 2","Example 3","Example 4","Example 5"};
-            source = new String[]{"source/calendar.png", "source/book-open-check.png", "source/scroll-text.png", "source/scroll-text-1.png", "source/settings.png"};
+            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/scroll-text.png", "source/scroll-text.png", "source/settings.png"};
         }else if(acc instanceof Admin){
             border = 100;
             name  = new String[]{"Example 1","Example 2","Example 3","Example 4"};
-            source = new String[]{"source/calendar.png", "source/book-open-check.png", "source/scroll-text.png", "source/settings.png"};
+            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/scroll-text.png", "source/settings.png"};
         }
 
         inPanel = new JPanel[name.length];
@@ -218,6 +218,8 @@ public class HomePage implements ActionListener {
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
+
+
         }
         System.out.println(new User().getUserAccount().getUsername());
 
