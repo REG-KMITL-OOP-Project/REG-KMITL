@@ -136,7 +136,9 @@ public class LoginFrame implements ActionListener {
             }
             catch (Exception ex){
                 System.out.println(ex.getMessage());
-                JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JDialog modal = Config.openFrame(500,200);
+                modal.setVisible(true);
+//                JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
