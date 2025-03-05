@@ -70,5 +70,18 @@ public class Config {
 
         return topPanel;
     }
-
+    public static void openFrame() {
+        JDialog dialog = new JDialog();
+        dialog.setLayout(new FlowLayout());
+        dialog.setTitle("");
+        dialog.setUndecorated(true);
+        dialog.setSize(300, 150);
+        dialog.setLocationRelativeTo(null);
+        RoundedButton closeButton = new RoundedButton("Close",20);
+        closeButton.setSize(20,20);
+        closeButton.addActionListener(e -> dialog.dispose());
+        dialog.add(closeButton);
+        dialog.setModal(true);
+        dialog.setVisible(true);
+    }
 }
