@@ -80,12 +80,10 @@ public class HomePage implements ActionListener {
         for (int i = 0; i < name.length; i++) {
             inPanel[i] = new JPanel();
             button[i] = new RoundedButton("",20);
-            button[i].setIcon(new ImageIcon(new ImageIcon(source[i]).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH)));
 
             inPanel[i].setLayout(new BoxLayout(inPanel[i], BoxLayout.Y_AXIS));
             inPanel[i].setBackground(null);
             inPanel[i].setPreferredSize(new Dimension((frame.getWidth()-150)/ name.length,(frame.getHeight() / 2) - 120));
-
 
             button[i].setIcon(new ImageIcon(new ImageIcon(source[i]).getImage().getScaledInstance(inPanel[i].getPreferredSize().width-border,inPanel[i].getPreferredSize().width-border,Image.SCALE_SMOOTH)));
 
@@ -170,7 +168,7 @@ public class HomePage implements ActionListener {
 //        frame.repaint();
         if(acc instanceof Student) {
             if (e.getSource().equals(button[0])) {
-
+                System.out.println("Student1");
             } else if (e.getSource().equals(button[1])) {
                 System.out.println("Student2");
             } else if (e.getSource().equals(button[2])) {

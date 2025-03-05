@@ -9,6 +9,8 @@ public class Config {
     public static final Color primaryColor_base = new Color(255,137,5);
     public static final Color primaryColor_hard = new Color(255,105,0);
     public static final Color primaryColor_harder = new Color(245,73,0);
+    public static final Color errorColor_base = new Color(250,44,55);
+    public static final Color errorColor_hard = new Color(231,0,11);
     public static Font HEADER_REGULAR[];
     public static Font HEADER_SEMIBOLD[];
     public static Font NORMAL_REGULAR;

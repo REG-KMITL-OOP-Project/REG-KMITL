@@ -136,11 +136,67 @@ public class LoginFrame implements ActionListener {
             }
             catch (Exception ex){
                 System.out.println(ex.getMessage());
-                JDialog modal = Config.openFrame(500,200);
-                modal.setVisible(true);
-//                JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                this.userorpassincorrect();
             }
         }
+    }
+    public void userorpassincorrect(){
+        JDialog popup = Config.openFrame(frame.getWidth()/3,frame.getHeight()/3);
+        popup.setLayout(new BorderLayout());
+        JPanel dialog = new JPanel();
+        dialog.setBackground(null);
+        dialog.setSize(popup.getWidth(), popup.getHeight());
+        dialog.setLayout(new BoxLayout(dialog, BoxLayout.Y_AXIS));
+
+        JPanel upperPanel = new JPanel();
+        upperPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        upperPanel.setBackground(null);
+        upperPanel.setSize(dialog.getWidth(), dialog.getHeight()/4);
+
+        JLabel alertLabel = new JLabel("เกิดข้อผิดพลาด");
+        alertLabel.setFont(Config.HEADER_SEMIBOLD[1]);
+        alertLabel.setForeground(Color.WHITE);
+        upperPanel.add(alertLabel);
+
+        RoundedButton alertPic = new RoundedButton("",20);
+        alertPic.setEnabled(false);
+        alertPic.setIcon(new ImageIcon(new ImageIcon("source/shield-alert.png").getImage().getScaledInstance(upperPanel.getHeight()-30,upperPanel.getHeight()-30,Image.SCALE_SMOOTH)));
+        alertPic.setSize(upperPanel.getHeight()-30,upperPanel.getHeight()-30);
+        alertPic.setBackground(Config.errorColor_hard);
+        upperPanel.add(alertPic);
+
+        JPanel middlePanel = new JPanel();
+        middlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        middlePanel.setBackground(null);
+        middlePanel.setSize(dialog.getWidth(), dialog.getHeight()/2);
+
+        JLabel duocrossPic = new JLabel();
+        duocrossPic.setIcon(new ImageIcon(new ImageIcon("source/cross-hand.png").getImage().getScaledInstance(middlePanel.getHeight()-30,middlePanel.getHeight()-30,Image.SCALE_SMOOTH)));
+        middlePanel.add(duocrossPic);
+
+        JLabel alert = new JLabel("Username หรือ Password ไม่ถูกต้อง");
+        alert.setFont(Config.NORMAL_REGULAR.deriveFont(Float.parseFloat("18")));
+        alert.setForeground(Color.WHITE);
+        middlePanel.add(alert);
+
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        bottomPanel.setBackground(null);
+        bottomPanel.setSize(dialog.getWidth(), dialog.getHeight()/4);
+
+        RoundedButton acceptButton = new RoundedButton("รับทราบ",20);
+        acceptButton.setFont(Config.HEADER_REGULAR[2]);
+        acceptButton.setBackground(Config.primaryColor_hard);
+        acceptButton.setForeground(Color.WHITE);
+        acceptButton.addActionListener(e -> popup.dispose());
+        bottomPanel.add(acceptButton);
+
+        dialog.add(upperPanel);
+        dialog.add(middlePanel);
+        dialog.add(bottomPanel);
+
+        popup.add(dialog, BorderLayout.CENTER);
+        popup.setVisible(true);
     }
 }
 
