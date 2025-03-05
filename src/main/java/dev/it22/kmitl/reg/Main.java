@@ -1,6 +1,8 @@
 package dev.it22.kmitl.reg;
 
+import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.ui.HomePage;
+import dev.it22.kmitl.reg.ui.profile.LoginFrame;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
@@ -15,7 +17,8 @@ public class Main {
 //        Database db = new Database();
 //        ResultSet rs = null;
         JFrame a = Config.createAndShowGUI();
-        new HomePage(a);
+//
+        new LoginFrame(a);
 //        try {
 //            rs = db.getQuery("SELECT * FROM user;");
 //            while (rs.next()) {

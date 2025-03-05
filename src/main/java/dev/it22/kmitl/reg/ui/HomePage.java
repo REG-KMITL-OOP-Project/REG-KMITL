@@ -3,6 +3,7 @@ package dev.it22.kmitl.reg.ui;
 import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.*;
+import dev.it22.kmitl.reg.ui.profile.LoginFrame;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -169,7 +170,7 @@ public class HomePage implements ActionListener {
 //        frame.repaint();
         if(acc instanceof Student) {
             if (e.getSource().equals(button[0])) {
-                System.out.println("Student1");
+
             } else if (e.getSource().equals(button[1])) {
                 System.out.println("Student2");
             } else if (e.getSource().equals(button[2])) {
@@ -208,16 +209,15 @@ public class HomePage implements ActionListener {
 
     public static void main(String[] args) {
         JFrame config = Config.createAndShowGUI();
+
         try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
 //            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
 //            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
-
-
         }
         System.out.println(new User().getUserAccount().getUsername());
 

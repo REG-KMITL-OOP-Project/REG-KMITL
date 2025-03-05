@@ -1,12 +1,18 @@
 package dev.it22.kmitl.reg.ui.profile;
 
+import dev.it22.kmitl.reg.controller.auth.Login;
+import dev.it22.kmitl.reg.controller.auth.User;
+import dev.it22.kmitl.reg.model.auth.Account;
+import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class LoginFrame {
+public class LoginFrame implements ActionListener {
     private JFrame frame;
     private JPanel bigPanel , panel , loginPanel;
     private JLabel upper,lower,username,password;
@@ -85,6 +91,7 @@ public class LoginFrame {
 
         loginButton.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
         loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        loginButton.addActionListener(this);
 
         Box buttonBox = Box.createHorizontalBox();
         buttonBox.add(Box.createHorizontalGlue());
@@ -104,13 +111,34 @@ public class LoginFrame {
 
         bigPanel.add(panel);
         frame.add(bigPanel, BorderLayout.CENTER);
-//        frame.setLocationRelativeTo(null);
+//        frame.setLocationRelativeTo(null
         frame.setVisible(true);
     }
 
     public static void main(String[] args) {
         JFrame config = Config.createAndShowGUI();
         new LoginFrame(config);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getSource());
+        if(e.getSource() == loginButton){
+            System.out.println("Login");
+            String username = userT.getText();
+            String password = passT.getText();
+            try{
+                new Login(username,password).loginWithUsernameAndPassword();
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                new HomePage(frame);
+            }
+            catch (Exception ex){
+                System.out.println(ex.getMessage());
+                JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 }
 
