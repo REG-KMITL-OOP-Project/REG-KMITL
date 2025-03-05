@@ -170,7 +170,9 @@ public class HomePage implements ActionListener {
         if(acc instanceof Student) {
             if (e.getSource().equals(button[0])) {
                 System.out.println("Student1");
-                Config.openFrame();
+                JDialog dialog = Config.openFrame(frame.getWidth()/4, frame.getHeight()/4);
+                dialog.setVisible(true);
+
             } else if (e.getSource().equals(button[1])) {
                 System.out.println("Student2");
             } else if (e.getSource().equals(button[2])) {
