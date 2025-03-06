@@ -28,9 +28,9 @@ public class AdminAddEvent implements ActionListener {
         panelEdit = new JPanel();
         panelSave = new JPanel();
         panelDel = new JPanel();
-        save = new RoundedButton("SAVE CHANGE",22);
+        save = new RoundedButton("SAVE AS DRAFT",22);
         upload = new RoundedButton("UPLOAD", 22);
-        editEvent = new JLabel("              EDIT EVENT");
+        editEvent = new JLabel("               ADD EVENT");
         to = new JLabel("TO");
         eventName = new RoundedTextField(22);
         dateStart = new RoundedTextField(22);
@@ -115,7 +115,7 @@ public class AdminAddEvent implements ActionListener {
         panelRek5.add(panelSave);
         panelSave.setLayout( new FlowLayout(FlowLayout.LEFT,93,0));
         save.setForeground(Color.BLACK);
-        save.setBackground(new Color(255,247,237));
+        save.setBackground(Config.primaryColor_base);
         save.setFont(Config.HEADER_SEMIBOLD[2]);
         save.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
 
@@ -142,7 +142,7 @@ public class AdminAddEvent implements ActionListener {
         new AdminAddEvent (Config.createAndShowGUI());
     }
 
-    private JButton del , cal ;
+    private RoundedButton del , cal ;
     private JDialog dialog ;
 
     public void actionPerformed(ActionEvent ev){
@@ -153,8 +153,8 @@ public class AdminAddEvent implements ActionListener {
             JPanel P = new JPanel();
             JPanel panel = new JPanel();
             JLabel header = new JLabel("ARE YOU SURE WANT TO DELETE");
-            del = new JButton("DELETE");
-            cal = new JButton("CANCEL");
+            del = new RoundedButton("DELETE" , 22);
+            cal = new RoundedButton("CANCEL" , 22);
 
             header.setForeground(Config.primaryColor_hard);
             header.setFont(Config.HEADER_SEMIBOLD[1]);
@@ -201,3 +201,4 @@ public class AdminAddEvent implements ActionListener {
 
     }
 }
+
