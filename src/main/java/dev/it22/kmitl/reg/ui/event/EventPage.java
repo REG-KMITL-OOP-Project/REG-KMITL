@@ -90,8 +90,8 @@ public class EventPage implements FocusListener {
 
         panelRek3.add(to);
         to.setOpaque(true);
-        to.setBackground(Config.primaryColor_hard);
-        to.setFont(Config.HEADER_SEMIBOLD[3]);
+        to.setBackground(null);
+        to.setFont(Config.HEADER_SEMIBOLD[2]);
         to.setForeground(Color.WHITE);
         to.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/3.4),(frame.getHeight() / 4) - 120));
         to.setHorizontalAlignment(SwingConstants.CENTER);
