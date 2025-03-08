@@ -9,14 +9,14 @@ import javax.swing.*;
 
 public class AdminAddEvent extends EventPage implements ActionListener {
     private JPanel panelSave,panelDel;
-    private RoundedButton save,upload;
+    private RoundedButton cancel,upload;
     private JLabel addEvent;
 
     public AdminAddEvent (JFrame frame){
         super(frame);
         panelSave = new JPanel();
         panelDel = new JPanel();
-        save = new RoundedButton("SAVE AS DRAFT",22);
+        cancel = new RoundedButton("CANCEL",22);
         upload = new RoundedButton("UPLOAD", 22);
         addEvent = new JLabel("               ADD EVENT");
         regularFont = Config.NORMAL_REGULAR;
@@ -32,14 +32,14 @@ public class AdminAddEvent extends EventPage implements ActionListener {
 
         panelRek5.add(panelSave);
         panelSave.setLayout( new FlowLayout(FlowLayout.LEFT,93,0));
-        save.setForeground(Color.BLACK);
-        save.setBackground(Config.primaryColor_base);
-        save.setFont(Config.HEADER_SEMIBOLD[2]);
-        save.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
+        cancel.setForeground(Color.BLACK);
+        cancel.setBackground(new Color(255,247,237));
+        cancel.setFont(Config.HEADER_SEMIBOLD[2]);
+        cancel.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
 
-        save.addActionListener(this);
+        cancel.addActionListener(this);
 
-        panelSave.add(save);
+        panelSave.add(cancel);
 
         panelRek5.add(panelDel);
         panelDel.setLayout( new FlowLayout(FlowLayout.RIGHT,93,0));
@@ -60,19 +60,19 @@ public class AdminAddEvent extends EventPage implements ActionListener {
         new AdminAddEvent (Config.createAndShowGUI());
     }
 
-    private RoundedButton del , cal ;
+    private RoundedButton yes , cal ;
     private JDialog dialog ;
 
     public void actionPerformed(ActionEvent ev){
-        if (ev.getSource() == upload) {
+        if (ev.getSource() == cancel) {
             dialog = Config.openFrame((int)(frame.getWidth()/2), (int) (frame.getHeight()/2 ));
             JPanel panelD = new JPanel();
             JPanel panelC = new JPanel();
             JPanel P = new JPanel();
             JPanel panel = new JPanel();
-            JLabel header = new JLabel("ARE YOU SURE WANT TO DELETE");
-            del = new RoundedButton("DELETE" , 22);
-            cal = new RoundedButton("CANCEL" , 22);
+            JLabel header = new JLabel("ARE YOU SURE WANT TO CANCEL");
+            yes = new RoundedButton("YES" , 22);
+            cal = new RoundedButton("NO" , 22);
 
             header.setForeground(Config.primaryColor_hard);
             header.setFont(Config.HEADER_SEMIBOLD[1]);
@@ -89,15 +89,15 @@ public class AdminAddEvent extends EventPage implements ActionListener {
             P.add(panelD);
 
             panelD.setLayout( new FlowLayout(FlowLayout.RIGHT,30,0));
-            del.setForeground(Color.WHITE);
-            del.setBackground(Config.primaryColor_harder);
-            del.setFont(Config.HEADER_SEMIBOLD[2]);
-            del.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/3.5),(frame.getHeight() / 4) - 120));
+            yes.setForeground(Color.WHITE);
+            yes.setBackground(Config.primaryColor_harder);
+            yes.setFont(Config.HEADER_SEMIBOLD[2]);
+            yes.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/3.5),(frame.getHeight() / 4) - 120));
 
-            del.addActionListener(this);
+            yes.addActionListener(this);
 
             panelD.setBackground(null);
-            panelD.add(del);
+            panelD.add(yes);
 
             panelC.setLayout( new FlowLayout(FlowLayout.LEFT,30,0));
             cal.setForeground(Color.BLACK);
@@ -112,8 +112,13 @@ public class AdminAddEvent extends EventPage implements ActionListener {
 
             dialog.add(P);
             dialog.setVisible(true);
-        }
-        else if (ev.getSource() == cal) {
+        }else if (ev.getSource() == cal) {
+            dialog.setVisible(false);
+        }else if (ev.getSource() == yes || ev.getSource() == upload) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new AdminCalendarPage (frame);
             dialog.setVisible(false);
         }
 
