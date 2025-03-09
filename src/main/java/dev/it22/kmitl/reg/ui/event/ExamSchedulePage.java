@@ -1,9 +1,11 @@
 package dev.it22.kmitl.reg.ui.event;
 import dev.it22.kmitl.reg.utils.Config;
-
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 public class ExamSchedulePage {
     private JFrame frame;
@@ -17,6 +19,7 @@ public class ExamSchedulePage {
     private JLabel examSche;
     private JLabel tarangsob;
     private JButton home;
+    private JPanel exSchPanel ;
 
     //body-information
     private JPanel allInfo, testFormat, allchosen, choseYear,choseSem,choseExam, stdInfo;
@@ -47,18 +50,53 @@ public class ExamSchedulePage {
 
 
         //head-menubar
+        exSchPanel = new JPanel();
         bar = new JMenuBar();
-        ETC = new JMenu("ETC");
-        expand = new JMenuItem("Expand");
-        savePDF = new JMenuItem("Save PDF");
-        saveJPG = new JMenuItem("Save JPG");
-        share = new JMenuItem("Share");
-        examSche = new JLabel("Exam Schedule");
         tarangsob = new JLabel("Exam Schedule");
-        home = new JButton("Home");
+
+        examSche = new JLabel("  Exam Schedule");
+        examSche.setPreferredSize(new Dimension(110, 30));
+        examSche.setSize(110, 30);
+        examSche.setForeground(Config.primaryColor_base);
+        exSchPanel.add(examSche);
+        exSchPanel.setBackground(Config.bgColor_base);
+
+        ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
+        home = new JButton(homeIcon);
+
+        ETC = new JMenu();
+        ImageIcon originalIcon = new ImageIcon("source/icon_schedule/icon_etc.png");
+        Image scaledImage = originalIcon.getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        ETC.setIcon(scaledIcon);
+        ETC.setBackground(Config.bgColor_base);
+
+        ImageIcon expandIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_etc.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
+        expand = new JMenuItem("Expand", expandIcon);
+        expand.setPreferredSize(new Dimension(30,40));
+        expand.setBackground(Config.bgColor_base);
+        expand.setForeground(Config.primaryColor_base);
+
+        ImageIcon savePDFIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_etc.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
+        savePDF = new JMenuItem("Save PDF",savePDFIcon);
+        savePDF.setPreferredSize(new Dimension(30,40));
+        savePDF.setBackground(Config.bgColor_base);
+        savePDF.setForeground(Config.primaryColor_base);
+
+        ImageIcon saveJPGIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_etc.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
+        saveJPG = new JMenuItem("Save JPG",saveJPGIcon);
+        saveJPG.setPreferredSize(new Dimension(30,40));
+        saveJPG.setBackground(Config.bgColor_base);
+        saveJPG.setForeground(Config.primaryColor_base);
+
+        ImageIcon shareIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_etc.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
+        share = new JMenuItem("Share",shareIcon);
+        share.setPreferredSize(new Dimension(30,40));
+        share.setBackground(Config.bgColor_base);
+        share.setForeground(Config.primaryColor_base);
 
         tarangsob.setForeground(Config.primaryColor_base);
-        tarangsob.setFont(Config.HEADER_SEMIBOLD[1]);;
+        tarangsob.setFont(Config.HEADER_SEMIBOLD[1]);
 
         //body-information
         allInfo = new JPanel();
@@ -97,11 +135,23 @@ public class ExamSchedulePage {
         //place components
         //head
         //head-menubar
-        bar.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
+        home.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 5));
+        ETC.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
+        tarangsob.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+        bar.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0));
+
+        home.setBorderPainted(false);
+        home.setContentAreaFilled(false);
+        home.setFocusPainted(false);
+
+        bar.setBackground(Config.bgColor_base);
+        bar.setBorderPainted(false);
         bar.add(home);
+
+        ETC.setForeground(Config.primaryColor_base);
         bar.add(ETC);
         bar.add(tarangsob);
-        ETC.add(examSche);
+        ETC.add(exSchPanel);
         ETC.add(expand);
         ETC.add(savePDF);
         ETC.add(saveJPG);
@@ -110,6 +160,42 @@ public class ExamSchedulePage {
         //body-schedule
         DefaultTableModel model = new DefaultTableModel(testData, columnNames);
         examSchedule = new JTable(model);
+        JTableHeader header = examSchedule.getTableHeader();
+        header.setPreferredSize(new Dimension(30,30));
+        header.setBackground(Config.primaryColor_hard);
+        header.setForeground(Color.WHITE);
+        examSchedule.setRowHeight(30);
+
+
+        //จัดข้อความให้อยู่ตรงกลาง
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < examSchedule.getColumnCount(); i++) {
+            examSchedule.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+
+        //เปลี่ยนขนาดช่อง
+        TableColumn day = examSchedule.getColumnModel().getColumn(0);
+        day.setPreferredWidth(100);
+
+        TableColumn time = examSchedule.getColumnModel().getColumn(1);
+        time.setPreferredWidth(100);
+
+        TableColumn id = examSchedule.getColumnModel().getColumn(2);
+        id.setPreferredWidth(100);
+
+        TableColumn subject = examSchedule.getColumnModel().getColumn(3);
+        subject.setPreferredWidth(200);
+
+        TableColumn examType = examSchedule.getColumnModel().getColumn(4);
+        examType.setPreferredWidth(50);
+
+        TableColumn seat = examSchedule.getColumnModel().getColumn(5);
+        seat.setPreferredWidth(30);
+
+        TableColumn room = examSchedule.getColumnModel().getColumn(6);
+        room.setPreferredWidth(50);
+
         scrollPane = new JScrollPane(examSchedule);
         scrollPane.setBackground(null);
         scrollPane.getViewport().setBackground(null);
