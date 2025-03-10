@@ -3,8 +3,10 @@ package dev.it22.kmitl.reg.ui;
 import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.*;
+import dev.it22.kmitl.reg.ui.event.AdminCalendarPage;
 import dev.it22.kmitl.reg.ui.event.ExamSchedulePage;
 import dev.it22.kmitl.reg.ui.profile.LoginFrame;
+import dev.it22.kmitl.reg.ui.profile.RegisterFrame;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -195,11 +197,11 @@ public class HomePage implements ActionListener {
             }
         } else if(acc instanceof Admin) { //"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
-                System.out.println("Admin1");
+                new RegisterFrame(frame);
             } else if (e.getSource().equals(button[1])) {
                 System.out.println("Admin2");
             } else if (e.getSource().equals(button[2])) {
-                System.out.println("Admin3");
+                new AdminCalendarPage(frame);
             } else if (e.getSource().equals(button[3])) {
                 System.out.println("Admin4");
             }
@@ -210,9 +212,9 @@ public class HomePage implements ActionListener {
         JFrame config = Config.createAndShowGUI();
 
         try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
 //            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
-//            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
+            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         }
         catch (Exception e) {
