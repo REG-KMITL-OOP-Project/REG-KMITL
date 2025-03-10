@@ -3,6 +3,7 @@ package dev.it22.kmitl.reg.ui;
 import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.*;
+import dev.it22.kmitl.reg.ui.event.ExamSchedulePage;
 import dev.it22.kmitl.reg.ui.profile.LoginFrame;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
@@ -58,15 +59,15 @@ public class HomePage implements ActionListener {
         if (acc instanceof Student) {
             border = 60;
             name  = new String[]{"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"};
-            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/user-round.png", "source/calendar-days.png", "source/scroll-text.png", "source/settings.png"};
+            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/book.png", "source/calendar-days.png", "source/scroll-text.png", "source/settings.png"};
         }else if(acc instanceof Prof){
             border = 80;
             name  = new String[]{"Example 1","Example 2","Example 3","Example 4","Example 5"};
             source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/scroll-text.png", "source/scroll-text.png", "source/settings.png"};
         }else if(acc instanceof Admin){
             border = 100;
-            name  = new String[]{"Example 1","Example 2","Example 3","Example 4"};
-            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/scroll-text.png", "source/settings.png"};
+            name  = new String[]{"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ตั้งค่า"};
+            source = new String[]{"source/user-round.png", "source/sheet.png", "source/calendar-days.png", "source/settings.png"};
         }
 
         inPanel = new JPanel[name.length];
@@ -163,14 +164,14 @@ public class HomePage implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-//        frame.getContentPane().removeAll();
-//        frame.revalidate();
-//        frame.repaint();
-        if(acc instanceof Student) {
+        frame.getContentPane().removeAll();
+        frame.revalidate();
+        frame.repaint();
+        if(acc instanceof Student) { //"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
                 System.out.println("Student1");
             } else if (e.getSource().equals(button[1])) {
-                System.out.println("Student2");
+                new ExamSchedulePage(frame);
             } else if (e.getSource().equals(button[2])) {
                 System.out.println("Student3");
             } else if (e.getSource().equals(button[3])) {
@@ -192,7 +193,7 @@ public class HomePage implements ActionListener {
             } else if (e.getSource().equals(button[4])) {
                 System.out.println("Prof5");
             }
-        } else if(acc instanceof Admin) {
+        } else if(acc instanceof Admin) { //"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
                 System.out.println("Admin1");
             } else if (e.getSource().equals(button[1])) {
@@ -209,7 +210,7 @@ public class HomePage implements ActionListener {
         JFrame config = Config.createAndShowGUI();
 
         try {
-//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+            new Login("Student01","Student1234").loginWithUsernameAndPassword();
 //            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
 //            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
