@@ -13,7 +13,7 @@ public class CalenderHeaderMenu extends JMenuBar {
     private JPanel SchPanel;
 
     //อยากทำให้มันยาวตามขนาดหน้าจอแต่ทำไม่ได้ง่ะ
-    public CalenderHeaderMenu(int hgt) {
+    public CalenderHeaderMenu() {
         event = new JMenu();
 
         sampleEvent = new JPanel();

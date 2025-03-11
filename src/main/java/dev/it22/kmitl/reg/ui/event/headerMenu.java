@@ -35,7 +35,7 @@ public class headerMenu extends JMenuBar {
         innerLabel.setSize(110, 30);
         innerLabel.setForeground(Config.primaryColor_base);
         SchPanel.add(innerLabel);
-        SchPanel.setBackground(Config.bgColor_base);
+        SchPanel.setBackground(new Color(107,107,118));
 
         ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home_re.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
         home = new JButton(homeIcon);
@@ -48,28 +48,28 @@ public class headerMenu extends JMenuBar {
         ETC.setIcon(scaledIcon);
         ETC.setBackground(Config.bgColor_base);
         ETC.getPopupMenu().setBorder(null);
-        ETC.setMenuLocation(-45, 42);
+        ETC.setMenuLocation(-45, 38);
 
         ImageIcon savePDFIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_saveFile.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
         savePDF = new JMenuItem("Save PDF",savePDFIcon);
         savePDF.setPreferredSize(new Dimension(30,40));
-        savePDF.setBackground(Config.bgColor_base);
+        savePDF.setBackground(new Color(107,107,118));
         savePDF.setForeground(Config.primaryColor_base);
-        savePDF.setBorder(BorderFactory.createLineBorder(Config.bgColor_base));
+        savePDF.setBorder(BorderFactory.createLineBorder(new Color(107,107,118)));
 
         ImageIcon saveJPGIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_saveImage.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
         saveJPG = new JMenuItem("Save JPG",saveJPGIcon);
         saveJPG.setPreferredSize(new Dimension(30,40));
-        saveJPG.setBackground(Config.bgColor_base);
+        saveJPG.setBackground(new Color(107,107,118));
         saveJPG.setForeground(Config.primaryColor_base);
-        saveJPG.setBorder(BorderFactory.createLineBorder(Config.bgColor_base));
+        saveJPG.setBorder(BorderFactory.createLineBorder(new Color(107,107,118)));
 
         ImageIcon shareIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_share.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
         share = new JMenuItem("Share",shareIcon);
         share.setPreferredSize(new Dimension(30,40));
-        share.setBackground(Config.bgColor_base);
+        share.setBackground(new Color(107,107,118));
         share.setForeground(Config.primaryColor_base);
-        share.setBorder(BorderFactory.createLineBorder(Config.bgColor_base));
+        share.setBorder(BorderFactory.createLineBorder(new Color(107,107,118)));
 
 
         outer_Label.setForeground(Config.primaryColor_base);
