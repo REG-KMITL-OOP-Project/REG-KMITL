@@ -10,8 +10,8 @@ public class headerMenu extends JMenuBar {
     //head-menubar
     private JMenu ETC;
     private JMenuItem savePDF, saveJPG, share;
-    private JLabel headerLabel;
     private JLabel innerLabel;
+    private JLabel outer_Label;
     private JButton home;
     private JPanel SchPanel;
 
@@ -21,23 +21,23 @@ public class headerMenu extends JMenuBar {
         savePDF = new JMenuItem("Save PDF");
         saveJPG = new JMenuItem("Save JPG");
         share = new JMenuItem("Share");
-        headerLabel = new JLabel(title);
         innerLabel = new JLabel(title);
+        outer_Label = new JLabel(title);
         home = new JButton("Home");
 
-        innerLabel.setForeground(Config.primaryColor_base);
-        innerLabel.setFont(Config.HEADER_SEMIBOLD[1]);;
+        outer_Label.setForeground(Config.primaryColor_base);
+        outer_Label.setFont(Config.HEADER_SEMIBOLD[1]);;
 
         //head-menubar
         SchPanel = new JPanel();
 
-        headerLabel.setPreferredSize(new Dimension(110, 30));
-        headerLabel.setSize(110, 30);
-        headerLabel.setForeground(Config.primaryColor_base);
-        SchPanel.add(headerLabel);
+        innerLabel.setPreferredSize(new Dimension(110, 30));
+        innerLabel.setSize(110, 30);
+        innerLabel.setForeground(Config.primaryColor_base);
+        SchPanel.add(innerLabel);
         SchPanel.setBackground(Config.bgColor_base);
 
-        ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
+        ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home_re.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
         home = new JButton(homeIcon);
 
 
@@ -72,12 +72,12 @@ public class headerMenu extends JMenuBar {
         share.setBorder(BorderFactory.createLineBorder(Config.bgColor_base));
 
 
-        innerLabel.setForeground(Config.primaryColor_base);
-        innerLabel.setFont(Config.HEADER_SEMIBOLD[1]);
+        outer_Label.setForeground(Config.primaryColor_base);
+        outer_Label.setFont(Config.HEADER_SEMIBOLD[1]);
 
         home.setBorder(BorderFactory.createEmptyBorder(0, 10, 5, 5));
         ETC.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
-        innerLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+        outer_Label.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
         this.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0));
 
         home.setBorderPainted(false);
@@ -90,7 +90,7 @@ public class headerMenu extends JMenuBar {
 
         ETC.setForeground(Config.primaryColor_base);
         this.add(ETC);
-        this.add(innerLabel);
+        this.add(outer_Label);
         ETC.add(SchPanel);
         ETC.add(savePDF);
         ETC.add(saveJPG);
