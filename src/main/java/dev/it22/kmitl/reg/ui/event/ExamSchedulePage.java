@@ -1,4 +1,8 @@
 package dev.it22.kmitl.reg.ui.event;
+import dev.it22.kmitl.reg.controller.auth.Login;
+import dev.it22.kmitl.reg.controller.auth.User;
+import dev.it22.kmitl.reg.model.auth.Account;
+import dev.it22.kmitl.reg.model.auth.Student;
 import dev.it22.kmitl.reg.utils.Config;
 import java.awt.*;
 import javax.swing.*;
@@ -11,6 +15,9 @@ public class ExamSchedulePage {
     private JFrame frame;
            //Attribute ที่สร้างในคลาส
     private JPanel pn1 , pn2;
+
+    //user-data
+    private Account user;
 
     //head-menubar
     private JMenuBar bar;
@@ -25,13 +32,17 @@ public class ExamSchedulePage {
     private JPanel allInfo, testFormat, allchosen, choseYear,choseSem,choseExam, stdInfo;
     private JLabel ID, name, faculty, branch;
     private JComboBox year, semester, exam ;
+    JLabel label[];
 
     //body-schedule
     private JTable examSchedule;
     private JScrollPane scrollPane;
 
     private String years[] = {"2568", "2567", "2566"};
-    private String semesters[] = {"Semester 1", "Semester 2"};
+    //private String semesters[] = {"Semester 1", "Semester 2"};
+    private JLabel semesters1;
+    private JLabel semesters2;
+    private String semesters[] = {"เทอม 1", "เทอม 2"};
     private String exams[] = {"Midterm","Final"};
     private String columnNames[] = {"DD/MM/YY","time", "subject-ID","subject","type","seat","room"};
     private Object testData[][] = {{"DD/MM/YY","09.30-18.00","060111222","OOP","practical","A4","L123"},
@@ -40,7 +51,7 @@ public class ExamSchedulePage {
             {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","A4","L123"}};
 
 
-    public ExamSchedulePage(JFrame frame){
+    public ExamSchedulePage(JFrame frame) throws Exception {
         this.frame = frame;
         pn1 = new JPanel();
         pn2 = new JPanel();
@@ -48,11 +59,13 @@ public class ExamSchedulePage {
         pn1.setBackground(null);
         pn2.setBackground(null);
 
+        //data
+        user = new User().getUserAccount();
 
         //head-menubar
         exSchPanel = new JPanel();
         bar = new JMenuBar();
-        tarangsob = new JLabel("Exam Schedule");
+        tarangsob = new JLabel("ตารางสอบ");
 
         examSche = new JLabel("  Exam Schedule");
         examSche.setPreferredSize(new Dimension(110, 30));
@@ -117,16 +130,20 @@ public class ExamSchedulePage {
         stdInfo.setBackground(null);
 
 
-        ID = new JLabel("Student ID : ");
-        name = new JLabel("Name : ");
-        faculty = new JLabel("Faculty : ");
-        branch = new JLabel("Branch : ");
+        ID = new JLabel("รหัสนักศึกษา : "+ ((Student) user).getStudentId());
+        name = new JLabel("ชื่อ : "+ ((Student) user).getFullName());
+        faculty = new JLabel("คณะ : "+ ((Student) user).getFaculty());
+        branch = new JLabel("สาขา : "+ ((Student) user).getMajor());
 
         ID.setForeground(Color.WHITE);
         name.setForeground(Color.WHITE);
         faculty.setForeground(Color.WHITE);
         branch.setForeground(Color.WHITE);
 
+        //for (int i = 0; i < semesters.length; i++) {
+            //label[i] = new JLabel(semesters[i]);
+            //label[i].setFont(Config.HEADER_SEMIBOLD[2]);
+        //}
 
         year = new JComboBox(years);
         semester = new JComboBox(semesters);
@@ -210,6 +227,7 @@ public class ExamSchedulePage {
         choseSem.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
         choseSem.setLayout(new GridLayout(1, 2));
         choseSem.add(semester);
+        choseSem.setFont(Config.NORMAL_REGULAR);
 
         //panel-exam button
         choseExam.setLayout(new GridLayout(1, 1));
@@ -217,6 +235,12 @@ public class ExamSchedulePage {
 
         //panel-studentInfo
         stdInfo.setLayout(new GridLayout(2, 2));
+
+        ID.setFont(Config.NORMAL_REGULAR);
+        name.setFont(Config.NORMAL_REGULAR);
+        faculty.setFont(Config.NORMAL_REGULAR);
+        branch.setFont(Config.NORMAL_REGULAR);
+
         stdInfo.add(ID);
         stdInfo.add(name);
         stdInfo.add(faculty);
