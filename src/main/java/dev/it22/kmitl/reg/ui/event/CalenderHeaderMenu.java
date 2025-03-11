@@ -7,16 +7,16 @@ import java.awt.*;
 public class CalenderHeaderMenu extends JMenuBar {
     //head-menubar
     private JMenu event;
-    private JLabel sampleEvent;
+    private JPanel sampleEvent;
     private JLabel outer_Label;
     private JButton home;
     private JPanel SchPanel;
 
-
-    public CalenderHeaderMenu() {
+    //อยากทำให้มันยาวตามขนาดหน้าจอแต่ทำไม่ได้ง่ะ
+    public CalenderHeaderMenu(int hgt) {
         event = new JMenu();
 
-        sampleEvent = new JLabel("sample event");
+        sampleEvent = new JPanel();
         outer_Label = new JLabel("Calender");
         home = new JButton("Home");
         outer_Label.setForeground(Config.primaryColor_base);
@@ -28,6 +28,7 @@ public class CalenderHeaderMenu extends JMenuBar {
         sampleEvent.setPreferredSize(new Dimension(110, 30));
         sampleEvent.setSize(110, 30);
         sampleEvent.setForeground(Config.primaryColor_base);
+        sampleEvent.setBackground(Config.bgColor_base);
         SchPanel.add(sampleEvent);
         SchPanel.setBackground(Config.bgColor_base);
 
@@ -44,8 +45,7 @@ public class CalenderHeaderMenu extends JMenuBar {
         event.getPopupMenu().setBorder(null);
         event.setMenuLocation(-45, 42);
 
-
-
+        
         outer_Label.setForeground(Config.primaryColor_base);
         outer_Label.setFont(Config.HEADER_SEMIBOLD[1]);
 
