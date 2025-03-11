@@ -15,7 +15,11 @@ public class headerMenu extends JMenuBar {
     private JButton home;
     private JPanel SchPanel;
 
-    public headerMenu(String title) {
+    public headerMenu(JFrame frame) {
+        this("No title", frame);
+    }
+
+    public headerMenu(String title, JFrame frame) {
 
         ETC = new JMenu("ETC");
         savePDF = new JMenuItem("Save PDF");
@@ -35,11 +39,10 @@ public class headerMenu extends JMenuBar {
         innerLabel.setSize(110, 30);
         innerLabel.setForeground(Config.primaryColor_base);
         SchPanel.add(innerLabel);
-        SchPanel.setBackground(new Color(107,107,118));
+        SchPanel.setBackground(Config.bgColor_base);
 
         ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home_re.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
         home = new JButton(homeIcon);
-
 
         ETC = new JMenu();
         ImageIcon originalIcon = new ImageIcon("source/icon_schedule/icon_etc.png");
@@ -47,30 +50,29 @@ public class headerMenu extends JMenuBar {
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         ETC.setIcon(scaledIcon);
         ETC.setBackground(Config.bgColor_base);
-        ETC.getPopupMenu().setBorder(null);
+        ETC.getPopupMenu().setBorder(BorderFactory.createLineBorder(Config.bgColor_harder));
         ETC.setMenuLocation(-45, 38);
 
         ImageIcon savePDFIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_saveFile.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
         savePDF = new JMenuItem("Save PDF",savePDFIcon);
         savePDF.setPreferredSize(new Dimension(30,40));
-        savePDF.setBackground(new Color(107,107,118));
+        savePDF.setBackground(Config.bgColor_base);
         savePDF.setForeground(Config.primaryColor_base);
-        savePDF.setBorder(BorderFactory.createLineBorder(new Color(107,107,118)));
+        savePDF.setBorder(BorderFactory.createLineBorder(Config.bgColor_base));
 
         ImageIcon saveJPGIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_saveImage.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
         saveJPG = new JMenuItem("Save JPG",saveJPGIcon);
         saveJPG.setPreferredSize(new Dimension(30,40));
-        saveJPG.setBackground(new Color(107,107,118));
+        saveJPG.setBackground(Config.bgColor_base);
         saveJPG.setForeground(Config.primaryColor_base);
-        saveJPG.setBorder(BorderFactory.createLineBorder(new Color(107,107,118)));
+        saveJPG.setBorder(BorderFactory.createLineBorder(Config.bgColor_base));
 
         ImageIcon shareIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_share.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
         share = new JMenuItem("Share",shareIcon);
         share.setPreferredSize(new Dimension(30,40));
-        share.setBackground(new Color(107,107,118));
+        share.setBackground(Config.bgColor_base);
         share.setForeground(Config.primaryColor_base);
-        share.setBorder(BorderFactory.createLineBorder(new Color(107,107,118)));
-
+        share.setBorder(BorderFactory.createLineBorder(Config.bgColor_base));
 
         outer_Label.setForeground(Config.primaryColor_base);
         outer_Label.setFont(Config.HEADER_SEMIBOLD[1]);
@@ -95,5 +97,9 @@ public class headerMenu extends JMenuBar {
         ETC.add(savePDF);
         ETC.add(saveJPG);
         ETC.add(share);
+
+        //set event handler
+        home.addActionListener(new HomeButtonHandler(frame));
     }
+
 }
