@@ -128,9 +128,9 @@ public class EditEventPage extends EventPage implements ActionListener {
 
             dialog.add(P);
             dialog.setVisible(true);
-        } else if (ev.getSource().equals(cal)) {
+        }else if (ev.getSource().equals(cal) || ev.getSource().equals(del)) {
             dialog.setVisible(false);
-        }else if (ev.getSource().equals(del) || ev.getSource().equals(cancel)) {
+        }if (ev.getSource().equals(del) || ev.getSource().equals(cancel)) {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
