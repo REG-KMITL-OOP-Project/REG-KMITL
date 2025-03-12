@@ -2,6 +2,7 @@ package dev.it22.kmitl.reg.ui.Homepage_regis;
 import dev.it22.kmitl.reg.ui.event.AdminAddEvent;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.CustomCombobox;
+import dev.it22.kmitl.reg.utils.RoundedButton;
 import dev.it22.kmitl.reg.utils.RoundedTextField;
 
 import javax.swing.*;
@@ -11,9 +12,11 @@ public class AdminAddSubject {
     private JFrame frame ;
     private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelHead;
     private JLabel addSubject;
-    private RoundedTextField year,name,code,note,condition;
+    private RoundedTextField year,code,name,teacher,note,condition;
     private JComboBox type,kit,group,branch;
     private Font innerFont, regularFont;
+    private RoundedButton cancel,save;
+    private JPanel panelSave = new JPanel() , panelCan = new JPanel();
 
     public AdminAddSubject(JFrame frame){
         this.frame = frame;
@@ -26,10 +29,13 @@ public class AdminAddSubject {
         panelRek5 = new JPanel();
         addSubject = new JLabel("              Add Subject");
         year = new RoundedTextField(22);
-        name = new RoundedTextField(22);
-        code = new RoundedTextField(22);
         note = new RoundedTextField(22);
+        code = new RoundedTextField(22);
+        name = new RoundedTextField(22);
+        teacher = new RoundedTextField(22);
         condition = new RoundedTextField(22);
+        cancel = new RoundedButton("CANCEL" ,22);
+        save = new RoundedButton("SAVE" ,22);
         type = new JComboBox();
         kit = new JComboBox();
         group = new JComboBox();
@@ -44,6 +50,8 @@ public class AdminAddSubject {
         panelRek3.setBackground(null);
         panelRek4.setBackground(null);
         panelRek5.setBackground(null);
+        panelCan.setBackground(null);
+        panelSave.setBackground(null);
 
         panelHead.setLayout( new BorderLayout());
         panelHead.add(panelBig);
@@ -107,12 +115,60 @@ public class AdminAddSubject {
         branch.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
         panelRek2.add(code);
-        code.setText("   รหัสวิชาค");
+        code.setText("   รหัสวิชา");
         code.setFont(innerFont);
         code.setForeground(Color.GRAY);
         code.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
         panelBig.add(panelRek2);
+
+        panelRek3.add(name);
+        name.setText("   ชื่อวิชา");
+        name.setFont(innerFont);
+        name.setForeground(Color.GRAY);
+        name.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.7),(frame.getHeight() / 4) - 120));
+
+        panelRek3.add(teacher);
+        teacher.setText("   อาจารย์ผู้สอน");
+        teacher.setFont(innerFont);
+        teacher.setForeground(Color.GRAY);
+        teacher.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.7),(frame.getHeight() / 4) - 120));
+
+        panelBig.add(panelRek3);
+
+        panelRek4.add(note);
+        note.setText("   หมายเหตุ");
+        note.setFont(innerFont);
+        note.setForeground(Color.GRAY);
+        note.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.7),(frame.getHeight() / 4) - 120));
+
+        panelRek4.add(condition);
+        condition.setText("   เงื่อนไข");
+        condition.setFont(innerFont);
+        condition.setForeground(Color.GRAY);
+        condition.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.7),(frame.getHeight() / 4) - 120));
+
+        panelBig.add(panelRek4);
+
+        panelRek5.add(panelCan);
+        panelCan.setLayout( new FlowLayout(FlowLayout.LEFT,93,0));
+        cancel.setForeground(Color.BLACK);
+        cancel.setBackground(new Color(255,247,237));
+        cancel.setFont(Config.HEADER_SEMIBOLD[2]);
+        cancel.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
+
+        panelCan.add(cancel);
+
+        panelRek5.add(panelSave);
+        panelSave.setLayout( new FlowLayout(FlowLayout.CENTER,93,0));
+        save.setForeground(new Color(255, 247, 237));
+        save.setBackground(Config.primaryColor_base);
+        save.setFont(Config.HEADER_SEMIBOLD[2]);
+        save.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
+
+        panelSave.add(save);
+
+        panelBig.add(panelRek5);
 
         panelHead.add(panelBig);
         frame.add(panelHead);
