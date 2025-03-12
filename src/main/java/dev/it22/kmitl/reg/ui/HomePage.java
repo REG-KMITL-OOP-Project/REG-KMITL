@@ -7,6 +7,8 @@ import dev.it22.kmitl.reg.ui.event.AdminCalendarPage;
 import dev.it22.kmitl.reg.ui.event.ExamSchedulePage;
 import dev.it22.kmitl.reg.ui.profile.LoginFrame;
 import dev.it22.kmitl.reg.ui.profile.RegisterFrame;
+//import dev.it22.kmitl.reg.ui.transcript.TranscriptController;
+//import dev.it22.kmitl.reg.ui.transcript.TranscriptView;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -56,7 +58,7 @@ public class HomePage implements ActionListener {
 
         upperPanel.add(innerUpperPanel, BorderLayout.WEST);
         upperPanel.add(clockLabel, BorderLayout.EAST);
-        frame.add(upperPanel);
+        frame.getContentPane().add(upperPanel);
 
         if (acc instanceof Student) {
             border = 60;
@@ -106,7 +108,7 @@ public class HomePage implements ActionListener {
             bottomPanel.add(inPanel[i]);
         }
 
-        frame.add(bottomPanel);
+        frame.getContentPane().add(bottomPanel);
         frame.setVisible(true);
     }
 
@@ -166,9 +168,8 @@ public class HomePage implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        frame.getContentPane().removeAll();
-        frame.revalidate();
-        frame.repaint();
+        frame.setContentPane(new JFrame().getContentPane());
+        frame.getContentPane().setBackground(Config.bgColor_base);
         if(acc instanceof Student) { //"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
                 System.out.println("Student1");
@@ -179,7 +180,7 @@ public class HomePage implements ActionListener {
             } else if (e.getSource().equals(button[3])) {
                 System.out.println("Student4");
             } else if (e.getSource().equals(button[4])) {
-                System.out.println("Student5");
+//               new TranscriptController(frame);
             } else if (e.getSource().equals(button[5])) {
                 System.out.println("Student6");
             }
