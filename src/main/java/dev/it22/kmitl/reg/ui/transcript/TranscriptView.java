@@ -1,4 +1,4 @@
-package dev.it22.kmitl.reg.ui;
+package dev.it22.kmitl.reg.ui.transcript;
 
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -6,7 +6,7 @@ import dev.it22.kmitl.reg.utils.RoundedButton;
 import javax.swing.*;
 import java.awt.*;
 
-public class Transcript {
+public class TranscriptView {
     private JFrame frame;
     private JPanel mainPanel, transcriptPanel, centerPanel, topLeftPanel, topMidPanel, topRightPanel, topPanel, bottomPanel, textPanel1, textPanel2, unVisiblePanel1, buttonPanel;
     private JLabel transcHeader, transcSubHeader;
@@ -14,7 +14,7 @@ public class Transcript {
     private RoundedButton download;
     private ImageIcon homeIcon;
 
-    public Transcript(JFrame frame) {
+    public TranscriptView(JFrame frame) {
         this.frame = frame;
 
         transcHeader = new JLabel("Transcript", SwingConstants.CENTER);
@@ -58,10 +58,10 @@ public class Transcript {
         homeButton.setBorderPainted(false);
         homeButton.setFocusPainted(false);
 
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(centerPanel, BorderLayout.CENTER);
-        mainPanel.add(topPanel, BorderLayout.NORTH);
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.add(topPanel);
+        mainPanel.add(centerPanel);
+        mainPanel.add(bottomPanel);
 
         topPanel.setLayout(new GridLayout(1,3));
         topPanel.add(topLeftPanel);
@@ -75,10 +75,12 @@ public class Transcript {
         topMidPanel.add(textPanel2);
 
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        centerPanel.add(transcriptPanel);
         transcriptPanel.setPreferredSize(new Dimension((int) ((frame.getHeight()/1.368316831683168) / 1.414285714), (int)(frame.getHeight()/1.368316831683168) ));
+        transcriptPanel.setSize(new Dimension((int) ((frame.getHeight()/1.368316831683168) / 1.414285714), (int)(frame.getHeight()/1.368316831683168) ));
+        centerPanel.add(transcriptPanel);
 
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
+        bottomPanel.setSize(frame.getWidth()/30, frame.getWidth()/30);
         bottomPanel.add(unVisiblePanel1);
         bottomPanel.add(buttonPanel);
         unVisiblePanel1.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()/300));
@@ -93,15 +95,18 @@ public class Transcript {
         textPanel1.add(transcHeader);
         textPanel1.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()/17));
         textPanel2.add(transcSubHeader);
-        frame.add(mainPanel);
+        frame.getContentPane().add(mainPanel);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        System.out.println(frame.getHeight());
-        System.out.println(centerPanel.getHeight());
+        System.out.println(bottomPanel.getWidth());
+        System.out.println(bottomPanel.getHeight());
     }
 
-    public static void main(String[] args) {
-        new Transcript(Config.createAndShowGUI());
+    public RoundedButton getDownloadButton() {
+        return download;
     }
+    public JButton getHomeButton() {return homeButton;}
+    public JFrame getFrame() {return frame;}
+
 }
