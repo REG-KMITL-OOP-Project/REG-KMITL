@@ -51,7 +51,7 @@ public class ExamSchedulePage {
             {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","A4","L123"}};
 
 
-    public ExamSchedulePage(JFrame frame) throws Exception {
+    public ExamSchedulePage(JFrame frame) {
         this.frame = frame;
         pn1 = new JPanel();
         pn2 = new JPanel();

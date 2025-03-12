@@ -91,5 +91,8 @@ public class User {
         return userAccount;
     }
 
+    public void logout() {
+        this.userAccount = null;
+    }
 
 }
