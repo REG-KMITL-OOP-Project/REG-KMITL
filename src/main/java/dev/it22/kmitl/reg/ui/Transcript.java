@@ -8,9 +8,11 @@ import java.awt.*;
 
 public class Transcript {
     private JFrame frame;
-    private JPanel mainPanel, transcriptPanel, westPanel, eastPanel, topPanel, bottomPanel, textPanel1, textPanel2, unVisiblePanel1, unVisiblePanel2, buttonPanel;
+    private JPanel mainPanel, transcriptPanel, centerPanel, topLeftPanel, topMidPanel, topRightPanel, topPanel, bottomPanel, textPanel1, textPanel2, unVisiblePanel1, buttonPanel;
     private JLabel transcHeader, transcSubHeader;
+    private JButton homeButton;
     private RoundedButton download;
+    private ImageIcon homeIcon;
 
     public Transcript(JFrame frame) {
         this.frame = frame;
@@ -25,66 +27,78 @@ public class Transcript {
 
         mainPanel = new JPanel();
         transcriptPanel = new JPanel();
-        westPanel = new JPanel();
-        eastPanel = new JPanel();
         topPanel = new JPanel();
+        topLeftPanel = new JPanel();
+        topMidPanel = new JPanel();
+        topRightPanel = new JPanel();
+        centerPanel = new JPanel();
         bottomPanel = new JPanel();
         textPanel1 = new JPanel();
         textPanel2 = new JPanel();
         unVisiblePanel1 = new JPanel();
-        unVisiblePanel2 = new JPanel();
         buttonPanel = new JPanel();
-        download = new RoundedButton("Download", 20);
+        homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home_re.png").getImage().getScaledInstance(frame.getWidth()/30, frame.getWidth()/30, Image.SCALE_SMOOTH));
+        download = new RoundedButton("DOWNLOAD", 20);
+        homeButton = new JButton(homeIcon);
 
-        westPanel.setPreferredSize(new Dimension((int)(frame.getWidth()/2.98),frame.getHeight()));
-        eastPanel.setPreferredSize(new Dimension((int) (frame.getWidth()/3.02),frame.getHeight()));
         mainPanel.setBackground(null);
-        eastPanel.setBackground(null);
-        westPanel.setBackground(null);
         topPanel.setBackground(null);
+        topLeftPanel.setBackground(null);
+        topMidPanel.setBackground(null);
+        topRightPanel.setBackground(null);
+        centerPanel.setBackground(null);
         bottomPanel.setBackground(null);
         textPanel1.setBackground(null);
         textPanel2.setBackground(null);
         unVisiblePanel1.setBackground(null);
-        unVisiblePanel2.setBackground(null);
         buttonPanel.setBackground(null);
 
+        homeButton.setBackground(null);
+        homeButton.setBounds(10,10,frame.getWidth()/30, frame.getWidth()/30);
+        homeButton.setBorderPainted(false);
+        homeButton.setFocusPainted(false);
+
         mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(westPanel, BorderLayout.WEST);
-        mainPanel.add(eastPanel, BorderLayout.EAST);
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-        mainPanel.add(transcriptPanel, BorderLayout.CENTER);
 
-        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
-        topPanel.add(Box.createVerticalStrut(5));
-        topPanel.add(textPanel1);
-        topPanel.add(textPanel2);
+        topPanel.setLayout(new GridLayout(1,3));
+        topPanel.add(topLeftPanel);
+        topPanel.add(topMidPanel);
+        topPanel.add(topRightPanel);
+        topLeftPanel.setLayout(null);
+        topLeftPanel.add(homeButton);
+        topMidPanel.setLayout(new BoxLayout(topMidPanel, BoxLayout.Y_AXIS));
+        topMidPanel.add(Box.createVerticalStrut(5));
+        topMidPanel.add(textPanel1);
+        topMidPanel.add(textPanel2);
+
+        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        centerPanel.add(transcriptPanel);
+        transcriptPanel.setPreferredSize(new Dimension((int) ((frame.getHeight()/1.368316831683168) / 1.414285714), (int)(frame.getHeight()/1.368316831683168) ));
 
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
         bottomPanel.add(unVisiblePanel1);
         bottomPanel.add(buttonPanel);
         unVisiblePanel1.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()/300));
 
-        buttonPanel.add(unVisiblePanel2);
-        unVisiblePanel2.setPreferredSize(new Dimension((frame.getWidth()/600),frame.getHeight()/12));
-
         buttonPanel.add(download);
         buttonPanel.setPreferredSize(new Dimension((frame.getWidth()),frame.getHeight()/10));
         download.setBackground(Config.primaryColor_hard);
         download.setForeground(new Color(255, 255, 255));
         download.setFont(Config.HEADER_SEMIBOLD[2]);
-        download.setPreferredSize(new Dimension((int)(frame.getWidth()/3.5),frame.getHeight()/12));
+        download.setPreferredSize(new Dimension((int) ((frame.getHeight()/1.368316831683168) / 1.414285714),frame.getHeight()/12));
 
         textPanel1.add(transcHeader);
         textPanel1.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()/17));
         textPanel2.add(transcSubHeader);
-
         frame.add(mainPanel);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        System.out.println(transcriptPanel.getHeight());
+        System.out.println(frame.getHeight());
+        System.out.println(centerPanel.getHeight());
     }
 
     public static void main(String[] args) {

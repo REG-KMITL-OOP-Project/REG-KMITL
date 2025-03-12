@@ -128,16 +128,15 @@ public class EditEventPage extends EventPage implements ActionListener {
 
             dialog.add(P);
             dialog.setVisible(true);
-        } else if (ev.getSource() == cal) {
+        } else if (ev.getSource().equals(cal)) {
             dialog.setVisible(false);
-        }else if (ev.getSource() == del || ev.getSource() == cancel) {
+        }else if (ev.getSource().equals(del) || ev.getSource().equals(cancel)) {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
             new AdminCalendarPage (frame);
-            dialog.setVisible(false);
         }
-    else if (ev.getSource() == save) {
+    else if (ev.getSource().equals(save)) {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
