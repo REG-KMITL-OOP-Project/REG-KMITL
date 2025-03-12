@@ -14,7 +14,7 @@ import java.awt.event.FocusListener;
 public class EventPage implements FocusListener {
     protected JFrame frame;
     protected JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelHead;
-    protected JLabel to;
+    protected JLabel to,;
     protected RoundedTextField eventName,dateStart,dateEnd;
     protected RoundedTextArea description;
     protected JComboBox eventType;
@@ -106,11 +106,12 @@ public class EventPage implements FocusListener {
         dateEnd.addFocusListener(this);
 
         panelBig.add(panelRek4);
-        eventType.addItem("   CHOOSE CATEGORY");
-        eventType.addItem("   CHOOSE CATEGORY");
-        eventType.addItem("   CHOOSE CATEGORY");
-        eventType.addItem("   CHOOSE CATEGORY");
-        eventType.addItem("   CHOOSE CATEGORY");
+        eventType.addItem("   อื่นๆ");
+        eventType.addItem("   เปิด-ปิด ภาคการศึกษา");
+        eventType.addItem("   สอบ");
+        eventType.addItem("   ชำระเงิน");
+        eventType.addItem("   ลงทะเบียน");
+        eventType.addItem("   ประเมินอาจารย์");
         eventType.setRenderer(new CustomCombobox());
         eventType.setMaximumRowCount(3);
         eventType.setFont(Config.NORMAL_REGULAR);
