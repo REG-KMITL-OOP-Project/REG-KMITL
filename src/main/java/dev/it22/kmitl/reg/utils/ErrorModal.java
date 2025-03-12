@@ -38,8 +38,8 @@ public class ErrorModal implements ActionListener {
         duocrossPic.setBorder(BorderFactory.createEmptyBorder(0,0,0,10));
         contentPanel.add(duocrossPic);
 
-        JLabel errorLabel = new JLabel(errorMessage);
-        errorLabel.setFont(Config.HEADER_SEMIBOLD[1]);
+        JLabel errorLabel = new JLabel("<html><div style='width:220px;'>" + errorMessage + "</div></html>");
+        errorLabel.setFont(Config.NORMAL_REGULAR);
         errorLabel.setForeground(Color.WHITE);
         contentPanel.add(errorLabel);
 
