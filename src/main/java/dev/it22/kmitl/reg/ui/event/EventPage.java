@@ -14,7 +14,7 @@ import java.awt.event.FocusListener;
 public class EventPage implements FocusListener {
     protected JFrame frame;
     protected JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelHead;
-    protected JLabel to,;
+    protected JLabel to;
     protected RoundedTextField eventName,dateStart,dateEnd;
     protected RoundedTextArea description;
     protected JComboBox eventType;

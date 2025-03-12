@@ -39,7 +39,7 @@ public class User {
             default: throw new IllegalArgumentException("Invalid prefix value: " + prefixValue);
         }
         String phone = account.getString("phone");
-        String studentId = account.getString("studentid");
+        String studentId = account.getString("std_id");
         String faculty = account.getString("faculty");
         String major = account.getString("major");
         String section = account.getString("section");
