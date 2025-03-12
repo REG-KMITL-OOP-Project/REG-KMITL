@@ -248,7 +248,7 @@ public class ExamSchedulePage {
         stdInfo.add(name);
         stdInfo.add(faculty);
         stdInfo.add(branch);
-        
+
         allInfo.setLayout(new BorderLayout());
         testFormat.setLayout(new GridLayout(1, 2));
         allchosen.setLayout(new GridLayout(2, 1));

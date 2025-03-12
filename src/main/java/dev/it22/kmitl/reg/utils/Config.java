@@ -46,7 +46,7 @@ public class Config {
         frame.setResizable(false);
         frame.setSize(new Dimension(screenSize.width * 4/5,screenSize.height *4/5));
         frame.setIconImage(new ImageIcon("source/Logo.png").getImage());
-        frame.setLocation(screenSize.width/9,screenSize.height/9);
+        frame.setLocationRelativeTo(null);
         System.out.println(screenSize);
         return frame;
     }

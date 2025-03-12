@@ -119,7 +119,9 @@ public class AdminAddEvent extends EventPage implements ActionListener {
             frame.revalidate();
             frame.repaint();
             new AdminCalendarPage (frame);
-            dialog.setVisible(false);
+            if (ev.getSource() == yes) {
+                dialog.setVisible(false);
+            }
         }
 
     }
