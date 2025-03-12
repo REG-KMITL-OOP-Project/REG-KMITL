@@ -27,7 +27,7 @@ public class AdminAddSubject {
         panelRek3 = new JPanel();
         panelRek4 = new JPanel();
         panelRek5 = new JPanel();
-        addSubject = new JLabel("              Add Subject");
+        addSubject = new JLabel("              เพิ่มวิชาเรียน");
         year = new RoundedTextField(22);
         note = new RoundedTextField(22);
         code = new RoundedTextField(22);
@@ -59,7 +59,7 @@ public class AdminAddSubject {
         panelBig.add(Box.createVerticalStrut(10));
 
         panelHead.add(addSubject);
-        addSubject.setForeground(new Color(255,247,237));
+        addSubject.setForeground(Config.primaryColor_hard);
         addSubject.setFont(Config.HEADER_SEMIBOLD[1]);
         addSubject.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
         panelHead.add(addSubject,BorderLayout.NORTH);
