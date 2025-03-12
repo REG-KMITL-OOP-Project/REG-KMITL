@@ -21,20 +21,20 @@ public class Login {
             ResultSet userCheck = db.getQuery("SELECT * FROM user WHERE username = '" + this.username + "';");
 
             if (!userCheck.next()) {
-                throw new Exception("??ERROR : Username not found");
+                throw new Exception("Username not found");
             }
 
             String hashedPassword = userCheck.getString("password");
             if (!new PasswordHash(this.password).checkPassword(hashedPassword)) {
-                throw new Exception("??ERROR : Password not match");
+                throw new Exception("Password not match");
             }
 
             User user = new User(userCheck);
             System.out.println("Login success");
         }
         catch (Exception e) {
-            System.out.println("😳 Error Login : "+e.getMessage());
-            throw new Exception("😳 Error Login : "+e.getMessage());
+            System.out.println("Error Login : "+e.getMessage());
+            throw new Exception("Error Login : "+e.getMessage());
         }
     }
 

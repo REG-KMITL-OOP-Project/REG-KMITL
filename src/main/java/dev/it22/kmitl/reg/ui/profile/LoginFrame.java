@@ -135,7 +135,7 @@ public class LoginFrame implements ActionListener {
                 new HomePage(frame);
             }
             catch (Exception ex){
-                new ErrorModal(frame,ex.getMessage());
+                new ErrorModal(frame,"Username or Password incorrect.");
             }
         }
     }

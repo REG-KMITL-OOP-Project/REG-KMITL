@@ -62,16 +62,16 @@ public class HomePage implements ActionListener {
 
         if (acc instanceof Student) {
             border = 60;
-            name  = new String[]{"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"};
-            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/book.png", "source/calendar-days.png", "source/scroll-text.png", "source/settings.png"};
+            name  = new String[]{"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ออกจากระบบ"};
+            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/book.png", "source/calendar-days.png", "source/scroll-text.png", "source/log-out.png"};
         }else if(acc instanceof Prof){
             border = 80;
             name  = new String[]{"Example 1","Example 2","Example 3","Example 4","Example 5"};
-            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/scroll-text.png", "source/scroll-text.png", "source/settings.png"};
+            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/scroll-text.png", "source/scroll-text.png", "source/log-out.png"};
         }else if(acc instanceof Admin){
             border = 100;
-            name  = new String[]{"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ตั้งค่า"};
-            source = new String[]{"source/user-round.png", "source/sheet.png", "source/calendar-days.png", "source/settings.png"};
+            name  = new String[]{"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ออกจากระบบ"};
+            source = new String[]{"source/user-round.png", "source/sheet.png", "source/calendar-days.png", "source/log-out.png"};
         }
 
         inPanel = new JPanel[name.length];
