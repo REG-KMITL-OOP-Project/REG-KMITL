@@ -7,6 +7,8 @@ import dev.it22.kmitl.reg.ui.event.AdminCalendarPage;
 import dev.it22.kmitl.reg.ui.event.ExamSchedulePage;
 import dev.it22.kmitl.reg.ui.profile.LoginFrame;
 import dev.it22.kmitl.reg.ui.profile.RegisterFrame;
+//import dev.it22.kmitl.reg.ui.transcript.TranscriptController;
+//import dev.it22.kmitl.reg.ui.transcript.TranscriptView;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -67,6 +69,8 @@ public class HomePage implements ActionListener {
         clock = new RealTimeClock();
         clockLabel = clock.getClock();
         clockLabel.setPreferredSize(new Dimension(frame.getWidth()/3, frame.getHeight()/2));
+        upperPanel.setBackground(Config.bgColor_base);
+//        lowerPanel.setBackground(Config.bgColor_hard);
 
         upperPanel.add(innerUpperPanel, BorderLayout.WEST);
         upperPanel.add(clockLabel, BorderLayout.EAST);
@@ -76,11 +80,11 @@ public class HomePage implements ActionListener {
             border = 60;
             name = new String[]{"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"};
             source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/book.png", "source/calendar-days.png", "source/scroll-text.png", "source/settings.png"};
-        } else if(acc instanceof Prof) {
+        }else if(acc instanceof Prof){
             border = 80;
-            name = new String[]{"Example 1","Example 2","Example 3","Example 4","Example 5"};
+            name  = new String[]{"Example 1","Example 2","Example 3","Example 4","Example 5"};
             source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/scroll-text.png", "source/scroll-text.png", "source/settings.png"};
-        } else if(acc instanceof Admin) {
+        }else if(acc instanceof Admin){
             border = 100;
             name = new String[]{"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ตั้งค่า"};
             source = new String[]{"source/user-round.png", "source/sheet.png", "source/calendar-days.png", "source/settings.png"};
@@ -208,6 +212,8 @@ public class HomePage implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // ปรับให้แสดงทางเลือกด้วย JInternalFrame แทนการเปลี่ยนแปลง contentPane
+        frame.setContentPane(new JFrame().getContentPane());
+        frame.getContentPane().setBackground(Config.bgColor_base);
         if(acc instanceof Student) { //"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
                 showInternalFrame("ตารางเรียน", 700, 500);
@@ -289,6 +295,8 @@ public class HomePage implements ActionListener {
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
+
+
         }
         System.out.println(new User().getUserAccount().getUsername());
 
