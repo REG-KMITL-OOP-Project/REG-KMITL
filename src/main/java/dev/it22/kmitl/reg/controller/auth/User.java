@@ -42,7 +42,7 @@ public class User {
         String studentId = account.getString("std_id");
         String faculty = account.getString("faculty");
         String major = account.getString("major");
-        String section = account.getString("section");
+        String section = account.getString("section_id");
         String address = account.getString("address");
         String prof_id = account.getString("prof_id");
 
