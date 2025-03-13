@@ -11,7 +11,8 @@ import javax.swing.*;
 
 public class EditEventPage extends EventPage implements ActionListener {
     private JPanel panelSave,panelDel,panelCan;
-    private RoundedButton save,delete,cancel;
+    private RoundedButton delete,cancel;
+    private ButtonSave save;
     private JLabel editEvent;
 
     public EditEventPage(JFrame frame){
@@ -19,9 +20,9 @@ public class EditEventPage extends EventPage implements ActionListener {
         panelSave = new JPanel();
         panelDel = new JPanel();
         panelCan = new JPanel();
-        save = new RoundedButton("SAVE CHANGE",22);
         delete = new RoundedButton("DELETE", 22);
         cancel = new RoundedButton("CANCEL", 22);
+        save = new ButtonSave("SAVE CHANGE",22);
         editEvent = new JLabel("              EDIT EVENT");
 
         panelSave.setBackground(null);
@@ -45,15 +46,10 @@ public class EditEventPage extends EventPage implements ActionListener {
         panelCan.add(cancel);
 
         panelRek5.add(panelSave);
-        panelSave.setLayout( new FlowLayout(FlowLayout.CENTER,93,0));
-        save.setForeground(new Color(255, 247, 237));
-        save.setBackground(Config.primaryColor_base);
-        save.setFont(Config.HEADER_SEMIBOLD[2]);
-        save.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
-
-        save.addActionListener(this);
-
+        panelSave.setLayout(new FlowLayout(FlowLayout.CENTER, 93, 0));
+        save.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 2.7), (frame.getHeight() / 4) - 120));
         panelSave.add(save);
+        save.addActionListener(this);
 
         panelRek5.add(panelDel);
         panelDel.setLayout( new FlowLayout(FlowLayout.RIGHT,93,0));
