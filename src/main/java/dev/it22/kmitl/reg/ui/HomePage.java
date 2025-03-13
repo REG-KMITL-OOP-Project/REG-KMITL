@@ -16,6 +16,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
+
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class HomePage implements ActionListener {
 
@@ -35,7 +38,11 @@ public class HomePage implements ActionListener {
     JPanel bottomPanel;
 
     public HomePage(JFrame frame) {
-
+        try{
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         this.frame = frame;
         frame.setLayout(new GridLayout(2,1));
 
@@ -201,11 +208,16 @@ public class HomePage implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (!e.getSource().equals(editButton)) {
+        JLayeredPane newLayeredPane = new JLayeredPane();
+        newLayeredPane.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+        frame.setLayeredPane(newLayeredPane);
         frame.setContentPane(new JFrame().getContentPane());
         frame.getContentPane().setBackground(Config.bgColor_base);
         frame.getContentPane().removeAll();
         frame.revalidate();
         frame.repaint();
+        }
         if(acc instanceof Student) { //"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
                 System.out.println("Student1");
@@ -221,7 +233,7 @@ public class HomePage implements ActionListener {
                 user.logout();
                 new LoginFrame(frame);
             } else if (e.getSource().equals(editButton)) {
-                new HomePage(frame);
+                requestEditData(frame);
             }
         }else if(acc instanceof Prof) {
             if (e.getSource().equals(button[0])) {
@@ -236,7 +248,7 @@ public class HomePage implements ActionListener {
                 user.logout();
                 new LoginFrame(frame);
             } else if (e.getSource().equals(editButton)) {
-                new HomePage(frame);
+                requestEditData(frame);
             }
         } else if(acc instanceof Admin) { //"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
@@ -252,12 +264,28 @@ public class HomePage implements ActionListener {
         }
     }
 
+    private void requestEditData(JFrame frame) {
+        JLayeredPane layeredPane = frame.getLayeredPane();
+        JDesktopPane desktopPane = new JDesktopPane();
+        desktopPane.setOpaque(false);
+        desktopPane.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+        JInternalFrame internalFrame = new JInternalFrame("",false,true,false,false);
+        internalFrame.setFrameIcon(null);
+        internalFrame.setSize(300, 200);
+        internalFrame.setLocation(100, 100);
+        internalFrame.setVisible(true);
+        internalFrame.setLocation((desktopPane.getWidth() - internalFrame.getWidth())/2, (desktopPane.getHeight() - internalFrame.getHeight())/2);
+        desktopPane.add(internalFrame);
+        layeredPane.add(desktopPane, JLayeredPane.PALETTE_LAYER);
+        frame.setVisible(true);
+    }
+
     public static void main(String[] args) {
         JFrame config = Config.createAndShowGUI();
 
         try {
-//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
+            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
 //            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         }
