@@ -84,6 +84,12 @@ public class AdminAddGroupClass {
         type.setFont(innerFont);
         type.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
+        numStu.setText("    จำนวนนักศึกษาที่รับ");
+        numStu.setFont(innerFont);
+        numStu.setForeground(Color.GRAY);
+        numStu.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
+
+        panelRek1.add(numStu);
         panelBig.add(panelRek1);
 
         panelSpecial.add(date);
@@ -105,13 +111,13 @@ public class AdminAddGroupClass {
         time.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
         panelRek2.add(mid);
-        mid.setText("   Midterm");
+        mid.setText("   กลางภาค");
         mid.setFont(innerFont);
         mid.setForeground(Color.GRAY);
         mid.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
         panelRek2.add(fi);
-        fi.setText("   Final");
+        fi.setText("   ปลายภาค");
         fi.setFont(innerFont);
         fi.setForeground(Color.GRAY);
         fi.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
@@ -136,6 +142,27 @@ public class AdminAddGroupClass {
         room.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
         panelBig.add(panelRek3);
+
+        panelRek5.add(panelCan);
+        panelCan.setLayout( new FlowLayout(FlowLayout.LEFT,93,0));
+        cancel.setForeground(Color.BLACK);
+        cancel.setBackground(new Color(255,247,237));
+        cancel.setFont(Config.HEADER_SEMIBOLD[2]);
+        cancel.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
+
+        panelCan.add(cancel);
+
+        panelRek5.add(panelSave);
+        panelSave.setLayout( new FlowLayout(FlowLayout.CENTER,93,0));
+        save.setForeground(new Color(255, 247, 237));
+        save.setBackground(Config.primaryColor_base);
+        save.setFont(Config.HEADER_SEMIBOLD[2]);
+        save.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
+
+        panelSave.add(save);
+
+        panelBig.add(panelRek5);
+
 
         panelHead.add(panelBig);
         frame.add(panelHead);
