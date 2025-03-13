@@ -7,8 +7,7 @@ import dev.it22.kmitl.reg.ui.event.AdminCalendarPage;
 import dev.it22.kmitl.reg.ui.event.ExamSchedulePage;
 import dev.it22.kmitl.reg.ui.profile.LoginFrame;
 import dev.it22.kmitl.reg.ui.profile.RegisterFrame;
-//import dev.it22.kmitl.reg.ui.transcript.TranscriptController;
-//import dev.it22.kmitl.reg.ui.transcript.TranscriptView;
+import dev.it22.kmitl.reg.ui.transcript.TranscriptController;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -31,7 +30,7 @@ public class HomePage implements ActionListener {
     String name[];
     String source[];
     JPanel inPanel[];
-    RoundedButton button[];
+    RoundedButton button[] ,editButton;
     JLabel label[];
     JPanel bottomPanel;
 
@@ -136,8 +135,15 @@ public class HomePage implements ActionListener {
             idLabel.setForeground(Config.primaryColor_base);
             idLabel.setFont(Config.HEADER_SEMIBOLD[1]);
 
+            editButton = new RoundedButton("",10);
+            editButton.setBackground(Config.primaryColor_base);
+            editButton.setPreferredSize(new Dimension(30,30));
+            editButton.setIcon(new ImageIcon(new ImageIcon("source/square-pen.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH)));
+            editButton.addActionListener(this);
+
             topPanel.add(welcome);
             topPanel.add(idLabel);
+            topPanel.add(editButton);
 
             JLabel nameLabel = new JLabel(" คุณ"+acc.getFirstName()+" "+acc.getLastName());
             nameLabel.setBackground(null);
@@ -147,7 +153,34 @@ public class HomePage implements ActionListener {
 
             panel.add(topPanel);
             panel.add(nameLabel);
-        } else if (acc instanceof Prof || acc instanceof Admin) {
+        } else if (acc instanceof Prof) {
+            JLabel welcome = new JLabel("ยินดีต้อนรับ ");
+            welcome.setForeground(Color.WHITE);
+            welcome.setFont(Config.HEADER_SEMIBOLD[1]);
+
+            JLabel idLabel = new JLabel(((Prof)acc).getProf_id());
+            idLabel.setForeground(Config.primaryColor_base);
+            idLabel.setFont(Config.HEADER_SEMIBOLD[1]);
+
+            editButton = new RoundedButton("",10);
+            editButton.setBackground(Config.primaryColor_base);
+            editButton.setPreferredSize(new Dimension(30,30));
+            editButton.setIcon(new ImageIcon(new ImageIcon("source/square-pen.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH)));
+            editButton.addActionListener(this);
+
+            topPanel.add(welcome);
+            topPanel.add(idLabel);
+            topPanel.add(editButton);
+
+            JLabel nameLabel = new JLabel(" คุณ"+acc.getFirstName()+" "+acc.getLastName());
+            nameLabel.setBackground(null);
+            nameLabel.setForeground(Config.primaryColor_base);
+            nameLabel.setFont(Config.HEADER_SEMIBOLD[1]);
+            nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            panel.add(topPanel);
+            panel.add(nameLabel);
+        } else if (acc instanceof Admin) {
             JLabel welcome = new JLabel("ยินดีต้อนรับ ");
             welcome.setForeground(Color.WHITE);
             welcome.setFont(Config.HEADER_SEMIBOLD[1]);
@@ -170,6 +203,9 @@ public class HomePage implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         frame.setContentPane(new JFrame().getContentPane());
         frame.getContentPane().setBackground(Config.bgColor_base);
+        frame.getContentPane().removeAll();
+        frame.revalidate();
+        frame.repaint();
         if(acc instanceof Student) { //"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
                 System.out.println("Student1");
@@ -180,21 +216,27 @@ public class HomePage implements ActionListener {
             } else if (e.getSource().equals(button[3])) {
                 System.out.println("Student4");
             } else if (e.getSource().equals(button[4])) {
-//               new TranscriptController(frame);
+               new TranscriptController(frame);
             } else if (e.getSource().equals(button[5])) {
-                System.out.println("Student6");
+                user.logout();
+                new LoginFrame(frame);
+            } else if (e.getSource().equals(editButton)) {
+                new HomePage(frame);
             }
         }else if(acc instanceof Prof) {
             if (e.getSource().equals(button[0])) {
                 System.out.println("Prof1");
             } else if (e.getSource().equals(button[1])) {
-                System.out.println("Prof2");
+                new ExamSchedulePage(frame);
             } else if (e.getSource().equals(button[2])) {
                 System.out.println("Prof3");
             } else if (e.getSource().equals(button[3])) {
                 System.out.println("Prof4");
             } else if (e.getSource().equals(button[4])) {
-                System.out.println("Prof5");
+                user.logout();
+                new LoginFrame(frame);
+            } else if (e.getSource().equals(editButton)) {
+                new HomePage(frame);
             }
         } else if(acc instanceof Admin) { //"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
@@ -204,7 +246,8 @@ public class HomePage implements ActionListener {
             } else if (e.getSource().equals(button[2])) {
                 new AdminCalendarPage(frame);
             } else if (e.getSource().equals(button[3])) {
-                System.out.println("Admin4");
+                user.logout();
+                new LoginFrame(frame);
             }
         }
     }
@@ -214,8 +257,8 @@ public class HomePage implements ActionListener {
 
         try {
 //            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-//            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
-            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
+            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
+//            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         }
         catch (Exception e) {
