@@ -9,6 +9,8 @@ public class Config {
     public static final Color primaryColor_base = new Color(255,137,5);
     public static final Color primaryColor_hard = new Color(255,105,0);
     public static final Color primaryColor_harder = new Color(245,73,0);
+    public static final Color errorColor_base = new Color(250,44,55);
+    public static final Color errorColor_hard = new Color(231,0,11);
     public static Font HEADER_REGULAR[];
     public static Font HEADER_SEMIBOLD[];
     public static Font NORMAL_REGULAR;
@@ -44,7 +46,7 @@ public class Config {
         frame.setResizable(false);
         frame.setSize(new Dimension(screenSize.width * 4/5,screenSize.height *4/5));
         frame.setIconImage(new ImageIcon("source/Logo.png").getImage());
-        frame.setLocation(screenSize.width/9,screenSize.height/9);
+        frame.setLocationRelativeTo(null);
         System.out.println(screenSize);
         return frame;
     }
@@ -70,5 +72,16 @@ public class Config {
 
         return topPanel;
     }
-
+    public static JDialog openFrame(int width, int height) {
+        JDialog dialog = new JDialog();
+        dialog.setLayout(new FlowLayout());
+        dialog.setTitle("");
+        dialog.setUndecorated(true);
+        dialog.setResizable(false);
+        dialog.setSize(width, height);
+        dialog.setLocationRelativeTo(null);
+        dialog.setModal(true);
+        dialog.getContentPane().setBackground(Config.bgColor_harder);
+        return dialog;
+    }
 }

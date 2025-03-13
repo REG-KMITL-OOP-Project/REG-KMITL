@@ -1,89 +1,70 @@
+
 package dev.it22.kmitl.reg.ui.event;
-import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.*;
 
-public class EditEventPage {
-    private  JFrame frame;
-    private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelEdit;
-    private JButton save,delete;
-    private JLabel editEvent,to;
-    private JTextField eventName,dateStart,dateEnd;
-    private JTextArea description;
-    private JComboBox eventType;
+public class EditEventPage extends EventPage implements ActionListener {
+    private JPanel panelSave,panelDel,panelCan;
+    private RoundedButton save,delete,cancel;
+    private JLabel editEvent;
 
     public EditEventPage(JFrame frame){
-        this.frame = frame;
-        panelBig = new JPanel();
-        panelRek1 = new JPanel();
-        panelRek2 = new JPanel();
-        panelRek3 = new JPanel();
-        panelRek4 = new JPanel();
-        panelRek5 = new JPanel();
-        panelEdit = new JPanel();
-        save = new JButton("SAVE CHANGE");
-        delete = new JButton("DELETE");
-        editEvent = new JLabel("EDIT EVENT");
-        to = new JLabel("To");
-        eventName = new JTextField(25);
-        dateStart = new JTextField(6);
-        dateEnd = new JTextField(6);
-        description = new JTextArea(2,25);
-        eventType = new JComboBox();
+        super(frame);
+        panelSave = new JPanel();
+        panelDel = new JPanel();
+        panelCan = new JPanel();
+        save = new RoundedButton("SAVE CHANGE",22);
+        delete = new RoundedButton("DELETE", 22);
+        cancel = new RoundedButton("CANCEL", 22);
+        editEvent = new JLabel("              EDIT EVENT");
 
-        panelEdit.setBackground(null);
-        panelRek1.setBackground(null);
-        panelRek2.setBackground(null);
-        panelRek3.setBackground(null);
-        panelRek4.setBackground(null);
-        panelRek5.setBackground(null);
-        panelEdit.setBackground(null);
-        panelBig.setBackground(null);
+        panelSave.setBackground(null);
+        panelDel.setBackground(null);
+        panelCan.setBackground(null);
 
-        frame.add(panelEdit);
-        panelEdit.setLayout( new BorderLayout());
             editEvent.setForeground(new Color(255,247,237));
-            editEvent.setFont(Config.HEADER_SEMIBOLD[1]);;
-        panelEdit.add(editEvent,BorderLayout.NORTH);
-        panelEdit.add(panelBig,BorderLayout.WEST);
-        panelBig.setLayout( new GridLayout(5,1));
+            editEvent.setFont(Config.HEADER_SEMIBOLD[1]);
+        editEvent.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        panelHead.add(editEvent,BorderLayout.NORTH);
 
-        panelBig.add(panelRek1);
-            eventName.setText("Event Name");
-            eventName.setForeground(Color.GRAY);
-        panelRek1.add(eventName);
+        panelRek5.add(panelCan);
+        panelCan.setLayout( new FlowLayout(FlowLayout.LEFT,93,0));
+        cancel.setForeground(Color.BLACK);
+        cancel.setBackground(new Color(255,247,237));
+        cancel.setFont(Config.HEADER_SEMIBOLD[2]);
+        cancel.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
 
-        panelBig.add(panelRek2);
-            description.setText("DESCRIPTION");
-            description.setForeground(Color.GRAY);
-        panelRek2.add(description);
+        cancel.addActionListener(this);
 
-        panelBig.add(panelRek3);
-        panelRek3.setLayout( new FlowLayout());
-        panelRek3.add(dateStart);
-            dateStart.setText("DD/MM/YY");
-            dateStart.setForeground(Color.GRAY);
-        panelRek3.add(to);
-            to.setForeground(Color.WHITE);
-        panelRek3.add(dateEnd);
-            dateEnd.setText("DD/MM/YY");
-            dateEnd.setForeground(Color.GRAY);
+        panelCan.add(cancel);
 
-        panelBig.add(panelRek4);
-        eventType.addItem("CHOOSE CATEGORY");
-        panelRek4.add(eventType);
+        panelRek5.add(panelSave);
+        panelSave.setLayout( new FlowLayout(FlowLayout.CENTER,93,0));
+        save.setForeground(new Color(255, 247, 237));
+        save.setBackground(Config.primaryColor_base);
+        save.setFont(Config.HEADER_SEMIBOLD[2]);
+        save.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
 
-        panelBig.add(panelRek5);
-        panelRek5.setLayout( new FlowLayout());
-        save.setForeground(Color.BLACK);
-        save.setBackground(new Color(255,247,237));
-        save.setPreferredSize(new Dimension((frame.getWidth()-500)/6,(frame.getHeight() / 4) - 120));
-        panelRek5.add(save);
+        save.addActionListener(this);
+
+        panelSave.add(save);
+
+        panelRek5.add(panelDel);
+        panelDel.setLayout( new FlowLayout(FlowLayout.RIGHT,93,0));
         delete.setForeground(Color.WHITE);
-        delete.setBackground( new Color(245,73,0));
-        delete.setPreferredSize(new Dimension((frame.getWidth()-500)/6,(frame.getHeight() / 4) - 120));
-        panelRek5.add(delete);
+        delete.setBackground(Config.primaryColor_harder);
+        delete.setFont(Config.HEADER_SEMIBOLD[2]);
+        delete.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
+
+        delete.addActionListener(this);
+
+        panelDel.add(delete);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -91,5 +72,75 @@ public class EditEventPage {
 
     public static void main(String[] args) {
         new EditEventPage(Config.createAndShowGUI());
+    }
+
+    private RoundedButton del , cal ;
+    private JDialog dialog ;
+
+    public void actionPerformed(ActionEvent ev) {
+        if (ev.getSource() == delete) {
+            dialog = Config.openFrame((int) (frame.getWidth() / 2), (int) (frame.getHeight() / 2));
+            JPanel panelD = new JPanel();
+            JPanel panelC = new JPanel();
+            JPanel P = new JPanel();
+            JPanel panel = new JPanel();
+            JLabel header = new JLabel("ARE YOU SURE WANT TO DELETE");
+            del = new RoundedButton("DELETE", 22);
+            cal = new RoundedButton("CANCEL", 22);
+
+            header.setForeground(Config.primaryColor_hard);
+
+            header.setFont(Config.HEADER_SEMIBOLD[1]);
+            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+            panel.add(Box.createVerticalStrut(50));
+
+            panel.setBackground(null);
+            panel.add(header);
+            dialog.add(panel);
+
+            P.setLayout(new GridLayout(1, 2));
+            P.setBackground(null);
+            P.add(panelC);
+            P.add(panelD);
+
+            panelD.setLayout(new FlowLayout(FlowLayout.RIGHT, 30, 0));
+            del.setForeground(Color.WHITE);
+            del.setBackground(Config.primaryColor_harder);
+            del.setFont(Config.HEADER_SEMIBOLD[2]);
+
+            del.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 3.5), (frame.getHeight() / 4) - 120));
+
+            del.addActionListener(this);
+
+            panelD.setBackground(null);
+            panelD.add(del);
+
+            panelC.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 0));
+            cal.setForeground(Color.BLACK);
+            cal.setBackground(new Color(255, 247, 237));
+            cal.setFont(Config.HEADER_SEMIBOLD[2]);
+            cal.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 3.5), (frame.getHeight() / 4) - 120));
+
+            cal.addActionListener(this);
+
+            panelC.setBackground(null);
+            panelC.add(cal);
+
+            dialog.add(P);
+            dialog.setVisible(true);
+        }else if (ev.getSource().equals(cal) || ev.getSource().equals(del)) {
+            dialog.setVisible(false);
+        }if (ev.getSource().equals(del) || ev.getSource().equals(cancel)) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new AdminCalendarPage (frame);
+        }
+    else if (ev.getSource().equals(save)) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new AdminCalendarPage (frame);
+        }
     }
 }

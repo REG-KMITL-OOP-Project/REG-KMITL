@@ -3,6 +3,7 @@ package dev.it22.kmitl.reg.model.auth;
 import dev.it22.kmitl.reg.constant.UserPrefix;
 import dev.it22.kmitl.reg.constant.UserRole;
 
+import java.sql.ResultSet;
 import java.util.Date;
 
 public class Admin extends Account {
@@ -10,8 +11,15 @@ public class Admin extends Account {
         super(id, UserRole.ADMIN, email, username, prefix, firstName, lastName, dateOfBirth);
     }
 
-    public void approveRequest() {
-        System.out.println("Request approved");
-        System.out.println("I will back to this and implement the logic later jup jup");
+    public Admin(String id,
+                 UserRole role,
+                    String email,
+                    String username,
+                    UserPrefix prefix,
+                    String firstName,
+                    String lastName
+                 ) throws Exception {
+
+        super(id, role, email, username, prefix, firstName, lastName);
     }
 }

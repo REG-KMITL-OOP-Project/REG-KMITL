@@ -6,16 +6,21 @@ import dev.it22.kmitl.reg.constant.UserRole;
 import java.util.Date;
 
 public abstract class Account {
-    private String id;
-    private UserRole role;
-    private String email;
-    private String username;
-    private UserPrefix prefix;
-    private String firstName;
-    private String lastName;
-    private Date dateOfBirth;
+    protected String id;
+    protected UserRole role;
+    protected String email;
+    protected String username;
+    protected UserPrefix prefix;
+    protected String firstName;
+    protected String lastName;
 
-    public Account(String id, UserRole role, String email, String username, UserPrefix prefix, String firstName, String lastName, Date dateOfBirth) {
+    public Account(String id,
+                   UserRole role,
+                   String email,
+                   String username,
+                   UserPrefix prefix,
+                   String firstName,
+                   String lastName) {
         this.id = id;
         this.role = role;
         this.email = email;
@@ -23,7 +28,6 @@ public abstract class Account {
         this.prefix = prefix;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
     }
 
     public String getId() {
@@ -54,9 +58,6 @@ public abstract class Account {
         return lastName;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
 
     public void setId(String id) {
         this.id = id;
@@ -86,9 +87,6 @@ public abstract class Account {
         this.lastName = lastName;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
 
     public String getFullName() {
         return prefix + " " + firstName + " " + lastName;
