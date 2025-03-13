@@ -104,7 +104,7 @@ public class headerMenu extends JMenuBar {
         ETC.add(SchPanel);
         ETC.add(savePDF);
         ETC.add(saveJPG);
-        //ETC.add(share);
+            //ETC.add(share);
 
         //set event handler
         home.addActionListener(new HomeButtonHandler(frame));
