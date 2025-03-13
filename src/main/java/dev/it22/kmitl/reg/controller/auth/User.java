@@ -44,6 +44,7 @@ public class User {
         String major = account.getString("major");
         String section = account.getString("section");
         String address = account.getString("address");
+        String prof_id = account.getString("prof_id");
 
         if (userRole == UserRole.STUDENT.getLevel()) {
             userAccount = new Student(
@@ -63,6 +64,7 @@ public class User {
         } else if (userRole == UserRole.PROF.getLevel()) {
             userAccount = new Prof(
                     id,
+                    prof_id,
                     UserRole.PROF,
                     email,
                     username,

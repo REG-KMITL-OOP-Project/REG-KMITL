@@ -1,5 +1,6 @@
 package dev.it22.kmitl.reg.controller.auth;
 
+import dev.it22.kmitl.reg.model.auth.Prof;
 import dev.it22.kmitl.reg.utils.Database;
 import dev.it22.kmitl.reg.utils.PasswordHash;
 
@@ -39,7 +40,7 @@ public class Login {
     }
 
     public static void main(String[] args) {
-        Login login = new Login("test", "test");
+        Login login = new Login("Prof01", "Prof1234");
         try{
             login.loginWithUsernameAndPassword();
         }

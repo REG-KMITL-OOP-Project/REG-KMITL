@@ -7,11 +7,13 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class Prof extends Account{
+    private String prof_id;
     private String phone;
     private ArrayList<String> subject;
 
     public Prof(
             String id,
+            String prof_id,
             UserRole role,
             String email,
             String username,
@@ -23,12 +25,17 @@ public class Prof extends Account{
     ) throws SQLException {
 
 
-        super(id, role, email, username, prefix, firstName, lastName);
+        super(id , role, email, username, prefix, firstName, lastName);
+        this.prof_id = prof_id;
         this.phone = phone;
         this.subject = subject;
     }
     public String getPhone() {
         return phone;
+    }
+
+    public String getProf_id() {
+        return prof_id;
     }
 
     public void setPhone(String phone) {
