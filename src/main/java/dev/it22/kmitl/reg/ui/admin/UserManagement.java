@@ -8,9 +8,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class UserManagement {
-    public  UserManagement(){
-        JFrame panel = Config.createAndShowGUI();
-        panel.setLayout(new BorderLayout());
+    private JFrame frame;
+    public  UserManagement(JFrame frame){
+        this.frame = frame;
+        frame.setLayout(new BorderLayout());
 
         //Header
         JPanel headerPanel = new JPanel();
@@ -37,12 +38,45 @@ public class UserManagement {
 
         headerPanel.add(headerLogoGroup);
 
-        panel.add(headerPanel,BorderLayout.NORTH);
+        frame.add(headerPanel,BorderLayout.NORTH);
 
-        panel.setVisible(true);
+        //Body panel
+
+        JPanel bodyPanel = new JPanel();
+        bodyPanel.setLayout(new FlowLayout());
+        bodyPanel.setSize(frame.getWidth(), frame.getHeight() - headerPanel.getHeight());
+        bodyPanel.setBackground(null);
+
+        JPanel titlePanel = new JPanel(new GridLayout(1,2));
+        System.out.println(bodyPanel.getWidth());
+        titlePanel.setPreferredSize(new Dimension(bodyPanel.getWidth(),100));
+        JLabel titleLabel = new JLabel("Users");
+        titleLabel.setFont(Config.HEADER_SEMIBOLD[0]);
+        titleLabel.setForeground(Color.WHITE);
+        titlePanel.add(titleLabel);
+        titlePanel.setBackground(null);
+        titlePanel.setBorder(new EmptyBorder(35, 50, 0, 0));
+
+        JPanel createBtnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        createBtnPanel.setBackground(null);
+        createBtnPanel.setBorder(new EmptyBorder(15, 0, 0, 50));
+        RoundedButton createBtn = new RoundedButton("+ เพิ่มผู้ใช้",10);
+        createBtn.setFont(Config.HEADER_SEMIBOLD[2]);
+//        createBtn.setIcon(new ImageIcon(new ImageIcon("source/plus.png").getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)));
+        createBtn.setForeground(Color.WHITE);
+        createBtn.setPreferredSize(new Dimension(150, 40));
+        createBtn.setBackground(Config.primaryColor_hard);
+        createBtnPanel.add(createBtn);
+        titlePanel.add(createBtnPanel);
+        bodyPanel.add(titlePanel);
+
+        frame.add(bodyPanel,BorderLayout.CENTER);
+
+
+        frame.setVisible(true);
     }
 
     public static void main(String[] args) {
-        new UserManagement();
+        new UserManagement(Config.createAndShowGUI());
     }
 }
