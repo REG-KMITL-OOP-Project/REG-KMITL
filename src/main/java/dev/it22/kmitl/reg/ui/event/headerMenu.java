@@ -44,7 +44,7 @@ public class headerMenu extends JMenuBar {
         innerLabel.setForeground(Config.primaryColor_base);
         innerLabel.setBorder(null);
         SchPanel.add(innerLabel);
-        SchPanel.setBackground(Config.bgColor_base);
+        SchPanel.setBackground(Config.bgColor_hard);
         SchPanel.setBorder(null);
 
         ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home_re.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
@@ -56,7 +56,7 @@ public class headerMenu extends JMenuBar {
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         ETC.setBorder(null);
         ETC.setIcon(scaledIcon);
-        ETC.setBackground(Config.bgColor_base);
+        ETC.setBackground(Config.bgColor_hard);
         ETC.getPopupMenu().setBorder(BorderFactory.createEmptyBorder());
         ETC.getPopupMenu().setBorder(null);
         ETC.setMenuLocation(-45, 38);
@@ -64,21 +64,21 @@ public class headerMenu extends JMenuBar {
         ImageIcon savePDFIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_saveFile.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
         savePDF = new JMenuItem("Save PDF",savePDFIcon);
         savePDF.setPreferredSize(new Dimension(30,40));
-        savePDF.setBackground(Config.bgColor_base);
+        savePDF.setBackground(Config.bgColor_hard);
         savePDF.setForeground(Config.primaryColor_base);
         savePDF.setBorder(null);
 
         ImageIcon saveJPGIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_saveImage.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
         saveJPG = new JMenuItem("Save JPG",saveJPGIcon);
         saveJPG.setPreferredSize(new Dimension(30,40));
-        saveJPG.setBackground(Config.bgColor_base);
+        saveJPG.setBackground(Config.bgColor_hard);
         saveJPG.setForeground(Config.primaryColor_base);
         saveJPG.setBorder(null);
 
         ImageIcon shareIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_share.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
         share = new JMenuItem("Share",shareIcon);
         share.setPreferredSize(new Dimension(30,40));
-        share.setBackground(Config.bgColor_base);
+        share.setBackground(Config.bgColor_hard);
         share.setForeground(Config.primaryColor_base);
         share.setBorder(null);
 
@@ -104,7 +104,7 @@ public class headerMenu extends JMenuBar {
         ETC.add(SchPanel);
         ETC.add(savePDF);
         ETC.add(saveJPG);
-        //ETC.add(share);
+            //ETC.add(share);
 
         //set event handler
         home.addActionListener(new HomeButtonHandler(frame));
