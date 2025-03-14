@@ -5,6 +5,7 @@ import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.model.auth.Student;
 
 import dev.it22.kmitl.reg.utils.Config;
+import org.intellij.lang.annotations.Flow;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -29,8 +30,9 @@ public class ClassSchedulePage {
     private JComboBox year, semester, exam ;
     private String years[] = {"2568", "2567", "2566"};
     private String semesters[] = {"เทอม 1", "เทอม 2"};
-    private String exams[] = {"กลางภาค","ปลายภาค"};
 
+    // table
+    private ClassScheduleTable schedule;
 
     public ClassSchedulePage(JFrame frame) {
         this.frame = frame;
@@ -79,14 +81,10 @@ public class ClassSchedulePage {
 
         year = new JComboBox(years);
         semester = new JComboBox(semesters);
-        exam = new JComboBox(exams);
 
         //change font in combobox
         JComboBox<String> semester = new JComboBox<>(semesters);
         semester.setFont(Config.NORMAL_REGULAR);
-
-        JComboBox<String> exam = new JComboBox<>(exams);
-        exam.setFont(Config.NORMAL_REGULAR);
 
 
         //panel-year
@@ -100,10 +98,6 @@ public class ClassSchedulePage {
         choseSem.setLayout(new GridLayout(1, 1));
         choseSem.add(semester);
 
-        //unused
-            //panel-exam button
-            //choseExam.setLayout(new GridLayout(1, 1));
-            //choseExam.add(exam);
 
         //panel-studentInfo
         stdInfo.setLayout(new GridLayout(2, 2));
@@ -124,7 +118,6 @@ public class ClassSchedulePage {
 
         //layout-all semester year exam button
         testFormat.add(choseSem);
-            //testFormat.add(choseExam);
         allchosen.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
         allchosen.add(choseYear);
         allchosen.add(testFormat);
@@ -139,18 +132,20 @@ public class ClassSchedulePage {
         pn1.setLayout(new BorderLayout());
         pn1.add(allInfo, BorderLayout.SOUTH);
 
+        //table
+        schedule = new ClassScheduleTable();
+
+
         frame.setLayout(new BorderLayout());
         frame.setJMenuBar(new headerMenu("Class Schedule", frame));
         frame.add(pn1, BorderLayout.NORTH);
-
+        frame.add(schedule, BorderLayout.CENTER);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 
     public static void main(String[] args) {
-
             new ClassSchedulePage(Config.createAndShowGUI());
-
     }
 }
