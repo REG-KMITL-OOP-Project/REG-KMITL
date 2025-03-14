@@ -44,7 +44,7 @@ public class headerMenu extends JMenuBar {
         innerLabel.setForeground(Config.primaryColor_base);
         innerLabel.setBorder(null);
         SchPanel.add(innerLabel);
-        SchPanel.setBackground(Config.bgColor_hard);
+        SchPanel.setBackground(Config.bgColor_base.darker());
         SchPanel.setBorder(null);
 
         ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home_re.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
@@ -56,7 +56,7 @@ public class headerMenu extends JMenuBar {
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         ETC.setBorder(null);
         ETC.setIcon(scaledIcon);
-        ETC.setBackground(Config.bgColor_hard);
+        ETC.setBackground(Config.bgColor_base.darker());
         ETC.getPopupMenu().setBorder(BorderFactory.createEmptyBorder());
         ETC.getPopupMenu().setBorder(null);
         ETC.setMenuLocation(-45, 38);
@@ -64,14 +64,14 @@ public class headerMenu extends JMenuBar {
         ImageIcon savePDFIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_saveFile.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
         savePDF = new JMenuItem("Save PDF",savePDFIcon);
         savePDF.setPreferredSize(new Dimension(30,40));
-        savePDF.setBackground(Config.bgColor_hard);
+        savePDF.setBackground(Config.bgColor_base.darker());
         savePDF.setForeground(Config.primaryColor_base);
         savePDF.setBorder(null);
 
         ImageIcon saveJPGIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_saveImage.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
         saveJPG = new JMenuItem("Save JPG",saveJPGIcon);
         saveJPG.setPreferredSize(new Dimension(30,40));
-        saveJPG.setBackground(Config.bgColor_hard);
+        saveJPG.setBackground(Config.bgColor_base.darker());
         saveJPG.setForeground(Config.primaryColor_base);
         saveJPG.setBorder(null);
 
