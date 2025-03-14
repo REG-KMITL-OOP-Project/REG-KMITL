@@ -89,20 +89,21 @@ public class ClassSchedulePage {
         exam.setFont(Config.NORMAL_REGULAR);
 
 
-        //panel-year button
+        //panel-year
+        choseYear.setPreferredSize(new Dimension(100, 35));
         choseYear.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         choseYear.setLayout(new GridLayout(1, 1));
         choseYear.add(year);
 
         //panel-semester
-        choseSem.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
-        choseSem.setLayout(new GridLayout(1, 2));
+        choseSem.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        choseSem.setLayout(new GridLayout(1, 1));
         choseSem.add(semester);
 
-
-        //panel-exam button
-        choseExam.setLayout(new GridLayout(1, 1));
-        choseExam.add(exam);
+        //unused
+            //panel-exam button
+            //choseExam.setLayout(new GridLayout(1, 1));
+            //choseExam.add(exam);
 
         //panel-studentInfo
         stdInfo.setLayout(new GridLayout(2, 2));
@@ -118,12 +119,12 @@ public class ClassSchedulePage {
         stdInfo.add(branch);
 
         allInfo.setLayout(new BorderLayout());
-        testFormat.setLayout(new GridLayout(1, 2));
+        testFormat.setLayout(new GridLayout(1, 1));
         allchosen.setLayout(new GridLayout(2, 1));
 
         //layout-all semester year exam button
         testFormat.add(choseSem);
-        testFormat.add(choseExam);
+            //testFormat.add(choseExam);
         allchosen.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 15));
         allchosen.add(choseYear);
         allchosen.add(testFormat);
