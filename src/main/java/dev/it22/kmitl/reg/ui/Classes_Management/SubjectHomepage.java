@@ -9,14 +9,29 @@ import java.awt.*;
 
 public  class SubjectHomepage {
     private JFrame frame;
+    private JButton home;
+    private JLabel regLabel;
     private RoundedButton addclass,addtime,addsubjec;
-    private JPanel top,low,box,group1,group2;
+    private JPanel botton,combobox,tablesubject,ICON,groupbotton_box,setposition;
     private JComboBox Faculty,Semester;
     private JTable table;
     private JScrollPane showdetail_Subject;
     private String columnNames[] = {"รหัสวิชา","ชื่อวิชา", "กลุ่มเรียน","ห้องเรียน","อาจารย์ผู้สอน","เงื่อนไข","หมายเหตุ","วันสอบ","รับ"};
 
     public SubjectHomepage(JFrame frame){
+        ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
+        home = new JButton(homeIcon);
+        home.setBorderPainted(false);
+        home.setContentAreaFilled(false);
+        home.setFocusPainted(false);
+        ImageIcon logo = new ImageIcon(new ImageIcon("source/Logo.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
+        JLabel regLabel = new JLabel(logo);
+        ICON = new JPanel();
+        ICON.setLayout(new FlowLayout());
+        ICON.add(home);
+        ICON.add(regLabel);
+        ICON.setBackground(null);
+
         this.frame = frame;
         addsubjec = new RoundedButton("เพิ่ม-เปลี่ยนวิชา",22);
         addtime = new RoundedButton("เพิ่ม-เปลี่ยนเวลาเรียน",22);
@@ -35,12 +50,12 @@ public  class SubjectHomepage {
         addclass.setForeground(Color.BLACK);
         addclass.setBackground(Config.primaryColor_base);
 
-        top = new JPanel();
-        top.add(addsubjec);
-        top.add(addtime);
-        top.add(addclass);
-        top.setLayout(new FlowLayout());
-        top.setBackground(null);
+        botton = new JPanel();
+        botton.add(addsubjec);
+        botton.add(addtime);
+        botton.add(addclass);
+        botton.setLayout(new FlowLayout());
+        botton.setBackground(null);
 
         Faculty = new JComboBox();
         Faculty.addItem("คณะ");
@@ -50,41 +65,48 @@ public  class SubjectHomepage {
         Semester.addItem("ภาคการศึกษา");
         Semester.setFont(Config.HEADER_SEMIBOLD[2]);
 
-        low = new JPanel();
-        low.add(Faculty);
-        low.add(Semester);
-        low.setLayout(new FlowLayout());
-        low.setBackground(null);
+        combobox = new JPanel();
+        combobox.add(Faculty);
+        combobox.add(Semester);
+        combobox.setLayout(new FlowLayout());
+        combobox.setBackground(null);
 
+        //table//
         DefaultTableModel model = new DefaultTableModel(null, columnNames);
         table = new JTable(model);
         JTableHeader header = table.getTableHeader();
         table.setRowHeight(30);
         header.setFont(Config.HEADER_SEMIBOLD[2]);
 
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setResizingAllowed(false);
+
         for (int i = 0; i < table.getColumnCount(); i++) {
             table.getColumnModel().getColumn(i);
         }
-
 
         showdetail_Subject = new JScrollPane(table);
         showdetail_Subject.setPreferredSize(new Dimension(1000, 400));
         showdetail_Subject.setBackground(null);
 
+        setposition = new JPanel();
+        setposition.setLayout(new BorderLayout());
+        setposition.add(ICON, BorderLayout.WEST);
+        setposition.setBackground(null);
 
-        box = new JPanel();
-        box.add(showdetail_Subject);
-        box.setBackground(null);
+        groupbotton_box = new JPanel();
+        groupbotton_box.setLayout(new GridLayout(2,1));
+        groupbotton_box.add(botton);
+        groupbotton_box.add(combobox);
+        groupbotton_box.setBackground(null);
 
-        frame.setLayout(new BorderLayout());
-        group1 = new JPanel();
-        group1.setLayout(new GridLayout(2,1));
-        group1.add(top);
-        group1.add(low);
-        group1.setBackground(null);
+        tablesubject = new JPanel(new BorderLayout());
+        tablesubject.add(setposition, BorderLayout.NORTH);
+        tablesubject.add(groupbotton_box, BorderLayout.CENTER);
+        tablesubject.add(showdetail_Subject, BorderLayout.SOUTH);
+        tablesubject.setBackground(null);
 
-        frame.add(group1, BorderLayout.NORTH);
-        frame.add(box, BorderLayout.CENTER);
+        frame.add(tablesubject);
         frame.setVisible(true);
     }
     public static void main(String[] args) {
