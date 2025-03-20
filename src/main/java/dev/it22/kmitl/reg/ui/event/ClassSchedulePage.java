@@ -1,17 +1,8 @@
 package dev.it22.kmitl.reg.ui.event;
-import dev.it22.kmitl.reg.controller.auth.Login;
-import dev.it22.kmitl.reg.controller.auth.User;
-import dev.it22.kmitl.reg.model.auth.Account;
-import dev.it22.kmitl.reg.model.auth.Student;
 
 import dev.it22.kmitl.reg.utils.Config;
-import org.intellij.lang.annotations.Flow;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 
 public class ClassSchedulePage {
@@ -32,7 +23,9 @@ public class ClassSchedulePage {
     private String semesters[] = {"เทอม 1", "เทอม 2"};
 
     // table
-    private ClassScheduleTable schedule;
+    private JPanel tablepn;
+    private column_ClassTable schedule;
+    private rowOFDay_ClassTable rowOFDay_ClassTable;
 
     public ClassSchedulePage(JFrame frame) {
         this.frame = frame;
@@ -131,15 +124,30 @@ public class ClassSchedulePage {
 
         pn1.setLayout(new BorderLayout());
         pn1.add(allInfo, BorderLayout.SOUTH);
+        pn1.setBorder(BorderFactory.createEmptyBorder(5, 5, 40, 5));
 
         //table
-        schedule = new ClassScheduleTable();
+        tablepn = new JPanel();
+        schedule = new column_ClassTable();
+        rowOFDay_ClassTable = new rowOFDay_ClassTable();
+        tablepn.setLayout(new BorderLayout());
+        tablepn.setBackground(null);
+        tablepn.setPreferredSize(new Dimension(1000, 394));
+        tablepn.setBorder(BorderFactory.createEmptyBorder(5, 50, 5, 50));
+        tablepn.add(rowOFDay_ClassTable, BorderLayout.WEST);
+        tablepn.add(schedule);
+        JPanel v2 = new JPanel();
+        v2.setLayout(new FlowLayout());
+        v2.add(tablepn);
+        v2.setBackground(null);
+
 
 
         frame.setLayout(new BorderLayout());
         frame.setJMenuBar(new headerMenu("Class Schedule", frame));
         frame.add(pn1, BorderLayout.NORTH);
-        frame.add(schedule, BorderLayout.CENTER);
+
+        frame.add(v2, BorderLayout.CENTER);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);

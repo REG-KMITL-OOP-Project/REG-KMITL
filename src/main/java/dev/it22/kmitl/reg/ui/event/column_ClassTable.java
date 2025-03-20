@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class ClassScheduleTable extends JPanel {
+public class column_ClassTable extends JPanel {
     private JTable table;
 
     //sample data
@@ -14,24 +14,24 @@ public class ClassScheduleTable extends JPanel {
     private String time_column[] = {"", "09.00", "09.00", "09.00", "09.00", "09.00", "09.00", "09.00"};
 
     String[][] schedule = {
-            {"", "09.00", "09.00", "09.00", "09.00", "09.00", "09.00", "09.00"},
-            {"Monday", "Math", "", "Science", "Science", "Art"},
-            {"Tuesday", "English", "Math", "", "History", "Art"},
-            {"Wednesday", "PE", "PE", "Math", "", "Music"},
-            {"Thursday", "Math", "Science", "Science", "History", "PE"},
-            {"Friday", "History", "English", "", "Math", "Art"},
-            {"Saturday", "History", "English", "", "Math", "Art"},
-            {"Sunday", "History", "English", "", "Math", "Art"}
+            {"09.00", "09.00", "09.00", "09.00", "09.00", "09.00", "09.00"},
+            {"Math", "", "Science", "Science", "Art"},
+            {"English", "Math", "", "History", "Art"},
+            {"PE", "PE", "Math", "", "Music"},
+            {"Math", "Science", "Science", "History", "PE"},
+            {"History", "English", "", "Math", "Art"},
+            {"History", "English", "", "Math", "Art"},
+            {"History", "English", "", "Math", "Art"}
     };
 
-    public ClassScheduleTable() {
+    public column_ClassTable() {
         //table = new JTable(8,11);
         DefaultTableModel model = new DefaultTableModel(schedule, time_column);
         table = new JTable(model);
         //table.setModel(model);
         table.setEnabled(false);
-        table.setPreferredSize(new Dimension(1100,304));
-        table.setRowHeight(38);
+        table.setPreferredSize(new Dimension(800,384));
+        table.setRowHeight(48);
         table.setBorder(BorderFactory.createLineBorder(Config.bgColor_hard));
         table.setGridColor(Config.bgColor_hard);
   
@@ -40,18 +40,16 @@ public class ClassScheduleTable extends JPanel {
         //table.setShowHorizontalLines(false);
 
 
-        table.setForeground(Color.WHITE);
-
-
-
+        table.setForeground(Color.BLACK);
 
 
 
 
         table.setBackground(null);
-        this.setLayout(new FlowLayout());
+        this.setLayout(new BorderLayout());
         this.add(table);
-        this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        this.setBorder(BorderFactory.createEmptyBorder(0,-1,0,0));
         this.setBackground(null);
+
     }
 }
