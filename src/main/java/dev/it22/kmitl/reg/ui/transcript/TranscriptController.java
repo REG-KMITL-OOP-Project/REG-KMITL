@@ -18,7 +18,9 @@ public class TranscriptController implements ActionListener {
         view.getHomeButton().addActionListener(this);
     }
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == view.getDownloadButton()) {}
+        if (e.getSource() == view.getDownloadButton()) {
+            new Transcript();
+        }
         else if (e.getSource() == view.getHomeButton()) {
             view.getFrame().getContentPane().removeAll();
             view.getFrame().revalidate();
