@@ -10,8 +10,8 @@ import java.awt.*;
 
 public class AdminAddGroupClass {
     private JFrame frame ;
-    private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelHead,panelSpecial;
-    private JLabel addGroup,date,timeExam;
+    private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelHead,panelDate,paneltime,panelTimeExamFinal;
+    private JLabel addGroup,date,timeExam,timeExamFinal;
     private RoundedTextField numGroup,time,mid,fi,room,numStu;
     private JComboBox type,tow;
     private Font innerFont, regularFont;
@@ -27,10 +27,13 @@ public class AdminAddGroupClass {
         panelRek3 = new JPanel();
         panelRek4 = new JPanel();
         panelRek5 = new JPanel();
-        panelSpecial = new JPanel();
+        panelDate = new JPanel();
+        paneltime = new JPanel();
+        panelTimeExamFinal  = new JPanel();
         addGroup = new JLabel("              เพิ่มกลุ่มเรียน");
         date = new JLabel("วัน-เวลาเรียน");
-        timeExam = new JLabel("วัน-เวลาสอบ");
+        timeExam = new JLabel("วัน-เวลาสอบกลางภาค");
+        timeExamFinal = new JLabel("วัน-เวลาสอบปลายภาค");
         numGroup = new RoundedTextField(22);
         time = new RoundedTextField(22);
         mid = new RoundedTextField(22);
@@ -51,9 +54,11 @@ public class AdminAddGroupClass {
         panelRek3.setBackground(null);
         panelRek4.setBackground(null);
         panelRek5.setBackground(null);
-        panelSpecial.setBackground(null);
         panelCan.setBackground(null);
         panelSave.setBackground(null);
+        panelDate.setBackground(null);
+        paneltime.setBackground(null);
+        panelTimeExamFinal.setBackground(null);
 
         panelHead.setLayout( new BorderLayout());
         panelHead.add(panelBig);
@@ -92,31 +97,45 @@ public class AdminAddGroupClass {
         panelRek1.add(numStu);
         panelBig.add(panelRek1);
 
-        panelSpecial.add(date);
-            date.setForeground(Color.GRAY);
+        panelDate.setLayout(new BoxLayout(panelDate, BoxLayout.Y_AXIS));
+        panelDate.add(Box.createVerticalStrut(10));
+        panelDate.add(date);
+        panelDate.add(time);
+            date.setForeground(Config.primaryColor_base);
             date.setFont(Config.HEADER_SEMIBOLD[2]);
             date.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
 
-        panelSpecial.add(timeExam);
-            timeExam.setForeground(Color.GRAY);
+        paneltime.setLayout(new BoxLayout(paneltime, BoxLayout.Y_AXIS));
+        paneltime.add(Box.createVerticalStrut(10));
+        paneltime.add(timeExam);
+        paneltime.add(mid);
+            timeExam.setForeground(Config.primaryColor_base);
             timeExam.setFont(Config.HEADER_SEMIBOLD[2]);
             timeExam.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
 
-        panelBig.add(panelSpecial);
+        panelTimeExamFinal.setLayout(new BoxLayout(panelTimeExamFinal, BoxLayout.Y_AXIS));
 
-        panelRek2.add(time);
+        panelTimeExamFinal.add(Box.createVerticalStrut(10));
+        panelTimeExamFinal.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panelTimeExamFinal.add(timeExamFinal);
+        panelTimeExamFinal.add(fi);
+            timeExamFinal.setForeground(Config.primaryColor_base);
+            timeExamFinal.setFont(Config.HEADER_SEMIBOLD[2]);
+            timeExamFinal.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+
+        panelRek2.add(panelDate);
         time.setText("   จ. 8:00 - 20:00");
         time.setFont(innerFont);
         time.setForeground(Color.GRAY);
         time.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
-        panelRek2.add(mid);
+        panelRek2.add(paneltime);
         mid.setText("   กลางภาค");
         mid.setFont(innerFont);
         mid.setForeground(Color.GRAY);
         mid.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
-        panelRek2.add(fi);
+        panelRek2.add(panelTimeExamFinal);
         fi.setText("   ปลายภาค");
         fi.setFont(innerFont);
         fi.setForeground(Color.GRAY);

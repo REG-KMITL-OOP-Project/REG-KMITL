@@ -4,11 +4,11 @@ import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.CustomCombobox;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 import dev.it22.kmitl.reg.utils.RoundedTextField;
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-public class AdminAddSubject {
+public class AdminAddSubject implements FocusListener {
     private JFrame frame ;
     private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelHead;
     private JLabel addSubject;
@@ -17,6 +17,7 @@ public class AdminAddSubject {
     private Font innerFont, regularFont;
     private RoundedButton cancel,save;
     private JPanel panelSave = new JPanel() , panelCan = new JPanel();
+    protected boolean showYear, showCode, showName, showTeacher,showNote,showCondition;
 
     public AdminAddSubject(JFrame frame){
         this.frame = frame;
@@ -65,11 +66,12 @@ public class AdminAddSubject {
         panelHead.add(addSubject,BorderLayout.NORTH);
 
         panelRek1.add(year);
-        //showYear = true;
+        showYear = true;
         year.setText("   ภาคการศึกษา");
         year.setFont(innerFont);
         year.setForeground(Color.GRAY);
         year.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
+        year.addFocusListener(this);
 
         panelRek1.add(type);
         type.addItem("ประเภท");
@@ -115,38 +117,48 @@ public class AdminAddSubject {
         branch.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
         panelRek2.add(code);
+        showCode = true;
         code.setText("   รหัสวิชา");
         code.setFont(innerFont);
         code.setForeground(Color.GRAY);
         code.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
+        code.addFocusListener(this);
 
         panelBig.add(panelRek2);
 
         panelRek3.add(name);
+        showName = true;
         name.setText("   ชื่อวิชา");
         name.setFont(innerFont);
         name.setForeground(Color.GRAY);
         name.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.7),(frame.getHeight() / 4) - 120));
+        name.addFocusListener(this);
 
         panelRek3.add(teacher);
+        showTeacher = true;
         teacher.setText("   อาจารย์ผู้สอน");
         teacher.setFont(innerFont);
         teacher.setForeground(Color.GRAY);
         teacher.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.7),(frame.getHeight() / 4) - 120));
+        teacher.addFocusListener(this);
 
         panelBig.add(panelRek3);
 
         panelRek4.add(note);
+        showNote = true;
         note.setText("   หมายเหตุ");
         note.setFont(innerFont);
         note.setForeground(Color.GRAY);
         note.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.7),(frame.getHeight() / 4) - 120));
+        note.addFocusListener(this);
 
         panelRek4.add(condition);
+        showCondition = true;
         condition.setText("   เงื่อนไข");
         condition.setFont(innerFont);
         condition.setForeground(Color.GRAY);
         condition.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.7),(frame.getHeight() / 4) - 120));
+        condition.addFocusListener(this);
 
         panelBig.add(panelRek4);
 
@@ -177,5 +189,66 @@ public class AdminAddSubject {
         frame.setVisible(true);
     } public static void main(String[] args) {
         new AdminAddSubject(Config.createAndShowGUI());
+    }
+    public void focusGained(FocusEvent fg){
+        if (fg.getSource().equals(year) && showYear){
+            year.setText("");
+            year.setForeground(Color.BLACK);
+            showYear = false;
+
+        }else if(fg.getSource().equals(code) && showCode){
+            code.setText("");
+            code.setForeground(Color.BLACK);
+            showCode = false;
+
+        }else if (fg.getSource().equals(name) && showName){
+            name.setText("");
+            name.setForeground(Color.BLACK);
+            showName = false;
+
+        }else if (fg.getSource().equals(teacher) && showTeacher) {
+            teacher.setText("");
+            teacher.setForeground(Color.BLACK);
+            showTeacher = false;
+        }else if (fg.getSource().equals(note) && showNote) {
+            note.setText("");
+            note.setForeground(Color.BLACK);
+            showNote = false;
+        }else if (fg.getSource().equals(condition) && showCondition) {
+            condition.setText("");
+            condition.setForeground(Color.BLACK);
+            showCondition = false;
+        }
+    }public void focusLost(FocusEvent e){
+        if (year.getText().isEmpty()) {
+            showYear = true;
+            year.setText("   ภาคการศึกษา");
+            year.setForeground(Color.GRAY);
+        }
+
+        if(code.getText().isEmpty()){
+            showCode = true;
+            code.setText("   รหัสวิชา");
+            code.setForeground(Color.GRAY);
+        }
+
+        if (name.getText().isEmpty()) {
+            showName = true;
+            name.setText("   ชื่อวิชา");
+            name.setForeground(Color.GRAY);
+
+        }if (teacher.getText().isEmpty()) {
+            showTeacher = true;
+            teacher.setText("   อาจารย์ผู้สอน");
+            teacher.setForeground(Color.GRAY);
+        }if (note.getText().isEmpty()) {
+            showNote = true;
+            note.setText("   หมายเหตุ");
+            note.setForeground(Color.GRAY);
+        }if (condition.getText().isEmpty()) {
+            showCondition = true;
+            condition.setText("   เงื่อนไข");
+            condition.setForeground(Color.GRAY);
+        }
     }
 }
