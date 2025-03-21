@@ -4,6 +4,7 @@ import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 
 public class column_ClassTable extends JPanel {
@@ -28,7 +29,6 @@ public class column_ClassTable extends JPanel {
         //table = new JTable(8,11);
         DefaultTableModel model = new DefaultTableModel(schedule, time_column);
         table = new JTable(model);
-        //table.setModel(model);
         table.setEnabled(false);
         table.setPreferredSize(new Dimension(800,384));
         table.setRowHeight(48);

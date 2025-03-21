@@ -23,9 +23,10 @@ public class ClassSchedulePage {
     private String semesters[] = {"เทอม 1", "เทอม 2"};
 
     // table
-    private JPanel tablepn;
+    //private JPanel tablepn;
     private column_ClassTable schedule;
     private rowOFDay_ClassTable rowOFDay_ClassTable;
+    private ClassScheduleTable table;
 
     public ClassSchedulePage(JFrame frame) {
         this.frame = frame;
@@ -127,27 +128,27 @@ public class ClassSchedulePage {
         pn1.setBorder(BorderFactory.createEmptyBorder(5, 5, 40, 5));
 
         //table
-        tablepn = new JPanel();
-        schedule = new column_ClassTable();
-        rowOFDay_ClassTable = new rowOFDay_ClassTable();
-        tablepn.setLayout(new BorderLayout());
-        tablepn.setBackground(null);
-        tablepn.setPreferredSize(new Dimension(1000, 394));
-        tablepn.setBorder(BorderFactory.createEmptyBorder(5, 50, 5, 50));
-        tablepn.add(rowOFDay_ClassTable, BorderLayout.WEST);
-        tablepn.add(schedule);
-        JPanel v2 = new JPanel();
-        v2.setLayout(new FlowLayout());
-        v2.add(tablepn);
-        v2.setBackground(null);
-
+//        tablepn = new JPanel();
+//        schedule = new column_ClassTable();
+//        rowOFDay_ClassTable = new rowOFDay_ClassTable();
+//        tablepn.setLayout(new BorderLayout());
+//        tablepn.setBackground(null);
+//        tablepn.setPreferredSize(new Dimension(1000, 394));
+//        tablepn.setBorder(BorderFactory.createEmptyBorder(5, 50, 5, 50));
+//        tablepn.add(rowOFDay_ClassTable, BorderLayout.WEST);
+//        tablepn.add(schedule);
+//        JPanel v2 = new JPanel();
+//        v2.setLayout(new FlowLayout());
+//        v2.add(tablepn);
+//        v2.setBackground(null);
+          table = new ClassScheduleTable();
 
 
         frame.setLayout(new BorderLayout());
         frame.setJMenuBar(new headerMenu("Class Schedule", frame));
         frame.add(pn1, BorderLayout.NORTH);
 
-        frame.add(v2, BorderLayout.CENTER);
+        frame.add(table, BorderLayout.CENTER);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);

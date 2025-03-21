@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 public class rowOFDay_ClassTable extends JPanel {
-    private column_ClassTable secTable;
+
     private JTable table;
     private JPanel panel, pn1;
     private String time_column[] = {""};
