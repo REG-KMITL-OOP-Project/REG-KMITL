@@ -10,9 +10,9 @@ import java.awt.*;
 
 public class AdminAddGroupClass {
     private JFrame frame ;
-    private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelHead,panelDate,paneltime,panelTimeExamFinal;
-    private JLabel addGroup,date,timeExam,timeExamFinal;
-    private RoundedTextField numGroup,time,mid,fi,room,numStu;
+    private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelHead,panelTime,panelTimeExamMid,panelTimeExamFinal,groupPan,numPan,typePan;
+    private JLabel numGroupLabel,numStuLabel,typeLabel,addGroup,date,timeExam,timeExamFinal;
+    private RoundedTextField numGroup,numStu,time,mid,fi,room;
     private JComboBox type,tow;
     private Font innerFont, regularFont;
     private RoundedButton cancel,save;
@@ -27,9 +27,15 @@ public class AdminAddGroupClass {
         panelRek3 = new JPanel();
         panelRek4 = new JPanel();
         panelRek5 = new JPanel();
-        panelDate = new JPanel();
-        paneltime = new JPanel();
+        panelTime = new JPanel();
+        panelTimeExamMid = new JPanel();
         panelTimeExamFinal  = new JPanel();
+        groupPan = new JPanel();
+        numPan = new JPanel();
+        typePan = new JPanel();
+        numGroupLabel = new JLabel("จำนวนกลุ่มเรียน");
+        numStuLabel = new JLabel("จำนวนนักศึกษาที่รับ");
+        typeLabel = new JLabel("กลุ่มเรียนที่");
         addGroup = new JLabel("              เพิ่มกลุ่มเรียน");
         date = new JLabel("วัน-เวลาเรียน");
         timeExam = new JLabel("วัน-เวลาสอบกลางภาค");
@@ -56,14 +62,17 @@ public class AdminAddGroupClass {
         panelRek5.setBackground(null);
         panelCan.setBackground(null);
         panelSave.setBackground(null);
-        panelDate.setBackground(null);
-        paneltime.setBackground(null);
+        panelTime.setBackground(null);
+        panelTimeExamMid.setBackground(null);
         panelTimeExamFinal.setBackground(null);
+        groupPan.setBackground(null);
+        numPan.setBackground(null);
+        typePan.setBackground(null);
 
-        panelHead.setLayout( new BorderLayout());
+        panelHead.setLayout(new BorderLayout());
         panelHead.add(panelBig);
         panelBig.setLayout(new BoxLayout(panelBig, BoxLayout.Y_AXIS));
-        panelBig.add(Box.createVerticalStrut(10));
+        panelBig.add(Box.createVerticalStrut(25));
 
         panelHead.add(addGroup);
         addGroup.setForeground(Config.primaryColor_hard);
@@ -71,15 +80,35 @@ public class AdminAddGroupClass {
         addGroup.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
         panelHead.add(addGroup,BorderLayout.NORTH);
 
-        panelRek1.add(numGroup);
-        //showYear = true;
-        numGroup.setText("   จำนวนกลุ่มเรียน");
+        panelRek1.setPreferredSize(new Dimension((int)(frame.getWidth()),(frame.getHeight() / 4) - 120));
+        groupPan.setLayout(new BorderLayout());
+        groupPan.add(numGroupLabel,BorderLayout.NORTH);
+        groupPan.add(numGroup);
+        numGroupLabel.setForeground(Config.primaryColor_base);
+        numGroupLabel.setFont(Config.HEADER_SEMIBOLD[2]);
+        numGroupLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+
+        typePan.setLayout(new BorderLayout());
+        typePan.add(typeLabel,BorderLayout.NORTH);
+        typePan.add(type);
+        typeLabel.setForeground(Config.primaryColor_base);
+        typeLabel.setFont(Config.HEADER_SEMIBOLD[2]);
+        typeLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+
+        numPan.setLayout(new BorderLayout());
+        numPan.add(numStuLabel,BorderLayout.NORTH);
+        numPan.add(numStu);
+        numStuLabel.setForeground(Config.primaryColor_base);
+        numStuLabel.setFont(Config.HEADER_SEMIBOLD[2]);
+        numStuLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+
+        panelRek1.add(groupPan);
+        numGroup.setText("   3");
         numGroup.setFont(innerFont);
         numGroup.setForeground(Color.GRAY);
         numGroup.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
-        panelRek1.add(type);
-        type.addItem("กลุ่มเรียนที่");
+        panelRek1.add(typePan);
         type.addItem("1");
         type.addItem("2");
         type.addItem("3");
@@ -89,54 +118,50 @@ public class AdminAddGroupClass {
         type.setFont(innerFont);
         type.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
-        numStu.setText("    จำนวนนักศึกษาที่รับ");
+        panelRek1.add(numPan);
+        numStu.setText("    200");
         numStu.setFont(innerFont);
         numStu.setForeground(Color.GRAY);
         numStu.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
-        panelRek1.add(numStu);
         panelBig.add(panelRek1);
 
-        panelDate.setLayout(new BoxLayout(panelDate, BoxLayout.Y_AXIS));
-        panelDate.add(Box.createVerticalStrut(10));
-        panelDate.add(date);
-        panelDate.add(time);
+        panelRek2.setPreferredSize(new Dimension((int)(frame.getWidth()),(int)(frame.getHeight() / 3.5) - 100));
+        panelTime.setLayout(new BorderLayout());
+        panelTime.add(date,BorderLayout.NORTH);
+        panelTime.add(time);
             date.setForeground(Config.primaryColor_base);
             date.setFont(Config.HEADER_SEMIBOLD[2]);
             date.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
 
-        paneltime.setLayout(new BoxLayout(paneltime, BoxLayout.Y_AXIS));
-        paneltime.add(Box.createVerticalStrut(10));
-        paneltime.add(timeExam);
-        paneltime.add(mid);
+        panelTimeExamMid.setLayout(new BorderLayout());
+        panelTimeExamMid.add(timeExam,BorderLayout.NORTH);
+        panelTimeExamMid.add(mid);
             timeExam.setForeground(Config.primaryColor_base);
             timeExam.setFont(Config.HEADER_SEMIBOLD[2]);
             timeExam.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
 
-        panelTimeExamFinal.setLayout(new BoxLayout(panelTimeExamFinal, BoxLayout.Y_AXIS));
-
-        panelTimeExamFinal.add(Box.createVerticalStrut(10));
-        panelTimeExamFinal.setAlignmentX(Component.LEFT_ALIGNMENT);
-        panelTimeExamFinal.add(timeExamFinal);
+        panelTimeExamFinal.setLayout(new BorderLayout());
+        panelTimeExamFinal.add(timeExamFinal,BorderLayout.NORTH);
         panelTimeExamFinal.add(fi);
             timeExamFinal.setForeground(Config.primaryColor_base);
             timeExamFinal.setFont(Config.HEADER_SEMIBOLD[2]);
             timeExamFinal.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
 
-        panelRek2.add(panelDate);
+        panelRek2.add(panelTime);
         time.setText("   จ. 8:00 - 20:00");
         time.setFont(innerFont);
         time.setForeground(Color.GRAY);
         time.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
-        panelRek2.add(paneltime);
-        mid.setText("   กลางภาค");
+        panelRek2.add(panelTimeExamMid);
+        mid.setText("   จ. 9:00 - 12:00");
         mid.setFont(innerFont);
         mid.setForeground(Color.GRAY);
         mid.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
         panelRek2.add(panelTimeExamFinal);
-        fi.setText("   ปลายภาค");
+        fi.setText("   จ. 9:00 - 12:00");
         fi.setFont(innerFont);
         fi.setForeground(Color.GRAY);
         fi.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
@@ -188,6 +213,7 @@ public class AdminAddGroupClass {
 
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        System.out.println(panelTimeExamMid.getComponentCount());
 }public static void main(String[] args) {
         new AdminAddGroupClass(Config.createAndShowGUI());
     }
