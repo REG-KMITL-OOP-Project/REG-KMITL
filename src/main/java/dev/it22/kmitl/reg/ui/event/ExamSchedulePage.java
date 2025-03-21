@@ -17,41 +17,31 @@ public class ExamSchedulePage {
     private JPanel pn1 , pn2;
 
     //user-data
-    private Account user;
+    //private Account user;
 
     //head-menubar
-    private JMenuBar bar;
-    private JMenu ETC;
-    private JMenuItem savePDF, expand,saveJPG, share;
-    private JLabel examSche;
-    private JLabel tarangsob;
-    private JButton home;
-    private JPanel exSchPanel ;
+    private headerMenu header;
 
     //body-information
     private JPanel allInfo, testFormat, allchosen, choseYear,choseSem,choseExam, stdInfo;
     private JLabel ID, name, faculty, branch;
     private JComboBox year, semester, exam ;
-    JLabel label[];
 
     //body-schedule
     private JTable examSchedule;
     private JScrollPane scrollPane;
 
     private String years[] = {"2568", "2567", "2566"};
-    //private String semesters[] = {"Semester 1", "Semester 2"};
-    private JLabel semesters1;
-    private JLabel semesters2;
     private String semesters[] = {"เทอม 1", "เทอม 2"};
-    private String exams[] = {"Midterm","Final"};
-    private String columnNames[] = {"DD/MM/YY","time", "subject-ID","subject","type","seat","room"};
-    private Object testData[][] = {{"DD/MM/YY","09.30-18.00","060111222","OOP","practical","A4","L123"},
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","A4","L123"},
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","A4","L123"},
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","A4","L123"}};
+    private String exams[] = {"กลางภาค","ปลายภาค"};
+    private String columnNames[] = {"วัน/เดือน/ปี","เวลา", "รหัสวิชา","วิชา","ประเภท","ห้องสอบ"};
+    private Object testData[][] = {{"DD/MM/YY","09.30-18.00","060111222","OOP","ทฤษฎี","L123"},
+            {"DD/MM/YY","09.30-18.00","060111222","OOP","ปฏิบัติ","L123"},
+            {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","L123"},
+            {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","L123"}};
 
 
-    public ExamSchedulePage(JFrame frame) {
+    public ExamSchedulePage(JFrame frame){
         this.frame = frame;
         pn1 = new JPanel();
         pn2 = new JPanel();
@@ -60,56 +50,7 @@ public class ExamSchedulePage {
         pn2.setBackground(null);
 
         //data
-        user = new User().getUserAccount();
-
-        //head-menubar
-        exSchPanel = new JPanel();
-        bar = new JMenuBar();
-        tarangsob = new JLabel("ตารางสอบ");
-
-        examSche = new JLabel("  Exam Schedule");
-        examSche.setPreferredSize(new Dimension(110, 30));
-        examSche.setSize(110, 30);
-        examSche.setForeground(Config.primaryColor_base);
-        exSchPanel.add(examSche);
-        exSchPanel.setBackground(Config.bgColor_base);
-
-        ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
-        home = new JButton(homeIcon);
-
-        ETC = new JMenu();
-        ImageIcon originalIcon = new ImageIcon("source/icon_schedule/icon_etc.png");
-        Image scaledImage = originalIcon.getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        ETC.setIcon(scaledIcon);
-        ETC.setBackground(Config.bgColor_base);
-
-        ImageIcon expandIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_etc.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
-        expand = new JMenuItem("Expand", expandIcon);
-        expand.setPreferredSize(new Dimension(30,40));
-        expand.setBackground(Config.bgColor_base);
-        expand.setForeground(Config.primaryColor_base);
-
-        ImageIcon savePDFIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_etc.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
-        savePDF = new JMenuItem("Save PDF",savePDFIcon);
-        savePDF.setPreferredSize(new Dimension(30,40));
-        savePDF.setBackground(Config.bgColor_base);
-        savePDF.setForeground(Config.primaryColor_base);
-
-        ImageIcon saveJPGIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_etc.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
-        saveJPG = new JMenuItem("Save JPG",saveJPGIcon);
-        saveJPG.setPreferredSize(new Dimension(30,40));
-        saveJPG.setBackground(Config.bgColor_base);
-        saveJPG.setForeground(Config.primaryColor_base);
-
-        ImageIcon shareIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_etc.png").getImage().getScaledInstance(15,15,Image.SCALE_SMOOTH));
-        share = new JMenuItem("Share",shareIcon);
-        share.setPreferredSize(new Dimension(30,40));
-        share.setBackground(Config.bgColor_base);
-        share.setForeground(Config.primaryColor_base);
-
-        tarangsob.setForeground(Config.primaryColor_base);
-        tarangsob.setFont(Config.HEADER_SEMIBOLD[1]);
+        //user = new User().getUserAccount();
 
         //body-information
         allInfo = new JPanel();
@@ -129,66 +70,54 @@ public class ExamSchedulePage {
         choseExam.setBackground(null);
         stdInfo.setBackground(null);
 
+        ID = new JLabel("รหัสนักศึกษา : ");
+        name = new JLabel("ชื่อ : ");
+        faculty = new JLabel("คณะ : ");
+        branch = new JLabel("สาขา : ");
 
-        ID = new JLabel("รหัสนักศึกษา : "+ ((Student) user).getStudentId());
-        name = new JLabel("ชื่อ : "+ ((Student) user).getFullName());
-        faculty = new JLabel("คณะ : "+ ((Student) user).getFaculty());
-        branch = new JLabel("สาขา : "+ ((Student) user).getMajor());
+        //ID = new JLabel("รหัสนักศึกษา : "+ ((Student) user).getStudentId());
+        //name = new JLabel("ชื่อ : "+ ((Student) user).getFullName());
+        //faculty = new JLabel("คณะ : "+ ((Student) user).getFaculty());
+        //branch = new JLabel("สาขา : "+ ((Student) user).getMajor());
 
         ID.setForeground(Color.WHITE);
         name.setForeground(Color.WHITE);
         faculty.setForeground(Color.WHITE);
         branch.setForeground(Color.WHITE);
 
-        //for (int i = 0; i < semesters.length; i++) {
-            //label[i] = new JLabel(semesters[i]);
-            //label[i].setFont(Config.HEADER_SEMIBOLD[2]);
-        //}
-
         year = new JComboBox(years);
         semester = new JComboBox(semesters);
         exam = new JComboBox(exams);
 
+        //change font in combobox
+        JComboBox<String> semester = new JComboBox<>(semesters);
+        semester.setFont(Config.NORMAL_REGULAR);
+
+        JComboBox<String> exam = new JComboBox<>(exams);
+        exam.setFont(Config.NORMAL_REGULAR);
+
+
         //place components
-        //head
-        //head-menubar
-        home.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 5));
-        ETC.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
-        tarangsob.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
-        bar.setBorder(BorderFactory.createEmptyBorder(10, 0, 5, 0));
-
-        home.setBorderPainted(false);
-        home.setContentAreaFilled(false);
-        home.setFocusPainted(false);
-
-        bar.setBackground(Config.bgColor_base);
-        bar.setBorderPainted(false);
-        bar.add(home);
-
-        ETC.setForeground(Config.primaryColor_base);
-        bar.add(ETC);
-        bar.add(tarangsob);
-        ETC.add(exSchPanel);
-        ETC.add(expand);
-        ETC.add(savePDF);
-        ETC.add(saveJPG);
-        ETC.add(share);
-
         //body-schedule
+        //All about JTable
         DefaultTableModel model = new DefaultTableModel(testData, columnNames);
         examSchedule = new JTable(model);
         JTableHeader header = examSchedule.getTableHeader();
         header.setPreferredSize(new Dimension(30,30));
         header.setBackground(Config.primaryColor_hard);
         header.setForeground(Color.WHITE);
+        header.setFont(Config.HEADER_SEMIBOLD[3]);
         examSchedule.setRowHeight(30);
 
+        //ปิดไม่ให้แก้ขนาด & เลื่อนตารางไปมา
+        header.setReorderingAllowed(false);
+        header.setResizingAllowed(false);
 
         //จัดข้อความให้อยู่ตรงกลาง
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        DefaultTableCellRenderer Renderer = new DefaultTableCellRenderer();
+        Renderer.setHorizontalAlignment(SwingConstants.CENTER);
         for (int i = 0; i < examSchedule.getColumnCount(); i++) {
-            examSchedule.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+            examSchedule.getColumnModel().getColumn(i).setCellRenderer(Renderer);
         }
 
         //เปลี่ยนขนาดช่อง
@@ -207,16 +136,12 @@ public class ExamSchedulePage {
         TableColumn examType = examSchedule.getColumnModel().getColumn(4);
         examType.setPreferredWidth(50);
 
-        TableColumn seat = examSchedule.getColumnModel().getColumn(5);
-        seat.setPreferredWidth(30);
-
-        TableColumn room = examSchedule.getColumnModel().getColumn(6);
+        TableColumn room = examSchedule.getColumnModel().getColumn(5);
         room.setPreferredWidth(50);
 
         scrollPane = new JScrollPane(examSchedule);
         scrollPane.setBackground(null);
         scrollPane.getViewport().setBackground(null);
-
 
         //panel-year button
         choseYear.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
@@ -227,7 +152,7 @@ public class ExamSchedulePage {
         choseSem.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
         choseSem.setLayout(new GridLayout(1, 2));
         choseSem.add(semester);
-        choseSem.setFont(Config.NORMAL_REGULAR);
+
 
         //panel-exam button
         choseExam.setLayout(new GridLayout(1, 1));
@@ -236,16 +161,15 @@ public class ExamSchedulePage {
         //panel-studentInfo
         stdInfo.setLayout(new GridLayout(2, 2));
 
-        ID.setFont(Config.NORMAL_REGULAR);
-        name.setFont(Config.NORMAL_REGULAR);
-        faculty.setFont(Config.NORMAL_REGULAR);
-        branch.setFont(Config.NORMAL_REGULAR);
+        ID.setFont(Config.HEADER_SEMIBOLD[3]);
+        name.setFont(Config.HEADER_SEMIBOLD[3]);
+        faculty.setFont(Config.HEADER_SEMIBOLD[3]);
+        branch.setFont(Config.HEADER_SEMIBOLD[3]);
 
         stdInfo.add(ID);
         stdInfo.add(name);
         stdInfo.add(faculty);
         stdInfo.add(branch);
-
 
         allInfo.setLayout(new BorderLayout());
         testFormat.setLayout(new GridLayout(1, 2));
@@ -273,7 +197,7 @@ public class ExamSchedulePage {
         pn2.add(scrollPane, BorderLayout.CENTER);
 
         frame.setLayout(new BorderLayout());
-        frame.setJMenuBar(bar);
+        frame.setJMenuBar(new headerMenu("Exam Schedule", frame));
         frame.add(pn1, BorderLayout.NORTH);
         frame.add(pn2,BorderLayout.CENTER);
 
@@ -281,6 +205,7 @@ public class ExamSchedulePage {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
+
     public static void main(String[] args) {
         new ExamSchedulePage(Config.createAndShowGUI());
     }

@@ -16,7 +16,7 @@ public class ErrorModal implements ActionListener {
 
         JPanel dialog = new JPanel();
         dialog.setSize(popup.getSize());
-        dialog.setBackground(Config.bgColor_base);
+        dialog.setBackground(Config.bgColor_harder);
         dialog.setSize(popup.getWidth(), popup.getHeight());
         dialog.setLayout(new BoxLayout(dialog, BoxLayout.Y_AXIS));
         dialog.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -30,23 +30,30 @@ public class ErrorModal implements ActionListener {
         titlePanel.setBackground(null);
         titlePanel.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 
+        RoundedButton errorIcon = new RoundedButton("" , 20);
+        errorIcon.setBackground(Config.errorColor_hard);
+        errorIcon.setIcon(new ImageIcon(new ImageIcon("source/shield-alert.png").getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT)));
+        errorIcon.setEnabled(false);
+        titlePanel.add(errorIcon);
+
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         contentPanel.setBackground(null);
+
         JLabel duocrossPic = new JLabel();
         duocrossPic.setIcon(new ImageIcon(new ImageIcon("source/cross-hand.png").getImage().getScaledInstance(60,60,Image.SCALE_SMOOTH)));
         duocrossPic.setBorder(BorderFactory.createEmptyBorder(0,0,0,10));
         contentPanel.add(duocrossPic);
 
-        JLabel errorLabel = new JLabel(errorMessage);
-        errorLabel.setFont(Config.HEADER_SEMIBOLD[1]);
+        JTextArea errorLabel = new JTextArea(errorMessage,1,25);
+        errorLabel.setEditable(false);
+        errorLabel.setLineWrap(true);
+        errorLabel.setBackground(null);
+        errorLabel.setFont(Config.NORMAL_REGULAR);
         errorLabel.setForeground(Color.WHITE);
-        contentPanel.add(errorLabel);
+        errorLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
 
-        RoundedButton errorIcon = new RoundedButton("" , 20);
-        errorIcon.setBackground(Config.errorColor_hard);
-        errorIcon.setIcon(new ImageIcon(new ImageIcon("source/shield-alert.png").getImage().getScaledInstance(20,20,Image.SCALE_DEFAULT)));
-        titlePanel.add(errorIcon);
+        contentPanel.add(errorLabel);
 
         JPanel footerPanel = new JPanel();
         footerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -59,7 +66,6 @@ public class ErrorModal implements ActionListener {
         acceptButton.addActionListener(this);
         footerPanel.add(acceptButton);
 
-
         titlePanel.setSize(dialog.getWidth(), titlePanel.getHeight());
         titlePanel.setBackground(null);
         dialog.add(titlePanel);
@@ -67,7 +73,6 @@ public class ErrorModal implements ActionListener {
         dialog.add(footerPanel);
 
         popup.add(dialog);
-        popup.setUndecorated(false);
         popup.setVisible(true);
     }
 
@@ -83,7 +88,7 @@ public class ErrorModal implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        new ErrorModal(frame,"ควย");
+        new ErrorModal(frame,"32202");
     }
 
 }

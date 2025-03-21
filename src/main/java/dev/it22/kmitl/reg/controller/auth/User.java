@@ -39,11 +39,12 @@ public class User {
             default: throw new IllegalArgumentException("Invalid prefix value: " + prefixValue);
         }
         String phone = account.getString("phone");
-        String studentId = account.getString("studentid");
+        String studentId = account.getString("std_id");
         String faculty = account.getString("faculty");
         String major = account.getString("major");
-        String section = account.getString("section");
+        String section = account.getString("section_id");
         String address = account.getString("address");
+        String prof_id = account.getString("prof_id");
 
         if (userRole == UserRole.STUDENT.getLevel()) {
             userAccount = new Student(
@@ -63,6 +64,7 @@ public class User {
         } else if (userRole == UserRole.PROF.getLevel()) {
             userAccount = new Prof(
                     id,
+                    prof_id,
                     UserRole.PROF,
                     email,
                     username,

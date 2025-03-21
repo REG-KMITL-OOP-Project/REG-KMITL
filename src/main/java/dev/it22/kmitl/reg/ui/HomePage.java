@@ -7,6 +7,7 @@ import dev.it22.kmitl.reg.ui.event.AdminCalendarPage;
 import dev.it22.kmitl.reg.ui.event.ExamSchedulePage;
 import dev.it22.kmitl.reg.ui.profile.LoginFrame;
 import dev.it22.kmitl.reg.ui.profile.RegisterFrame;
+import dev.it22.kmitl.reg.ui.transcript.TranscriptController;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -15,6 +16,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
+
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class HomePage implements ActionListener {
 
@@ -29,12 +33,16 @@ public class HomePage implements ActionListener {
     String name[];
     String source[];
     JPanel inPanel[];
-    RoundedButton button[];
+    RoundedButton button[] ,editButton;
     JLabel label[];
     JPanel bottomPanel;
 
     public HomePage(JFrame frame) {
-
+        try{
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         this.frame = frame;
         frame.setLayout(new GridLayout(2,1));
 
@@ -56,20 +64,20 @@ public class HomePage implements ActionListener {
 
         upperPanel.add(innerUpperPanel, BorderLayout.WEST);
         upperPanel.add(clockLabel, BorderLayout.EAST);
-        frame.add(upperPanel);
+        frame.getContentPane().add(upperPanel);
 
         if (acc instanceof Student) {
             border = 60;
-            name  = new String[]{"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"};
-            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/book.png", "source/calendar-days.png", "source/scroll-text.png", "source/settings.png"};
+            name  = new String[]{"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ออกจากระบบ"};
+            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/book.png", "source/calendar-days.png", "source/scroll-text.png", "source/log-out.png"};
         }else if(acc instanceof Prof){
             border = 80;
             name  = new String[]{"Example 1","Example 2","Example 3","Example 4","Example 5"};
-            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/scroll-text.png", "source/scroll-text.png", "source/settings.png"};
+            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/scroll-text.png", "source/scroll-text.png", "source/log-out.png"};
         }else if(acc instanceof Admin){
             border = 100;
-            name  = new String[]{"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ตั้งค่า"};
-            source = new String[]{"source/user-round.png", "source/sheet.png", "source/calendar-days.png", "source/settings.png"};
+            name  = new String[]{"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ออกจากระบบ"};
+            source = new String[]{"source/user-round.png", "source/sheet.png", "source/calendar-days.png", "source/log-out.png"};
         }
 
         inPanel = new JPanel[name.length];
@@ -106,7 +114,7 @@ public class HomePage implements ActionListener {
             bottomPanel.add(inPanel[i]);
         }
 
-        frame.add(bottomPanel);
+        frame.getContentPane().add(bottomPanel);
         frame.setVisible(true);
     }
 
@@ -134,8 +142,15 @@ public class HomePage implements ActionListener {
             idLabel.setForeground(Config.primaryColor_base);
             idLabel.setFont(Config.HEADER_SEMIBOLD[1]);
 
+            editButton = new RoundedButton("",10);
+            editButton.setBackground(Config.primaryColor_base);
+            editButton.setPreferredSize(new Dimension(30,30));
+            editButton.setIcon(new ImageIcon(new ImageIcon("source/square-pen.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH)));
+            editButton.addActionListener(this);
+
             topPanel.add(welcome);
             topPanel.add(idLabel);
+            topPanel.add(editButton);
 
             JLabel nameLabel = new JLabel(" คุณ"+acc.getFirstName()+" "+acc.getLastName());
             nameLabel.setBackground(null);
@@ -145,7 +160,34 @@ public class HomePage implements ActionListener {
 
             panel.add(topPanel);
             panel.add(nameLabel);
-        } else if (acc instanceof Prof || acc instanceof Admin) {
+        } else if (acc instanceof Prof) {
+            JLabel welcome = new JLabel("ยินดีต้อนรับ ");
+            welcome.setForeground(Color.WHITE);
+            welcome.setFont(Config.HEADER_SEMIBOLD[1]);
+
+            JLabel idLabel = new JLabel(((Prof)acc).getProf_id());
+            idLabel.setForeground(Config.primaryColor_base);
+            idLabel.setFont(Config.HEADER_SEMIBOLD[1]);
+
+            editButton = new RoundedButton("",10);
+            editButton.setBackground(Config.primaryColor_base);
+            editButton.setPreferredSize(new Dimension(30,30));
+            editButton.setIcon(new ImageIcon(new ImageIcon("source/square-pen.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH)));
+            editButton.addActionListener(this);
+
+            topPanel.add(welcome);
+            topPanel.add(idLabel);
+            topPanel.add(editButton);
+
+            JLabel nameLabel = new JLabel(" คุณ"+acc.getFirstName()+" "+acc.getLastName());
+            nameLabel.setBackground(null);
+            nameLabel.setForeground(Config.primaryColor_base);
+            nameLabel.setFont(Config.HEADER_SEMIBOLD[1]);
+            nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            panel.add(topPanel);
+            panel.add(nameLabel);
+        } else if (acc instanceof Admin) {
             JLabel welcome = new JLabel("ยินดีต้อนรับ ");
             welcome.setForeground(Color.WHITE);
             welcome.setFont(Config.HEADER_SEMIBOLD[1]);
@@ -166,9 +208,16 @@ public class HomePage implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (!e.getSource().equals(editButton)) {
+        JLayeredPane newLayeredPane = new JLayeredPane();
+        newLayeredPane.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+        frame.setLayeredPane(newLayeredPane);
+        frame.setContentPane(new JFrame().getContentPane());
+        frame.getContentPane().setBackground(Config.bgColor_base);
         frame.getContentPane().removeAll();
         frame.revalidate();
         frame.repaint();
+        }
         if(acc instanceof Student) { //"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
                 System.out.println("Student1");
@@ -179,21 +228,27 @@ public class HomePage implements ActionListener {
             } else if (e.getSource().equals(button[3])) {
                 System.out.println("Student4");
             } else if (e.getSource().equals(button[4])) {
-                System.out.println("Student5");
+               new TranscriptController(frame);
             } else if (e.getSource().equals(button[5])) {
-                System.out.println("Student6");
+                user.logout();
+                new LoginFrame(frame);
+            } else if (e.getSource().equals(editButton)) {
+                requestEditData(frame);
             }
         }else if(acc instanceof Prof) {
             if (e.getSource().equals(button[0])) {
                 System.out.println("Prof1");
             } else if (e.getSource().equals(button[1])) {
-                System.out.println("Prof2");
+                new ExamSchedulePage(frame);
             } else if (e.getSource().equals(button[2])) {
                 System.out.println("Prof3");
             } else if (e.getSource().equals(button[3])) {
                 System.out.println("Prof4");
             } else if (e.getSource().equals(button[4])) {
-                System.out.println("Prof5");
+                user.logout();
+                new LoginFrame(frame);
+            } else if (e.getSource().equals(editButton)) {
+                requestEditData(frame);
             }
         } else if(acc instanceof Admin) { //"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
@@ -203,18 +258,35 @@ public class HomePage implements ActionListener {
             } else if (e.getSource().equals(button[2])) {
                 new AdminCalendarPage(frame);
             } else if (e.getSource().equals(button[3])) {
-                System.out.println("Admin4");
+                user.logout();
+                new LoginFrame(frame);
             }
         }
+    }
+
+    private void requestEditData(JFrame frame) {
+        JLayeredPane layeredPane = frame.getLayeredPane();
+        JDesktopPane desktopPane = new JDesktopPane();
+        desktopPane.setOpaque(false);
+        desktopPane.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+        JInternalFrame internalFrame = new JInternalFrame("",false,true,false,false);
+        internalFrame.setFrameIcon(null);
+        internalFrame.setSize(300, 200);
+        internalFrame.setLocation(100, 100);
+        internalFrame.setVisible(true);
+        internalFrame.setLocation((desktopPane.getWidth() - internalFrame.getWidth())/2, (desktopPane.getHeight() - internalFrame.getHeight())/2);
+        desktopPane.add(internalFrame);
+        layeredPane.add(desktopPane, JLayeredPane.PALETTE_LAYER);
+        frame.setVisible(true);
     }
 
     public static void main(String[] args) {
         JFrame config = Config.createAndShowGUI();
 
         try {
-//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+            new Login("Student01","Student1234").loginWithUsernameAndPassword();
 //            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
-            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
+//            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         }
         catch (Exception e) {
