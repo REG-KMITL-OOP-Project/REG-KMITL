@@ -3,6 +3,7 @@ package dev.it22.kmitl.reg.ui.event;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class sampleHeaderMenu{
 
@@ -11,6 +12,9 @@ public class sampleHeaderMenu{
     private StudentInfo studentInfo;
     private headerMenu header;
     private CalenderHeaderMenu headerCalender;
+
+    private calendarTable table;
+
     public sampleHeaderMenu(JFrame frame) {
 
         this.frame = frame;
@@ -22,6 +26,10 @@ public class sampleHeaderMenu{
 
         //frame.setJMenuBar(new CalenderHeaderMenu());
         //frame.add(studentInfo);
+        table = new calendarTable("January");
+        frame.setLayout(new BorderLayout());
+        frame.add(table, BorderLayout.CENTER);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }

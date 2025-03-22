@@ -51,7 +51,7 @@ public class ClassScheduleTable extends JTable {
         table_day.setShowHorizontalLines(false);
 
         //table_day.setForeground(Config.primaryColor_harder);
-        table_day.setBackground(null);
+        //table_day.setBackground(null);
         pn1.setBackground(null);
 
         row = new JPanel(new BorderLayout());
@@ -68,7 +68,7 @@ public class ClassScheduleTable extends JTable {
         table_column.setBorder(BorderFactory.createLineBorder(Config.bgColor_hard));
         table_column.setGridColor(Config.bgColor_hard);
 
-        table_column.setForeground(Color.BLACK);
+        table_column.setForeground(Color.WHITE);
 
         table_column.setBackground(null);
         column = new JPanel(new BorderLayout());
