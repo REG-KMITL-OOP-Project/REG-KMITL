@@ -3,7 +3,9 @@ package dev.it22.kmitl.reg.ui.event;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 
 public class ClassScheduleTable extends JTable {
@@ -47,6 +49,13 @@ public class ClassScheduleTable extends JTable {
         pn1.add(table_day);
         pn1.setPreferredSize(new Dimension(100, 384));
 
+        //table_day.getTableHeader().setBackground(Config.bgColor_hard);
+        DefaultTableCellRenderer Renderer = new DefaultTableCellRenderer();
+        Renderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < table_day.getColumnCount(); i++) {
+            table_day.getColumnModel().getColumn(i).setCellRenderer(Renderer);
+        }
+
         //ปิดเส้นแกน x ระหว่างตาราง
         table_day.setShowHorizontalLines(false);
 
@@ -75,6 +84,12 @@ public class ClassScheduleTable extends JTable {
         column.add(table_column);
         column.setBorder(BorderFactory.createEmptyBorder(0,-1,0,0));
         column.setBackground(null);
+
+        DefaultTableCellRenderer Renderer2 = new DefaultTableCellRenderer();
+        Renderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < table_column.getColumnCount(); i++) {
+            table_column.getColumnModel().getColumn(i).setCellRenderer(Renderer);
+        }
 
         //combine
         com = new JPanel();

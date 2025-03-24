@@ -5,7 +5,7 @@ import dev.it22.kmitl.reg.utils.Config;
 import javax.swing.*;
 import java.awt.*;
 
-public class ClassSchedulePage {
+public class TeacherClassSchedulePage{
     private JFrame frame;
     private JPanel pn1 , pn2;
 
@@ -24,8 +24,7 @@ public class ClassSchedulePage {
 
     // table
     private ClassScheduleTable table;
-
-    public ClassSchedulePage(JFrame frame) {
+    public TeacherClassSchedulePage(JFrame frame) {
         this.frame = frame;
         pn1 = new JPanel();
         pn2 = new JPanel();
@@ -55,7 +54,7 @@ public class ClassSchedulePage {
         stdInfo.setBackground(null);
 
 
-        ID = new JLabel("รหัสนักศึกษา : ");
+        ID = new JLabel("รหัสประจำตัว : ");
         name = new JLabel("ชื่อ : ");
         faculty = new JLabel("คณะ : ");
         branch = new JLabel("สาขา : ");
@@ -125,11 +124,11 @@ public class ClassSchedulePage {
         pn1.setBorder(BorderFactory.createEmptyBorder(5, 5, 40, 5));
 
         //table
-          table = new ClassScheduleTable();
+        table = new ClassScheduleTable();
 
 
         frame.setLayout(new BorderLayout());
-        frame.setJMenuBar(new headerMenu("ตารางเรียน", frame));
+        frame.setJMenuBar(new headerMenu("ตารางสอน", frame));
         frame.add(pn1, BorderLayout.NORTH);
 
         frame.add(table, BorderLayout.CENTER);
@@ -137,8 +136,7 @@ public class ClassSchedulePage {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-
     public static void main(String[] args) {
-            new ClassSchedulePage(Config.createAndShowGUI());
+        new TeacherClassSchedulePage(Config.createAndShowGUI());
     }
 }
