@@ -56,4 +56,16 @@ public class UserRequestController {
         }
         return true;
     }
+
+    public boolean rejectRequest(int id) {
+        Database db = new Database();
+        try {
+            int res = db.postQuery("UPDATE user_request SET status = 'rejected' WHERE id = " + id + ";");
+            System.out.println("Reject request success : " + res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }
