@@ -3,10 +3,11 @@ package dev.it22.kmitl.reg.ui.event;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class calendarTable extends JTable {
+public class calendarTable extends JPanel {
     //rowOFDay_ClassTable
     private JPanel row;
     private JTable table_Month;
@@ -39,6 +40,12 @@ public class calendarTable extends JTable {
 
         table_column.setForeground(Color.WHITE);
 
+        DefaultTableCellRenderer Renderer2 = new DefaultTableCellRenderer();
+        Renderer2.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < table_column.getColumnCount(); i++) {
+            table_column.getColumnModel().getColumn(i).setCellRenderer(Renderer2);
+        }
+
         table_column.setBackground(null);
         column = new JPanel(new BorderLayout());
         column.add(table_column);
@@ -47,7 +54,7 @@ public class calendarTable extends JTable {
 
 
         //rowOfMonth_ClassTable
-        String[][] month_row = {{"               " + month}};
+        String[][] month_row = {{month}};
         DefaultTableModel model_day = new DefaultTableModel(month_row, day_month_column);
         table_Month = new JTable(model_day);
         table_Month.setRowHeight(table_column.getPreferredSize().height);
@@ -55,6 +62,12 @@ public class calendarTable extends JTable {
         table_Month.setGridColor(Config.bgColor_hard);
         table_Month.setEnabled(false);
         table_Month.setBorder(BorderFactory.createEmptyBorder(5,-5,-10,-3));
+
+        DefaultTableCellRenderer Renderer = new DefaultTableCellRenderer();
+        Renderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < table_Month.getColumnCount(); i++) {
+            table_Month.getColumnModel().getColumn(i).setCellRenderer(Renderer);
+        }
 
         pn1 = new JPanel(new BorderLayout());
         pn1.add(table_Month);

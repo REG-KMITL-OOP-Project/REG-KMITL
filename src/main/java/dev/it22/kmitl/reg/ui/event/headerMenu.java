@@ -16,14 +16,14 @@ public class headerMenu extends JMenuBar {
     private JPanel SchPanel;
 
     public headerMenu(JFrame frame) {
-        this("No title", frame);
+        this("No title", frame, null);
     }
 
-    public headerMenu(String title, JFrame frame) {
-        this(title, frame, "source/icon_schedule/icon_etc.png" );
+    public headerMenu(String title, JFrame frame, JPanel table) {
+        this(title, frame, "source/icon_schedule/icon_etc.png", table );
     }
 
-    public headerMenu(String title, JFrame frame, String filePath) {
+    public headerMenu(String title, JFrame frame, String filePath, JPanel table) {
 
         ETC = new JMenu("ETC");
         savePDF = new JMenuItem("Save PDF");
@@ -108,6 +108,11 @@ public class headerMenu extends JMenuBar {
 
         //set event handler
         home.addActionListener(new HomeButtonHandler(frame));
+        savePDF.addActionListener(new saveFileHandler());
+        saveJPG.addActionListener(new saveJPGHandler(title, table));
+    }
+    public JButton getHome() {
+        return home;
     }
 
 }

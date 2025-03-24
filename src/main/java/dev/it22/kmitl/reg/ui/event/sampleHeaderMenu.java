@@ -20,7 +20,7 @@ public class sampleHeaderMenu{
         this.frame = frame;
         frame.setBackground(null);
         studentInfo = new StudentInfo();
-        frame.setJMenuBar(new headerMenu("Schedule", frame));
+
 
         //header.getHome().addActionListener(new returnHomePageHandler());
 
@@ -29,13 +29,16 @@ public class sampleHeaderMenu{
         table = new calendarTable("January");
         frame.setLayout(new BorderLayout());
         frame.add(table, BorderLayout.CENTER);
-
+        frame.setJMenuBar(new headerMenu("Schedule", frame, table));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
+
     }
 
 
     public static void main(String[] args) {
         new sampleHeaderMenu(Config.createAndShowGUI());
     }
+
 }

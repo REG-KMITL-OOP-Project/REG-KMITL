@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 
-public class ClassScheduleTable extends JTable {
+public class ClassScheduleTable extends JPanel{
     //rowOFDay_ClassTable
     private JPanel row;
     private JTable table_day;
@@ -103,4 +103,5 @@ public class ClassScheduleTable extends JTable {
         this.add(com);
         this.setBackground(null);
     }
+
 }

@@ -5,7 +5,7 @@ import dev.it22.kmitl.reg.utils.Config;
 import javax.swing.*;
 import java.awt.*;
 
-public class ClassSchedulePage {
+public class ClassSchedulePage{
     private JFrame frame;
     private JPanel pn1 , pn2;
 
@@ -129,7 +129,7 @@ public class ClassSchedulePage {
 
 
         frame.setLayout(new BorderLayout());
-        frame.setJMenuBar(new headerMenu("ตารางเรียน", frame));
+        frame.setJMenuBar(new headerMenu("ตารางเรียน", frame, table));
         frame.add(pn1, BorderLayout.NORTH);
 
         frame.add(table, BorderLayout.CENTER);
@@ -141,4 +141,6 @@ public class ClassSchedulePage {
     public static void main(String[] args) {
             new ClassSchedulePage(Config.createAndShowGUI());
     }
+
+
 }

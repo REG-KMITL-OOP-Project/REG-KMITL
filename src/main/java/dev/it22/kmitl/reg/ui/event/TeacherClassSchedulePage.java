@@ -128,7 +128,7 @@ public class TeacherClassSchedulePage{
 
 
         frame.setLayout(new BorderLayout());
-        frame.setJMenuBar(new headerMenu("ตารางสอน", frame));
+        frame.setJMenuBar(new headerMenu("ตารางสอน", frame, table));
         frame.add(pn1, BorderLayout.NORTH);
 
         frame.add(table, BorderLayout.CENTER);

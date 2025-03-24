@@ -9,7 +9,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 
-public class TeacherExamSchedulePage {
+public class TeacherExamSchedulePage{
     private JFrame frame;
     //Attribute ที่สร้างในคลาส
     private JPanel pn1 , pn2;
@@ -193,7 +193,7 @@ public class TeacherExamSchedulePage {
         pn2.add(scrollPane, BorderLayout.CENTER);
 
         frame.setLayout(new BorderLayout());
-        frame.setJMenuBar(new headerMenu("ตารางสอบ", frame));
+        frame.setJMenuBar(new headerMenu("ตารางสอบ", frame, pn2));
         frame.add(pn1, BorderLayout.NORTH);
         frame.add(pn2,BorderLayout.CENTER);
 
@@ -204,4 +204,5 @@ public class TeacherExamSchedulePage {
     public static void main(String[] args) {
         new TeacherExamSchedulePage(Config.createAndShowGUI());
     }
+
 }
