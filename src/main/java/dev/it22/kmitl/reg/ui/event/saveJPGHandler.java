@@ -19,28 +19,30 @@ public class saveJPGHandler implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try{
             BufferedImage image = new BufferedImage(table.getWidth(), table.getHeight(), BufferedImage.TYPE_INT_RGB);
-            Graphics2D g = image.createGraphics();
-
-            table.printAll(g);
-            g.dispose();
-
+            table.printAll(image.createGraphics());
             //test saving
-            //ImageIO.write(image, "jpg", new File(filename + ".jpg"));
-            //System.out.println("Image saved successfully: " + "table");
+//            ImageIO.write(image, "jpg", new File(filename + ".jpg"));
+//            System.out.println("Image saved successfully: " + "table");
 
             //test fileChooser
-//            JFileChooser fileChooser = new JFileChooser();
-//            fileChooser.setDialogTitle("Save Image");
-//            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("JPG Image", "jpg"));
-//
-//            int userSelection = fileChooser.showSaveDialog(null);
-//            if (userSelection == JFileChooser.APPROVE_OPTION) {
-//                File file = fileChooser.getSelectedFile();
-//                if (!file.getName().toLowerCase().endsWith(".jpg")) {
-//                    file = new File(file.getAbsolutePath() + ".jpg");
-//                }
-//                ImageIO.write(image, "jpg", file);
-//            }
+            try {
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Save Image");
+            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("JPG Image", "jpg"));
+
+            int userSelection = fileChooser.showSaveDialog(null);
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+                if (!file.getName().toLowerCase().endsWith(".jpg")) {
+                    file = new File(file.getAbsolutePath() + ".jpg");
+                }
+                ImageIO.write(image, "jpg", file);
+            }
         }catch(Exception ex){
             ex.printStackTrace();
         }
