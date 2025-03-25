@@ -87,7 +87,7 @@ public class ClassScheduleTable extends JPanel{
         table_column.setGridColor(Config.bgColor_base);
         table_column.setFont(Config.NORMAL_REGULAR);
         table_column.setForeground(Color.white);
-        table_column.setShowHorizontalLines(true);
+        table_column.setShowGrid(true);
         table_column.setBackground(Config.bgColor_base.darker());
         table_column.setPreferredSize(new Dimension(1000,335));
 
@@ -98,6 +98,8 @@ public class ClassScheduleTable extends JPanel{
         header_c.setFont(Config.HEADER_SEMIBOLD[3]);
         header_c.setPreferredSize(new Dimension(100, 30));
         header_c.setBorder(null);
+        header_c.setReorderingAllowed(false);
+        header_c.setResizingAllowed(false);
 
         DefaultTableCellRenderer Renderer2 = new DefaultTableCellRenderer();
         Renderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -120,16 +122,13 @@ public class ClassScheduleTable extends JPanel{
         com.setLayout(new BorderLayout());
         com.setBackground(null);
         com.setPreferredSize(new Dimension(1200, 379)); //384
-        com.setBorder(BorderFactory.createEmptyBorder(5, 50, 5, 50));
+        com.setBorder(BorderFactory.createEmptyBorder(0, 0, 35, 0));
         com.add(row, BorderLayout.WEST);
         com.add(column);
 
-        JPanel com2 = new JPanel();
-        com2.setLayout(new FlowLayout());
-        com2.add(com);
-        com2.setBackground(null);
+
         this.setLayout(new BorderLayout());
-        this.add(com2);
+        this.add(com);
         JPanel pL = new JPanel();
         JPanel pR = new JPanel();
         pL.setBackground(null);
@@ -137,7 +136,7 @@ public class ClassScheduleTable extends JPanel{
         this.add(pL, BorderLayout.WEST);
         this.add(pR, BorderLayout.EAST);
         //this.setPreferredSize(new Dimension(1200, 379));
-        this.setBorder(BorderFactory.createEmptyBorder(5, 50, 5, 50));
+        this.setBorder(BorderFactory.createEmptyBorder(5, 25, 5, 25));
         this.setBackground(null);
     }
 
