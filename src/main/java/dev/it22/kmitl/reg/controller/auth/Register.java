@@ -37,7 +37,7 @@ public class Register {
     }
 
     public static void main(String[] args) {
-        Register register = new Register("Admin02", "Admin12345");
+        Register register = new Register("StudentTest", "StudentTest12345");
         try {
             register.registerWithUsernameAndPassword();
         }

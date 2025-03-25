@@ -2,76 +2,94 @@ package dev.it22.kmitl.reg.ui.request;
 
 import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.Database;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.sql.ResultSet;
+import java.util.Vector;
 
 public class UserRequestView {
     JFrame frame;
-    JPanel upperPanel , eastPanel , lowerPanel;
+    JPanel upperPanel, lowerPanel;
     JLabel showLabel;
-    RoundedButton returnBtn , approveBtn;
+    RoundedButton returnBtn;
+    DefaultTableModel tableModel;
     JTable table;
     JScrollPane scrollPane;
+
     public UserRequestView(JFrame frame) {
         this.frame = frame;
-        upperPanel = new JPanel();
-        upperPanel.setLayout(new BorderLayout());
-        upperPanel.setBackground(null);
-        upperPanel.add(Config.createLogoAndTitle(Config.HEADER_SEMIBOLD[3],50) , BorderLayout.WEST);
+        frame.getContentPane().removeAll();
+        frame.setLayout(new BorderLayout());
 
-        eastPanel = new JPanel();
-        eastPanel.setLayout(new FlowLayout(FlowLayout.CENTER,40,40));
-        eastPanel.setBackground(null);
+        // Upper Panel
+        upperPanel = new JPanel(new BorderLayout());
+        upperPanel.setBackground(Config.bgColor_hard);
+        upperPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        upperPanel.add(Config.createLogoAndTitle(Config.HEADER_SEMIBOLD[3], 50), BorderLayout.WEST);
 
-        returnBtn = new RoundedButton("",20);
+        returnBtn = new RoundedButton("", 20);
         returnBtn.setIcon(new ImageIcon(new ImageIcon("source/undo.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-        returnBtn.setPreferredSize(new Dimension(50,50));
-        returnBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-        returnBtn.setAlignmentY(Component.CENTER_ALIGNMENT);
+        returnBtn.setPreferredSize(new Dimension(50, 50));
         returnBtn.addActionListener(e -> {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
             new HomePage(frame);
         });
-        eastPanel.add(returnBtn);
-        upperPanel.add(eastPanel , BorderLayout.EAST);
+        upperPanel.add(returnBtn, BorderLayout.EAST);
+        frame.add(upperPanel, BorderLayout.NORTH);
 
-        frame.getContentPane().add(upperPanel , BorderLayout.NORTH);
-
-        lowerPanel = new JPanel();
-        lowerPanel.setLayout(new BorderLayout());
-        lowerPanel.setBorder(BorderFactory.createEmptyBorder(0,50,30,50));
-        lowerPanel.setBackground(null);
+        // Lower Panel
+        lowerPanel = new JPanel(new BorderLayout());
+        lowerPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
+        lowerPanel.setBackground(Config.bgColor_hard);
 
         showLabel = new JLabel("List of Request");
         showLabel.setFont(Config.HEADER_SEMIBOLD[0]);
         showLabel.setForeground(Color.WHITE);
         lowerPanel.add(showLabel, BorderLayout.NORTH);
 
-
-        table = new JTable();
+        // Table Setup
+        String[] columns = {"Request ID", "User Email", "Field Name", "Current Value", "New Value", "Status", "Created At"};
+        tableModel = new DefaultTableModel(columns, 0);
+        table = new JTable(tableModel);
         table.setBackground(Config.bgColor_hard);
         table.setForeground(Color.WHITE);
         scrollPane = new JScrollPane(table);
         lowerPanel.add(scrollPane, BorderLayout.CENTER);
 
-        JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        southPanel.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
-        southPanel.setBackground(null);
+        loadData();
 
-        approveBtn = new RoundedButton("Aprrove",20);
-        approveBtn.setFont(Config.HEADER_SEMIBOLD[3]);
-        approveBtn.setPreferredSize(new Dimension(100,50));
-        southPanel.add(approveBtn);
-
-
-        lowerPanel.add(southPanel, BorderLayout.SOUTH);
-        frame.getContentPane().add(lowerPanel , BorderLayout.CENTER);
-
+        frame.add(lowerPanel, BorderLayout.CENTER);
         frame.setVisible(true);
+    }
+
+    private void loadData() {
+        Database db = new Database();
+        try {
+            ResultSet rs = db.getQuery("SELECT id, email, field_name, old_value, new_value, status, created_at FROM user_request WHERE status = 'pending'");
+            tableModel.setRowCount(0);
+
+            while (rs.next()) {
+                Vector<String> row = new Vector<>();
+                row.add(String.valueOf(rs.getInt("id")));
+                row.add(rs.getString("email"));
+                row.add(rs.getString("field_name"));
+                row.add(rs.getString("old_value"));
+                row.add(rs.getString("new_value"));
+                row.add(rs.getString("status"));
+                row.add(rs.getTimestamp("created_at").toString());
+                tableModel.addRow(row);
+            }
+
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
