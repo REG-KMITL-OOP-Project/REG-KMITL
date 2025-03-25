@@ -1,5 +1,7 @@
 package dev.it22.kmitl.reg.ui.event;
 
+import dev.it22.kmitl.reg.utils.Config;
+
 import javax.imageio.*;
 import javax.swing.*;
 import java.awt.*;
@@ -10,19 +12,18 @@ import java.io.File;
 
 public class saveJPGHandler implements ActionListener {
     private JPanel table;
-    private String filename;
-    public saveJPGHandler(String filename, JPanel panel) {
+    private JFrame frame;
+    public saveJPGHandler(JPanel panel, JFrame frame) {
         this.table = panel;
-        this.filename = filename;
+        this.frame = frame;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         try{
             BufferedImage image = new BufferedImage(table.getWidth(), table.getHeight(), BufferedImage.TYPE_INT_RGB);
-            table.printAll(image.createGraphics());
-            //test saving
-//            ImageIO.write(image, "jpg", new File(filename + ".jpg"));
-//            System.out.println("Image saved successfully: " + "table");
+            Graphics2D g2d = image.createGraphics();
+            table.printAll(g2d);
+            g2d.dispose();
 
             //test fileChooser
             try {
@@ -42,9 +43,50 @@ public class saveJPGHandler implements ActionListener {
                     file = new File(file.getAbsolutePath() + ".jpg");
                 }
                 ImageIO.write(image, "jpg", file);
+                JLabel l = new JLabel("Image Saved Successfully", SwingConstants.CENTER);
+                l.setBackground(Config.primaryColor_hard);
+                l.setForeground(Color.WHITE);
+                l.setFont(Config.HEADER_SEMIBOLD[3]);
+
+                JDialog success = new JDialog();
+                success.setResizable(false);
+                success.getContentPane().setBackground(Config.primaryColor_hard);
+                success.add(l);
+                success.setSize(280, 100);
+                success.setLocation(frame.getX() + 500,frame.getY() + 500);
+                success.setResizable(false);
+                success.setVisible(true);
             }
+            else{
+                JLabel l = new JLabel("Image Saved Unsuccessful", SwingConstants.CENTER);
+                l.setBackground(Config.primaryColor_hard);
+                l.setForeground(Color.WHITE);
+                l.setFont(Config.HEADER_SEMIBOLD[3]);
+
+                JDialog success = new JDialog();
+                success.setResizable(false);
+                success.getContentPane().setBackground(Config.primaryColor_hard);
+                success.add(l);
+                success.setSize(280, 100);
+                success.setLocation(frame.getX() + 500,frame.getY() + 500);
+                success.setResizable(false);
+                success.setVisible(true);
+            }
+
         }catch(Exception ex){
-            ex.printStackTrace();
+            JLabel l = new JLabel("Image Saved Unsuccessful", SwingConstants.CENTER);
+            l.setBackground(Config.primaryColor_hard);
+            l.setForeground(Color.WHITE);
+            l.setFont(Config.HEADER_SEMIBOLD[3]);
+
+            JDialog success = new JDialog();
+            success.setResizable(false);
+            success.getContentPane().setBackground(Config.primaryColor_hard);
+            success.add(l);
+            success.setSize(280, 100);
+            success.setLocation(frame.getX() + 500,frame.getY() + 500);
+            success.setResizable(false);
+            success.setVisible(true);
         }
     }
 }

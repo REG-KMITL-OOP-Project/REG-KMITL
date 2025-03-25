@@ -109,7 +109,7 @@ public class headerMenu extends JMenuBar {
         //set event handler
         home.addActionListener(new HomeButtonHandler(frame));
         savePDF.addActionListener(new saveFileHandler());
-        saveJPG.addActionListener(new saveJPGHandler(title, table));
+        saveJPG.addActionListener(new saveJPGHandler(table, frame));
     }
     public JButton getHome() {
         return home;
