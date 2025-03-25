@@ -122,7 +122,7 @@ public class ClassSchedulePage{
 
         pn1.setLayout(new BorderLayout());
         pn1.add(allInfo, BorderLayout.SOUTH);
-        pn1.setBorder(BorderFactory.createEmptyBorder(5, 5, 40, 5));
+        pn1.setBorder(BorderFactory.createEmptyBorder(5, 5, 15, 5));
 
         //table
           table = new ClassScheduleTable();
@@ -131,12 +131,12 @@ public class ClassSchedulePage{
         frame.setLayout(new BorderLayout());
         frame.setJMenuBar(new headerMenu("ตารางเรียน", frame, table));
         frame.add(pn1, BorderLayout.NORTH);
-        JPanel pL = new JPanel();
-        JPanel pR = new JPanel();
-        pL.setBackground(null);
-        pR.setBackground(null);
-        frame.add(pL, BorderLayout.WEST);
-        frame.add(pR, BorderLayout.EAST);
+//        JPanel pL = new JPanel();
+//        JPanel pR = new JPanel();
+//        pL.setBackground(null);
+//        pR.setBackground(null);
+//        frame.add(pL, BorderLayout.WEST);
+//        frame.add(pR, BorderLayout.EAST);
         frame.add(table, BorderLayout.CENTER);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

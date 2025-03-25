@@ -123,9 +123,20 @@ public class ClassScheduleTable extends JPanel{
         com.setBorder(BorderFactory.createEmptyBorder(5, 50, 5, 50));
         com.add(row, BorderLayout.WEST);
         com.add(column);
-        this.setLayout(new FlowLayout());
-        this.add(com);
-        this.setPreferredSize(new Dimension(1200, 379));
+
+        JPanel com2 = new JPanel();
+        com2.setLayout(new FlowLayout());
+        com2.add(com);
+        com2.setBackground(null);
+        this.setLayout(new BorderLayout());
+        this.add(com2);
+        JPanel pL = new JPanel();
+        JPanel pR = new JPanel();
+        pL.setBackground(null);
+        pR.setBackground(null);
+        this.add(pL, BorderLayout.WEST);
+        this.add(pR, BorderLayout.EAST);
+        //this.setPreferredSize(new Dimension(1200, 379));
         this.setBorder(BorderFactory.createEmptyBorder(5, 50, 5, 50));
         this.setBackground(null);
     }
