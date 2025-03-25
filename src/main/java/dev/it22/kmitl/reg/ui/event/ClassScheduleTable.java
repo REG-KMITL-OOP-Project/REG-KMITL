@@ -136,7 +136,7 @@ public class ClassScheduleTable extends JPanel{
         this.add(pL, BorderLayout.WEST);
         this.add(pR, BorderLayout.EAST);
         //this.setPreferredSize(new Dimension(1200, 379));
-        this.setBorder(BorderFactory.createEmptyBorder(5, 25, 5, 25));
+        this.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 20));
         this.setBackground(null);
     }
 

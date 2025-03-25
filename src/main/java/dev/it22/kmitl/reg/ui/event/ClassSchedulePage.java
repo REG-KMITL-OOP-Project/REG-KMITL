@@ -12,8 +12,8 @@ public class ClassSchedulePage{
     //user-data
     //private Account user;
 
-    //head-menubar
-    private headerMenu header;
+    //header
+    private JPanel headerPanel;
 
     //body-information
     private JPanel allInfo, testFormat, allchosen, choseYear,choseSem,choseExam, stdInfo;
@@ -85,7 +85,6 @@ public class ClassSchedulePage{
         choseYear.add(year);
 
         //panel-semester
-        choseSem.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         choseSem.setLayout(new GridLayout(1, 1));
         choseSem.add(semester);
 
@@ -115,29 +114,30 @@ public class ClassSchedulePage{
 
         stdInfo.setBackground(Config.bgColor_base.darker());
         stdInfo.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
-        allInfo.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
+        allInfo.setBorder(BorderFactory.createEmptyBorder(10, 30, 20, 30));
         allInfo.add(allchosen, BorderLayout.WEST);
         allInfo.add(stdInfo, BorderLayout.CENTER);
 
 
         pn1.setLayout(new BorderLayout());
-        pn1.add(allInfo, BorderLayout.SOUTH);
-        pn1.setBorder(BorderFactory.createEmptyBorder(5, 5, 15, 5));
+        pn1.add(allInfo, BorderLayout.NORTH);
+
 
         //table
           table = new ClassScheduleTable();
-
+          pn1.add(table, BorderLayout.CENTER);
 
         frame.setLayout(new BorderLayout());
-        frame.setJMenuBar(new headerMenu("ตารางเรียน", frame, table));
-        frame.add(pn1, BorderLayout.NORTH);
+        headerPanel = new newHeader("ตารางเรียน", frame, table);
+        frame.add(headerPanel, BorderLayout.NORTH);
+
 //        JPanel pL = new JPanel();
 //        JPanel pR = new JPanel();
 //        pL.setBackground(null);
 //        pR.setBackground(null);
 //        frame.add(pL, BorderLayout.WEST);
 //        frame.add(pR, BorderLayout.EAST);
-        frame.add(table, BorderLayout.CENTER);
+        frame.add(pn1, BorderLayout.CENTER);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
