@@ -11,7 +11,6 @@ public class sampleHeaderMenu{
     private JFrame frame;
     private StudentInfo studentInfo;
     private headerMenu header;
-    private CalenderHeaderMenu headerCalender;
 
     private calendarTable table;
 
@@ -24,7 +23,7 @@ public class sampleHeaderMenu{
 
         //header.getHome().addActionListener(new returnHomePageHandler());
 
-        frame.setJMenuBar(new CalenderHeaderMenu());
+
         //frame.add(studentInfo);
         table = new calendarTable("January");
         frame.setLayout(new BorderLayout());

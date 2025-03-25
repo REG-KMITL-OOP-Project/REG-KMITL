@@ -46,7 +46,8 @@ public class calendarTable extends JPanel {
         for (int i = 0; i < table_column.getColumnCount(); i++) {
             table_column.getColumnModel().getColumn(i).setCellRenderer(Renderer2);
         }
-
+        table_column.setShowVerticalLines(true);
+        table_column.setShowHorizontalLines(true);
         table_column.setBackground(Config.bgColor_hard);
         column = new JPanel(new BorderLayout());
         column.add(table_column);
@@ -94,7 +95,7 @@ public class calendarTable extends JPanel {
         com = new JPanel();
         com.setLayout(new BorderLayout());
         com.setBackground(null);
-        com.setPreferredSize(new Dimension(800, table_column.getPreferredSize().height + 10));
+        com.setPreferredSize(new Dimension(900, table_column.getPreferredSize().height + 10));
         com.setBorder(BorderFactory.createEmptyBorder(5, 50, 5, 50));
         com.add(row, BorderLayout.WEST);
         com.add(column);

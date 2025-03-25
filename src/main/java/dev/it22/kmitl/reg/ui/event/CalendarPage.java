@@ -4,15 +4,23 @@ import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class CalendarPage {
     private JFrame frame;
-    private JPanel panel, pn1;
+    private JPanel r_panel, pn1;
     private JScrollPane scrollPane;
     private newHeader header;
     private calendarTable jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
+    private eventCategory category;
     public CalendarPage(JFrame frame) {
+        try{
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
         this.frame = frame;
 
         jan = new calendarTable("มกราคม");
@@ -28,42 +36,38 @@ public class CalendarPage {
         nov = new calendarTable("พฤศจิกายน");
         dec = new calendarTable("ธันวาคม");
 
-        panel = new JPanel();
-        panel.setBackground(null);
-        panel.setBorder(null);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(jan);
-        panel.add(feb);
-        panel.add(mar);
-        panel.add(apr);
-        panel.add(may);
-        panel.add(jun);
-        panel.add(jul);
-        panel.add(aug);
-        panel.add(sep);
-        panel.add(oct);
-        panel.add(nov);
-        panel.add(dec);
+        r_panel = new JPanel();
+        r_panel.setBackground(null);
+        r_panel.setBorder(null);
+        r_panel.setLayout(new BoxLayout(r_panel, BoxLayout.Y_AXIS));
+        r_panel.add(jan);
+        r_panel.add(feb);
+        r_panel.add(mar);
+        r_panel.add(apr);
+        r_panel.add(may);
+        r_panel.add(jun);
+        r_panel.add(jul);
+        r_panel.add(aug);
+        r_panel.add(sep);
+        r_panel.add(oct);
+        r_panel.add(nov);
+        r_panel.add(dec);
 
-
-        try{
-            UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        scrollPane = new JScrollPane(panel);
+        scrollPane = new JScrollPane(r_panel);
         scrollPane.setBackground(null);
         scrollPane.getVerticalScrollBar().setBackground(null);
         scrollPane.getViewport().setBackground(null);
         scrollPane.getViewport().setBorder(null);
         scrollPane.getViewport().getView().setBackground(null);
-        scrollPane.setBorder(null);
+        scrollPane.setBorder(new EmptyBorder(10,0,0,0));
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(12);
 
         header = new newHeader("ปฏิทินการศึกษา", frame);
-
+        category = new eventCategory();
+        category.setBorder(new EmptyBorder(10,0,0,0));
         frame.add(header, BorderLayout.NORTH);
+        frame.add(category, BorderLayout.CENTER);
         frame.add(scrollPane, BorderLayout.EAST);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
