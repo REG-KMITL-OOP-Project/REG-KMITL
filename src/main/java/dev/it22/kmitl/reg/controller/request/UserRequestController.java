@@ -43,7 +43,7 @@ public class UserRequestController {
         return data;
     }
 
-    public boolean qpproveRequest(int id, String email, String fieldName, String newValue) {
+    public boolean approveRequest(int id, String email, String fieldName, String newValue) {
         Database db = new Database();
         try {
             int res = db.postQuery("UPDATE user_request SET status = 'approved' WHERE id = " + id + ";");

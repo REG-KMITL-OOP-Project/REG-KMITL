@@ -3,24 +3,23 @@ package dev.it22.kmitl.reg.ui.request;
 import dev.it22.kmitl.reg.controller.request.UserRequestController;
 import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.utils.Config;
-import dev.it22.kmitl.reg.utils.Database;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.ResultSet;
 import java.util.Vector;
 
 public class UserRequestView {
     JFrame frame;
-    JPanel upperPanel, lowerPanel;
+    JPanel upperPanel, lowerPanel, buttonPanel;
     JLabel showLabel;
     RoundedButton returnBtn;
     DefaultTableModel tableModel;
     JTable table;
     JScrollPane scrollPane;
     UserRequestController ctl = new UserRequestController();
+    JButton approveButton, rejectButton;
 
     public UserRequestView(JFrame frame) {
         this.frame = frame;
@@ -34,8 +33,8 @@ public class UserRequestView {
         upperPanel.add(Config.createLogoAndTitle(Config.HEADER_SEMIBOLD[3], 50), BorderLayout.WEST);
 
         returnBtn = new RoundedButton("", 20);
-        returnBtn.setIcon(new ImageIcon(new ImageIcon("source/undo.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-        returnBtn.setPreferredSize(new Dimension(50, 50));
+        returnBtn.setIcon(new ImageIcon(new ImageIcon("source/undo.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        returnBtn.setPreferredSize(new Dimension(25, 25));
         returnBtn.addActionListener(e -> {
             frame.getContentPane().removeAll();
             frame.revalidate();
@@ -61,13 +60,42 @@ public class UserRequestView {
         table = new JTable(tableModel);
         table.setBackground(Config.bgColor_hard);
         table.setForeground(Color.WHITE);
+
         scrollPane = new JScrollPane(table);
         lowerPanel.add(scrollPane, BorderLayout.CENTER);
 
-        loadData();
+        // Button Panel
+        buttonPanel = new JPanel();
+        buttonPanel.setBackground(Config.bgColor_hard);
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
+        approveButton = new JButton("Approve");
+        approveButton.setEnabled(false);  // ปุ่มจะถูกปิดใช้งานเมื่อไม่มีแถวที่เลือก
+        approveButton.addActionListener(e -> approveRequest());
+        rejectButton = new JButton("Reject");
+        rejectButton.setEnabled(false);  // ปุ่มจะถูกปิดใช้งานเมื่อไม่มีแถวที่เลือก
+        rejectButton.addActionListener(e -> rejectRequest());
+
+        buttonPanel.add(approveButton);
+        buttonPanel.add(rejectButton);
+
+        frame.add(buttonPanel, BorderLayout.SOUTH);
         frame.add(lowerPanel, BorderLayout.CENTER);
         frame.setVisible(true);
+
+        // Set Row Selection Listener
+        table.getSelectionModel().addListSelectionListener(e -> {
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow != -1) {
+                approveButton.setEnabled(true);
+                rejectButton.setEnabled(true);
+            } else {
+                approveButton.setEnabled(false);
+                rejectButton.setEnabled(false);
+            }
+        });
+
+        loadData();
     }
 
     private void loadData() {
@@ -75,6 +103,27 @@ public class UserRequestView {
         Vector<Vector<String>> data = ctl.getPendingRequests();
         for (Vector<String> row : data) {
             tableModel.addRow(row);
+        }
+    }
+
+    private void approveRequest() {
+        int row = table.getSelectedRow();
+        if (row != -1) {
+            int requestId = Integer.parseInt(table.getValueAt(row, 0).toString());  // Get Request ID
+            String email = table.getValueAt(row, 1).toString();
+            String fieldName = table.getValueAt(row, 2).toString();
+            String newValue = table.getValueAt(row, 4).toString();
+            ctl.approveRequest(requestId, email, fieldName, newValue);
+            loadData();
+        }
+    }
+
+    private void rejectRequest() {
+        int row = table.getSelectedRow();
+        if (row != -1) {
+            int requestId = Integer.parseInt(table.getValueAt(row, 0).toString());  // Get Request ID
+            ctl.rejectRequest(requestId);
+            loadData();
         }
     }
 
