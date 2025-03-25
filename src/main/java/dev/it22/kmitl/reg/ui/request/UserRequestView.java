@@ -1,5 +1,6 @@
 package dev.it22.kmitl.reg.ui.request;
 
+import dev.it22.kmitl.reg.controller.request.UserRequestController;
 import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.Database;
@@ -19,6 +20,7 @@ public class UserRequestView {
     DefaultTableModel tableModel;
     JTable table;
     JScrollPane scrollPane;
+    UserRequestController ctl = new UserRequestController();
 
     public UserRequestView(JFrame frame) {
         this.frame = frame;
@@ -69,26 +71,10 @@ public class UserRequestView {
     }
 
     private void loadData() {
-        Database db = new Database();
-        try {
-            ResultSet rs = db.getQuery("SELECT id, email, field_name, old_value, new_value, status, created_at FROM user_request WHERE status = 'pending'");
-            tableModel.setRowCount(0);
-
-            while (rs.next()) {
-                Vector<String> row = new Vector<>();
-                row.add(String.valueOf(rs.getInt("id")));
-                row.add(rs.getString("email"));
-                row.add(rs.getString("field_name"));
-                row.add(rs.getString("old_value"));
-                row.add(rs.getString("new_value"));
-                row.add(rs.getString("status"));
-                row.add(rs.getTimestamp("created_at").toString());
-                tableModel.addRow(row);
-            }
-
-            rs.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        tableModel.setRowCount(0);
+        Vector<Vector<String>> data = ctl.getPendingRequests();
+        for (Vector<String> row : data) {
+            tableModel.addRow(row);
         }
     }
 

@@ -1,11 +1,10 @@
 package dev.it22.kmitl.reg.controller.request;
 
-import dev.it22.kmitl.reg.model.request.UserRequestModel;
 import dev.it22.kmitl.reg.utils.Database;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class UserRequestController {
     public boolean createRequest() {
@@ -20,27 +19,28 @@ public class UserRequestController {
         return true;
     }
 
-    public List<UserRequestModel> getPendingRequest() {
+    public Vector<Vector<String>> getPendingRequests() {
+        Vector<Vector<String>> data = new Vector<>();
         Database db = new Database();
-        List<UserRequestModel> requests = new ArrayList<>();
         try {
-            while (db.getQuery("SELECT * FROM user_request WHERE status = 'pending';").next()) {
-                requests.add(new UserRequestModel(
-                        db.getQuery("SELECT * FROM user_request WHERE status = 'pending';").getInt("id"),
-                        db.getQuery("SELECT * FROM user_request WHERE status = 'pending';").getString("email"),
-                        db.getQuery("SELECT * FROM user_request WHERE status = 'pending';").getString("field_name"),
-                        db.getQuery("SELECT * FROM user_request WHERE status = 'pending';").getString("old_value"),
-                        db.getQuery("SELECT * FROM user_request WHERE status = 'pending';").getString("new_value"),
-                        db.getQuery("SELECT * FROM user_request WHERE status = 'pending';").getString("status"),
-                        db.getQuery("SELECT * FROM user_request WHERE status = 'pending';").getTimestamp("created_at"),
-                        db.getQuery("SELECT * FROM user_request WHERE status = 'pending';").getTimestamp("updated_at")
-                ));
+            ResultSet rs = db.getQuery("SELECT id, email, field_name, old_value, new_value, status, created_at FROM user_request WHERE status = 'pending'");
+            while (rs.next()) {
+                Vector<String> row = new Vector<>();
+                row.add(String.valueOf(rs.getInt("id")));
+                row.add(rs.getString("email"));
+                row.add(rs.getString("field_name"));
+                row.add(rs.getString("old_value"));
+                row.add(rs.getString("new_value"));
+                row.add(rs.getString("status"));
+                row.add(rs.getTimestamp("created_at").toString());
+                data.add(row);
             }
-        } catch (SQLException e) {
+            rs.close();
+        } catch (
+                SQLException e) {
             e.printStackTrace();
-            return null;
         }
-        return requests;
+        return data;
     }
 
     public boolean qpproveRequest(int id, String email, String fieldName, String newValue) {
@@ -69,3 +69,5 @@ public class UserRequestController {
         return true;
     }
 }
+
+
