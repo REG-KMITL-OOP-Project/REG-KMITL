@@ -1,5 +1,6 @@
 package dev.it22.kmitl.reg.ui.event;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
@@ -43,6 +44,12 @@ public class CalendarPage {
         panel.add(nov);
         panel.add(dec);
 
+
+        try{
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         scrollPane = new JScrollPane(panel);
         scrollPane.setBackground(null);
         scrollPane.getVerticalScrollBar().setBackground(null);
@@ -51,6 +58,8 @@ public class CalendarPage {
         scrollPane.getViewport().getView().setBackground(null);
         scrollPane.setBorder(null);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(12);
+
 
         frame.add(scrollPane, BorderLayout.EAST);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
