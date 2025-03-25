@@ -4,6 +4,7 @@ import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.metal.MetalCheckBoxIcon;
 import java.awt.*;
 
 public class eventCategory extends JPanel{
@@ -28,6 +29,13 @@ public class eventCategory extends JPanel{
         bill.setForeground(Color.WHITE);
         eval.setForeground(Color.WHITE);
         other.setForeground(Color.WHITE);
+
+        semester.setIcon(new changeColorCheckbox(Color.RED));
+        exam.setIcon(new changeColorCheckbox(Config.primaryColor_hard));
+        bill.setIcon(new changeColorCheckbox(Color.GREEN));
+        eval.setIcon(new changeColorCheckbox(Color.BLUE));
+        other.setIcon(new changeColorCheckbox(Color.magenta));
+
 
         sem = new JPanel();
         ex = new JPanel();
