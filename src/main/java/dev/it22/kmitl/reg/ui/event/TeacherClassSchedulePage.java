@@ -132,7 +132,6 @@ public class TeacherClassSchedulePage{
         frame.add(pn1, BorderLayout.NORTH);
 
         frame.add(table, BorderLayout.CENTER);
-
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }

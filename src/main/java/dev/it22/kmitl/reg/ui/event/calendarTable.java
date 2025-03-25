@@ -36,8 +36,9 @@ public class calendarTable extends JPanel {
         table_column.setRowHeight(48);
         table_column.setPreferredSize(new Dimension(event_column.length * 200,48 * events.length));
         table_column.setBorder(BorderFactory.createLineBorder(Config.bgColor_hard));
-        table_column.setGridColor(Config.bgColor_hard);
+        table_column.setGridColor(Config.bgColor_harder);
 
+        table_column.setFont(Config.NORMAL_REGULAR);
         table_column.setForeground(Color.WHITE);
 
         DefaultTableCellRenderer Renderer2 = new DefaultTableCellRenderer();
@@ -46,11 +47,12 @@ public class calendarTable extends JPanel {
             table_column.getColumnModel().getColumn(i).setCellRenderer(Renderer2);
         }
 
-        table_column.setBackground(null);
+        table_column.setBackground(Config.bgColor_hard);
         column = new JPanel(new BorderLayout());
         column.add(table_column);
         column.setBorder(BorderFactory.createEmptyBorder(0,-1,0,0));
-        column.setBackground(null);
+        column.setBackground(Config.bgColor_hard);
+        column.setBorder(BorderFactory.createLineBorder(Config.bgColor_harder));
 
 
         //rowOfMonth_ClassTable
@@ -62,6 +64,8 @@ public class calendarTable extends JPanel {
         table_Month.setGridColor(Config.bgColor_hard);
         table_Month.setEnabled(false);
         table_Month.setBorder(BorderFactory.createEmptyBorder(5,-5,-10,-3));
+        table_Month.setFont(Config.HEADER_SEMIBOLD[2]);
+
 
         DefaultTableCellRenderer Renderer = new DefaultTableCellRenderer();
         Renderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -74,12 +78,10 @@ public class calendarTable extends JPanel {
         pn1.setPreferredSize(new Dimension(150, table_column.getPreferredSize().height));
         //pn1.setPreferredSize(new Dimension(100, 384));
 
-        //ปิดเส้นแกน x ระหว่างตาราง
-        table_Month.setShowHorizontalLines(false);
-
-        //table_day.setForeground(Config.primaryColor_harder);
-        //table_day.setBackground(null);
-        pn1.setBackground(null);
+        //pn1.setBorder(BorderFactory.createLineBorder(Config.bgColor_hard));
+        table_Month.setForeground(Config.primaryColor_base);
+        table_Month.setBackground(Config.bgColor_hard);
+        pn1.setBackground(Config.bgColor_hard);
 
         row = new JPanel(new BorderLayout());
         row.add(pn1, BorderLayout.WEST);
@@ -92,7 +94,7 @@ public class calendarTable extends JPanel {
         com = new JPanel();
         com.setLayout(new BorderLayout());
         com.setBackground(null);
-        com.setPreferredSize(new Dimension(1050, table_column.getPreferredSize().height + 10));
+        com.setPreferredSize(new Dimension(800, table_column.getPreferredSize().height + 10));
         com.setBorder(BorderFactory.createEmptyBorder(5, 50, 5, 50));
         com.add(row, BorderLayout.WEST);
         com.add(column);

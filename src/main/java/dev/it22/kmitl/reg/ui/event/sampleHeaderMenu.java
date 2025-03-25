@@ -24,12 +24,12 @@ public class sampleHeaderMenu{
 
         //header.getHome().addActionListener(new returnHomePageHandler());
 
-        //frame.setJMenuBar(new CalenderHeaderMenu());
+        frame.setJMenuBar(new CalenderHeaderMenu());
         //frame.add(studentInfo);
         table = new calendarTable("January");
         frame.setLayout(new BorderLayout());
         frame.add(table, BorderLayout.CENTER);
-        frame.setJMenuBar(new headerMenu("Schedule", frame, table));
+        //frame.setJMenuBar(new headerMenu("Schedule", frame, table));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
