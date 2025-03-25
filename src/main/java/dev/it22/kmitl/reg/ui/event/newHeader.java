@@ -69,6 +69,44 @@ public class newHeader extends JPanel {
         saveJPG.addActionListener(new saveJPGHandler(table, frame));
     }
 
+    public newHeader(String title, JFrame frame) {
+
+        // Home Button
+        ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home_re.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        home = new JButton(homeIcon);
+        home.setBorderPainted(false);
+        home.setContentAreaFilled(false);
+        home.setFocusPainted(false);
+        home.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+
+
+        // Outer Label
+        text = new JLabel(title);
+        text.setForeground(Config.primaryColor_base);
+        text.setFont(Config.HEADER_SEMIBOLD[1]);
+
+        left = new JPanel();
+        left.setBackground(null);
+        left.setLayout(new FlowLayout(FlowLayout.LEFT,10,0));
+        left.add(home);
+        left.add(text);
+
+
+        allPanel = new JPanel();
+        allPanel.setBackground(null);
+        allPanel.setLayout(new BorderLayout());
+        allPanel.add(left,BorderLayout.WEST);
+
+        this.setLayout(new BorderLayout());
+        this.setBackground(Config.bgColor_base);
+        this.setBorder(BorderFactory.createEmptyBorder(15, 25, 0, 25));
+        this.add(allPanel,BorderLayout.NORTH);
+
+
+        // Set event handlers
+        home.addActionListener(new HomeButtonHandler(frame));
+    }
+
     public JButton getHome() {
         return home;
     }

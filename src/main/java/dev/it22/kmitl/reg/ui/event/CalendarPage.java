@@ -10,6 +10,7 @@ public class CalendarPage {
     private JFrame frame;
     private JPanel panel, pn1;
     private JScrollPane scrollPane;
+    private newHeader header;
     private calendarTable jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
     public CalendarPage(JFrame frame) {
         this.frame = frame;
@@ -60,7 +61,9 @@ public class CalendarPage {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(12);
 
+        header = new newHeader("ปฏิทินการศึกษา", frame);
 
+        frame.add(header, BorderLayout.NORTH);
         frame.add(scrollPane, BorderLayout.EAST);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
