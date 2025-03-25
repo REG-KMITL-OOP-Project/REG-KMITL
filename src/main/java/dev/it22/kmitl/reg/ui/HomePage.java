@@ -7,6 +7,7 @@ import dev.it22.kmitl.reg.ui.event.AdminCalendarPage;
 import dev.it22.kmitl.reg.ui.event.ExamSchedulePage;
 import dev.it22.kmitl.reg.ui.profile.LoginFrame;
 import dev.it22.kmitl.reg.ui.profile.RegisterFrame;
+import dev.it22.kmitl.reg.ui.request.UserRequestView;
 import dev.it22.kmitl.reg.ui.transcript.TranscriptController;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
@@ -252,7 +253,8 @@ public class HomePage implements ActionListener {
             }
         } else if(acc instanceof Admin) { //"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
-                new RegisterFrame(frame);
+//                new RegisterFrame(frame);
+                new UserRequestView(frame);
             } else if (e.getSource().equals(button[1])) {
                 System.out.println("Admin2");
             } else if (e.getSource().equals(button[2])) {
@@ -284,9 +286,9 @@ public class HomePage implements ActionListener {
         JFrame config = Config.createAndShowGUI();
 
         try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
 //            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
-//            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
+            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         }
         catch (Exception e) {
