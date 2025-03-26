@@ -6,8 +6,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class calendarTable extends JPanel {
+public class calendarTable extends JPanel implements MouseListener {
     //rowOFDay_ClassTable
     private JPanel row;
     private JTable table_Month;
@@ -27,7 +29,15 @@ public class calendarTable extends JPanel {
     //combine
     private JPanel com;
 
-    public calendarTable(String month){
+    private JFrame frame;
+
+    public calendarTable(String month) {
+        this(month, null);
+    }
+
+    public calendarTable(String month, JFrame frame) {
+        this.frame = frame;
+
 
         //column_ClassTable
         DefaultTableModel model = new DefaultTableModel(events, event_column);
@@ -102,5 +112,38 @@ public class calendarTable extends JPanel {
         this.setLayout(new FlowLayout());
         this.add(com);
         this.setBackground(null);
+
+        table_column.addMouseListener(this);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        try {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new EditEventPage(frame);
+        }catch (NullPointerException ex){}
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        //System.out.println("Mouse Entered");
+        //table_column.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }

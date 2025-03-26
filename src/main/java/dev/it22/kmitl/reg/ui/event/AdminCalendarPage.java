@@ -6,10 +6,7 @@ import dev.it22.kmitl.reg.utils.Config;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
 
 public class AdminCalendarPage implements ActionListener {
     private JFrame frame;
@@ -44,18 +41,19 @@ public class AdminCalendarPage implements ActionListener {
         create_panel.setBackground(null);
         create_panel.setBorder(null);
 
-        jan = new calendarTable("มกราคม");
-        feb = new calendarTable("กุมภาพันธ์");
-        mar = new calendarTable("มีนาคม");
-        apr = new calendarTable("เมษายน");
-        may = new calendarTable("พฤษภาคม");
-        jun = new calendarTable("มิถุนายน");
-        jul = new calendarTable("กรกฎาคม");
-        aug = new calendarTable("สิงหาคม");
-        sep = new calendarTable("กันยายน");
-        oct = new calendarTable("ตุลาคม");
-        nov = new calendarTable("พฤศจิกายน");
-        dec = new calendarTable("ธันวาคม");
+        jan = new calendarTable("มกราคม", frame);
+        feb = new calendarTable("กุมภาพันธ์", frame);
+        mar = new calendarTable("มีนาคม", frame);
+        apr = new calendarTable("เมษายน", frame);
+        may = new calendarTable("พฤษภาคม", frame);
+        jun = new calendarTable("มิถุนายน", frame);
+        jul = new calendarTable("กรกฎาคม", frame);
+        aug = new calendarTable("สิงหาคม", frame);
+        sep = new calendarTable("กันยายน", frame);
+        oct = new calendarTable("ตุลาคม", frame);
+        nov = new calendarTable("พฤศจิกายน", frame);
+        dec = new calendarTable("ธันวาคม", frame);
+
 
         r_panel = new JPanel();
         r_panel.setBackground(null);
@@ -112,11 +110,6 @@ public class AdminCalendarPage implements ActionListener {
             frame.repaint();
             new AdminAddEvent(frame);
         }
-//        } else if (ev.getSource() == create) {
-//            frame.getContentPane().removeAll();
-//            frame.revalidate();
-//            frame.repaint();
-//            new EditEventPage(frame);
-//        }
     }
+
 }
