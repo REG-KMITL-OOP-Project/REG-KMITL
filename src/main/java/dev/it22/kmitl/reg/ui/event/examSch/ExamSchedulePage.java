@@ -1,20 +1,21 @@
 package dev.it22.kmitl.reg.ui.event.examSch;
+
+import com.formdev.flatlaf.FlatLightLaf;
+import dev.it22.kmitl.reg.controller.auth.User;
+import dev.it22.kmitl.reg.model.auth.*;
+import dev.it22.kmitl.reg.ui.event.classSch.ClassScheduleTable;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
 import dev.it22.kmitl.reg.utils.Config;
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
+
 
 public class ExamSchedulePage{
     private JFrame frame;
-           //Attribute ที่สร้างในคลาส
-    private JPanel pn1 , pn2;
+    private JPanel pn1 ;
 
     //user-data
-    //private Account user;
+//    private Account user;
 
     //header
     private JPanel headerPanel;
@@ -24,30 +25,22 @@ public class ExamSchedulePage{
     private JLabel ID, name, faculty, branch;
     private JComboBox year, semester, exam ;
 
-    //body-schedule
-    private JTable examSchedule;
-    private JScrollPane scrollPane;
+    // table
+    private ExamScheduleTable table;
 
     private String years[] = {"2568", "2567", "2566"};
     private String semesters[] = {"เทอม 1", "เทอม 2"};
     private String exams[] = {"กลางภาค","ปลายภาค"};
-    private String columnNames[] = {"วัน/เดือน/ปี","เวลา", "รหัสวิชา","วิชา","ประเภท","ห้องสอบ"};
-    private Object testData[][] = {{"DD/MM/YY","09.30-18.00","060111222","OOP","ทฤษฎี","L123"},
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","ปฏิบัติ","L123"},
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","L123"},
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","L123"}};
 
 
     public ExamSchedulePage(JFrame frame){
         this.frame = frame;
         pn1 = new JPanel();
-        pn2 = new JPanel();
-
         pn1.setBackground(null);
-        pn2.setBackground(null);
+
 
         //data
-        //user = new User().getUserAccount();
+//        user = new User().getUserAccount();
 
         //body-information
         allInfo = new JPanel();
@@ -72,10 +65,10 @@ public class ExamSchedulePage{
         faculty = new JLabel("คณะ : ");
         branch = new JLabel("สาขา : ");
 
-        //ID = new JLabel("รหัสนักศึกษา : "+ ((Student) user).getStudentId());
-        //name = new JLabel("ชื่อ : "+ ((Student) user).getFullName());
-        //faculty = new JLabel("คณะ : "+ ((Student) user).getFaculty());
-        //branch = new JLabel("สาขา : "+ ((Student) user).getMajor());
+//        ID = new JLabel("รหัสนักศึกษา : "+ ((Student) user).getStudentId());
+//        name = new JLabel("ชื่อ : "+ ((Student) user).getFullName());
+//        faculty = new JLabel("คณะ : "+ ((Student) user).getFaculty());
+//        branch = new JLabel("สาขา : "+ ((Student) user).getMajor());
 
         ID.setForeground(Color.WHITE);
         name.setForeground(Color.WHITE);
@@ -94,52 +87,7 @@ public class ExamSchedulePage{
         exam.setFont(Config.NORMAL_REGULAR);
 
 
-        //place components
         //body-schedule
-        //All about JTable
-        DefaultTableModel model = new DefaultTableModel(testData, columnNames);
-        examSchedule = new JTable(model);
-        JTableHeader header = examSchedule.getTableHeader();
-        header.setPreferredSize(new Dimension(30,30));
-        header.setBackground(Config.primaryColor_hard);
-        header.setForeground(Color.WHITE);
-        header.setFont(Config.HEADER_SEMIBOLD[3]);
-        examSchedule.setRowHeight(30);
-
-        //ปิดไม่ให้แก้ขนาด & เลื่อนตารางไปมา
-        header.setReorderingAllowed(false);
-        header.setResizingAllowed(false);
-
-        //จัดข้อความให้อยู่ตรงกลาง
-        DefaultTableCellRenderer Renderer = new DefaultTableCellRenderer();
-        Renderer.setHorizontalAlignment(SwingConstants.CENTER);
-        for (int i = 0; i < examSchedule.getColumnCount(); i++) {
-            examSchedule.getColumnModel().getColumn(i).setCellRenderer(Renderer);
-        }
-
-        //เปลี่ยนขนาดช่อง
-        TableColumn day = examSchedule.getColumnModel().getColumn(0);
-        day.setPreferredWidth(100);
-
-        TableColumn time = examSchedule.getColumnModel().getColumn(1);
-        time.setPreferredWidth(100);
-
-        TableColumn id = examSchedule.getColumnModel().getColumn(2);
-        id.setPreferredWidth(100);
-
-        TableColumn subject = examSchedule.getColumnModel().getColumn(3);
-        subject.setPreferredWidth(200);
-
-        TableColumn examType = examSchedule.getColumnModel().getColumn(4);
-        examType.setPreferredWidth(50);
-
-        TableColumn room = examSchedule.getColumnModel().getColumn(5);
-        room.setPreferredWidth(50);
-
-        scrollPane = new JScrollPane(examSchedule);
-        scrollPane.setBackground(null);
-        scrollPane.getViewport().setBackground(null);
-
         //panel-year button
         choseYear.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         choseYear.setLayout(new GridLayout(1, 1));
@@ -181,25 +129,21 @@ public class ExamSchedulePage{
 
         stdInfo.setBackground(Config.bgColor_base.darker());
         stdInfo.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
-        allInfo.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
+        allInfo.setBorder(BorderFactory.createEmptyBorder(10, 30, 20, 30));
         allInfo.add(allchosen, BorderLayout.WEST);
         allInfo.add(stdInfo, BorderLayout.CENTER);
 
-
         pn1.setLayout(new BorderLayout());
         pn1.add(allInfo, BorderLayout.NORTH);
-
-
-        scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 30, 30, 30));
-        pn1.add(scrollPane, BorderLayout.CENTER);
+        
+        //table
+        table = new ExamScheduleTable();
+        pn1.add(table, BorderLayout.CENTER);
 
         frame.setLayout(new BorderLayout());
-        headerPanel = new newHeader("ตารางเรียน", frame, pn2);
+        headerPanel = new newHeader("ตารางสอบ", frame, table);
         frame.add(headerPanel, BorderLayout.NORTH);
-
-
-        frame.add(pn1,BorderLayout.CENTER);
-
+        frame.add(pn1, BorderLayout.CENTER);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
