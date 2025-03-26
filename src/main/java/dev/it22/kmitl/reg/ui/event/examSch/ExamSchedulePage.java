@@ -1,8 +1,5 @@
-package dev.it22.kmitl.reg.ui.event;
-import dev.it22.kmitl.reg.controller.auth.Login;
-import dev.it22.kmitl.reg.controller.auth.User;
-import dev.it22.kmitl.reg.model.auth.Account;
-import dev.it22.kmitl.reg.model.auth.Student;
+package dev.it22.kmitl.reg.ui.event.examSch;
+import dev.it22.kmitl.reg.ui.event.component.newHeader;
 import dev.it22.kmitl.reg.utils.Config;
 import java.awt.*;
 import javax.swing.*;
@@ -19,8 +16,8 @@ public class ExamSchedulePage{
     //user-data
     //private Account user;
 
-    //head-menubar
-    private headerMenu header;
+    //header
+    private JPanel headerPanel;
 
     //body-information
     private JPanel allInfo, testFormat, allchosen, choseYear,choseSem,choseExam, stdInfo;
@@ -190,16 +187,18 @@ public class ExamSchedulePage{
 
 
         pn1.setLayout(new BorderLayout());
-        pn1.add(allInfo, BorderLayout.SOUTH);
+        pn1.add(allInfo, BorderLayout.NORTH);
 
-        pn2.setLayout(new BorderLayout());
+
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 30, 30, 30));
-        pn2.add(scrollPane, BorderLayout.CENTER);
+        pn1.add(scrollPane, BorderLayout.CENTER);
 
         frame.setLayout(new BorderLayout());
-        frame.setJMenuBar(new headerMenu("Exam Schedule", frame, pn2));
-        frame.add(pn1, BorderLayout.NORTH);
-        frame.add(pn2,BorderLayout.CENTER);
+        headerPanel = new newHeader("ตารางเรียน", frame, pn2);
+        frame.add(headerPanel, BorderLayout.NORTH);
+
+
+        frame.add(pn1,BorderLayout.CENTER);
 
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

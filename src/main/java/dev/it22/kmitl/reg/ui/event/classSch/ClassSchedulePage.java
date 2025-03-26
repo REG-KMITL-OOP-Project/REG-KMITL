@@ -1,5 +1,6 @@
-package dev.it22.kmitl.reg.ui.event;
+package dev.it22.kmitl.reg.ui.event.classSch;
 
+import dev.it22.kmitl.reg.ui.event.component.newHeader;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;

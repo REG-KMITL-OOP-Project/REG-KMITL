@@ -1,12 +1,11 @@
 
-package dev.it22.kmitl.reg.ui.event;
+package dev.it22.kmitl.reg.ui.event.admin;
+import dev.it22.kmitl.reg.ui.event.calendar.EventPage;
 import dev.it22.kmitl.reg.utils.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import javax.swing.*;
 
 public class EditEventPage extends EventPage implements ActionListener {
@@ -134,7 +133,7 @@ public class EditEventPage extends EventPage implements ActionListener {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            new AdminCalendarPage (frame);
+            new AdminCalendarPage(frame);
         }
     else if (ev.getSource().equals(save)) {
             frame.getContentPane().removeAll();

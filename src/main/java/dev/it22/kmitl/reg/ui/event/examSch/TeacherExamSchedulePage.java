@@ -1,5 +1,6 @@
-package dev.it22.kmitl.reg.ui.event;
+package dev.it22.kmitl.reg.ui.event.examSch;
 
+import dev.it22.kmitl.reg.ui.event.component.headerMenu;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;

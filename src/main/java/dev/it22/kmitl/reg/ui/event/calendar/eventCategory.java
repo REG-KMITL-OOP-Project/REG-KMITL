@@ -1,10 +1,10 @@
-package dev.it22.kmitl.reg.ui.event;
+package dev.it22.kmitl.reg.ui.event.calendar;
 
+import dev.it22.kmitl.reg.ui.event.component.changeColorCheckbox;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.metal.MetalCheckBoxIcon;
 import java.awt.*;
 
 public class eventCategory extends JPanel{

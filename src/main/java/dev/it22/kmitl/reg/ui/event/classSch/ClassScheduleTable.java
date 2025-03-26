@@ -1,4 +1,4 @@
-package dev.it22.kmitl.reg.ui.event;
+package dev.it22.kmitl.reg.ui.event.classSch;
 
 import dev.it22.kmitl.reg.utils.Config;
 
@@ -6,7 +6,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 
 public class ClassScheduleTable extends JPanel{

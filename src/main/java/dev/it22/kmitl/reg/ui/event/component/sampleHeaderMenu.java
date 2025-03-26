@@ -1,5 +1,6 @@
-package dev.it22.kmitl.reg.ui.event;
+package dev.it22.kmitl.reg.ui.event.component;
 
+import dev.it22.kmitl.reg.ui.event.calendar.calendarTable;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
