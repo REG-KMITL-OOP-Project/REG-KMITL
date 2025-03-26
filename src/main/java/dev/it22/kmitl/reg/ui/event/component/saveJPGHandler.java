@@ -24,7 +24,6 @@ public class saveJPGHandler implements ActionListener , MouseListener {
         success.setResizable(false);
         success.getContentPane().setBackground(Config.primaryColor_hard);
         success.setSize(270, 40);
-        success.setLocation(frame.getX() + 500,frame.getY() + 600);
         success.setResizable(false);
         success.addMouseListener(this);
     }
@@ -72,7 +71,7 @@ public class saveJPGHandler implements ActionListener , MouseListener {
                 });
                 timer.setRepeats(false);
                 timer.start();
-
+                success.setLocation(frame.getX() + 500,frame.getY() + 600);
                 success.setVisible(true);
             }
             else{
@@ -93,7 +92,7 @@ public class saveJPGHandler implements ActionListener , MouseListener {
                 });
                 timer.setRepeats(false);
                 timer.start();
-
+                success.setLocation(frame.getX() + 500,frame.getY() + 600);
                 success.setVisible(true);
             }
 
@@ -115,7 +114,7 @@ public class saveJPGHandler implements ActionListener , MouseListener {
             });
             timer.setRepeats(false);
             timer.start();
-
+            success.setLocation(frame.getX() + 500,frame.getY() + 600);
             success.setVisible(true);
 
         }
