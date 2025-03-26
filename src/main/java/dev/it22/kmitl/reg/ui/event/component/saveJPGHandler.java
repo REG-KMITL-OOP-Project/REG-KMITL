@@ -72,6 +72,7 @@ public class saveJPGHandler implements ActionListener , MouseListener {
                 });
                 timer.setRepeats(false);
                 timer.start();
+                success.setLocationRelativeTo(frame);
                 success.setLocation(frame.getX() + 500,frame.getY() + 600);
                 success.setVisible(true);
             }
@@ -94,6 +95,7 @@ public class saveJPGHandler implements ActionListener , MouseListener {
                 });
                 timer.setRepeats(false);
                 timer.start();
+                success.setLocationRelativeTo(frame);
                 success.setLocation(frame.getX() + 500,frame.getY() + 600);
                 success.setVisible(true);
             }
@@ -117,6 +119,7 @@ public class saveJPGHandler implements ActionListener , MouseListener {
             });
             timer.setRepeats(false);
             timer.start();
+            success.setLocationRelativeTo(frame);
             success.setLocation(frame.getX() + 500,frame.getY() + 600);
             success.setVisible(true);
 
