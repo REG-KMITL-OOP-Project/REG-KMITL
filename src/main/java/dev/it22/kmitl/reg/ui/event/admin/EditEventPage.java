@@ -117,12 +117,15 @@ public class EditEventPage extends EventPage implements ActionListener {
             frame.revalidate();
             frame.repaint();
             new AdminCalendarPage(frame);
-        }
-    else if (ev.getSource().equals(save)) {
-            frame.getContentPane().removeAll();
-            frame.revalidate();
-            frame.repaint();
-            new AdminCalendarPage (frame);
+        }else if (ev.getSource().equals(save)) {
+            if (eventName.getText().equals("   EVENT NAME") || dateStart.getText().equals("DD/MM/YY") || dateEnd.getText().equals("DD/MM/YY") || description.getText().equals(("   DESCRIPTION"))){
+                new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
+            } else {
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                new AdminCalendarPage (frame);
+            }
         }
     }
 }
