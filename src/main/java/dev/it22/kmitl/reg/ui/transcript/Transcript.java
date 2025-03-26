@@ -4,28 +4,35 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.pdf.draw.VerticalPositionMark;
+import dev.it22.kmitl.reg.controller.auth.User;
+import dev.it22.kmitl.reg.model.auth.Account;
+import dev.it22.kmitl.reg.model.auth.Student;
 
 public class Transcript {
     private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm");
 
     private static final String PDF_FILEPATH =  System.getProperty("user.home") + "/Downloads/transcript_" + dtf.format(LocalDateTime.now()) + ".pdf" ;
 
-    private String name = "Mr. Asitara  Phumdokmai",
+    private Account user = new User().getUserAccount();
+
+    private String name = user.getFullName(),
             dateOB = "July 14, 2006",
-            dateOA = "2024",
+            dateOA = (Integer.valueOf("25" +(((Student)user).getStudentId().charAt(0) +"" + ((Student)user).getStudentId().charAt(1))) - 543)+"",
             degree = "Bachelor of Science",
-            major = "Information Technology",
-            studentID = "67070199",
+            major = ((Student)user).getMajor(),
+            studentID = ((Student)user).getStudentId(),
             dateOG = "N/A";
 
     Font headerFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
-    Font tableHeaderFont = new Font(Font.FontFamily.TIMES_ROMAN, 7.5f, Font.BOLD);
+    Font tableHeaderFont = new Font(Font.FontFamily.TIMES_ROMAN, 7f, Font.BOLD);
     Font insideHeaderFont = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
     Font insideFooterFont = new Font(Font.FontFamily.TIMES_ROMAN, 7, Font.BOLD);
+    Font insideFooterRFont = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD, BaseColor.RED);
     Font insideFooterNFont = new Font(Font.FontFamily.TIMES_ROMAN, 7, Font.NORMAL);
     Font gradeHeaderFont = new Font(Font.FontFamily.TIMES_ROMAN, 7f, Font.BOLDITALIC);
     Font insideFont = new Font(Font.FontFamily.TIMES_ROMAN, 7, Font.NORMAL);
@@ -150,8 +157,36 @@ public class Transcript {
             table.addCell("");
             table.addCell("");
 
-
             document.add(table);
+
+            LocalDateTime ldt = LocalDateTime.now();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMMM dd, yyyy", Locale.ENGLISH);
+            Chunk date = new Chunk("Date ", insideFooterFont);
+            Chunk issue = new Chunk("Issued: ", insideFooterFont);
+            issue.setWordSpacing(10.5f);
+
+            Chunk nowDate = new Chunk(ldt.format(dtf), insideFooterNFont);
+            nowDate.setUnderline(0.3f,-1);
+
+            Chunk space = new Chunk(" ", insideFooterFont);
+            space.setWordSpacing(89f);
+
+            Chunk unoff = new Chunk("This document is unofficial transcript.", insideFooterFont);
+
+            Paragraph footer = new Paragraph();
+            footer.add(date);
+            footer.add(issue);
+            footer.add(nowDate);
+            footer.add(space);
+            footer.add(unoff);
+            footer.setSpacingBefore(-5f);
+            footer.setIndentationLeft(13f);
+            document.add(footer);
+
+            footer = new Paragraph("This is unofficial transcript use for OOP project presentation only!!", insideFooterRFont);
+            footer.setAlignment(Element.ALIGN_CENTER);
+            footer.setSpacingBefore(10f);
+            document.add(footer);
 
             document.close();
             System.out.println("Student ID: ");
@@ -182,13 +217,14 @@ public class Transcript {
             cell.addElement(semesterP);
             for (int j = 0; j<subject[i].length; j++) {
                 Chunk subjectNumber = new Chunk(subjectNumberList[i][j] + " ", insideFont);
-                subjectNumber.setWordSpacing(5f);
+                subjectNumber.setWordSpacing(4f);
                 Chunk subjectChunk = new Chunk(subject[i][j], insideFont);
                 Paragraph subjectP = new Paragraph();
                 subjectP.add(subjectNumber);
                 subjectP.add(subjectChunk);
                 subjectP.setSpacingBefore(-5f);
                 subjectP.setSpacingAfter(-0.25f);
+                subjectP.setIndentationLeft(1f);
                 cell.addElement(subjectP);
             }
             Paragraph gradeP = new Paragraph("GPS : 3.75          GPA : 3.75", gradeHeaderFont);
