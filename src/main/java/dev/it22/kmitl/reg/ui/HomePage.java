@@ -3,8 +3,8 @@ package dev.it22.kmitl.reg.ui;
 import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.*;
-import dev.it22.kmitl.reg.ui.event.AdminCalendarPage;
-import dev.it22.kmitl.reg.ui.event.ExamSchedulePage;
+import dev.it22.kmitl.reg.ui.event.admin.AdminCalendarPage;
+import dev.it22.kmitl.reg.ui.event.examSch.ExamSchedulePage;
 import dev.it22.kmitl.reg.ui.profile.LoginFrame;
 import dev.it22.kmitl.reg.ui.profile.RegisterFrame;
 import dev.it22.kmitl.reg.ui.transcript.TranscriptController;
@@ -16,7 +16,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
