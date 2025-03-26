@@ -11,6 +11,7 @@ import java.awt.*;
 
 public class ExamScheduleTable extends JPanel {
 
+    private Font innerFont, regularFont;
     private JTable examSchedule;
     private JScrollPane scrollPane;
     private String columnNames[] = {"วัน/เดือน/ปี","เวลา", "รหัสวิชา","วิชา","ประเภท","ห้องสอบ"};
@@ -24,6 +25,8 @@ public class ExamScheduleTable extends JPanel {
 
 
     public ExamScheduleTable(){
+        regularFont = Config.NORMAL_REGULAR;
+        innerFont = regularFont.deriveFont(15f);
 
         //All about JTable
         DefaultTableModel model = new DefaultTableModel(testData, columnNames);
@@ -31,15 +34,16 @@ public class ExamScheduleTable extends JPanel {
         examSchedule.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         examSchedule.setGridColor(Config.bgColor_hard);
         examSchedule.setShowGrid(true);
-        examSchedule.setRowHeight(35);
+        examSchedule.setRowHeight(40);
         examSchedule.setBorder(BorderFactory.createLineBorder(Config.bgColor_hard));
+        examSchedule.setFont(innerFont);
 
         //header
         JTableHeader header = examSchedule.getTableHeader();
         header.setBackground(Config.primaryColor_hard);
         header.setForeground(Color.WHITE);
         header.setFont(Config.HEADER_SEMIBOLD[3]);
-        header.setPreferredSize(new Dimension(500,30));
+        header.setPreferredSize(new Dimension(500,40));
         header.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, Config.bgColor_hard));
 
         //ปิดไม่ให้แก้ขนาด & เลื่อนตารางไปมา
