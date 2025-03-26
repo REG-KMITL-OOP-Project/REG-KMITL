@@ -14,11 +14,19 @@ public class Transcript {
 
     private static final String PDF_FILEPATH =  System.getProperty("user.home") + "/Downloads/transcript_" + dtf.format(LocalDateTime.now()) + ".pdf" ;
 
-    private String name, dateOB, dateOA, degree, major, studentID, dateOG;
+    private String name = "Mr. Asitara  Phumdokmai",
+            dateOB = "July 14, 2006",
+            dateOA = "2024",
+            degree = "Bachelor of Science",
+            major = "Information Technology",
+            studentID = "67070199",
+            dateOG = "N/A";
 
     Font headerFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
     Font tableHeaderFont = new Font(Font.FontFamily.TIMES_ROMAN, 7.5f, Font.BOLD);
     Font insideHeaderFont = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
+    Font insideFooterFont = new Font(Font.FontFamily.TIMES_ROMAN, 7, Font.BOLD);
+    Font insideFooterNFont = new Font(Font.FontFamily.TIMES_ROMAN, 7, Font.NORMAL);
     Font gradeHeaderFont = new Font(Font.FontFamily.TIMES_ROMAN, 7f, Font.BOLDITALIC);
     Font insideFont = new Font(Font.FontFamily.TIMES_ROMAN, 7, Font.NORMAL);
     Font tableHeader2Font = new Font(Font.FontFamily.TIMES_ROMAN, 5f, Font.BOLD);
@@ -27,16 +35,21 @@ public class Transcript {
     Font regularFont = new Font(Font.FontFamily.TIMES_ROMAN, 9, Font.NORMAL);
     Font subHeaderFont = new Font(Font.FontFamily.TIMES_ROMAN, 9, Font.BOLDITALIC);
 
+
+    String []semester = {"1st Semester, Year, "+Integer.valueOf(dateOA) +"-"+ (Integer.valueOf(dateOA)+1), "2nd Semester, Year, "+(Integer.valueOf(dateOA)) +"-"+ (Integer.valueOf(dateOA)+1),
+                         "1st Semester, Year, "+Integer.valueOf(dateOA+1) +"-"+ (Integer.valueOf(dateOA)+2), "2nd Semester, Year, "+(Integer.valueOf(dateOA)+1) +"-"+ (Integer.valueOf(dateOA)+2),
+                         "1st Semester, Year, "+Integer.valueOf(dateOA+2) +"-"+ (Integer.valueOf(dateOA)+3), "2nd Semester, Year, "+(Integer.valueOf(dateOA)+2) +"-"+ (Integer.valueOf(dateOA)+3),
+                         "1st Semester, Year, "+Integer.valueOf(dateOA+3) +"-"+ (Integer.valueOf(dateOA)+4), "2nd Semester, Year, "+(Integer.valueOf(dateOA)+3) +"-"+ (Integer.valueOf(dateOA)+4)};
+    String [][] subject = {{"MATHEMATICS FOR INFORMATION TECHNOLOGY", "INFORMATION TECHNOLOGY FUNDAMENTALS", "INTRODUCTION TO COMPUTER SYSTEMS", "PROBLEM SOLVING AND COMPUTER PROGRAMMING", "CHARM SCHOOL", "FOUNDATION ENGLISH 1", "FOUNDATION ENGLISH 2"},
+                           {"OBJECT-ORIENTED PROGRAMMING", "PROBABILITY AND STATISTICS", "BUSINESS FUNDAMENTALS FOR INFORMATION", "DATA STRUCTURES AND ALGORITHMS", "DIGITAL CITIZEN"}};
+    String[][] subjectNumberList = {{"06016401", "06016402", "06016411", "06066303", "90642999", "90644007", "90644008"},
+                                    {"06016408", "06066001", "06066101", "06066301", "90641007"}};
+    int[][] creditsList = {{3, 3, 3, 3, 3, 3, 3},
+                           {3, 3, 3, 3, 3}};
+    String[][] gradeList = {{"A", "B+", "B+", "A", "S", "S", "S"}};
+
     public Transcript() {
         Document document = new Document(PageSize.A4, 28.5f, 28.5f, 18.4f, 18.4f);
-
-        name = "Mr. Asitara  Phumdokmai";
-        dateOB = "July 14, 2006";
-        dateOA = "2024";
-        degree = "Bachelor of Science";
-        major = "Information Technology";
-        studentID = "67070199";
-        dateOG = "N/A";
 
         String[] subHeaderList = {"Name", "Date of Birth", "Date of Admission", "Degree", "Major"};
         String[] informationList = {name, dateOB, dateOA, degree, major};
@@ -78,7 +91,7 @@ public class Transcript {
                     else if(subHeaderList[i].equals("Date of Admission")){
 
                         subHeader = new Chunk(" Date of Graduation", subHeaderFont);
-                        text = new Chunk("N/A", regularFont);
+                        text = new Chunk(dateOG, regularFont);
                         space = new Chunk(" ", subHeaderFont);
                         space.setWordSpacing(10.5f);
                         sepSpace.setWordSpacing(162);
@@ -129,8 +142,9 @@ public class Transcript {
             table.addCell(gradeCell);
 
 
-            table.addCell(createSubjectCell(0));
-            table.addCell(createCreditCell(" \n3", insideFont, 0));
+            table.addCell(createSubjectCell());
+            table.addCell(createSubjectCell(7, "credit"));
+            table.addCell(createSubjectCell(7, "grade"));
             table.addCell("");
             table.addCell("");
             table.addCell("");
@@ -155,13 +169,7 @@ public class Transcript {
         return cell;
     }
 
-    private PdfPCell createSubjectCell(float padding){
-        String []semester = {"1st Semester, Year, "+Integer.valueOf(dateOA) +"-"+ (Integer.valueOf(dateOA)+1), "2nd Semester, Year, "+(Integer.valueOf(dateOA)) +"-"+ (Integer.valueOf(dateOA)+1),
-                "1st Semester, Year, "+Integer.valueOf(dateOA+1) +"-"+ (Integer.valueOf(dateOA)+2), "2nd Semester, Year, "+(Integer.valueOf(dateOA)+1) +"-"+ (Integer.valueOf(dateOA)+2),
-                "1st Semester, Year, "+Integer.valueOf(dateOA+2) +"-"+ (Integer.valueOf(dateOA)+3), "2nd Semester, Year, "+(Integer.valueOf(dateOA)+2) +"-"+ (Integer.valueOf(dateOA)+3),
-                "1st Semester, Year, "+Integer.valueOf(dateOA+3) +"-"+ (Integer.valueOf(dateOA)+4), "2nd Semester, Year, "+(Integer.valueOf(dateOA)+3) +"-"+ (Integer.valueOf(dateOA)+4)};
-        String [][] subject = {{"MATHEMATICS FOR INFORMATION TECHNOLOGY", "INFORMATION TECHNOLOGY FUNDAMENTALS", "INTRODUCTION TO COMPUTER SYSTEMS", "PROBLEM SOLVING AND COMPUTER PROGRAMMING", "CHARM SCHOOL", "FOUNDATION ENGLISH 1", "FOUNDATION ENGLISH 2"},
-                {"OBJECT-ORIENTED PROGRAMMING", "PROBABILITY AND STATISTICS"}};
+    private PdfPCell createSubjectCell(){
         PdfPCell cell = new PdfPCell();
         cell.setPaddingTop(-5);
         cell.setNoWrap(true);
@@ -173,15 +181,79 @@ public class Transcript {
             //semesterP.setAlignment(Element.ALIGN_CENTER);
             cell.addElement(semesterP);
             for (int j = 0; j<subject[i].length; j++) {
+                Chunk subjectNumber = new Chunk(subjectNumberList[i][j] + " ", insideFont);
+                subjectNumber.setWordSpacing(5f);
                 Chunk subjectChunk = new Chunk(subject[i][j], insideFont);
-                Paragraph subjectP = new Paragraph(subjectChunk);
+                Paragraph subjectP = new Paragraph();
+                subjectP.add(subjectNumber);
+                subjectP.add(subjectChunk);
+                subjectP.setSpacingBefore(-5f);
+                subjectP.setSpacingAfter(-0.25f);
                 cell.addElement(subjectP);
             }
-            Paragraph gradeP = new Paragraph("                                         GPS : 3.75          GPA : 3.75", gradeHeaderFont);
+            Paragraph gradeP = new Paragraph("GPS : 3.75          GPA : 3.75", gradeHeaderFont);
+            gradeP.setIndentationLeft(70.5f);
             cell.addElement(gradeP);
         }
+        footerFormat(cell,"Total  number of credit earned:  21\n",11f, insideFooterFont, 35f);
 
+        footerFormat(cell,"Cumulative GPA:  3.75", insideFooterFont, 52.8f);
 
+        footerFormat(cell,"-------------------------------- Transcript Closed --------------------------------", 0.1f, gradeHeaderFont);
+
+        footerFormat(cell,"Checked by   ______________________________________________", 11f, insideFooterNFont, 22f);
+
+        footerFormat(cell,  "(Xx Xxxxxxxxx Xxxxxxxxxxxxx)", insideFooterNFont, 125f);
+
+        return cell;
+    }
+
+    private void footerFormat(PdfPCell cell, String text, float spaceBefore, Font font, float indentLeft) {
+        Paragraph footerP = new Paragraph(text, font);
+        footerP.setSpacingBefore(spaceBefore);
+        footerP.setIndentationLeft(indentLeft);
+        cell.addElement(footerP);
+    }
+
+    private void footerFormat(PdfPCell cell, String text, Font font, float indentLeft) {
+        footerFormat(cell, text, 0f, font, indentLeft);
+    }
+
+    private void footerFormat(PdfPCell cell, String text, float spaceBefore, Font font) {
+        footerFormat(cell, text, spaceBefore, font, 0f);
+    }
+
+    private PdfPCell createSubjectCell(float leftIndent, String type){
+        PdfPCell cell = new PdfPCell();
+        cell.setPaddingTop(-4.6f);
+        cell.setNoWrap(true);
+        for (int i = 0; i<subject.length; i++){
+            Chunk enterChunk = new Chunk(" ", insideHeaderFont);
+            Paragraph semesterP = new Paragraph(enterChunk);
+            semesterP.setSpacingAfter(0.25f);
+            //semesterP.setAlignment(Element.ALIGN_CENTER);
+            cell.addElement(semesterP);
+            for (int j = 0; j<subject[i].length; j++) {
+                Paragraph subjectP = new Paragraph();
+                if (type.equals("credit")) {
+                    subjectP = new Paragraph(creditsList[i][j] + "", insideFont);
+                    subjectP.setIndentationLeft(leftIndent +0.5f);
+                }
+                else if (type.equals("grade")) {
+                    try {
+                        subjectP = new Paragraph(gradeList[i][j], insideFont);
+                    }
+                    catch (ArrayIndexOutOfBoundsException e) {
+                        subjectP = new Paragraph("", insideFont);
+                    }
+                    subjectP.setIndentationLeft(leftIndent-1.5f);
+                }
+                subjectP.setSpacingAfter(0.18f);
+                cell.addElement(subjectP);
+            }
+            Paragraph gradeP = new Paragraph(" ", gradeHeaderFont);
+            cell.addElement(gradeP);
+        }
         return cell;
     }
 
