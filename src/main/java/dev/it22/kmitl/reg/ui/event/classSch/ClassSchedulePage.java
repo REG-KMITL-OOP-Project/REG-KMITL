@@ -1,5 +1,6 @@
 package dev.it22.kmitl.reg.ui.event.classSch;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
 import dev.it22.kmitl.reg.utils.Config;
 
@@ -27,6 +28,11 @@ public class ClassSchedulePage{
     private ClassScheduleTable table;
 
     public ClassSchedulePage(JFrame frame) {
+        try{
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         this.frame = frame;
         pn1 = new JPanel();
         pn2 = new JPanel();
@@ -131,13 +137,6 @@ public class ClassSchedulePage{
         frame.setLayout(new BorderLayout());
         headerPanel = new newHeader("ตารางเรียน", frame, table);
         frame.add(headerPanel, BorderLayout.NORTH);
-
-//        JPanel pL = new JPanel();
-//        JPanel pR = new JPanel();
-//        pL.setBackground(null);
-//        pR.setBackground(null);
-//        frame.add(pL, BorderLayout.WEST);
-//        frame.add(pR, BorderLayout.EAST);
         frame.add(pn1, BorderLayout.CENTER);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
