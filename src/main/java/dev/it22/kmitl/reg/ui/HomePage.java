@@ -6,7 +6,6 @@ import dev.it22.kmitl.reg.model.auth.*;
 import dev.it22.kmitl.reg.ui.event.AdminCalendarPage;
 import dev.it22.kmitl.reg.ui.event.ExamSchedulePage;
 import dev.it22.kmitl.reg.ui.profile.LoginFrame;
-import dev.it22.kmitl.reg.ui.profile.RegisterFrame;
 import dev.it22.kmitl.reg.ui.request.UserRequestView;
 import dev.it22.kmitl.reg.ui.transcript.TranscriptController;
 import dev.it22.kmitl.reg.utils.Config;
@@ -17,7 +16,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
@@ -234,7 +232,7 @@ public class HomePage implements ActionListener {
                 user.logout();
                 new LoginFrame(frame);
             } else if (e.getSource().equals(editButton)) {
-                requestEditData(frame);
+                new RequestEditDataView(frame);
             }
         }else if(acc instanceof Prof) {
             if (e.getSource().equals(button[0])) {
@@ -249,7 +247,7 @@ public class HomePage implements ActionListener {
                 user.logout();
                 new LoginFrame(frame);
             } else if (e.getSource().equals(editButton)) {
-                requestEditData(frame);
+                new RequestEditDataView(frame);
             }
         } else if(acc instanceof Admin) { //"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
@@ -266,29 +264,15 @@ public class HomePage implements ActionListener {
         }
     }
 
-    private void requestEditData(JFrame frame) {
-        JLayeredPane layeredPane = frame.getLayeredPane();
-        JDesktopPane desktopPane = new JDesktopPane();
-        desktopPane.setOpaque(false);
-        desktopPane.setBounds(0, 0, frame.getWidth(), frame.getHeight());
-        JInternalFrame internalFrame = new JInternalFrame("",false,true,false,false);
-        internalFrame.setFrameIcon(null);
-        internalFrame.setSize(300, 200);
-        internalFrame.setLocation(100, 100);
-        internalFrame.setVisible(true);
-        internalFrame.setLocation((desktopPane.getWidth() - internalFrame.getWidth())/2, (desktopPane.getHeight() - internalFrame.getHeight())/2);
-        desktopPane.add(internalFrame);
-        layeredPane.add(desktopPane, JLayeredPane.PALETTE_LAYER);
-        frame.setVisible(true);
-    }
+
 
     public static void main(String[] args) {
         JFrame config = Config.createAndShowGUI();
 
         try {
-//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+            new Login("Student01","Student1234").loginWithUsernameAndPassword();
 //            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
-            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
+//            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         }
         catch (Exception e) {
