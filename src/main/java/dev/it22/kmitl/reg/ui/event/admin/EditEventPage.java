@@ -1,5 +1,6 @@
 
-package dev.it22.kmitl.reg.ui.event;
+package dev.it22.kmitl.reg.ui.event.admin;
+import dev.it22.kmitl.reg.ui.event.calendar.EventPage;
 import dev.it22.kmitl.reg.utils.*;
 
 import java.awt.*;
@@ -115,7 +116,7 @@ public class EditEventPage extends EventPage implements ActionListener {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            new AdminCalendarPage (frame);
+            new AdminCalendarPage(frame);
         }
     else if (ev.getSource().equals(save)) {
             frame.getContentPane().removeAll();
