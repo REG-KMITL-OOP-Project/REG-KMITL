@@ -1,19 +1,18 @@
-package dev.it22.kmitl.reg.ui.event;
-import dev.it22.kmitl.reg.controller.auth.Login;
-import dev.it22.kmitl.reg.controller.auth.User;
-import dev.it22.kmitl.reg.model.auth.Account;
-import dev.it22.kmitl.reg.model.auth.Student;
+package dev.it22.kmitl.reg.ui.event.examSch;
+
+import dev.it22.kmitl.reg.ui.event.component.headerMenu;
 import dev.it22.kmitl.reg.utils.Config;
-import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+import java.awt.*;
 
-public class ExamSchedulePage {
+public class TeacherExamSchedulePage{
     private JFrame frame;
-           //Attribute ที่สร้างในคลาส
+    //Attribute ที่สร้างในคลาส
     private JPanel pn1 , pn2;
 
     //user-data
@@ -39,9 +38,7 @@ public class ExamSchedulePage {
             {"DD/MM/YY","09.30-18.00","060111222","OOP","ปฏิบัติ","L123"},
             {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","L123"},
             {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","L123"}};
-
-
-    public ExamSchedulePage(JFrame frame){
+    public TeacherExamSchedulePage(JFrame frame) {
         this.frame = frame;
         pn1 = new JPanel();
         pn2 = new JPanel();
@@ -70,7 +67,7 @@ public class ExamSchedulePage {
         choseExam.setBackground(null);
         stdInfo.setBackground(null);
 
-        ID = new JLabel("รหัสนักศึกษา : ");
+        ID = new JLabel("รหัสประจำตัว : ");
         name = new JLabel("ชื่อ : ");
         faculty = new JLabel("คณะ : ");
         branch = new JLabel("สาขา : ");
@@ -197,7 +194,7 @@ public class ExamSchedulePage {
         pn2.add(scrollPane, BorderLayout.CENTER);
 
         frame.setLayout(new BorderLayout());
-        frame.setJMenuBar(new headerMenu("Exam Schedule", frame));
+        frame.setJMenuBar(new headerMenu("ตารางสอบ", frame, pn2));
         frame.add(pn1, BorderLayout.NORTH);
         frame.add(pn2,BorderLayout.CENTER);
 
@@ -205,8 +202,8 @@ public class ExamSchedulePage {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-
     public static void main(String[] args) {
-        new ExamSchedulePage(Config.createAndShowGUI());
+        new TeacherExamSchedulePage(Config.createAndShowGUI());
     }
+
 }

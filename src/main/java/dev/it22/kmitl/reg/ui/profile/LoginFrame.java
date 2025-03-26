@@ -17,8 +17,11 @@ public class LoginFrame implements ActionListener {
     private JFrame frame;
     private JPanel bigPanel , panel , loginPanel;
     private JLabel upper,lower,username,password;
-    private JTextField userT , passT;
+    private JTextField userT;
+    private JPasswordField passT;
     private RoundedButton loginButton;
+    private JButton toggle;
+    private boolean toggled = false;
 
     public LoginFrame(JFrame frame) {
         this.frame = frame;
@@ -69,6 +72,7 @@ public class LoginFrame implements ActionListener {
         userT.setBackground(Config.bgColor_hard);
         userT.setForeground(Color.WHITE);
         userT.setBorder(BorderFactory.createLineBorder(Config.primaryColor_hard, 2));
+        userT.setPreferredSize(new Dimension(loginPanel.getPreferredSize().width, 25));
 
         password = new JLabel("PASSWORD");
         password.setFont(Config.HEADER_REGULAR[2]);
@@ -79,11 +83,37 @@ public class LoginFrame implements ActionListener {
         passBox.add(password);
         passBox.add(Box.createHorizontalGlue());
 
-        passT = new JPasswordField(20);
+        JPanel passwordP = new JPanel();
+        passwordP.setLayout(new FlowLayout(FlowLayout.LEFT,0,1));
+        passwordP.setPreferredSize(new Dimension(loginPanel.getPreferredSize().width, 26));
+        passwordP.setBackground(Config.bgColor_hard);
+        passwordP.setBorder(BorderFactory.createLineBorder(Config.primaryColor_hard, 2));
+
+        passT = new JPasswordField(27);
         passT.setFont(Config.NORMAL_REGULAR);
-        passT.setBackground(Config.bgColor_hard);
+        passT.setBackground(null);
         passT.setForeground(Color.WHITE);
-        passT.setBorder(BorderFactory.createLineBorder(Config.primaryColor_hard, 2));
+        passT.setBorder(BorderFactory.createLineBorder(null, 0));
+        passwordP.add(passT);
+
+        toggle = new JButton();
+        toggle.setIcon(new ImageIcon(new ImageIcon("source/eye-closed.png").getImage().getScaledInstance(20,20,Image.SCALE_SMOOTH)));
+        toggle.setBackground(Config.bgColor_hard);
+        toggle.setBorderPainted(false);
+        toggle.setContentAreaFilled(false);
+        toggle.setFocusPainted(false);
+        toggle.setPreferredSize(new Dimension(20,passT.getPreferredSize().height));
+        toggle.addActionListener(e -> {
+            if (toggled){
+                passT.setEchoChar('•');
+                toggle.setIcon(new ImageIcon(new ImageIcon("source/eye-closed.png").getImage().getScaledInstance(20,20,Image.SCALE_SMOOTH)));
+            }else{
+                passT.setEchoChar((char) 0);
+                toggle.setIcon(new ImageIcon(new ImageIcon("source/eye.png").getImage().getScaledInstance(20,20,Image.SCALE_SMOOTH)));
+            }
+            toggled = !toggled;
+        });
+        passwordP.add(toggle);
 
         loginButton = new RoundedButton("เข้าสู่ระบบ", 20);
         loginButton.setFont(Config.HEADER_REGULAR[1]);
@@ -104,13 +134,14 @@ public class LoginFrame implements ActionListener {
         loginPanel.add(userT);
         loginPanel.add(Box.createVerticalStrut(10));
         loginPanel.add(passBox);
-        loginPanel.add(passT);
+        loginPanel.add(passwordP);
         loginPanel.add(Box.createVerticalStrut(10));
         loginPanel.add(buttonBox);
 
         panel.add(loginPanel);
 
         bigPanel.add(panel);
+        frame.getRootPane().setDefaultButton(loginButton);
         frame.add(bigPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
