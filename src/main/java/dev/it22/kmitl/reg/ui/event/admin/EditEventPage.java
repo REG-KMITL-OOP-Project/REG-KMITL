@@ -10,7 +10,7 @@ import javax.swing.*;
 
 public class EditEventPage extends EventPage implements ActionListener {
     private JPanel panelSave,panelDel,panelCan;
-    private RoundedButton save,delete,cancel;
+    private RoundedButtonWithColor delete,save,cancel;
     private JLabel editEvent;
 
     public EditEventPage(JFrame frame){
@@ -18,9 +18,9 @@ public class EditEventPage extends EventPage implements ActionListener {
         panelSave = new JPanel();
         panelDel = new JPanel();
         panelCan = new JPanel();
-        save = new RoundedButton("SAVE CHANGE",22);
-        delete = new RoundedButton("DELETE", 22);
-        cancel = new RoundedButton("CANCEL", 22);
+        delete = new RoundedButtonWithColor("DELETE", 22, new Color(255, 247, 237), Config.primaryColor_harder);
+        cancel = new RoundedButtonWithColor("CANCEL", 22,Color.BLACK,new Color(255, 247, 237));
+        save = new RoundedButtonWithColor("SAVE CHANGE",22, new Color(255, 247, 237), Config.primaryColor_base);
         editEvent = new JLabel("              EDIT EVENT");
 
         panelSave.setBackground(null);
@@ -34,36 +34,21 @@ public class EditEventPage extends EventPage implements ActionListener {
 
         panelRek5.add(panelCan);
         panelCan.setLayout( new FlowLayout(FlowLayout.LEFT,93,0));
-        cancel.setForeground(Color.BLACK);
-        cancel.setBackground(new Color(255,247,237));
-        cancel.setFont(Config.HEADER_SEMIBOLD[2]);
         cancel.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
-
+        panelCan.add(cancel);
         cancel.addActionListener(this);
 
-        panelCan.add(cancel);
-
         panelRek5.add(panelSave);
-        panelSave.setLayout( new FlowLayout(FlowLayout.CENTER,93,0));
-        save.setForeground(new Color(255, 247, 237));
-        save.setBackground(Config.primaryColor_base);
-        save.setFont(Config.HEADER_SEMIBOLD[2]);
-        save.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
-
-        save.addActionListener(this);
-
+        panelSave.setLayout(new FlowLayout(FlowLayout.CENTER, 93, 0));
+        save.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 2.7), (frame.getHeight() / 4) - 120));
         panelSave.add(save);
+        save.addActionListener(this);
 
         panelRek5.add(panelDel);
         panelDel.setLayout( new FlowLayout(FlowLayout.RIGHT,93,0));
-        delete.setForeground(Color.WHITE);
-        delete.setBackground(Config.primaryColor_harder);
-        delete.setFont(Config.HEADER_SEMIBOLD[2]);
         delete.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
-
-        delete.addActionListener(this);
-
         panelDel.add(delete);
+        delete.addActionListener(this);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -73,7 +58,7 @@ public class EditEventPage extends EventPage implements ActionListener {
         new EditEventPage(Config.createAndShowGUI());
     }
 
-    private RoundedButton del , cal ;
+    private RoundedButtonWithColor del , cal ;
     private JDialog dialog ;
 
     public void actionPerformed(ActionEvent ev) {
@@ -81,51 +66,49 @@ public class EditEventPage extends EventPage implements ActionListener {
             dialog = Config.openFrame((int) (frame.getWidth() / 2), (int) (frame.getHeight() / 2));
             JPanel panelD = new JPanel();
             JPanel panelC = new JPanel();
-            JPanel P = new JPanel();
-            JPanel panel = new JPanel();
+            JPanel panelButton = new JPanel();
+            JPanel panelHeader = new JPanel();
+            JPanel panelLayoutButton = new JPanel();
+            JPanel panelLayoutlHeader = new JPanel();
             JLabel header = new JLabel("ARE YOU SURE WANT TO DELETE");
-            del = new RoundedButton("DELETE", 22);
-            cal = new RoundedButton("CANCEL", 22);
-
-            header.setForeground(Config.primaryColor_hard);
-
-            header.setFont(Config.HEADER_SEMIBOLD[1]);
-            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-            panel.add(Box.createVerticalStrut(50));
-
-            panel.setBackground(null);
-            panel.add(header);
-            dialog.add(panel);
-
-            P.setLayout(new GridLayout(1, 2));
-            P.setBackground(null);
-            P.add(panelC);
-            P.add(panelD);
-
-            panelD.setLayout(new FlowLayout(FlowLayout.RIGHT, 30, 0));
-            del.setForeground(Color.WHITE);
-            del.setBackground(Config.primaryColor_harder);
-            del.setFont(Config.HEADER_SEMIBOLD[2]);
-
-            del.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 3.5), (frame.getHeight() / 4) - 120));
-
-            del.addActionListener(this);
-
-            panelD.setBackground(null);
-            panelD.add(del);
-
-            panelC.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 0));
-            cal.setForeground(Color.BLACK);
-            cal.setBackground(new Color(255, 247, 237));
-            cal.setFont(Config.HEADER_SEMIBOLD[2]);
-            cal.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 3.5), (frame.getHeight() / 4) - 120));
-
-            cal.addActionListener(this);
+            del = new RoundedButtonWithColor("DELETE", 22,Color.WHITE,Config.primaryColor_harder);
+            cal = new RoundedButtonWithColor("CANCEL", 22,Color.BLACK,new Color(255, 247, 237));
 
             panelC.setBackground(null);
-            panelC.add(cal);
+            panelD.setBackground(null);
+            panelHeader.setBackground(null);
+            panelButton.setBackground(null);
+            panelLayoutButton.setBackground(null);
+            panelLayoutlHeader.setBackground(null);
 
-            dialog.add(P);
+            dialog.setLayout(new BorderLayout());
+            panelLayoutlHeader.setLayout(new FlowLayout());
+            panelLayoutlHeader.add(header);
+            header.setForeground(Config.primaryColor_hard);
+            header.setFont(Config.HEADER_SEMIBOLD[1]);
+            panelHeader.setLayout(new BoxLayout(panelHeader, BoxLayout.Y_AXIS));
+            panelHeader.add(Box.createVerticalStrut(75));
+            panelHeader.add(panelLayoutlHeader);
+            dialog.add(panelHeader,BorderLayout.NORTH);
+
+            panelD.setLayout(new FlowLayout(FlowLayout.RIGHT, 30, 0));
+            del.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 3.5), (frame.getHeight() / 4) - 120));
+            panelD.add(del);
+            del.addActionListener(this);
+
+            panelC.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 0));
+            cal.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 3.5), (frame.getHeight() / 4) - 120));
+            panelC.add(cal);
+            cal.addActionListener(this);
+
+            panelButton.setLayout(new GridLayout(1, 2));
+            panelButton.add(panelC);
+            panelButton.add(panelD);
+            panelLayoutButton.setLayout(new BoxLayout(panelLayoutButton, BoxLayout.Y_AXIS));
+            panelLayoutButton.add(panelButton);
+            panelLayoutButton.add(Box.createVerticalStrut(100));
+            dialog.add(panelLayoutButton,BorderLayout.SOUTH);
+
             dialog.setVisible(true);
         }else if (ev.getSource().equals(cal) || ev.getSource().equals(del)) {
             dialog.setVisible(false);
