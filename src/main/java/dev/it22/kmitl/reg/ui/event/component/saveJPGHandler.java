@@ -66,6 +66,7 @@ public class saveJPGHandler implements ActionListener , MouseListener {
                 Timer timer = new Timer(1500, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         success.setVisible(false);
+                        success.remove(l);
                         success.dispose();
                     }
                 });
@@ -87,6 +88,7 @@ public class saveJPGHandler implements ActionListener , MouseListener {
                 Timer timer = new Timer(1500, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         success.setVisible(false);
+                        success.remove(l);
                         success.dispose();
                     }
                 });
@@ -109,6 +111,7 @@ public class saveJPGHandler implements ActionListener , MouseListener {
             Timer timer = new Timer(1500, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     success.setVisible(false);
+                    success.remove(l);
                     success.dispose();
                 }
             });
