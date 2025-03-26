@@ -34,7 +34,7 @@ public  class SubjectHomepage {
 
         this.frame = frame;
         addsubjec = new RoundedButton("เพิ่ม-เปลี่ยนวิชา",22);
-        addtime = new RoundedButton("เพิ่ม-เปลี่ยนเวลาเรียน",22);
+        addtime = new RoundedButton("เพิ่มกลุ่มเรียน",22);
         addclass = new RoundedButton("ชั้นเรียน",22);
 
         addsubjec.setFont(Config.HEADER_SEMIBOLD[2]);
