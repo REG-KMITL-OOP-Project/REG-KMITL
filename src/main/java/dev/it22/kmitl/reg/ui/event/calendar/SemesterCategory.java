@@ -6,12 +6,19 @@ import dev.it22.kmitl.reg.utils.Config;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class SemesterCategory extends JPanel{
+    private JFrame frame;
     private JCheckBox sem1, sem2, specialSem;
     private JPanel sm1, sm2, special, ev, ot;
     private JPanel pn1, pn2;
-    public SemesterCategory() {
+    public SemesterCategory(JFrame frame) {
+        this.frame = frame;
+
         sem1 = new JCheckBox("   ภาคการศึกษาที่ 1");
         sem2 = new JCheckBox("   ภาคการศึกษาที่ 2");
         specialSem = new JCheckBox("   ภาคการศึกษาพิเศษ");
@@ -56,16 +63,25 @@ public class SemesterCategory extends JPanel{
         pn1.add(sm1);
         pn1.add(sm2);
         pn1.add(special);
-        pn1.setPreferredSize(new Dimension(300, 300));
-        pn1.setBorder(new EmptyBorder(25,30,15,0));
+        pn1.setPreferredSize(new Dimension(300, frame.getHeight()));
+        pn1.setBorder(new EmptyBorder(25,0,15,0));
         pn1.setBackground(Config.bgColor_base.darker());
 
         pn2 = new JPanel();
         pn2.setBackground(null);
 
-        this.setLayout(new BorderLayout());
-        this.add(pn1, BorderLayout.WEST);
-        this.add(pn2, BorderLayout.EAST);
+        this.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        this.add(pn1);
+        this.add(pn2);
         this.setBackground(null);
+    }
+    public JCheckBox getSem1() {
+        return sem1;
+    }
+    public JCheckBox getSem2() {
+        return sem2;
+    }
+    public JCheckBox getSpecialSem() {
+        return specialSem;
     }
 }
