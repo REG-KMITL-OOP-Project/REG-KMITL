@@ -15,13 +15,15 @@ public class ExamScheduleTable extends JPanel {
     private JTable examSchedule;
     private JScrollPane scrollPane;
     private String columnNames[] = {"วัน/เดือน/ปี","เวลา", "รหัสวิชา","วิชา","ประเภท","ห้องสอบ"};
-    private Object testData[][] = {{"DD/MM/YY","09.30-18.00","060111222","OOP","ทฤษฎี","L123"},
+    private Object testData[][] = {
+            {"DD/MM/YY","09.30-18.00","060111222","OOP","ทฤษฎี","L123"},
             {"DD/MM/YY","09.30-18.00","060111222","OOP","ปฏิบัติ","L123"},
             {"DD/MM/YY","09.30-18.00","060111222","OOP","ปฏิบัติ","L123"},
             {"DD/MM/YY","09.30-18.00","060111222","OOP","ปฏิบัติ","L123"},
             {"DD/MM/YY","09.30-18.00","060111222","OOP","ปฏิบัติ","L123"},
             {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","L123"},
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","L123"}};
+            {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","L123"}
+    };
 
 
     public ExamScheduleTable(){
