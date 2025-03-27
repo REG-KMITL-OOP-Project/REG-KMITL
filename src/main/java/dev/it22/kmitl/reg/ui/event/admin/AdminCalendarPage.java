@@ -3,7 +3,7 @@ package dev.it22.kmitl.reg.ui.event.admin;
 import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.ui.event.calendar.calendarTable;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
-import dev.it22.kmitl.reg.ui.event.calendar.eventCategory;
+import dev.it22.kmitl.reg.ui.event.calendar.SemesterCategory;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
@@ -17,7 +17,7 @@ public class AdminCalendarPage implements ActionListener {
     private JScrollPane scrollPane;
     private newHeader header;
     private calendarTable jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
-    private eventCategory category;
+    private SemesterCategory category;
 
     private JButton create;
     private JPanel create_panel, back_panel;
@@ -93,7 +93,7 @@ public class AdminCalendarPage implements ActionListener {
         back_panel.add(scrollPane);
 
         header = new newHeader("ปฏิทินการศึกษา", frame);
-        category = new eventCategory();
+        category = new SemesterCategory();
         category.setBorder(new EmptyBorder(10,0,0,0));
         frame.add(header, BorderLayout.NORTH);
         frame.add(category, BorderLayout.CENTER);

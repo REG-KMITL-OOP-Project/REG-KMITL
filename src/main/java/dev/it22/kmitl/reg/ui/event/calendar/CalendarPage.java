@@ -14,7 +14,7 @@ public class CalendarPage {
     private JScrollPane scrollPane;
     private newHeader header;
     private calendarTable jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
-    private eventCategory category;
+    private SemesterCategory category;
     public CalendarPage(JFrame frame) {
         try{
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -65,7 +65,7 @@ public class CalendarPage {
         scrollPane.getVerticalScrollBar().setUnitIncrement(12);
 
         header = new newHeader("ปฏิทินการศึกษา", frame);
-        category = new eventCategory();
+        category = new SemesterCategory();
         category.setBorder(new EmptyBorder(10,0,0,0));
         frame.add(header, BorderLayout.NORTH);
         frame.add(category, BorderLayout.CENTER);
