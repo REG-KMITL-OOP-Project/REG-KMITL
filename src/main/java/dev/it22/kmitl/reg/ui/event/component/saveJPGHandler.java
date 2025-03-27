@@ -1,5 +1,6 @@
 package dev.it22.kmitl.reg.ui.event.component;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.imageio.*;
@@ -36,9 +37,9 @@ public class saveJPGHandler implements ActionListener , MouseListener {
             g2d.dispose();
 
             //test fileChooser
-            try {
-                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-            } catch (Exception ex) {
+            try{
+                UIManager.setLookAndFeel(new FlatLightLaf());
+            } catch (Exception ex){
                 ex.printStackTrace();
             }
 
