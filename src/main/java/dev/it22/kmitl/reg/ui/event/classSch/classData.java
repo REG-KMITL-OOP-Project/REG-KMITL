@@ -21,35 +21,17 @@ public class classData {
         user = new User().getUserAccount();
         db = new Database();
 
-        this.getSubject();
+        //this.getSubject("MON");
     }
 
-    public String[] getSubject() throws SQLException {
-        ResultSet rs = db.getQuery("SELECT room, course_id FROM section");
-        String[] subject = new String[12];
-        int i = 0;
-        while (rs.next()) {
-            String[] ject;
-            String sub = "";
-            sub += rs.getString("room");
-            sub += " " + this.getCourseName(rs.getString("course_id"));
-            System.out.println(sub);
-            while (subject[i] != null) {
-                i++;
-            }
-            subject[i] = sub;
-            System.out.println(Arrays.deepToString(subject));
-        }
-        return subject;
-    }
 
     public String[] getSubject(String day) throws SQLException {
         String q = null;
         if (user instanceof Student) {
-            q = "SELECT room, course_id FROM section WHERE section = " + ((Student)user).getSection() + " AND day_of_week = '" + day + "'" ;
+            q = "SELECT room, course_id, section_id FROM section WHERE section = " + ((Student)user).getSection() + " AND day_of_week = '" + day + "'" ;
         }
         else if (user instanceof Prof){
-            q = "SELECT room, course_id FROM section WHERE prof_id = " + ((Prof)user).getProf_id() + " AND day_of_week = '" + day + "'" ;
+            q = "SELECT room, course_id, section_id FROM section WHERE prof_id = " + ((Prof)user).getProf_id() + " AND day_of_week = '" + day + "'" ;
         }
         ResultSet rs = db.getQuery(q);
         String[] subject = new String[12];
@@ -57,18 +39,28 @@ public class classData {
         while (rs.next()) {
             String[] ject;
             String sub = "";
-            sub += rs.getString("room");
-            sub += " " + this.getCourseName(rs.getString("course_id"));
-            System.out.println(sub);
-            while (subject[i] != null) {
-                i++;
+            sub += "[" + rs.getString("room") + "] " + this.getCourseName(rs.getString("course_id"));
+            //System.out.println(sub);
+
+            //add subject at table by time
+            ResultSet rc = db.getQuery("SELECT start_time, end_time FROM section WHERE section_id = '" + rs.getString("section_id") + "'");
+            while (rc.next()) {
+                int start = Integer.parseInt(rc.getString("start_time").substring(0, 2)) - 8;
+                int end = Integer.parseInt(rc.getString("end_time").substring(0, 2)) - 9;
+                if (start < 0 || start > 12 || end < 0 || end > 12) {
+                    break;
+                }
+                while (start <= end) {
+                    subject[start] = sub;
+                    start++;
+                }
+                //System.out.println(Arrays.deepToString(subject));
             }
-            subject[i] = sub;
-            System.out.println(Arrays.deepToString(subject));
         }
         return subject;
     }
 
+    //get subject name from another table
     public String getCourseName(String id) throws SQLException {
         ResultSet rc = db.getQuery("SELECT course_name FROM course WHERE course_code = '" + id + "'");
         while (rc.next()) {

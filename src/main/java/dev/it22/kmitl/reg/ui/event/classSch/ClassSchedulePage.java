@@ -2,6 +2,9 @@ package dev.it22.kmitl.reg.ui.event.classSch;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.controller.auth.Login;
+import dev.it22.kmitl.reg.controller.auth.User;
+import dev.it22.kmitl.reg.model.auth.Account;
+import dev.it22.kmitl.reg.model.auth.Student;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
 import dev.it22.kmitl.reg.utils.Config;
 
@@ -13,7 +16,7 @@ public class ClassSchedulePage{
     private JPanel pn1 , pn2;
 
     //user-data
-    //private Account user;
+    private Account user;
 
     //header
     private JPanel headerPanel;
@@ -42,7 +45,7 @@ public class ClassSchedulePage{
         pn2.setBackground(null);
 
         //data
-        //user = new User().getUserAccount();
+        user = new User().getUserAccount();
 
         //body-information
         allInfo = new JPanel();
@@ -63,15 +66,15 @@ public class ClassSchedulePage{
         stdInfo.setBackground(null);
 
 
-        ID = new JLabel("รหัสนักศึกษา : ");
-        name = new JLabel("ชื่อ : ");
-        faculty = new JLabel("คณะ : ");
-        branch = new JLabel("สาขา : ");
+//        ID = new JLabel("รหัสนักศึกษา : ");
+//        name = new JLabel("ชื่อ : ");
+//        faculty = new JLabel("คณะ : ");
+//        branch = new JLabel("สาขา : ");
 
-        //ID = new JLabel("รหัสนักศึกษา : "+ ((Student) user).getStudentId());
-        //name = new JLabel("ชื่อ : "+ ((Student) user).getFullName());
-        //faculty = new JLabel("คณะ : "+ ((Student) user).getFaculty());
-        //branch = new JLabel("สาขา : "+ ((Student) user).getMajor());
+        ID = new JLabel("รหัสนักศึกษา : "+ ((Student) user).getStudentId());
+        name = new JLabel("ชื่อ : "+ ((Student) user).getFullName());
+        faculty = new JLabel("คณะ : "+ ((Student) user).getFaculty());
+        branch = new JLabel("สาขา : "+ ((Student) user).getMajor());
 
         ID.setForeground(Color.WHITE);
         name.setForeground(Color.WHITE);
