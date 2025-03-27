@@ -2,14 +2,7 @@ package dev.it22.kmitl.reg.controller.user;
 
 import dev.it22.kmitl.reg.controller.auth.Register;
 import dev.it22.kmitl.reg.utils.Database;
-import dev.it22.kmitl.reg.constant.UserPrefix;
-import dev.it22.kmitl.reg.constant.UserRole;
-import dev.it22.kmitl.reg.controller.auth.Register;
-import dev.it22.kmitl.reg.controller.auth.User;
-import dev.it22.kmitl.reg.utils.Database;
-import dev.it22.kmitl.reg.utils.ErrorModal;
 
-import javax.management.relation.Role;
 
 public class AdminCreateUser {
     private int role;
