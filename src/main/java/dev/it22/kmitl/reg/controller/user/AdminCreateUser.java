@@ -2,7 +2,14 @@ package dev.it22.kmitl.reg.controller.user;
 
 import dev.it22.kmitl.reg.controller.auth.Register;
 import dev.it22.kmitl.reg.utils.Database;
+import dev.it22.kmitl.reg.constant.UserPrefix;
+import dev.it22.kmitl.reg.constant.UserRole;
+import dev.it22.kmitl.reg.controller.auth.Register;
+import dev.it22.kmitl.reg.controller.auth.User;
+import dev.it22.kmitl.reg.utils.Database;
+import dev.it22.kmitl.reg.utils.ErrorModal;
 
+import javax.management.relation.Role;
 
 public class AdminCreateUser {
     private int role;
@@ -51,7 +58,6 @@ public class AdminCreateUser {
             System.out.println("Create Student success");
         }
     }
-
     public  void createProf(String email,String username,String password,int prefix,String fname,String lname,String phone,String address,String prof_id,String faculty) throws Exception {
         this.role = 3;
         this.email = email;
