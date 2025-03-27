@@ -61,22 +61,22 @@ public class ExamScheduleTable extends JPanel {
 
         //เปลี่ยนขนาดช่อง
         TableColumn day = examSchedule.getColumnModel().getColumn(0);
-        day.setPreferredWidth(200);
+        day.setPreferredWidth(225);
 
         TableColumn time = examSchedule.getColumnModel().getColumn(1);
-        time.setPreferredWidth(200);
+        time.setPreferredWidth(225);
 
         TableColumn id = examSchedule.getColumnModel().getColumn(2);
-        id.setPreferredWidth(160);
+        id.setPreferredWidth(185);
 
         TableColumn subject = examSchedule.getColumnModel().getColumn(3);
-        subject.setPreferredWidth(200);
+        subject.setPreferredWidth(225);
 
         TableColumn examType = examSchedule.getColumnModel().getColumn(4);
-        examType.setPreferredWidth(125);
+        examType.setPreferredWidth(146);
 
         TableColumn room = examSchedule.getColumnModel().getColumn(5);
-        room.setPreferredWidth(125);
+        room.setPreferredWidth(146);
 
         // กำหนดขนาดที่แน่นอน
         examSchedule.setPreferredScrollableViewportSize(new Dimension(

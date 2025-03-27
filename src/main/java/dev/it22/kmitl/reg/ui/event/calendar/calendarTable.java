@@ -6,6 +6,7 @@ import dev.it22.kmitl.reg.utils.Config;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -20,11 +21,11 @@ public class calendarTable extends JPanel implements MouseListener {
     //column_ClassTable
     private JPanel column;
     private JTable table_column;
-    private String event_column[] = {"date", "type", "event name"};
+    private String event_column[] = {"date", "event name", "type",};
     String[][] events = {
-            {"09/08/68", "Holiday", "Monk day"},
-            {"09/08/68", "Holiday", "Monk day"},
-            {"09/08/68", "Holiday", "Monk day"},
+            {"09/08/68", "เปิดเทอมภาคการศึกษาที่ 1", "ภาคเรียนที่ 1"},
+            {"09/08/68", "เปิดเทอมภาคการศึกษาที่ 1", "ภาคเรียนที่ 1"},
+            {"09/08/68", "เปิดเทอมภาคการศึกษาที่ 1", "ภาคเรียนที่ 1"},
     };
 
     //combine
@@ -45,7 +46,6 @@ public class calendarTable extends JPanel implements MouseListener {
         table_column = new JTable(model);
         table_column.setEnabled(false);
         table_column.setRowHeight(48);
-        table_column.setPreferredSize(new Dimension(event_column.length * 200,48 * events.length));
         table_column.setBorder(BorderFactory.createLineBorder(Config.bgColor_hard));
         table_column.setGridColor(Config.bgColor_harder);
 
@@ -57,6 +57,14 @@ public class calendarTable extends JPanel implements MouseListener {
         for (int i = 0; i < table_column.getColumnCount(); i++) {
             table_column.getColumnModel().getColumn(i).setCellRenderer(Renderer2);
         }
+
+        TableColumn day = table_column.getColumnModel().getColumn(0);
+        day.setPreferredWidth(100);
+        TableColumn type = table_column.getColumnModel().getColumn(1);
+        type.setPreferredWidth(230);
+        TableColumn event = table_column.getColumnModel().getColumn(2);
+        event.setPreferredWidth(100);
+
         table_column.setShowVerticalLines(true);
         table_column.setShowHorizontalLines(true);
         table_column.setBackground(Config.bgColor_hard);
