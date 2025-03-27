@@ -121,7 +121,6 @@ public class AdminAddEvent extends EventPage implements ActionListener {
                 frame.repaint();
                 new AdminCalendarPage (frame);
             }
-
         }else if (ev.getSource().equals(no)) {
             dialog.setVisible(false);
         }else if (ev.getSource().equals(yes) || ev.getSource().equals(upload)){
@@ -130,8 +129,12 @@ public class AdminAddEvent extends EventPage implements ActionListener {
                     new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
                     return;
                 }
-            }
+                else{
+                    new AddDataEvent(eventName.getText() , description.getText() , dateStart.getText() , ((String) eventType.getSelectedItem()).strip());
+                    new AddDataEvent(eventName.getText() , description.getText() , dateEnd.getText() , ((String) eventType.getSelectedItem()).strip());
 
+                }
+            }
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
@@ -141,7 +144,6 @@ public class AdminAddEvent extends EventPage implements ActionListener {
                 dialog.setVisible(false);
             }
         }
-
     }
 }
 

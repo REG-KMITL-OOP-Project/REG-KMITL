@@ -105,12 +105,9 @@ public class EventPage implements FocusListener {
         dateEnd.addFocusListener(this);
 
         panelBig.add(panelRek4);
-        eventType.addItem("   อื่นๆ");
-        eventType.addItem("   เปิด-ปิด ภาคการศึกษา");
-        eventType.addItem("   สอบ");
-        eventType.addItem("   ชำระเงิน");
-        eventType.addItem("   ลงทะเบียน");
-        eventType.addItem("   ประเมินอาจารย์");
+        eventType.addItem("   ภาคการศึกษาที่ 1");
+        eventType.addItem("   ภาคการศึกษาที่ 2");
+        eventType.addItem("   ภาคการศึกษาพิเศษ");
         eventType.setRenderer(new CustomCombobox());
         eventType.setMaximumRowCount(3);
         eventType.setFont(Config.NORMAL_REGULAR);
