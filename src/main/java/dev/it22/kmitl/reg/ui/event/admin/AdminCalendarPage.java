@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
-public class AdminCalendarPage implements ActionListener , ItemListener {
+public class AdminCalendarPage implements ActionListener , ItemListener, MouseListener {
     private JFrame frame;
     private JPanel r_panel, pn1;
     private JScrollPane scrollPane;
@@ -97,11 +97,10 @@ public class AdminCalendarPage implements ActionListener , ItemListener {
         r_panel.setBackground(null);
         r_panel.setBorder(null);
         r_panel.setLayout(new BoxLayout(r_panel, BoxLayout.Y_AXIS));
-        r_panel.add(sem2_1);
         r_panel.add(spe);
         r_panel.add(sem1);
         r_panel.add(sem2);
-
+        r_panel.add(sem2_1);
 
         scrollPane = new JScrollPane(r_panel);
         scrollPane.setBackground(null);
@@ -134,6 +133,18 @@ public class AdminCalendarPage implements ActionListener , ItemListener {
         category.getSem1().addItemListener(this);
         category.getSem2().addItemListener(this);
         category.getSpecialSem().addItemListener(this);
+        jan.getTable().addMouseListener(this);
+        feb.getTable().addMouseListener(this);
+        mar.getTable().addMouseListener(this);
+        apr.getTable().addMouseListener(this);
+        may.getTable().addMouseListener(this);
+        jun.getTable().addMouseListener(this);
+        jul.getTable().addMouseListener(this);
+        aug.getTable().addMouseListener(this);
+        sep.getTable().addMouseListener(this);
+        oct.getTable().addMouseListener(this);
+        nov.getTable().addMouseListener(this);
+        dec.getTable().addMouseListener(this);
     }
 
     @Override
@@ -175,6 +186,42 @@ public class AdminCalendarPage implements ActionListener , ItemListener {
             frame.repaint();
             new AdminAddEvent(frame);
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        try {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new EditEventPage(frame);
+        }catch (NullPointerException ex){}
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        try {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new EditEventPage(frame);
+        }catch (NullPointerException ex){}
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        //System.out.println("Mouse Entered");
+        //table_column.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 
 }
