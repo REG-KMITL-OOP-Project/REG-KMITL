@@ -15,7 +15,7 @@ public class EditEventPage extends EventPage implements ActionListener {
     private JLabel editEvent;
     private ArrayList<String> list;
     public EditEventPage(JFrame frame){
-        list = new EditDataEvent().getData("ลาออก","ภาคการศึกษาที่ 1");
+        //list = new EditDataEvent().getData("ลาออก","ภาคการศึกษาที่ 1");
         super(frame);
         eventName.setText(list.get(0));
         dateStart.setText(list.get(2));
