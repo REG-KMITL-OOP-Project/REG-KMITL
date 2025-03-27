@@ -140,6 +140,7 @@ public class EditEventPage extends EventPage implements ActionListener {
                     new EditDataEvent().deleteData((Integer.valueOf(list.get(4))),Integer.valueOf(list.get(6)));
                 }
 
+
             }
             frame.getContentPane().removeAll();
             frame.revalidate();
