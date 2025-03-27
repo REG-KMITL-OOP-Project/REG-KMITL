@@ -81,10 +81,10 @@ public class CalendarPage implements ItemListener {
         r_panel.setBackground(null);
         r_panel.setBorder(null);
         r_panel.setLayout(new BoxLayout(r_panel, BoxLayout.Y_AXIS));
-        r_panel.add(sem2_1);
-        r_panel.add(spe);
         r_panel.add(sem1);
         r_panel.add(sem2);
+        r_panel.add(sem2_1);
+        r_panel.add(spe);
 
 
         scrollPane = new JScrollPane(r_panel);
