@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class ClassScheduleTable extends JPanel{
     //rowOFDay_ClassTable
@@ -23,20 +24,27 @@ public class ClassScheduleTable extends JPanel{
     private JScrollPane scroll_1;
     private JTable table_column;
     private String time_column[] = {"08.00-09.00", "09.00-10.00", "10.00-11.00", "11.00-12.00", "12.00-13.00", "13.00-14.00", "14.00-15.00", "15.00-16.00", "16.00-17.00", "17.00-18.00", "18.00-19.00", "19.00-20.00"};
-    String[][] schedule = {
-            {"Math", "", "Science", "Science", "Art"},
-            {"English", "Math", "", "History", "Art"},
-            {"PE", "PE", "Math", "", "Music"},
-            {"Math", "Science", "Science", "History", "PE"},
-            {"History", "English", "", "Math", "Art"},
-            {"History", "English", "", "Math", "Art"},
-            {"History", "English", "", "Math", "Art"}
-    };
+    String[][] schedule;
 
     //combine
     private JPanel com;
 
     public ClassScheduleTable() {
+        try{
+            classData subject = new classData();
+            schedule = new String[7][1];
+            //schedule[0] = subject.getSubject();
+            schedule[0] = subject.getSubject("MON");
+            schedule[1] = subject.getSubject("TUE");
+            schedule[2] = subject.getSubject("WED");
+//            schedule[3] = subject.getSubject("MON");
+//            schedule[4] = subject.getSubject("MON");
+//            schedule[5] = subject.getSubject("MON");
+//            schedule[6] = subject.getSubject("MON");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         //rowOFDay_ClassTable
         DefaultTableModel model_day = new DefaultTableModel(day, day_time_column);
@@ -96,8 +104,8 @@ public class ClassScheduleTable extends JPanel{
         table_column.setBorder(BorderFactory.createEmptyBorder(0,-5,-10,-3));
         table_column.setBackground(Config.bgColor_base.darker());
         table_column.setPreferredSize(new Dimension(1300,334));
-        table_column.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
+        //table_column.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table_column.getTableHeader().setResizingAllowed(true);
 
         JTableHeader header_c = table_column.getTableHeader();
         header_c.setPreferredSize(new Dimension(30,30));
@@ -106,7 +114,6 @@ public class ClassScheduleTable extends JPanel{
         header_c.setFont(Config.HEADER_SEMIBOLD[3]);
         header_c.setBorder(null);
         header_c.setReorderingAllowed(false);
-        header_c.setResizingAllowed(false);
 
         DefaultTableCellRenderer Renderer2 = new DefaultTableCellRenderer();
         Renderer.setHorizontalAlignment(SwingConstants.CENTER);

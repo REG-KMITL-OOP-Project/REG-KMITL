@@ -18,6 +18,7 @@ public class testData {
         user = new User().getUserAccount();
         db = new Database();
         this.getRoom();
+        this.getCourseName();
     }
 
     public void getRoom() throws SQLException {
@@ -27,6 +28,13 @@ public class testData {
             //then don't forget to change column = SELECT
             System.out.println(rs.getString("room"));
             System.out.println(rs.getString("section"));
+        }
+    }
+
+    public void getCourseName() throws SQLException {
+        rs = db.getQuery("SELECT course_name FROM course WHERE course_code = '06016408'");
+        while (rs.next()) {
+            System.out.println(rs.getString("course_name"));
         }
     }
 

@@ -1,6 +1,7 @@
 package dev.it22.kmitl.reg.ui.event.classSch;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
 import dev.it22.kmitl.reg.utils.Config;
 
@@ -144,7 +145,15 @@ public class ClassSchedulePage{
     }
 
     public static void main(String[] args) {
+
+        try {
+            new Login("Student01","Student1234").loginWithUsernameAndPassword();
             new ClassSchedulePage(Config.createAndShowGUI());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 
