@@ -132,6 +132,7 @@ public class AdminAddEvent extends EventPage implements ActionListener {
                     return;
                 }
                 else{
+
                     if (dateStart.getText().equals(dateEnd.getText())){
                         new AddDataEvent(eventName.getText(), description.getText(), dateStart.getText(), ((String) eventType.getSelectedItem()).strip());
                     }else {
@@ -140,7 +141,6 @@ public class AdminAddEvent extends EventPage implements ActionListener {
                     }
                 }
             }
-
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
