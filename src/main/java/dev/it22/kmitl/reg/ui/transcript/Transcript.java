@@ -18,14 +18,12 @@ public class Transcript {
 
     private static final String PDF_FILEPATH =  System.getProperty("user.home") + "/Downloads/transcript_" + dtf.format(LocalDateTime.now()) + ".pdf" ;
 
-    private Account user = new User().getUserAccount();
-
-    private String name = user.getFullName(),
-            dateOB = "July 14, 2006",
-            dateOA = (Integer.valueOf("25" +(((Student)user).getStudentId().charAt(0) +"" + ((Student)user).getStudentId().charAt(1))) - 543)+"",
-            degree = "Bachelor of Science",
-            major = ((Student)user).getMajor(),
-            studentID = ((Student)user).getStudentId(),
+    private String name ,
+            dateOB ,
+            dateOA,
+            degree,
+            major,
+            studentID,
             dateOG = "N/A";
 
     Font headerFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
@@ -43,19 +41,25 @@ public class Transcript {
     Font subHeaderFont = new Font(Font.FontFamily.TIMES_ROMAN, 9, Font.BOLDITALIC);
 
 
-    String []semester = {"1st Semester, Year, "+Integer.valueOf(dateOA) +"-"+ (Integer.valueOf(dateOA)+1), "2nd Semester, Year, "+(Integer.valueOf(dateOA)) +"-"+ (Integer.valueOf(dateOA)+1),
-                         "1st Semester, Year, "+Integer.valueOf(dateOA+1) +"-"+ (Integer.valueOf(dateOA)+2), "2nd Semester, Year, "+(Integer.valueOf(dateOA)+1) +"-"+ (Integer.valueOf(dateOA)+2),
-                         "1st Semester, Year, "+Integer.valueOf(dateOA+2) +"-"+ (Integer.valueOf(dateOA)+3), "2nd Semester, Year, "+(Integer.valueOf(dateOA)+2) +"-"+ (Integer.valueOf(dateOA)+3),
-                         "1st Semester, Year, "+Integer.valueOf(dateOA+3) +"-"+ (Integer.valueOf(dateOA)+4), "2nd Semester, Year, "+(Integer.valueOf(dateOA)+3) +"-"+ (Integer.valueOf(dateOA)+4)};
-    String [][] subject = {{"MATHEMATICS FOR INFORMATION TECHNOLOGY", "INFORMATION TECHNOLOGY FUNDAMENTALS", "INTRODUCTION TO COMPUTER SYSTEMS", "PROBLEM SOLVING AND COMPUTER PROGRAMMING", "CHARM SCHOOL", "FOUNDATION ENGLISH 1", "FOUNDATION ENGLISH 2"},
-                           {"OBJECT-ORIENTED PROGRAMMING", "PROBABILITY AND STATISTICS", "BUSINESS FUNDAMENTALS FOR INFORMATION", "DATA STRUCTURES AND ALGORITHMS", "DIGITAL CITIZEN"}};
-    String[][] subjectNumberList = {{"06016401", "06016402", "06016411", "06066303", "90642999", "90644007", "90644008"},
-                                    {"06016408", "06066001", "06066101", "06066301", "90641007"}};
-    int[][] creditsList = {{3, 3, 3, 3, 3, 3, 3},
-                           {3, 3, 3, 3, 3}};
-    String[][] gradeList = {{"A", "B+", "B+", "A", "S", "S", "S"}};
+    String []semester;
+    String [][] subject;
+    String[][] subjectNumberList;
+    int[][] creditsList;
+    String[][] gradeList;
 
-    public Transcript() {
+    public Transcript(String name,String dateOB,String dateOA,String degree, String major, String studentID, String[] semester, String [][] subject, String[][] subjectNumberList, int[][] creditsList, String[][] gradeList ) {
+        this.name=name;
+        this.dateOB=dateOB;
+        this.dateOA=dateOA;
+        this.degree=degree;
+        this.major=major;
+        this.studentID=studentID;
+        this.semester=semester;
+        this.subject=subject;
+        this.subjectNumberList=subjectNumberList;
+        this.creditsList=creditsList;
+        this.gradeList=gradeList;
+
         Document document = new Document(PageSize.A4, 28.5f, 28.5f, 18.4f, 18.4f);
 
         String[] subHeaderList = {"Name", "Date of Birth", "Date of Admission", "Degree", "Major"};
@@ -299,9 +303,5 @@ public class Transcript {
         cell.setPaddingTop(padding);
         cell.setNoWrap(true);
         return cell;
-    }
-
-    public static void main(String[] args) {
-        new Transcript();
     }
 }
