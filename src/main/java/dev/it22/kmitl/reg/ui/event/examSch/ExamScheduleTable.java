@@ -1,5 +1,6 @@
 package dev.it22.kmitl.reg.ui.event.examSch;
 
+import dev.it22.kmitl.reg.ui.event.classSch.classData;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
@@ -8,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class ExamScheduleTable extends JPanel {
 
@@ -25,13 +27,22 @@ public class ExamScheduleTable extends JPanel {
             {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","L123"}
     };
 
+    private examTableData aaa;
+
 
     public ExamScheduleTable(){
+        try{
+            aaa = new examTableData();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         regularFont = Config.NORMAL_REGULAR;
         innerFont = regularFont.deriveFont(15f);
 
         //All about JTable
-        DefaultTableModel model = new DefaultTableModel(testData, columnNames);
+        DefaultTableModel model = new DefaultTableModel(aaa.getData(), columnNames);
         examSchedule = new JTable(model);
         examSchedule.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         examSchedule.setGridColor(Config.bgColor_hard);
