@@ -14,18 +14,18 @@ public class monthTableCalendar implements MouseListener{
     private calendarData data = new calendarData();
 
     public monthTableCalendar() {
-        jan = new calendarTable("มกราคม", data.getDataEvents(1));
-        feb = new calendarTable("กุมภาพันธ์", data.getDataEvents(2));
-        mar = new calendarTable("มีนาคม", data.getDataEvents(3));
-        apr = new calendarTable("เมษายน", data.getDataEvents(4));
-        may = new calendarTable("พฤษภาคม", data.getDataEvents(5));
-        jun = new calendarTable("มิถุนายน", data.getDataEvents(6));
-        jul = new calendarTable("กรกฎาคม", data.getDataEvents(7));
-        aug = new calendarTable("สิงหาคม", data.getDataEvents(8));
-        sep = new calendarTable("กันยายน", data.getDataEvents(9));
-        oct = new calendarTable("ตุลาคม", data.getDataEvents(10));
-        nov = new calendarTable("พฤศจิกายน", data.getDataEvents(11));
-        dec = new calendarTable("ธันวาคม", data.getDataEvents(12));
+        jan = new calendarTable("มกราคม", data.eventsData(1));
+        feb = new calendarTable("กุมภาพันธ์", data.eventsData(2));
+        mar = new calendarTable("มีนาคม", data.eventsData(3));
+        apr = new calendarTable("เมษายน", data.eventsData(4));
+        may = new calendarTable("พฤษภาคม", data.eventsData(5));
+        jun = new calendarTable("มิถุนายน", data.eventsData(6));
+        jul = new calendarTable("กรกฎาคม", data.eventsData(7));
+        aug = new calendarTable("สิงหาคม", data.eventsData(8));
+        sep = new calendarTable("กันยายน", data.eventsData(9));
+        oct = new calendarTable("ตุลาคม", data.eventsData(10));
+        nov = new calendarTable("พฤศจิกายน", data.eventsData(11));
+        dec = new calendarTable("ธันวาคม", data.eventsData(12));
 
         sem1 = new JPanel();
         sem1.setBackground(null);

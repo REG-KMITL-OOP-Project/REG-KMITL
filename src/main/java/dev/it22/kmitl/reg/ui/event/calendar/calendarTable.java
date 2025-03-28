@@ -24,17 +24,8 @@ public class calendarTable extends JPanel {
     private JPanel column;
     private JTable table_column;
     private String event_column[] = {"date", "event name", "type",};
-    private String[][] events =     {
-       {"09/08/68", "เปิดเทอมภาคการศึกษาที่ 1", "ภาคเรียนที่ 1"},
-        {"09/08/68", "เปิดเทอมภาคการศึกษาที่ 1", "ภาคเรียนที่ 1"},
-       {"09/08/68", "เปิดเทอมภาคการศึกษาที่ 1", "ภาคเรียนที่ 1"},
-   };
+    private String[][] events;
 
-//    {
-//        {"09/08/68", "เปิดเทอมภาคการศึกษาที่ 1", "ภาคเรียนที่ 1"},
-//        {"09/08/68", "เปิดเทอมภาคการศึกษาที่ 1", "ภาคเรียนที่ 1"},
-//        {"09/08/68", "เปิดเทอมภาคการศึกษาที่ 1", "ภาคเรียนที่ 1"},
-//    };
 
     //combine
     private JPanel com;
@@ -45,24 +36,19 @@ public class calendarTable extends JPanel {
         this(month,null,null);
     }
 
-    public calendarTable(String month, ArrayList events_data) {
+    public calendarTable(String month, String[][] events_data) {
         this(month, null, events_data);
     }
 
-    public calendarTable(String month, JFrame frame, ArrayList events_data) {
+    public calendarTable(String month, JFrame frame, String[][] events_data) {
         this.frame = frame;
 
-//        if (events_data != null) {
-//            events = new String[1][events_data.size()];
-//            int n = 0;
-//            while (!events_data.isEmpty()) {
-//                events[0] = (String[]) events_data.get(n);
-//                n++;
-//            }
-//        }
-//        else{
-//            events = new String[][]{};
-//        }
+        if (events_data.length > 0) {
+            events = events_data;
+        }
+        else{
+            events = new String[][]{};
+        }
 
 
         //column_ClassTable

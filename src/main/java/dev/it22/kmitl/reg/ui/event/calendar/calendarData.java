@@ -19,18 +19,39 @@ public class calendarData {
     private Database db;
     ResultSet rs;
 
-    //SELECT `Date`,`name`,`type` FROM `Event` WHERE `Date` BETWEEN '2026-03-1' AND '2026-03-31';
+    private String[][] events;
 
     public calendarData() {
         try {
             user = new User().getUserAccount();
             db = new Database();
-//            this.getEvent();
-//            this.getName();
-//            this.getDate();
-//            this.getType();
+
             this.getDataEvents(8);
-        }catch (Exception e) {}
+            events = new String[1][3];
+            for (String[] i : this.getDataEvents(8)){
+                events[0][0] = i[0];
+                events[0][1] = i[1];
+                events[0][2] = i[2];
+                System.out.println("AHA");
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String[][] eventsData(int month) {
+        try{
+            String[][] events = new String[1][3];
+            for (String[] i : this.getDataEvents(month)){
+                events[0][0] = i[0];
+                events[0][1] = i[1];
+                events[0][2] = i[2];
+            }
+            return events;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public ArrayList<String[]> getDataEvents(int month) {
@@ -40,19 +61,19 @@ public class calendarData {
             String q = "SELECT Date, name, type FROM Event WHERE Date " + this.setDateFormat(month);
             rs = db.getQuery(q);
             while (rs.next()) {
-                String[] ev = new String[0];
-                //System.out.println(rs.getString("Date") + " " + rs.getString("name") + " " + rs.getString("type"));
+                String[] ev;
                 ev = new String[]{
-                                                rs.getString("Date").replaceAll("-", "/"),
-                                                rs.getString("name"),
-                                                rs.getString("type")
-                                                };
+                                  rs.getString("Date").replaceAll("-", "/"),
+                                  rs.getString("name"),
+                                  rs.getString("type")
+                                  };
                 System.out.println(Arrays.toString(ev));
                 events.add(ev);
             }
             System.out.println(events);
             return events;
         }catch (Exception e){
+            System.out.println("Exception");
             return null;
         }
     }

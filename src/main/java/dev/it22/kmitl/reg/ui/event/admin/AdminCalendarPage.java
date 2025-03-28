@@ -1,6 +1,8 @@
 package dev.it22.kmitl.reg.ui.event.admin;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import dev.it22.kmitl.reg.controller.auth.Login;
+import dev.it22.kmitl.reg.ui.event.calendar.CalendarPage;
 import dev.it22.kmitl.reg.ui.event.calendar.calendarTable;
 import dev.it22.kmitl.reg.ui.event.calendar.monthTableCalendar;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
@@ -156,7 +158,13 @@ public class AdminCalendarPage extends monthTableCalendar implements ActionListe
     }
 
     public static void main(String[] args) {
-        new AdminCalendarPage(Config.createAndShowGUI());
+        try {
+            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
+            new AdminCalendarPage(Config.createAndShowGUI());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
 
