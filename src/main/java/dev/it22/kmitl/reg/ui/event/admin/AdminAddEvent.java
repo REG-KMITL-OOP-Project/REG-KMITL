@@ -130,9 +130,12 @@ public class AdminAddEvent extends EventPage implements ActionListener {
                     return;
                 }
                 else{
-                    new AddDataEvent(eventName.getText() , description.getText() , dateStart.getText() , ((String) eventType.getSelectedItem()).strip());
-                    new AddDataEvent(eventName.getText() , description.getText() , dateEnd.getText() , ((String) eventType.getSelectedItem()).strip());
-
+                    if (dateStart.getText().equals(dateEnd.getText())){
+                        new AddDataEvent(eventName.getText(), description.getText(), dateStart.getText(), ((String) eventType.getSelectedItem()).strip());
+                    }else {
+                        new AddDataEvent(eventName.getText(), description.getText(), dateStart.getText(), ((String) eventType.getSelectedItem()).strip());
+                        new AddDataEvent(eventName.getText(), description.getText(), dateEnd.getText(), ((String) eventType.getSelectedItem()).strip());
+                    }
                 }
             }
             frame.getContentPane().removeAll();

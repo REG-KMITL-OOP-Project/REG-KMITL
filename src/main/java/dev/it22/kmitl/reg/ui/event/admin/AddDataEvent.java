@@ -10,7 +10,8 @@ public class AddDataEvent {
         catch (Exception e) {
 
         }
-    } /*
+    }
+    /*
     public static void main(String[] args) {
         new AddDataEvent("Tech Conference 2025","งานประชุมเทคโนโลยีระดับนานาชาติ","2025-06-15","Conference");
     }*/

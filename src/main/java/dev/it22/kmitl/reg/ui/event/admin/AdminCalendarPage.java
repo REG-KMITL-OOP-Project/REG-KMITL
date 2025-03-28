@@ -122,21 +122,26 @@ public class AdminCalendarPage extends monthTableCalendar implements ActionListe
     public void mouseClicked(MouseEvent e) {
         System.out.println("mouseClicked");
         try {
-            frame.getContentPane().removeAll();
-            frame.revalidate();
-            frame.repaint();
-            new EditEventPage(frame);
+            if(!((String) ((JTable)e.getSource()).getValueAt(0, 1)).equals("")) {
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                new EditEventPage(frame, (String) ((JTable) e.getSource()).getValueAt(0, 1), (String) ((JTable) e.getSource()).getValueAt(0, 2));
+            }
         }catch (NullPointerException ex){}
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         System.out.println("mousePressed");
         try {
-            frame.getContentPane().removeAll();
-            frame.revalidate();
-            frame.repaint();
-            new EditEventPage(frame);
+            if(!((String) ((JTable)e.getSource()).getValueAt(0, 1)).equals("")) {
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                new EditEventPage(frame, (String) ((JTable) e.getSource()).getValueAt(0, 1), (String) ((JTable) e.getSource()).getValueAt(0, 2));
+            }
         }catch (NullPointerException ex){}
     }
 
