@@ -1,5 +1,6 @@
 package dev.it22.kmitl.reg.ui.event.examSch;
 
+import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.*;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
@@ -143,7 +144,13 @@ public class TeacherExamSchedulePage{
     }
 
     public static void main(String[] args) {
-        new ExamSchedulePage(Config.createAndShowGUI());
+        try {
+            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
+            new TeacherExamSchedulePage(Config.createAndShowGUI());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
