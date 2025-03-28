@@ -25,15 +25,7 @@ public class calendarData {
         try {
             user = new User().getUserAccount();
             db = new Database();
-
-            this.getDataEvents(8);
-            events = new String[1][3];
-            for (String[] i : this.getDataEvents(8)){
-                events[0][0] = i[0];
-                events[0][1] = i[1];
-                events[0][2] = i[2];
-                System.out.println("AHA");
-            }
+            
         }catch (Exception e) {
             e.printStackTrace();
         }
