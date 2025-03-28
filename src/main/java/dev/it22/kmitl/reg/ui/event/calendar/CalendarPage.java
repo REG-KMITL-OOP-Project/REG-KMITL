@@ -12,15 +12,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-public class CalendarPage implements ItemListener {
+public class CalendarPage extends monthTableCalendar implements ItemListener {
     private JFrame frame;
     private JPanel r_panel, pn1;
     private JScrollPane scrollPane;
     private newHeader header;
-    private calendarTable jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
     private SemesterCategory category;
-
-    private JPanel sem1, sem2, sem2_1, spe;
 
     public CalendarPage(JFrame frame) {
         try{
@@ -31,61 +28,14 @@ public class CalendarPage implements ItemListener {
 
         this.frame = frame;
 
-        jan = new calendarTable("มกราคม");
-        feb = new calendarTable("กุมภาพันธ์");
-        mar = new calendarTable("มีนาคม");
-        apr = new calendarTable("เมษายน");
-        may = new calendarTable("พฤษภาคม");
-        jun = new calendarTable("มิถุนายน");
-        jul = new calendarTable("กรกฎาคม");
-        aug = new calendarTable("สิงหาคม");
-        sep = new calendarTable("กันยายน");
-        oct = new calendarTable("ตุลาคม");
-        nov = new calendarTable("พฤศจิกายน");
-        dec = new calendarTable("ธันวาคม");
-
-        sem1 = new JPanel();
-        sem1.setBackground(null);
-        sem1.setBorder(null);
-        sem1.setLayout(new BoxLayout(sem1, BoxLayout.Y_AXIS));
-
-        sem2 = new JPanel();
-        sem2.setBackground(null);
-        sem2.setBorder(null);
-        sem2.setLayout(new BoxLayout(sem2, BoxLayout.Y_AXIS));
-
-        sem2_1 = new JPanel();
-        sem2_1.setBackground(null);
-        sem2_1.setBorder(null);
-        sem2_1.setLayout(new BoxLayout(sem2_1, BoxLayout.Y_AXIS));
-
-        spe = new JPanel();
-        spe.setBackground(null);
-        spe.setBorder(null);
-        spe.setLayout(new BoxLayout(spe, BoxLayout.Y_AXIS));
-
-        sem2_1.add(jan);
-        sem2_1.add(feb);
-        sem2_1.add(mar);
-        spe.add(apr);
-        spe.add(may);
-        sem1.add(jun);
-        sem1.add(jul);
-        sem1.add(aug);
-        sem1.add(sep);
-        sem1.add(oct);
-        sem2.add(nov);
-        sem2.add(dec);
-
         r_panel = new JPanel();
         r_panel.setBackground(null);
         r_panel.setBorder(null);
         r_panel.setLayout(new BoxLayout(r_panel, BoxLayout.Y_AXIS));
-        r_panel.add(sem1);
-        r_panel.add(sem2);
-        r_panel.add(sem2_1);
-        r_panel.add(spe);
-
+        r_panel.add(super.getSem1());
+        r_panel.add(super.getSem2());
+        r_panel.add(super.getSem2_1());
+        r_panel.add(super.getSpe());
 
         scrollPane = new JScrollPane(r_panel);
         scrollPane.setBackground(null);
@@ -114,24 +64,24 @@ public class CalendarPage implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
         if (category.getSem1().isSelected()) {
-            sem1.setVisible(false);
+            super.getSem1().setVisible(false);
         }
         if (!category.getSem1().isSelected()) {
-            sem1.setVisible(true);
+            super.getSem1().setVisible(true);
         }
         if (category.getSem2().isSelected()) {
-            sem2.setVisible(false);
-            sem2_1.setVisible(false);
+            super.getSem2().setVisible(false);
+            super.getSem2_1().setVisible(false);
         }
         if (!category.getSem2().isSelected()) {
-            sem2.setVisible(true);
-            sem2_1.setVisible(true);
+            super.getSem2().setVisible(true);
+            super.getSem2_1().setVisible(true);
         }
         if (!category.getSpecialSem().isSelected()) {
-            spe.setVisible(true);
+            super.getSpe().setVisible(true);
         }
         if (category.getSpecialSem().isSelected()) {
-            spe.setVisible(false);
+            super.getSpe().setVisible(false);
         }
     }
 

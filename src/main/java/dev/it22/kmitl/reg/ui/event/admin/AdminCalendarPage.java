@@ -2,6 +2,7 @@ package dev.it22.kmitl.reg.ui.event.admin;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.ui.event.calendar.calendarTable;
+import dev.it22.kmitl.reg.ui.event.calendar.monthTableCalendar;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
 import dev.it22.kmitl.reg.ui.event.calendar.SemesterCategory;
 import dev.it22.kmitl.reg.utils.Config;
@@ -11,18 +12,15 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
-public class AdminCalendarPage implements ActionListener , ItemListener, MouseListener {
+public class AdminCalendarPage extends monthTableCalendar implements ActionListener , ItemListener{
     private JFrame frame;
     private JPanel r_panel, pn1;
     private JScrollPane scrollPane;
     private newHeader header;
-    private calendarTable jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
     private SemesterCategory category;
 
     private JButton create;
     private JPanel create_panel, back_panel;
-
-    private JPanel sem1, sem2, sem2_1, spe;
 
     public AdminCalendarPage(JFrame frame){
         try{
@@ -46,61 +44,14 @@ public class AdminCalendarPage implements ActionListener , ItemListener, MouseLi
         create_panel.setBackground(null);
         create_panel.setBorder(null);
 
-        jan = new calendarTable("มกราคม", frame);
-        feb = new calendarTable("กุมภาพันธ์", frame);
-        mar = new calendarTable("มีนาคม", frame);
-        apr = new calendarTable("เมษายน", frame);
-        may = new calendarTable("พฤษภาคม", frame);
-        jun = new calendarTable("มิถุนายน", frame);
-        jul = new calendarTable("กรกฎาคม", frame);
-        aug = new calendarTable("สิงหาคม", frame);
-        sep = new calendarTable("กันยายน", frame);
-        oct = new calendarTable("ตุลาคม", frame);
-        nov = new calendarTable("พฤศจิกายน", frame);
-        dec = new calendarTable("ธันวาคม", frame);
-
-
-        sem1 = new JPanel();
-        sem1.setBackground(null);
-        sem1.setBorder(null);
-        sem1.setLayout(new BoxLayout(sem1, BoxLayout.Y_AXIS));
-
-        sem2 = new JPanel();
-        sem2.setBackground(null);
-        sem2.setBorder(null);
-        sem2.setLayout(new BoxLayout(sem2, BoxLayout.Y_AXIS));
-
-        sem2_1 = new JPanel();
-        sem2_1.setBackground(null);
-        sem2_1.setBorder(null);
-        sem2_1.setLayout(new BoxLayout(sem2_1, BoxLayout.Y_AXIS));
-
-        spe = new JPanel();
-        spe.setBackground(null);
-        spe.setBorder(null);
-        spe.setLayout(new BoxLayout(spe, BoxLayout.Y_AXIS));
-
-        sem2_1.add(jan);
-        sem2_1.add(feb);
-        sem2_1.add(mar);
-        spe.add(apr);
-        spe.add(may);
-        sem1.add(jun);
-        sem1.add(jul);
-        sem1.add(aug);
-        sem1.add(sep);
-        sem1.add(oct);
-        sem2.add(nov);
-        sem2.add(dec);
-
         r_panel = new JPanel();
         r_panel.setBackground(null);
         r_panel.setBorder(null);
         r_panel.setLayout(new BoxLayout(r_panel, BoxLayout.Y_AXIS));
-        r_panel.add(spe);
-        r_panel.add(sem1);
-        r_panel.add(sem2);
-        r_panel.add(sem2_1);
+        r_panel.add(super.getSem1());
+        r_panel.add(super.getSem2());
+        r_panel.add(super.getSem2_1());
+        r_panel.add(super.getSpe());
 
         scrollPane = new JScrollPane(r_panel);
         scrollPane.setBackground(null);
@@ -127,57 +78,34 @@ public class AdminCalendarPage implements ActionListener , ItemListener, MouseLi
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-
-
         create.addActionListener(this);
         category.getSem1().addItemListener(this);
         category.getSem2().addItemListener(this);
         category.getSpecialSem().addItemListener(this);
-        jan.getTable().addMouseListener(this);
-        feb.getTable().addMouseListener(this);
-        mar.getTable().addMouseListener(this);
-        apr.getTable().addMouseListener(this);
-        may.getTable().addMouseListener(this);
-        jun.getTable().addMouseListener(this);
-        jul.getTable().addMouseListener(this);
-        aug.getTable().addMouseListener(this);
-        sep.getTable().addMouseListener(this);
-        oct.getTable().addMouseListener(this);
-        nov.getTable().addMouseListener(this);
-        dec.getTable().addMouseListener(this);
     }
 
     @Override
     public void itemStateChanged(ItemEvent e) {
         if (category.getSem1().isSelected()) {
-            System.out.println("sem1");
-            sem1.setVisible(false);
+            super.getSem1().setVisible(false);
         }
         if (!category.getSem1().isSelected()) {
-            System.out.println("sem1");
-            sem1.setVisible(true);
+            super.getSem1().setVisible(true);
         }
         if (category.getSem2().isSelected()) {
-            System.out.println("sem2");
-            sem2.setVisible(false);
-            sem2_1.setVisible(false);
+            super.getSem2().setVisible(false);
+            super.getSem2_1().setVisible(false);
         }
         if (!category.getSem2().isSelected()) {
-            System.out.println("sem2");
-            sem2.setVisible(true);
-            sem2_1.setVisible(true);
+            super.getSem2().setVisible(true);
+            super.getSem2_1().setVisible(true);
         }
         if (!category.getSpecialSem().isSelected()) {
-            spe.setVisible(true);
+            super.getSpe().setVisible(true);
         }
         if (category.getSpecialSem().isSelected()) {
-            System.out.println("special");
-            spe.setVisible(false);
+            super.getSpe().setVisible(false);
         }
-    }
-
-    public static void main(String[] args) {
-        new AdminCalendarPage(Config.createAndShowGUI());
     }
     public void actionPerformed(ActionEvent ev){
         if (ev.getSource() == create) {
@@ -190,6 +118,7 @@ public class AdminCalendarPage implements ActionListener , ItemListener, MouseLi
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        System.out.println("mouseClicked");
         try {
             frame.getContentPane().removeAll();
             frame.revalidate();
@@ -200,6 +129,7 @@ public class AdminCalendarPage implements ActionListener , ItemListener, MouseLi
 
     @Override
     public void mousePressed(MouseEvent e) {
+        System.out.println("mousePressed");
         try {
             frame.getContentPane().removeAll();
             frame.revalidate();
@@ -215,8 +145,9 @@ public class AdminCalendarPage implements ActionListener , ItemListener, MouseLi
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        //System.out.println("Mouse Entered");
-        //table_column.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        //super.mouseEntered(e);
+        //r_panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     @Override
@@ -224,4 +155,12 @@ public class AdminCalendarPage implements ActionListener , ItemListener, MouseLi
 
     }
 
+    public static void main(String[] args) {
+        new AdminCalendarPage(Config.createAndShowGUI());
+    }
 }
+
+
+
+
+

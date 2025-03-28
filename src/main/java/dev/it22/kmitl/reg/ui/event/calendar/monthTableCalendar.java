@@ -1,0 +1,157 @@
+package dev.it22.kmitl.reg.ui.event.calendar;
+
+import dev.it22.kmitl.reg.ui.event.admin.EditEventPage;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class monthTableCalendar implements MouseListener{
+    private calendarTable jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
+    private JPanel sem1, sem2, sem2_1, spe;
+
+    public monthTableCalendar() {
+        jan = new calendarTable("มกราคม");
+        feb = new calendarTable("กุมภาพันธ์");
+        mar = new calendarTable("มีนาคม");
+        apr = new calendarTable("เมษายน");
+        may = new calendarTable("พฤษภาคม");
+        jun = new calendarTable("มิถุนายน");
+        jul = new calendarTable("กรกฎาคม");
+        aug = new calendarTable("สิงหาคม");
+        sep = new calendarTable("กันยายน");
+        oct = new calendarTable("ตุลาคม");
+        nov = new calendarTable("พฤศจิกายน");
+        dec = new calendarTable("ธันวาคม");
+
+        sem1 = new JPanel();
+        sem1.setBackground(null);
+        sem1.setBorder(null);
+        sem1.setLayout(new BoxLayout(sem1, BoxLayout.Y_AXIS));
+
+        sem2 = new JPanel();
+        sem2.setBackground(null);
+        sem2.setBorder(null);
+        sem2.setLayout(new BoxLayout(sem2, BoxLayout.Y_AXIS));
+
+        sem2_1 = new JPanel();
+        sem2_1.setBackground(null);
+        sem2_1.setBorder(null);
+        sem2_1.setLayout(new BoxLayout(sem2_1, BoxLayout.Y_AXIS));
+
+        spe = new JPanel();
+        spe.setBackground(null);
+        spe.setBorder(null);
+        spe.setLayout(new BoxLayout(spe, BoxLayout.Y_AXIS));
+
+        sem2_1.add(jan);
+        sem2_1.add(feb);
+        sem2_1.add(mar);
+        spe.add(apr);
+        spe.add(may);
+        sem1.add(jun);
+        sem1.add(jul);
+        sem1.add(aug);
+        sem1.add(sep);
+        sem1.add(oct);
+        sem2.add(nov);
+        sem2.add(dec);
+
+        jan.getTable().addMouseListener(this);
+        feb.getTable().addMouseListener(this);
+        mar.getTable().addMouseListener(this);
+        apr.getTable().addMouseListener(this);
+        may.getTable().addMouseListener(this);
+        jun.getTable().addMouseListener(this);
+        jul.getTable().addMouseListener(this);
+        aug.getTable().addMouseListener(this);
+        sep.getTable().addMouseListener(this);
+        oct.getTable().addMouseListener(this);
+        nov.getTable().addMouseListener(this);
+        dec.getTable().addMouseListener(this);
+
+    }
+    public JPanel getSem1() {
+        return sem1;
+    }
+    public JPanel getSem2() {
+        return sem2;
+    }
+    public JPanel getSem2_1() {
+        return sem2_1;
+    }
+    public JPanel getSpe() {
+        return spe;
+    }
+
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        //why it works only with panel lol
+        //sem1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    public calendarTable getJan() {
+        return jan;
+    }
+    public calendarTable getFeb() {
+        return feb;
+    }
+    public calendarTable getMar() {
+        return mar;
+    }
+    public calendarTable getApr() {
+        return apr;
+    }
+    public calendarTable getMay() {
+        return may;
+    }
+    public calendarTable getJun() {
+        return jun;
+    }
+    public calendarTable getJul() {
+        return jul;
+    }
+    public calendarTable getAug() {
+        return aug;
+    }
+    public calendarTable getSep() {
+        return sep;
+    }
+    public calendarTable getOct() {
+        return oct;
+    }
+    public calendarTable getNov() {
+        return nov;
+    }
+    public calendarTable getDec() {
+        return dec;
+    }
+
+}
+
+
+
+
