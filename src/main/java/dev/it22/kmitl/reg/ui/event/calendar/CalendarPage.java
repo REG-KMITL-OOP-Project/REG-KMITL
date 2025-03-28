@@ -88,14 +88,14 @@ public class CalendarPage extends monthTableCalendar implements ItemListener {
     }
 
     public static void main(String[] args) {
-
-        try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-            new CalendarPage(Config.createAndShowGUI());
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        new CalendarPage(Config.createAndShowGUI());
+//        try {
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
 
     }
 }

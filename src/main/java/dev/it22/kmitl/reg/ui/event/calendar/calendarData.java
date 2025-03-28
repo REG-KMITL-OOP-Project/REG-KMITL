@@ -56,7 +56,6 @@ public class calendarData {
             return null;
         }
     }
-
     public String setDateFormat(int month) {
         // 6-12 (25) : 1-5 (26)
         // 30 : 4/6/9/11

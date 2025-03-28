@@ -24,7 +24,11 @@ public class calendarTable extends JPanel {
     private JPanel column;
     private JTable table_column;
     private String event_column[] = {"date", "event name", "type",};
-    private String[][] events;
+    private String[][] events =     {
+       {"09/08/68", "เปิดเทอมภาคการศึกษาที่ 1", "ภาคเรียนที่ 1"},
+        {"09/08/68", "เปิดเทอมภาคการศึกษาที่ 1", "ภาคเรียนที่ 1"},
+       {"09/08/68", "เปิดเทอมภาคการศึกษาที่ 1", "ภาคเรียนที่ 1"},
+   };
 
 //    {
 //        {"09/08/68", "เปิดเทอมภาคการศึกษาที่ 1", "ภาคเรียนที่ 1"},
@@ -48,17 +52,17 @@ public class calendarTable extends JPanel {
     public calendarTable(String month, JFrame frame, ArrayList events_data) {
         this.frame = frame;
 
-        if (events_data != null) {
-            events = new String[1][events_data.size()];
-            int n = 0;
-            while (!events_data.isEmpty()) {
-                events[0] = (String[]) events_data.get(n);
-                n++;
-            }
-        }
-        else{
-            events = new String[][]{};
-        }
+//        if (events_data != null) {
+//            events = new String[1][events_data.size()];
+//            int n = 0;
+//            while (!events_data.isEmpty()) {
+//                events[0] = (String[]) events_data.get(n);
+//                n++;
+//            }
+//        }
+//        else{
+//            events = new String[][]{};
+//        }
 
 
         //column_ClassTable
