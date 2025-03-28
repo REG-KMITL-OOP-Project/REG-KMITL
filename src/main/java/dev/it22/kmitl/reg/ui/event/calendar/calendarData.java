@@ -25,7 +25,7 @@ public class calendarData {
         try {
             user = new User().getUserAccount();
             db = new Database();
-            
+
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,9 +79,17 @@ public class calendarData {
             start += "2026-0" + month + "-01";
             end += "2026-0" + month + "-28";
         }
-        else if(month == 4 || month == 6 || month == 9) {
+        else if (month == 61) {
+            start += "2026-06-01";
+            end += "2026-06-10";
+        }
+        else if(month == 4 || month == 9) {
             start += "2026-0" + month + "-01";
             end += "2026-0" + month + "-30";
+        }
+        else if(month == 6) {
+            start += "2025-0" + month + "-10";
+            end += "2025-0" + month + "-30";
         }
         else if (month == 11) {
             start += "2026-" + month + "-01";

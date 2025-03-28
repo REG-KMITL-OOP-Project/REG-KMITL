@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class monthTableCalendar implements MouseListener{
-    private calendarTable jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
+    private calendarTable jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec, jun_spe;
     private JPanel sem1, sem2, sem2_1, spe;
     private calendarData data = new calendarData();
 
@@ -26,6 +26,7 @@ public class monthTableCalendar implements MouseListener{
         oct = new calendarTable("ตุลาคม", data.eventsData(10));
         nov = new calendarTable("พฤศจิกายน", data.eventsData(11));
         dec = new calendarTable("ธันวาคม", data.eventsData(12));
+        jun_spe = new calendarTable("มิถุนายน", data.eventsData(61));
 
         sem1 = new JPanel();
         sem1.setBackground(null);
@@ -52,6 +53,7 @@ public class monthTableCalendar implements MouseListener{
         sem2_1.add(mar);
         spe.add(apr);
         spe.add(may);
+        spe.add(jun_spe);
         sem1.add(jun);
         sem1.add(jul);
         sem1.add(aug);
