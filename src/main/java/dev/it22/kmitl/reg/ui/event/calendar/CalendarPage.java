@@ -1,6 +1,8 @@
 package dev.it22.kmitl.reg.ui.event.calendar;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import dev.it22.kmitl.reg.controller.auth.Login;
+import dev.it22.kmitl.reg.ui.event.classSch.classData;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
 import dev.it22.kmitl.reg.utils.Config;
 
@@ -86,6 +88,14 @@ public class CalendarPage extends monthTableCalendar implements ItemListener {
     }
 
     public static void main(String[] args) {
-        new CalendarPage(Config.createAndShowGUI());
+
+        try {
+            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+            new CalendarPage(Config.createAndShowGUI());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
