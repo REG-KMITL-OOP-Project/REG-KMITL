@@ -30,17 +30,17 @@ public class classData {
         try{
             String q = null;
             if (user instanceof Student) {
-                q = "SELECT room, course_id, section_id FROM section WHERE section = " + ((Student)user).getSection() + " AND day_of_week = '" + day + "'" ;
+                q = "SELECT room, course_id, section_id, section FROM section WHERE section = " + ((Student)user).getSection() + " AND day_of_week = '" + day + "'" ;
             }
             else if (user instanceof Prof){
-                q = "SELECT room, course_id, section_id FROM section WHERE prof_id = " + ((Prof)user).getProf_id() + " AND day_of_week = '" + day + "'" ;
+                q = "SELECT room, course_id, section_id, section FROM section WHERE prof_id = " + ((Prof)user).getProf_id() + " AND day_of_week = '" + day + "'" ;
             }
             ResultSet rs = db.getQuery(q);
             int i = 0;
             while (rs.next()) {
                 String[] ject;
                 String sub = "";
-                sub += "[" + rs.getString("room") + "] " + this.getCourseName(rs.getString("course_id"));
+                sub += "[" + rs.getString("room") + "] " + this.getCourseName(rs.getString("course_id")) + " (SECTION " + rs.getString("section") + ")";
                 //System.out.println(sub);
 
                 //add subject at table by time
