@@ -59,10 +59,10 @@ public class calendarData {
                                   rs.getString("name"),
                                   rs.getString("type")
                                   };
-                System.out.println(Arrays.toString(ev));
+                //System.out.println(Arrays.toString(ev));
                 events.add(ev);
             }
-            System.out.println(events);
+            //System.out.println(events);
             return events;
         }catch (Exception e){
             System.out.println("Exception");

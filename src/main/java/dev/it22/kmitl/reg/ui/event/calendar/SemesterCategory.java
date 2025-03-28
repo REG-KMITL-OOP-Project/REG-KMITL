@@ -22,6 +22,9 @@ public class SemesterCategory extends JPanel{
         sem1 = new JCheckBox("   ภาคการศึกษาที่ 1");
         sem2 = new JCheckBox("   ภาคการศึกษาที่ 2");
         specialSem = new JCheckBox("   ภาคการศึกษาพิเศษ");
+        sem1.setSelected(true);
+        sem2.setSelected(true);
+        specialSem.setSelected(true);
 
 
         sem1.setFont(Config.HEADER_REGULAR[3]);

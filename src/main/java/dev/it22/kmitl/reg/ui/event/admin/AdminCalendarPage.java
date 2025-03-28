@@ -89,24 +89,24 @@ public class AdminCalendarPage extends monthTableCalendar implements ActionListe
     @Override
     public void itemStateChanged(ItemEvent e) {
         if (category.getSem1().isSelected()) {
-            super.getSem1().setVisible(false);
-        }
-        if (!category.getSem1().isSelected()) {
             super.getSem1().setVisible(true);
         }
-        if (category.getSem2().isSelected()) {
-            super.getSem2().setVisible(false);
-            super.getSem2_1().setVisible(false);
+        if (!category.getSem1().isSelected()) {
+            super.getSem1().setVisible(false);
         }
-        if (!category.getSem2().isSelected()) {
+        if (category.getSem2().isSelected()) {
             super.getSem2().setVisible(true);
             super.getSem2_1().setVisible(true);
         }
+        if (!category.getSem2().isSelected()) {
+            super.getSem2().setVisible(false);
+            super.getSem2_1().setVisible(false);
+        }
         if (!category.getSpecialSem().isSelected()) {
-            super.getSpe().setVisible(true);
+            super.getSpe().setVisible(false);
         }
         if (category.getSpecialSem().isSelected()) {
-            super.getSpe().setVisible(false);
+            super.getSpe().setVisible(true);
         }
     }
     public void actionPerformed(ActionEvent ev){
