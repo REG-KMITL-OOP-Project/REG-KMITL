@@ -6,15 +6,28 @@ import dev.it22.kmitl.reg.utils.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class EditEventPage extends EventPage implements ActionListener {
     private JPanel panelSave,panelDel,panelCan;
     private RoundedButtonWithColor delete,save,cancel;
     private JLabel editEvent;
-
+    private ArrayList<String> list;
     public EditEventPage(JFrame frame){
+        //list = new EditDataEvent().getData("ลาออก","ภาคการศึกษาที่ 1");
         super(frame);
+        eventName.setText(list.get(0));
+        dateStart.setText(list.get(2));
+        dateEnd.setText(list.get(5));
+        description.setText(list.get(1));
+        eventType.setSelectedItem(("   ")+(list.get(3)));
+        showEventName = false; showDateStart = false; showDateEnd = false; showDescription = false;
+        eventName.setForeground(Color.black);
+        dateStart.setForeground(Color.black);
+        dateEnd.setForeground(Color.black);
+        description.setForeground(Color.black);
+
         panelSave = new JPanel();
         panelDel = new JPanel();
         panelCan = new JPanel();
@@ -113,16 +126,23 @@ public class EditEventPage extends EventPage implements ActionListener {
         }else if (ev.getSource().equals(cal) || ev.getSource().equals(del)) {
             dialog.setVisible(false);
         }if (ev.getSource().equals(del) || ev.getSource().equals(cancel)) {
+            if (ev.getSource().equals(del)){
+                new EditDataEvent().deleteData((Integer.valueOf(list.get(4))),Integer.valueOf(list.get(6)));
+            }
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
             new AdminCalendarPage(frame);
-        }
-    else if (ev.getSource().equals(save)) {
-            frame.getContentPane().removeAll();
-            frame.revalidate();
-            frame.repaint();
-            new AdminCalendarPage (frame);
+        }else if (ev.getSource().equals(save)) {
+            if (eventName.getText().equals("   EVENT NAME") || dateStart.getText().equals("YYYY-MM-DD") || dateEnd.getText().equals("YYYY-MM-DD") || description.getText().equals(("   DESCRIPTION"))){
+                new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
+            } else {
+                new EditDataEvent().changeData((Integer.valueOf(list.get(4))),Integer.valueOf(list.get(6)),eventName.getText(),description.getText(),dateStart.getText(),dateEnd.getText(),((String) eventType.getSelectedItem()).strip());
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                new AdminCalendarPage (frame);
+            }
         }
     }
 }
