@@ -99,10 +99,11 @@ public class View_subject {
         obj_page.add(tableSub,BorderLayout.SOUTH);
         obj_page.setBackground(null);
 
+        this.frame = frame;
         frame.setLayout(new BorderLayout());
         frame.add(setposition,BorderLayout.NORTH);
         frame.add(obj_page,BorderLayout.CENTER);
-        frame.setSize(1000,700);
+        //frame.setSize(1000,700);
         frame.setVisible(true);
     }
     public static void main(String[] args) {

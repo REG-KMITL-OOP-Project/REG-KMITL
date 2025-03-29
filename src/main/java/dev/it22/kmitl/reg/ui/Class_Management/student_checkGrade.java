@@ -22,10 +22,10 @@ public class student_checkGrade {
 
     public student_checkGrade(JFrame frame){
         title = new JLabel("ตรวจสอบผลการเรียน");
-        id = new JTextField("รหัสนักศึกษา");
-        name = new JTextField("ชื่อ-นามสกุล");
-        faculty = new JTextField("คณะ");
-        major = new JTextField("สาขา");
+        id = new JTextField("รหัสนักศึกษา",8);
+        name = new JTextField("ชื่อ-นามสกุล", 20);
+        faculty = new JTextField("คณะ",20);
+        major = new JTextField("สาขา",20);
         semester = new JComboBox();
         semester.addItem("ภาคการศึกษา");
         year = new JComboBox();
@@ -55,7 +55,7 @@ public class student_checkGrade {
 
         //setfront
         title.setFont(Config.HEADER_SEMIBOLD[2]);
-        title.setForeground(Color.WHITE);
+        title.setForeground(Color.ORANGE);
         id.setFont(Config.HEADER_SEMIBOLD[2]);
         name.setFont(Config.HEADER_SEMIBOLD[2]);
         faculty.setFont(Config.HEADER_SEMIBOLD[2]);
@@ -139,10 +139,12 @@ public class student_checkGrade {
         group_obj.add(table,BorderLayout.SOUTH);
         group_obj.setBackground(null);
 
+
+        this.frame = frame;
         frame.setLayout(new BorderLayout());
         frame.add(setposition, BorderLayout.NORTH);
         frame.add(group_obj,BorderLayout.CENTER);
-        frame.setSize(1000,700);
+        //frame.setSize(1000,700);
         frame.setVisible(true);
 
     }
