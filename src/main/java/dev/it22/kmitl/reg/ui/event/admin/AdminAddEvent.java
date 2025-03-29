@@ -66,7 +66,7 @@ public class AdminAddEvent extends EventPage implements ActionListener {
 
     public void actionPerformed(ActionEvent ev){
         if (ev.getSource() == cancel) {
-            if (!(eventName.getText().equals("   EVENT NAME") && dateStart.getText().equals("DD/MM/YY") && dateEnd.getText().equals("DD/MM/YY") && description.getText().equals(("   DESCRIPTION")))){
+            if (!(eventName.getText().equals("   EVENT NAME") && dateStart.getText().equals("YYYY-MM-DD") && dateEnd.getText().equals("YYYY-MM-DD") && description.getText().equals(("   DESCRIPTION")))){
                 dialog = Config.openFrame((int) (frame.getWidth() / 2), (int) (frame.getHeight() / 2));
                 JPanel panelD = new JPanel();
                 JPanel panelC = new JPanel();
@@ -121,17 +121,24 @@ public class AdminAddEvent extends EventPage implements ActionListener {
                 frame.repaint();
                 new AdminCalendarPage (frame);
             }
-
         }else if (ev.getSource().equals(no)) {
             dialog.setVisible(false);
         }else if (ev.getSource().equals(yes) || ev.getSource().equals(upload)){
             if(ev.getSource().equals(upload)){
-                if (eventName.getText().equals("   EVENT NAME") || dateStart.getText().equals("DD/MM/YY") || dateEnd.getText().equals("DD/MM/YY") || description.getText().equals(("   DESCRIPTION"))){
+                if (eventName.getText().equals("   EVENT NAME") || dateStart.getText().equals("YYYY-MM-DD") || dateEnd.getText().equals("YYYY-MM-DD") || description.getText().equals(("   DESCRIPTION"))){
                     new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
                     return;
                 }
-            }
+                else{
 
+                    if (dateStart.getText().equals(dateEnd.getText())){
+                        new AddDataEvent(eventName.getText(), description.getText(), dateStart.getText(), ((String) eventType.getSelectedItem()).strip());
+                    }else {
+                        new AddDataEvent(eventName.getText(), description.getText(), dateStart.getText(), ((String) eventType.getSelectedItem()).strip());
+                        new AddDataEvent(eventName.getText(), description.getText(), dateEnd.getText(), ((String) eventType.getSelectedItem()).strip());
+                    }
+                }
+            }
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
@@ -141,7 +148,6 @@ public class AdminAddEvent extends EventPage implements ActionListener {
                 dialog.setVisible(false);
             }
         }
-
     }
 }
 

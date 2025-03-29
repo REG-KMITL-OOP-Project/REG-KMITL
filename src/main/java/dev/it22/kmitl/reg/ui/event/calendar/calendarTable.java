@@ -6,11 +6,14 @@ import dev.it22.kmitl.reg.utils.Config;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-public class calendarTable extends JPanel implements MouseListener {
+public class calendarTable extends JPanel {
     //rowOFDay_ClassTable
     private JPanel row;
     private JTable table_Month;
@@ -20,12 +23,9 @@ public class calendarTable extends JPanel implements MouseListener {
     //column_ClassTable
     private JPanel column;
     private JTable table_column;
-    private String event_column[] = {"date", "type", "event name"};
-    String[][] events = {
-            {"09/08/68", "Holiday", "Monk day"},
-            {"09/08/68", "Holiday", "Monk day"},
-            {"09/08/68", "Holiday", "Monk day"},
-    };
+    private String event_column[] = {"date", "event name", "type",};
+    private String[][] events;
+
 
     //combine
     private JPanel com;
@@ -33,11 +33,22 @@ public class calendarTable extends JPanel implements MouseListener {
     private JFrame frame;
 
     public calendarTable(String month) {
-        this(month, null);
+        this(month,null,null);
     }
 
-    public calendarTable(String month, JFrame frame) {
+    public calendarTable(String month, String[][] events_data) {
+        this(month, null, events_data);
+    }
+
+    public calendarTable(String month, JFrame frame, String[][] events_data) {
         this.frame = frame;
+
+        if (events_data.length > 0) {
+            events = events_data;
+        }
+        else{
+            events = new String[][]{};
+        }
 
 
         //column_ClassTable
@@ -45,7 +56,6 @@ public class calendarTable extends JPanel implements MouseListener {
         table_column = new JTable(model);
         table_column.setEnabled(false);
         table_column.setRowHeight(48);
-        table_column.setPreferredSize(new Dimension(event_column.length * 200,48 * events.length));
         table_column.setBorder(BorderFactory.createLineBorder(Config.bgColor_hard));
         table_column.setGridColor(Config.bgColor_harder);
 
@@ -57,6 +67,14 @@ public class calendarTable extends JPanel implements MouseListener {
         for (int i = 0; i < table_column.getColumnCount(); i++) {
             table_column.getColumnModel().getColumn(i).setCellRenderer(Renderer2);
         }
+
+        TableColumn day = table_column.getColumnModel().getColumn(0);
+        day.setPreferredWidth(100);
+        TableColumn type = table_column.getColumnModel().getColumn(1);
+        type.setPreferredWidth(230);
+        TableColumn event = table_column.getColumnModel().getColumn(2);
+        event.setPreferredWidth(100);
+
         table_column.setShowVerticalLines(true);
         table_column.setShowHorizontalLines(true);
         table_column.setBackground(Config.bgColor_hard);
@@ -101,7 +119,6 @@ public class calendarTable extends JPanel implements MouseListener {
         row.setPreferredSize(new Dimension(150, table_column.getPreferredSize().height));
 
 
-
         //combine
         com = new JPanel();
         com.setLayout(new BorderLayout());
@@ -113,38 +130,10 @@ public class calendarTable extends JPanel implements MouseListener {
         this.setLayout(new FlowLayout());
         this.add(com);
         this.setBackground(null);
-
-        table_column.addMouseListener(this);
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        try {
-            frame.getContentPane().removeAll();
-            frame.revalidate();
-            frame.repaint();
-            new EditEventPage(frame);
-        }catch (NullPointerException ex){}
+    public JTable getTable() {
+        return table_column;
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        //System.out.println("Mouse Entered");
-        //table_column.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
 }

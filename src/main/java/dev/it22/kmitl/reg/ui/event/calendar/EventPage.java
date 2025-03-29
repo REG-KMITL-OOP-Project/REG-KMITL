@@ -80,7 +80,7 @@ public class EventPage implements FocusListener {
         panelRek3.add(dateStart);
         dateStart.setHorizontalAlignment(SwingConstants.CENTER);
         showDateStart = true;
-        dateStart.setText("DD/MM/YY");
+        dateStart.setText("YYYY-MM-DD");
         dateStart.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/3.4),(frame.getHeight() / 4) - 120));
         dateStart.setFont(innerFont);
         dateStart.setForeground(Color.GRAY);
@@ -97,7 +97,7 @@ public class EventPage implements FocusListener {
         panelRek3.add(dateEnd);
         dateEnd.setHorizontalAlignment(SwingConstants.CENTER);
         showDateEnd = true;
-        dateEnd.setText("DD/MM/YY");
+        dateEnd.setText("YYYY-MM-DD");
         dateEnd.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/3.4),(frame.getHeight() / 4) - 120));
         dateEnd.setFont(innerFont);
         dateEnd.setForeground(Color.GRAY);
@@ -105,12 +105,9 @@ public class EventPage implements FocusListener {
         dateEnd.addFocusListener(this);
 
         panelBig.add(panelRek4);
-        eventType.addItem("   อื่นๆ");
-        eventType.addItem("   เปิด-ปิด ภาคการศึกษา");
-        eventType.addItem("   สอบ");
-        eventType.addItem("   ชำระเงิน");
-        eventType.addItem("   ลงทะเบียน");
-        eventType.addItem("   ประเมินอาจารย์");
+        eventType.addItem("   ภาคการศึกษาที่ 1");
+        eventType.addItem("   ภาคการศึกษาที่ 2");
+        eventType.addItem("   ภาคการศึกษาพิเศษ");
         eventType.setRenderer(new CustomCombobox());
         eventType.setMaximumRowCount(3);
         eventType.setFont(Config.NORMAL_REGULAR);
@@ -160,12 +157,12 @@ public class EventPage implements FocusListener {
 
         if (dateStart.getText().isEmpty()) {
             showDateStart = true;
-            dateStart.setText("DD/MM/YY");
+            dateStart.setText("YYYY-MM-DD");
             dateStart.setForeground(Color.GRAY);
 
         }if (dateEnd.getText().isEmpty()) {
             showDateEnd = true;
-            dateEnd.setText("DD/MM/YY");
+            dateEnd.setText("YYYY-MM-DD");
             dateEnd.setForeground(Color.GRAY);
         }
     }

@@ -1,5 +1,6 @@
 package dev.it22.kmitl.reg.ui.event.component;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.imageio.*;
@@ -7,15 +8,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class saveJPGHandler implements ActionListener {
+public class saveJPGHandler implements ActionListener , MouseListener {
     private JPanel table;
     private JFrame frame;
+    private JDialog success;
     public saveJPGHandler(JPanel panel, JFrame frame) {
         this.table = panel;
         this.frame = frame;
+
+        success = Config.openFrame((int) (260), (int) (50));
+        success.setResizable(false);
+        success.getContentPane().setBackground(Config.primaryColor_hard);
+        success.setSize(270, 40);
+        success.setResizable(false);
+        success.addMouseListener(this);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -26,9 +37,9 @@ public class saveJPGHandler implements ActionListener {
             g2d.dispose();
 
             //test fileChooser
-            try {
-                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-            } catch (Exception ex) {
+            try{
+                UIManager.setLookAndFeel(new FlatLightLaf());
+            } catch (Exception ex){
                 ex.printStackTrace();
             }
 
@@ -43,33 +54,50 @@ public class saveJPGHandler implements ActionListener {
                     file = new File(file.getAbsolutePath() + ".jpg");
                 }
                 ImageIO.write(image, "jpg", file);
+
                 JLabel l = new JLabel("Image Saved Successfully", SwingConstants.CENTER);
                 l.setBackground(Config.primaryColor_hard);
                 l.setForeground(Color.WHITE);
-                l.setFont(Config.HEADER_SEMIBOLD[3]);
+                l.setFont(Config.HEADER_SEMIBOLD[2]);
+                l.addMouseListener(this);
 
-                JDialog success = new JDialog();
-                success.setResizable(false);
-                success.getContentPane().setBackground(Config.primaryColor_hard);
                 success.add(l);
-                success.setSize(280, 100);
-                success.setLocation(frame.getX() + 500,frame.getY() + 500);
-                success.setResizable(false);
+                success.addMouseListener(this);
+
+                Timer timer = new Timer(1500, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        success.setVisible(false);
+                        success.remove(l);
+                        success.dispose();
+                    }
+                });
+                timer.setRepeats(false);
+                timer.start();
+                success.setLocationRelativeTo(frame);
+                success.setLocation(frame.getX() + 500,frame.getY() + 600);
                 success.setVisible(true);
             }
             else{
                 JLabel l = new JLabel("Image Saved Unsuccessful", SwingConstants.CENTER);
                 l.setBackground(Config.primaryColor_hard);
                 l.setForeground(Color.WHITE);
-                l.setFont(Config.HEADER_SEMIBOLD[3]);
+                l.setFont(Config.HEADER_SEMIBOLD[2]);
+                l.addMouseListener(this);
 
-                JDialog success = new JDialog();
-                success.setResizable(false);
-                success.getContentPane().setBackground(Config.primaryColor_hard);
                 success.add(l);
-                success.setSize(280, 100);
-                success.setLocation(frame.getX() + 500,frame.getY() + 500);
-                success.setResizable(false);
+                success.addMouseListener(this);
+
+                Timer timer = new Timer(1500, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        success.setVisible(false);
+                        success.remove(l);
+                        success.dispose();
+                    }
+                });
+                timer.setRepeats(false);
+                timer.start();
+                success.setLocationRelativeTo(frame);
+                success.setLocation(frame.getX() + 500,frame.getY() + 600);
                 success.setVisible(true);
             }
 
@@ -77,16 +105,48 @@ public class saveJPGHandler implements ActionListener {
             JLabel l = new JLabel("Image Saved Unsuccessful", SwingConstants.CENTER);
             l.setBackground(Config.primaryColor_hard);
             l.setForeground(Color.WHITE);
-            l.setFont(Config.HEADER_SEMIBOLD[3]);
+            l.setFont(Config.HEADER_SEMIBOLD[2]);
+            l.addMouseListener(this);
 
-            JDialog success = new JDialog();
-            success.setResizable(false);
-            success.getContentPane().setBackground(Config.primaryColor_hard);
             success.add(l);
-            success.setSize(280, 100);
-            success.setLocation(frame.getX() + 500,frame.getY() + 500);
-            success.setResizable(false);
+            success.addMouseListener(this);
+
+            Timer timer = new Timer(1500, new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    success.setVisible(false);
+                    success.remove(l);
+                    success.dispose();
+                }
+            });
+            timer.setRepeats(false);
+            timer.start();
+            success.setLocationRelativeTo(frame);
+            success.setLocation(frame.getX() + 500,frame.getY() + 600);
             success.setVisible(true);
+
         }
+    }
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        success.setVisible(false);
+        success.dispose();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        success.setVisible(false);
+        success.dispose();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 }
