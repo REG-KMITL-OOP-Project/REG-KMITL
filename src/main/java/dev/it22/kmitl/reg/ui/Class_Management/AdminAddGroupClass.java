@@ -246,7 +246,6 @@ public class AdminAddGroupClass implements FocusListener {
 
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        System.out.println(panelTimeExamMid.getComponentCount());
 }public static void main(String[] args) {
         new AdminAddGroupClass(Config.createAndShowGUI());
     }
