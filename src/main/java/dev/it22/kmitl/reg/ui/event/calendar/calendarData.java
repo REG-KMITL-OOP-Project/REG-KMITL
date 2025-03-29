@@ -33,13 +33,31 @@ public class calendarData {
 
     public String[][] eventsData(int month) {
         try{
-            ArrayList<String[]> data = this.getDataEvents(month);
-            int size = this.getDataEvents(month).size();
+            //store events in ArrayList
+            ArrayList<String[]> arrayEvents = new ArrayList<String[]>();
+
+            String q = "SELECT Date, name, type FROM Event WHERE Date " + this.setDateFormat(month);
+            rs = db.getQuery(q);
+            while (rs.next()) {
+                String[] ev;
+                ev = new String[]{
+                        rs.getString("Date").replaceAll("-", "/"),
+                        rs.getString("name"),
+                        rs.getString("type")
+                };
+                arrayEvents.add(ev);
+            }
+            if (arrayEvents.size() <= 0) {
+                arrayEvents.add(new String[1]);
+            }
+
+            //store data in ArrayList to array to fits table
+            ArrayList<String[]> data = arrayEvents;
+            int size = arrayEvents.size();
             String[][] events = new String[size][3];
             int n = 0;
             while (n < size) {
                 for (String[] i : data){
-                    System.out.println(Arrays.toString(i));
                     events[n][0] = i[0];
                     events[n][1] = i[1];
                     events[n][2] = i[2];
@@ -48,36 +66,10 @@ public class calendarData {
             }
             return events;
         }catch (Exception e){
-            //e.printStackTrace();
             return new String[1][3];
         }
     }
 
-    public ArrayList<String[]> getDataEvents(int month) {
-        try{
-            ArrayList<String[]> events = new ArrayList<String[]>();
-
-            String q = "SELECT Date, name, type FROM Event WHERE Date " + this.setDateFormat(month);
-            rs = db.getQuery(q);
-            while (rs.next()) {
-                String[] ev;
-                ev = new String[]{
-                                  rs.getString("Date").replaceAll("-", "/"),
-                                  rs.getString("name"),
-                                  rs.getString("type")
-                                  };
-                events.add(ev);
-            }
-            if (events.size() <= 0) {
-                events.add(new String[1]);
-            }
-            System.out.println(events.size());
-            return events;
-        }catch (Exception e){
-            System.out.println("Exception");
-            return null;
-        }
-    }
     public String setDateFormat(int month) {
         // 6-12 (25) : 1-5 (26)
         // 30 : 4/6/9/11
@@ -118,6 +110,32 @@ public class calendarData {
         }
         //System.out.println("BETWEEN " + start + " AND " + end);
         return "BETWEEN '" + start + "' AND '" + end + "'";
+    }
+
+    public ArrayList<String[]> getDataEvents(int month) {
+        try{
+            ArrayList<String[]> events = new ArrayList<String[]>();
+
+            String q = "SELECT Date, name, type FROM Event WHERE Date " + this.setDateFormat(month);
+            rs = db.getQuery(q);
+            while (rs.next()) {
+                String[] ev;
+                ev = new String[]{
+                        rs.getString("Date").replaceAll("-", "/"),
+                        rs.getString("name"),
+                        rs.getString("type")
+                };
+                events.add(ev);
+            }
+            if (events.size() <= 0) {
+                events.add(new String[1]);
+            }
+            //System.out.println(events.size());
+            return events;
+        }catch (Exception e){
+            System.out.println("Exception");
+            return null;
+        }
     }
 
     public String[] getEvent() throws SQLException {
