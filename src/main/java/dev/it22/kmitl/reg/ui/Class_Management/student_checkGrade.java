@@ -55,7 +55,7 @@ public class student_checkGrade {
 
         //setfront
         title.setFont(Config.HEADER_SEMIBOLD[2]);
-        title.setForeground(Color.WHITE);
+        title.setForeground(Color.ORANGE);
         id.setFont(Config.HEADER_SEMIBOLD[2]);
         name.setFont(Config.HEADER_SEMIBOLD[2]);
         faculty.setFont(Config.HEADER_SEMIBOLD[2]);
