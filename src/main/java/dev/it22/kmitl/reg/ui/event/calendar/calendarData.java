@@ -3,9 +3,6 @@ package dev.it22.kmitl.reg.ui.event.calendar;
 import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
-import dev.it22.kmitl.reg.model.auth.Prof;
-import dev.it22.kmitl.reg.model.auth.Student;
-import dev.it22.kmitl.reg.ui.event.testData;
 import dev.it22.kmitl.reg.utils.Database;
 
 import java.sql.ResultSet;
