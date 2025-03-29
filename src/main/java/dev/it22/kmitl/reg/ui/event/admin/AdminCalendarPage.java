@@ -122,11 +122,11 @@ public class AdminCalendarPage extends monthTableCalendar implements ActionListe
     public void mouseClicked(MouseEvent e) {
         System.out.println("mouseClicked");
         try {
-            if(!((String) ((JTable) e.getSource()).getValueAt(0, 1)).isEmpty()) {
+            if(!((String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1)).equals("")) {
                 frame.getContentPane().removeAll();
                 frame.revalidate();
                 frame.repaint();
-                new EditEventPage(frame, (String) ((JTable) e.getSource()).getValueAt(0, 1), (String) ((JTable) e.getSource()).getValueAt(0, 2));
+                new EditEventPage(frame, (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1), (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),2));
             }
         }catch (NullPointerException ex){}
 
@@ -136,11 +136,11 @@ public class AdminCalendarPage extends monthTableCalendar implements ActionListe
     public void mousePressed(MouseEvent e) {
         System.out.println("mousePressed");
         try {
-            if(!((String) ((JTable)e.getSource()).getValueAt(0, 1)).equals("")) {
+            if(!((String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1)).equals("")) {
                 frame.getContentPane().removeAll();
                 frame.revalidate();
                 frame.repaint();
-                new EditEventPage(frame, (String) ((JTable) e.getSource()).getValueAt(0, 1), (String) ((JTable) e.getSource()).getValueAt(0, 2));
+                new EditEventPage(frame, (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1), (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),2));
             }
         }catch (NullPointerException ex){}
     }
