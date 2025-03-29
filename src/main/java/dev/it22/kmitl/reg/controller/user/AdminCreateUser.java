@@ -51,7 +51,6 @@ public class AdminCreateUser {
             System.out.println("Create Student success");
         }
     }
-
     public  void createProf(String email,String username,String password,int prefix,String fname,String lname,String phone,String address,String prof_id,String faculty) throws Exception {
         this.role = 3;
         this.email = email;

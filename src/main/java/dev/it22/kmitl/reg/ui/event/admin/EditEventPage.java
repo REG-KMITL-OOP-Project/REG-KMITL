@@ -14,12 +14,20 @@ public class EditEventPage extends EventPage implements ActionListener {
     private RoundedButtonWithColor delete,save,cancel;
     private JLabel editEvent;
     private ArrayList<String> list;
-    public EditEventPage(JFrame frame){
-        //list = new EditDataEvent().getData("ลาออก","ภาคการศึกษาที่ 1");
+
+    private boolean oneRecord = false;
+    public EditEventPage(JFrame frame, String name, String type){
+        list = new EditDataEvent().getData(name,type);
         super(frame);
+        System.out.println(list);
         eventName.setText(list.get(0));
         dateStart.setText(list.get(2));
-        dateEnd.setText(list.get(5));
+        try{
+            dateEnd.setText(list.get(5));
+        }catch (Exception ex){
+            oneRecord = true;
+            dateEnd.setText(list.get(2));
+        }
         description.setText(list.get(1));
         eventType.setSelectedItem(("   ")+(list.get(3)));
         showEventName = false; showDateStart = false; showDateEnd = false; showDescription = false;
@@ -68,7 +76,7 @@ public class EditEventPage extends EventPage implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new EditEventPage(Config.createAndShowGUI());
+        //new EditEventPage(Config.createAndShowGUI());
     }
 
     private RoundedButtonWithColor del , cal ;
@@ -127,7 +135,11 @@ public class EditEventPage extends EventPage implements ActionListener {
             dialog.setVisible(false);
         }if (ev.getSource().equals(del) || ev.getSource().equals(cancel)) {
             if (ev.getSource().equals(del)){
-                new EditDataEvent().deleteData((Integer.valueOf(list.get(4))),Integer.valueOf(list.get(6)));
+                if (oneRecord){
+                    new EditDataEvent().deleteData((Integer.valueOf(list.get(4))));
+                } else {
+                    new EditDataEvent().deleteData((Integer.valueOf(list.get(4))),Integer.valueOf(list.get(6)));
+                }
             }
             frame.getContentPane().removeAll();
             frame.revalidate();
@@ -137,7 +149,19 @@ public class EditEventPage extends EventPage implements ActionListener {
             if (eventName.getText().equals("   EVENT NAME") || dateStart.getText().equals("YYYY-MM-DD") || dateEnd.getText().equals("YYYY-MM-DD") || description.getText().equals(("   DESCRIPTION"))){
                 new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
             } else {
-                new EditDataEvent().changeData((Integer.valueOf(list.get(4))),Integer.valueOf(list.get(6)),eventName.getText(),description.getText(),dateStart.getText(),dateEnd.getText(),((String) eventType.getSelectedItem()).strip());
+                if (dateStart.getText().equals(dateEnd.getText())){
+                    new EditDataEvent().changeData((Integer.valueOf(list.get(4))),eventName.getText(),description.getText(),dateStart.getText(),((String) eventType.getSelectedItem()).strip());
+                    if(!oneRecord){
+                        new EditDataEvent().deleteData((Integer.valueOf(list.get(6))));
+                    }
+                }else{
+                    if (oneRecord){
+                        new EditDataEvent().changeData((Integer.valueOf(list.get(4))),eventName.getText(),description.getText(),dateStart.getText(),((String) eventType.getSelectedItem()).strip());
+                        new AddDataEvent(eventName.getText(),description.getText(),dateEnd.getText(),((String) eventType.getSelectedItem()).strip());
+                    }else {
+                        new EditDataEvent().changeData((Integer.valueOf(list.get(4))), Integer.valueOf(list.get(6)), eventName.getText(), description.getText(), dateStart.getText(), dateEnd.getText(), ((String) eventType.getSelectedItem()).strip());
+                    }
+                }
                 frame.getContentPane().removeAll();
                 frame.revalidate();
                 frame.repaint();
