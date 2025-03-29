@@ -1,6 +1,5 @@
-package dev.it22.kmitl.reg.ui.Class_Management.component;
+package dev.it22.kmitl.reg.ui.Class_Management;
 
-import dev.it22.kmitl.reg.ui.Class_Management.AdminAddGroupClass;
 import dev.it22.kmitl.reg.utils.*;
 
 import javax.swing.*;
