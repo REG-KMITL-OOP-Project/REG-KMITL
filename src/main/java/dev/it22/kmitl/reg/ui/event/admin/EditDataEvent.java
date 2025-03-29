@@ -39,11 +39,31 @@ public class  EditDataEvent {
 
         }
     }
+    public void changeData(int id1, String name, String description, String dateStart, String type){
+        try{
+            Database db = new Database();
+            int ch = db.postQuery("UPDATE Event SET name = '"+name+"' , description = '"+description+"', Date = '"+dateStart+"' , type = '"+type+"' WHERE id = "+id1+";");
+        }
+        catch (Exception e) {
+
+        }
+    }
+
     public void deleteData(int id1,int id2){
         try{
             Database db = new Database();
             int ch = db.postQuery("DELETE FROM Event WHERE id = "+id1+";");
             ch = db.postQuery("DELETE FROM Event WHERE id = "+id2+";");
+        }
+        catch (Exception e) {
+
+        }
+    }
+
+    public void deleteData(int id1){
+        try{
+            Database db = new Database();
+            int ch = db.postQuery("DELETE FROM Event WHERE id = "+id1+";");
         }
         catch (Exception e) {
 
