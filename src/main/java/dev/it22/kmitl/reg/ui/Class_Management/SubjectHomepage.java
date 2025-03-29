@@ -12,7 +12,7 @@ public  class SubjectHomepage {
     private JButton home;
     private JLabel regLabel;
     private RoundedButton addclass,addtime,addsubjec;
-    private JPanel botton,combobox,tablesubject,ICON,groupbotton_box,setposition;
+    private JPanel botton,combobox,tablesubject,ICON,groupbotton_box,setposition,setlayout;
     private JComboBox Faculty,Semester;
     private JTable table;
     private JScrollPane showdetail_Subject;
@@ -89,6 +89,11 @@ public  class SubjectHomepage {
         showdetail_Subject.setPreferredSize(new Dimension(1000, 400));
         showdetail_Subject.setBackground(null);
 
+        setlayout = new JPanel();
+        setlayout.setLayout(new FlowLayout());
+        setlayout.add(showdetail_Subject);
+        setlayout.setBackground(null);
+
         setposition = new JPanel();
         setposition.setLayout(new BorderLayout());
         setposition.add(ICON, BorderLayout.WEST);
@@ -101,12 +106,13 @@ public  class SubjectHomepage {
         groupbotton_box.setBackground(null);
 
         tablesubject = new JPanel(new BorderLayout());
-        tablesubject.add(setposition, BorderLayout.NORTH);
         tablesubject.add(groupbotton_box, BorderLayout.CENTER);
-        tablesubject.add(showdetail_Subject, BorderLayout.SOUTH);
+        tablesubject.add(setlayout, BorderLayout.SOUTH);
         tablesubject.setBackground(null);
 
-        frame.add(tablesubject);
+        frame.setLayout(new BorderLayout());
+        frame.add(setposition, BorderLayout.NORTH);
+        frame.add(tablesubject,BorderLayout.CENTER);
         frame.setVisible(true);
     }
     public static void main(String[] args) {
