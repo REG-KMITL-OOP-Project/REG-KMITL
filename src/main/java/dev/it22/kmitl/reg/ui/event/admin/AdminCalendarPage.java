@@ -1,9 +1,12 @@
 package dev.it22.kmitl.reg.ui.event.admin;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import dev.it22.kmitl.reg.controller.auth.Login;
+import dev.it22.kmitl.reg.ui.event.calendar.CalendarPage;
 import dev.it22.kmitl.reg.ui.event.calendar.calendarTable;
+import dev.it22.kmitl.reg.ui.event.calendar.monthTableCalendar;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
-import dev.it22.kmitl.reg.ui.event.calendar.eventCategory;
+import dev.it22.kmitl.reg.ui.event.calendar.SemesterCategory;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
@@ -11,13 +14,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
-public class AdminCalendarPage implements ActionListener {
+public class AdminCalendarPage extends monthTableCalendar implements ActionListener , ItemListener{
     private JFrame frame;
     private JPanel r_panel, pn1;
     private JScrollPane scrollPane;
     private newHeader header;
-    private calendarTable jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
-    private eventCategory category;
+    private SemesterCategory category;
 
     private JButton create;
     private JPanel create_panel, back_panel;
@@ -44,37 +46,14 @@ public class AdminCalendarPage implements ActionListener {
         create_panel.setBackground(null);
         create_panel.setBorder(null);
 
-        jan = new calendarTable("มกราคม", frame);
-        feb = new calendarTable("กุมภาพันธ์", frame);
-        mar = new calendarTable("มีนาคม", frame);
-        apr = new calendarTable("เมษายน", frame);
-        may = new calendarTable("พฤษภาคม", frame);
-        jun = new calendarTable("มิถุนายน", frame);
-        jul = new calendarTable("กรกฎาคม", frame);
-        aug = new calendarTable("สิงหาคม", frame);
-        sep = new calendarTable("กันยายน", frame);
-        oct = new calendarTable("ตุลาคม", frame);
-        nov = new calendarTable("พฤศจิกายน", frame);
-        dec = new calendarTable("ธันวาคม", frame);
-
-
         r_panel = new JPanel();
         r_panel.setBackground(null);
         r_panel.setBorder(null);
         r_panel.setLayout(new BoxLayout(r_panel, BoxLayout.Y_AXIS));
-        r_panel.add(jan);
-        r_panel.add(feb);
-        r_panel.add(mar);
-        r_panel.add(apr);
-        r_panel.add(may);
-        r_panel.add(jun);
-        r_panel.add(jul);
-        r_panel.add(aug);
-        r_panel.add(sep);
-        r_panel.add(oct);
-        r_panel.add(nov);
-        r_panel.add(dec);
-
+        r_panel.add(super.getSem1());
+        r_panel.add(super.getSem2());
+        r_panel.add(super.getSem2_1());
+        r_panel.add(super.getSpe());
 
         scrollPane = new JScrollPane(r_panel);
         scrollPane.setBackground(null);
@@ -93,7 +72,7 @@ public class AdminCalendarPage implements ActionListener {
         back_panel.add(scrollPane);
 
         header = new newHeader("ปฏิทินการศึกษา", frame);
-        category = new eventCategory();
+        category = new SemesterCategory(frame);
         category.setBorder(new EmptyBorder(10,0,0,0));
         frame.add(header, BorderLayout.NORTH);
         frame.add(category, BorderLayout.CENTER);
@@ -102,9 +81,41 @@ public class AdminCalendarPage implements ActionListener {
         frame.setVisible(true);
 
         create.addActionListener(this);
+        category.getSem1().addItemListener(this);
+        category.getSem2().addItemListener(this);
+        category.getSpecialSem().addItemListener(this);
     }
-    public static void main(String[] args) {
-        new AdminCalendarPage(Config.createAndShowGUI());
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if (category.getSem1().isSelected()) {
+            super.getSem1().setVisible(true);
+        }
+        if (category.getSem1().isSelected() && !category.getSem2().isSelected()) {
+            super.getSem1().setVisible(true);
+            super.getNov_2().setVisible(true);
+        }
+        if (category.getSem1().isSelected() && category.getSem2().isSelected()) {
+            super.getSem1().setVisible(true);
+            super.getNov_2().setVisible(false);
+        }
+        if (!category.getSem1().isSelected()) {
+            super.getSem1().setVisible(false);
+        }
+        if (category.getSem2().isSelected()) {
+            super.getSem2().setVisible(true);
+            super.getSem2_1().setVisible(true);
+        }
+        if (!category.getSem2().isSelected()) {
+            super.getSem2().setVisible(false);
+            super.getSem2_1().setVisible(false);
+        }
+        if (!category.getSpecialSem().isSelected()) {
+            super.getSpe().setVisible(false);
+        }
+        if (category.getSpecialSem().isSelected()) {
+            super.getSpe().setVisible(true);
+        }
     }
     public void actionPerformed(ActionEvent ev){
         if (ev.getSource() == create) {
@@ -115,4 +126,45 @@ public class AdminCalendarPage implements ActionListener {
         }
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        System.out.println("mouseClicked");
+        try {
+            if(!((String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1)).equals("")) {
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                new EditEventPage(frame, (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1), (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),2));
+            }
+        }catch (NullPointerException ex){}
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        System.out.println("mousePressed");
+        try {
+            if(!((String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1)).equals("")) {
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                new EditEventPage(frame, (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1), (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),2));
+            }
+        }catch (NullPointerException ex){}
+    }
+
+    public static void main(String[] args) {
+        try {
+            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
+            new AdminCalendarPage(Config.createAndShowGUI());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
+
+
+
+
+
