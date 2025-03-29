@@ -17,8 +17,8 @@ public class EditEventPage extends EventPage implements ActionListener {
 
     private boolean oneRecord = false;
     public EditEventPage(JFrame frame, String name, String type){
-        list = new EditDataEvent().getData(name,type);
         super(frame);
+        list = new EditDataEvent().getData(name,type);
         System.out.println(list);
         eventName.setText(list.get(0));
         dateStart.setText(list.get(2));
