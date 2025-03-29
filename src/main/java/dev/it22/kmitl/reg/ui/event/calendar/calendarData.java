@@ -33,16 +33,23 @@ public class calendarData {
 
     public String[][] eventsData(int month) {
         try{
-            String[][] events = new String[1][3];
-            for (String[] i : this.getDataEvents(month)){
-                events[0][0] = i[0];
-                events[0][1] = i[1];
-                events[0][2] = i[2];
+            ArrayList<String[]> data = this.getDataEvents(month);
+            int size = this.getDataEvents(month).size();
+            String[][] events = new String[size][3];
+            int n = 0;
+            while (n < size) {
+                for (String[] i : data){
+                    System.out.println(Arrays.toString(i));
+                    events[n][0] = i[0];
+                    events[n][1] = i[1];
+                    events[n][2] = i[2];
+                    n++;
+                }
             }
             return events;
         }catch (Exception e){
-            e.printStackTrace();
-            return null;
+            //e.printStackTrace();
+            return new String[1][3];
         }
     }
 
@@ -59,10 +66,12 @@ public class calendarData {
                                   rs.getString("name"),
                                   rs.getString("type")
                                   };
-                //System.out.println(Arrays.toString(ev));
                 events.add(ev);
             }
-            //System.out.println(events);
+            if (events.size() <= 0) {
+                events.add(new String[1]);
+            }
+            System.out.println(events.size());
             return events;
         }catch (Exception e){
             System.out.println("Exception");

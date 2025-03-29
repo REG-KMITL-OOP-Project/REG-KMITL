@@ -122,7 +122,7 @@ public class AdminCalendarPage extends monthTableCalendar implements ActionListe
     public void mouseClicked(MouseEvent e) {
         System.out.println("mouseClicked");
         try {
-            if(!((String) ((JTable)e.getSource()).getValueAt(0, 1)).equals("")) {
+            if(!((String) ((JTable) e.getSource()).getValueAt(0, 1)).isEmpty()) {
                 frame.getContentPane().removeAll();
                 frame.revalidate();
                 frame.repaint();
