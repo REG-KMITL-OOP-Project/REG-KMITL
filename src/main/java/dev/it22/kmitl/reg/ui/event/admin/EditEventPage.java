@@ -14,6 +14,7 @@ public class EditEventPage extends EventPage implements ActionListener {
     private RoundedButtonWithColor delete,save,cancel;
     private JLabel editEvent;
     private ArrayList<String> list;
+
     private boolean oneRecord = false;
     public EditEventPage(JFrame frame, String name, String type){
         list = new EditDataEvent().getData(name,type);
@@ -139,8 +140,6 @@ public class EditEventPage extends EventPage implements ActionListener {
                 } else {
                     new EditDataEvent().deleteData((Integer.valueOf(list.get(4))),Integer.valueOf(list.get(6)));
                 }
-
-
             }
             frame.getContentPane().removeAll();
             frame.revalidate();

@@ -48,7 +48,6 @@ public class  EditDataEvent {
 
         }
     }
-
     public void deleteData(int id1,int id2){
         try{
             Database db = new Database();
@@ -59,7 +58,6 @@ public class  EditDataEvent {
 
         }
     }
-
     public void deleteData(int id1){
         try{
             Database db = new Database();
