@@ -4,7 +4,11 @@ import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.model.auth.Student;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class TranscriptModel {
+    private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm");
     private Account user = new User().getUserAccount();
 
     private String name = user.getFullName(),
@@ -26,8 +30,8 @@ public class TranscriptModel {
             {3, 3, 3, 3, 3}};
     private String[][] gradeList = {{"A", "B+", "B+", "A", "S", "S", "S"}};
 
-
     public void getTranscript(){
+        Transcript.pdfFilepath =  System.getProperty("user.home") + "/Downloads/transcript_" + dtf.format(LocalDateTime.now()) + ".pdf";
         new Transcript(name, dateOB, dateOA, degree, major, studentID, semester, subject, subjectNumberList, creditsList, gradeList);
     }
 

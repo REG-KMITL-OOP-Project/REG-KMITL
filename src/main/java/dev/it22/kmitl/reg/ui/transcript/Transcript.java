@@ -16,7 +16,7 @@ import dev.it22.kmitl.reg.model.auth.Student;
 public class Transcript {
     private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm");
 
-    private static final String PDF_FILEPATH =  System.getProperty("user.home") + "/Downloads/transcript_" + dtf.format(LocalDateTime.now()) + ".pdf" ;
+    public static String pdfFilepath =  System.getProperty("user.home") + "/Downloads/transcript_" + dtf.format(LocalDateTime.now()) + ".pdf" ;
 
     private String name ,
             dateOB ,
@@ -67,7 +67,7 @@ public class Transcript {
         float[] spaceList = {10f, 5.5f, 5.5f, 5.5f, 9f};
 
         try {
-            PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream(PDF_FILEPATH));
+            PdfWriter pdfWriter = PdfWriter.getInstance(document, new FileOutputStream(pdfFilepath));
 
             document.open();
 

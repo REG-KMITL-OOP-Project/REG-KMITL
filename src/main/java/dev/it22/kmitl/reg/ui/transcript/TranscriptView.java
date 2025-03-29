@@ -6,7 +6,10 @@ import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class TranscriptView {
     private JFrame frame;
@@ -70,50 +73,6 @@ public class TranscriptView {
         buttonPanel.setBackground(null);
     }
 
-    public void generateTranscript(JPanel parentPanel){
-        parentPanel.setLayout(new BorderLayout());
-        JLabel header = new JLabel("Unofficial Transcript");
-        JLabel studentName = new JLabel(name);
-        JLabel dateOb = new JLabel(dateOB);
-        JLabel dateOa = new JLabel(dateOA);
-        JLabel degreeLabel = new JLabel(degree);
-        JLabel majorLabel = new JLabel(major);
-        JLabel studentIDLabel = new JLabel(studentID);
-        JLabel dateOG = new JLabel("N/A");
-        JPanel inParent = new JPanel();
-        JPanel centerInParent = new JPanel();
-        JPanel flowZeroParent = new JPanel();
-        JPanel flowOneParent = new JPanel();
-        JPanel flowTwoParent = new JPanel();
-
-        System.out.println(dateOB);
-        inParent.add(header);
-        header.setFont(Config.HEADER_SEMIBOLD[2]);
-
-        centerInParent.setLayout(new BoxLayout(centerInParent, BoxLayout.Y_AXIS));
-        centerInParent.setSize(new Dimension(frame.getWidth()/2, frame.getHeight()/2));
-        centerInParent.setAlignmentX(Component.LEFT_ALIGNMENT);
-        studentName.setFont(Config.HEADER_SEMIBOLD[3]);
-        centerInParent.setBackground(Config.primaryColor_hard);
-        studentName.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        flowZeroParent.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JLabel nameHL = new JLabel("Name");
-        nameHL.setFont(//Font(Config.HEADER_SEMIBOLD[3].getName(), Font.BOLD | Font.ITALIC, 15));
-        flowZeroParent.add(new JLabel("adsa"));
-        centerInParent.add(studentName);
-
-        flowOneParent.setLayout(new FlowLayout(FlowLayout.LEFT));
-        dateOb.setPreferredSize(new Dimension(frame.getWidth()/5, frame.getHeight()/5));
-        flowOneParent.add(dateOb);
-        flowOneParent.add(studentIDLabel);
-        centerInParent.add(flowOneParent);
-
-        parentPanel.add(inParent, BorderLayout.NORTH);
-        parentPanel.add(centerInParent, BorderLayout.CENTER);
-
-    }
-
     public RoundedButton getDownloadButton() {
         return download;
     }
@@ -144,8 +103,8 @@ public class TranscriptView {
         topMidPanel.add(textPanel2);
 
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        transcriptPanel.setPreferredSize(new Dimension((int) ((frame.getHeight()/1.368316831683168) / 1.414285714), (int)(frame.getHeight()/1.368316831683168) ));
-        transcriptPanel.setSize(new Dimension((int) ((frame.getHeight()/1.368316831683168) / 1.414285714), (int)(frame.getHeight()/1.368316831683168) ));
+        transcriptPanel.setPreferredSize(new Dimension((int) (frame.getHeight()/1.368316831683168), (int)(frame.getHeight()/1.368316831683168) ));
+        transcriptPanel.setSize(new Dimension((int) (frame.getHeight()/1.368316831683168), (int)(frame.getHeight()/1.368316831683168) ));
         centerPanel.add(transcriptPanel);
 
         generateTranscript(transcriptPanel);
@@ -161,7 +120,7 @@ public class TranscriptView {
         download.setBackground(Config.primaryColor_hard);
         download.setForeground(new Color(255, 255, 255));
         download.setFont(Config.HEADER_SEMIBOLD[2]);
-        download.setPreferredSize(new Dimension((int) ((frame.getHeight()/1.368316831683168) / 1.414285714),frame.getHeight()/12));
+        download.setPreferredSize(new Dimension((int) (frame.getHeight()/1.368316831683168),frame.getHeight()/12));
 
         textPanel1.add(transcHeader);
         textPanel1.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()/17));
@@ -184,5 +143,85 @@ public class TranscriptView {
         this.subjectNumberList=subjectNumberList;
         this.creditsList=creditsList;
         this.gradeList=gradeList;
+    }
+
+    public void generateTranscript(JPanel parentPanel){
+        Font normal = new Font(Font.MONOSPACED, Font.PLAIN, 10);
+        try {
+            normal = Font.createFont(Font.TRUETYPE_FONT, new File("source/Noto_Sans_Thai_Looped/NotoSansThaiLooped-Regular.ttf")).deriveFont(Font.PLAIN, 10);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        parentPanel.setLayout(new BoxLayout(parentPanel, BoxLayout.Y_AXIS));
+        parentPanel.setAlignmentY(Component.TOP_ALIGNMENT);
+        JLabel header = new JLabel("Unofficial Transcript", SwingConstants.CENTER);
+        JLabel studentName = new JLabel("Name   " +name, SwingConstants.LEFT);
+        JLabel dateOb = new JLabel("Date of Birth   " + dateOB);
+        JLabel dateOa = new JLabel("Date of Admission   " +dateOA);
+        JLabel degreeLabel = new JLabel("Degree   " + degree);
+        JLabel majorLabel = new JLabel("Major   " + major);
+        JLabel studentIDLabel = new JLabel("Student ID   " +studentID);
+        JLabel dateOG = new JLabel("Date of Graduation   N/A");
+        JPanel inParent = new JPanel();
+        JPanel centerInParent = new JPanel();
+        JPanel flowZeroParent = new JPanel();
+        JPanel flowOneParent = new JPanel();
+        JPanel flowTwoParent = new JPanel();
+
+        System.out.println(dateOB);
+        inParent.add(header);
+        header.setFont(Config.HEADER_SEMIBOLD[3]);
+        header.setPreferredSize(new Dimension(parentPanel.getPreferredSize().width, header.getPreferredSize().height));
+
+        studentName.setFont(normal);
+
+        flowZeroParent.setLayout(new FlowLayout(FlowLayout.LEFT));
+        flowZeroParent.add(studentName);
+        studentName.setPreferredSize(new Dimension(studentName.getPreferredSize().width+10, studentName.getPreferredSize().height));
+        flowZeroParent.setPreferredSize(new Dimension(flowZeroParent.getPreferredSize().width, flowZeroParent.getPreferredSize().height-7));
+
+        flowOneParent.setLayout(new FlowLayout(FlowLayout.LEFT));
+        dateOb.setFont(normal);
+        studentIDLabel.setFont(normal);
+        flowOneParent.add(dateOb);
+        flowOneParent.add(studentIDLabel);
+        dateOb.setPreferredSize(new Dimension(parentPanel.getPreferredSize().width/2, dateOb.getPreferredSize().height));
+        studentIDLabel.setPreferredSize(new Dimension(studentIDLabel.getPreferredSize().width, studentIDLabel.getPreferredSize().height));
+        flowOneParent.setPreferredSize(new Dimension(flowOneParent.getPreferredSize().width, flowOneParent.getPreferredSize().height-5));
+
+        flowTwoParent.setLayout(new FlowLayout(FlowLayout.LEFT));
+        dateOa.setFont(normal);
+        dateOG.setFont(normal);
+        flowTwoParent.add(dateOa);
+        flowTwoParent.add(dateOG);
+        flowTwoParent.setBackground(Config.primaryColor_hard);
+        dateOa.setPreferredSize(new Dimension((int) (parentPanel.getPreferredSize().width/2), dateOa.getPreferredSize().height));
+        dateOG.setPreferredSize(new Dimension(dateOG.getPreferredSize().width, dateOa.getPreferredSize().height));
+        flowTwoParent.setPreferredSize(new Dimension(parentPanel.getPreferredSize().width,  (int) ( frame.getHeight()/1.5)));
+
+        parentPanel.add(inParent);
+        parentPanel.add(flowZeroParent);
+        parentPanel.add(flowOneParent);
+        parentPanel.add(flowTwoParent);
+
+        // กำหนดหัวคอลัมน์
+        String[] columnNames = {"COURSE TITLE", "CREDIT", "GRADE", "COURSE TITLE", "CREDIT", "GRADE"};
+
+        // สร้างข้อมูลตัวอย่าง
+        Object[][] data = {
+                {"Math", 3, "A", "Science", 4, "B+"},
+                {"History", 2, "B", "English", 3, "A-"},
+                {"Physics", 4, "C+", "Chemistry", 4, "B"}
+        };
+
+        // สร้าง JTable พร้อมโมเดลข้อมูล
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        JTable table = new JTable(model);
+
+        // ใส่ JTable ลงใน JScrollPane เพื่อให้เลื่อนดูได้
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        parentPanel.add(scrollPane);
     }
 }
