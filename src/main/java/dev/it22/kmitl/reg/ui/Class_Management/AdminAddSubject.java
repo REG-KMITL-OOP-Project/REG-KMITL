@@ -315,32 +315,32 @@ public class AdminAddSubject implements FocusListener {
     }public void focusLost(FocusEvent e){
         if (year.getText().isEmpty()) {
             showYear = true;
-            year.setText("   ภาคการศึกษา");
+            year.setText("   25xx");
             year.setForeground(Color.GRAY);
         }
 
         if(code.getText().isEmpty()){
             showCode = true;
-            code.setText("   รหัสวิชา");
+            code.setText("   06xxxxxx");
             code.setForeground(Color.GRAY);
         }
 
         if (name.getText().isEmpty()) {
             showName = true;
-            name.setText("   ชื่อวิชา");
+            name.setText("   OOP");
             name.setForeground(Color.GRAY);
 
         }if (teacher.getText().isEmpty()) {
             showTeacher = true;
-            teacher.setText("   อาจารย์ผู้สอน");
+            teacher.setText("  ธราวิเชษฐ์");
             teacher.setForeground(Color.GRAY);
         }if (note.getText().isEmpty()) {
             showNote = true;
-            note.setText("   หมายเหตุ");
+            note.setText("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก");
             note.setForeground(Color.GRAY);
         }if (condition.getText().isEmpty()) {
             showCondition = true;
-            condition.setText("   เงื่อนไข");
+            condition.setText("   รับเฉพาะนักศึกษาคณะไอที");
             condition.setForeground(Color.GRAY);
         }
     }
