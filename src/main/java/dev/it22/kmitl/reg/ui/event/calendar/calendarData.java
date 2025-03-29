@@ -36,7 +36,7 @@ public class calendarData {
             //store events in ArrayList
             ArrayList<String[]> arrayEvents = new ArrayList<String[]>();
 
-            String q = "SELECT Date, name, type FROM Event WHERE Date " + this.setDateFormat(month);
+            String q = "SELECT Date, name, type FROM Event WHERE Date " + this.setDateFormat(month) + "ORDER BY Date ASC";
             rs = db.getQuery(q);
             while (rs.next()) {
                 String[] ev;
@@ -116,7 +116,7 @@ public class calendarData {
         try{
             ArrayList<String[]> events = new ArrayList<String[]>();
 
-            String q = "SELECT Date, name, type FROM Event WHERE Date " + this.setDateFormat(month);
+            String q = "SELECT Date, name, type FROM Event WHERE Date " + this.setDateFormat(month) + "ORDER BY Date ASC";
             rs = db.getQuery(q);
             while (rs.next()) {
                 String[] ev;
