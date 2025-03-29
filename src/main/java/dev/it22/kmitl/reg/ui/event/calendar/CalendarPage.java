@@ -68,6 +68,14 @@ public class CalendarPage extends monthTableCalendar implements ItemListener {
         if (category.getSem1().isSelected()) {
             super.getSem1().setVisible(true);
         }
+        if (category.getSem1().isSelected() && !category.getSem2().isSelected()) {
+            super.getSem1().setVisible(true);
+            super.getNov_2().setVisible(true);
+        }
+        if (category.getSem1().isSelected() && category.getSem2().isSelected()) {
+            super.getSem1().setVisible(true);
+            super.getNov_2().setVisible(false);
+        }
         if (!category.getSem1().isSelected()) {
             super.getSem1().setVisible(false);
         }
