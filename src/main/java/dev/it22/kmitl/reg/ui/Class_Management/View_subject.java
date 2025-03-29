@@ -1,6 +1,7 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.RoundedButton;
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -9,9 +10,10 @@ import java.awt.*;
 public class View_subject {
     private JFrame frame;
     private JButton home;
-    private JPanel ICON,setposition,textname_id,combo_teach,obj_page,tableSub;
+    private JPanel ICON,setposition,textname_id,combo_teach,obj_page,tableSub,titel,setstu;
     private JLabel namesubject,idsubject,teacher;
     private JComboBox group;
+    private RoundedButton addstudent;
     private JTable tablesubject;
     private JScrollPane showdetail_table;
     private String columnNames[] = {"รหัสนักศึกษา","ชื่อนักศึกษา"};
@@ -41,14 +43,23 @@ public class View_subject {
         namesubject = new JLabel("sing");
         idsubject = new JLabel("0670975");
         teacher = new JLabel("peter");
+        addstudent = new RoundedButton("เพิ่มนักศึกษา",22);
 
         //เปลี่ยนฟอนและสีข้อความ
+        addstudent.setFont(Config.HEADER_SEMIBOLD[2]);
+        addstudent.setForeground(Color.BLACK);
+        addstudent.setBackground(Config.primaryColor_base);
         namesubject.setFont(Config.HEADER_SEMIBOLD[2]);
         namesubject.setForeground(Color.WHITE);
         idsubject.setFont(Config.HEADER_SEMIBOLD[2]);
         idsubject.setForeground(Color.WHITE);
         teacher.setFont(Config.HEADER_SEMIBOLD[2]);
         teacher.setForeground(Color.WHITE);
+
+        setstu = new JPanel();
+        setstu.setLayout(new FlowLayout());
+        setstu.add(addstudent);
+        setstu.setBackground(null);
 
         group = new JComboBox<>();
         group.addItem("กลุ่มเรียน");
@@ -67,6 +78,13 @@ public class View_subject {
         combo_teach.add(group);
         combo_teach.add(teacher);
         combo_teach.setBackground(null);
+
+        //รวมtextnameกับcombo
+        titel = new JPanel();
+        titel.setLayout(new BorderLayout());
+        titel.add(textname_id,BorderLayout.NORTH);
+        titel.add(combo_teach,BorderLayout.CENTER);
+        titel.setBackground(null);
 
         //tablesubject
         DefaultTableModel model = new DefaultTableModel(null, columnNames);
@@ -94,8 +112,8 @@ public class View_subject {
         //รวมองค์ประกอบไว้ในpanelนี้
         obj_page = new JPanel();
         obj_page.setLayout(new BorderLayout());
-        obj_page.add(textname_id,BorderLayout.NORTH);
-        obj_page.add(combo_teach,BorderLayout.CENTER);
+        obj_page.add(titel,BorderLayout.NORTH);
+        obj_page.add(setstu,BorderLayout.CENTER);
         obj_page.add(tableSub,BorderLayout.SOUTH);
         obj_page.setBackground(null);
 
