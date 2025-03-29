@@ -153,23 +153,6 @@ public class AdminCalendarPage extends monthTableCalendar implements ActionListe
         }catch (NullPointerException ex){}
     }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-        //super.mouseEntered(e);
-        //r_panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
     public static void main(String[] args) {
         try {
             new Login("Admin01","Admin1234").loginWithUsernameAndPassword();

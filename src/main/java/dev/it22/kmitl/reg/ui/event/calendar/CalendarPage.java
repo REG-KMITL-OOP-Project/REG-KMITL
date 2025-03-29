@@ -2,6 +2,7 @@ package dev.it22.kmitl.reg.ui.event.calendar;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.controller.auth.Login;
+import dev.it22.kmitl.reg.ui.event.admin.EditEventPage;
 import dev.it22.kmitl.reg.ui.event.classSch.classData;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
 import dev.it22.kmitl.reg.utils.Config;
@@ -9,10 +10,7 @@ import dev.it22.kmitl.reg.utils.Config;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 
 public class CalendarPage extends monthTableCalendar implements ItemListener {
     private JFrame frame;
@@ -93,6 +91,33 @@ public class CalendarPage extends monthTableCalendar implements ItemListener {
         if (category.getSpecialSem().isSelected()) {
             super.getSpe().setVisible(true);
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        System.out.println("mouseClicked");
+        try {
+            if(!((String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1)).equals("")) {
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                new descriptionPage(frame, (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1), (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),2));
+            }
+        }catch (NullPointerException ex){}
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        System.out.println("mousePressed");
+        try {
+            if(!((String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1)).equals("")) {
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                new descriptionPage(frame, (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1), (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),2));
+            }
+        }catch (NullPointerException ex){}
     }
 
     public static void main(String[] args) {
