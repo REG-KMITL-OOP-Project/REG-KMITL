@@ -70,6 +70,12 @@ public class AdminCreateUserPortal {
         stdBtn.setFont(Config.HEADER_REGULAR[1]);
         stdBtn.setForeground(Color.WHITE);
         stdBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        stdBtn.addActionListener(e -> {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new AdminCreateStudent(frame);
+        });
         innerPanel.add(stdBtn);
 
         profBtn = new RoundedButton("สำหรับอาจารย์",20);
