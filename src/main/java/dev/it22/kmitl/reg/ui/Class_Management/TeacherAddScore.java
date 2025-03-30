@@ -1,32 +1,40 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
 import dev.it22.kmitl.reg.controller.auth.Login;
+import dev.it22.kmitl.reg.controller.auth.User;
+import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
 import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
+import dev.it22.kmitl.reg.ui.event.calendar.calendarData;
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.CustomCombobox;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class TeacherAddScore {
     private JFrame frame;
-    private JLabel enter_grade, add_score_student, student;
+    private JLabel enter_score, add_score_student, student;
     private JPanel main_panel, sub1, sub2, sub3;
     private JPanel west_panel, student_panel, student_pan, cancel_panel, save_panel, save_cancel_panel, score_no_panel, pls_enter_score_panel, score_no_enter_score_panel;
     private callData data_id_subject, data_id_student;
     private RoundedButton cancel, save;
-    private JComboBox grade;
+    private JTextField score;
     private JTextField subject;
     private Font innerFont, regularFont;
     private stdInfo std;
-    
+
     public TeacherAddScore(JFrame frame) {
         this.frame = frame;
 //    private Account user;
 
 
-    public TeacherAddGrade(JFrame frame) {
+    public TeacherAddScore(JFrame frame) {
             this.frame = frame;
 //        user = new User().getUserAccount();
             regularFont = Config.NORMAL_REGULAR;
@@ -80,17 +88,17 @@ public class TeacherAddScore {
             student_panel.setBorder(BorderFactory.createEmptyBorder(30, 35, 5, 5));
             student_panel.setBackground(null);
 
-            enter_grade = new JLabel("เลือกเกรด");
-            enter_grade.setForeground(Config.bgColor_harder);
-            enter_grade.setFont(Config.HEADER_SEMIBOLD[2]);
-            enter_grade.setBackground(Color.WHITE);
+            enter_score = new JLabel("เลือกเกรด");
+            enter_score.setForeground(Config.bgColor_harder);
+            enter_score.setFont(Config.HEADER_SEMIBOLD[2]);
+            enter_score.setBackground(Color.WHITE);
 
-            grade = new JComboBox(new String[]{"A", "B+", "B", "C+", "C", "D+", "D", "F", "S", "U"});
+            score = new JTextField();
 
             sub1 = new JPanel();
             sub1.setLayout(new BorderLayout());
-            sub1.add(grade, BorderLayout.SOUTH);
-            sub1.add(enter_grade, BorderLayout.NORTH);
+            sub1.add(score, BorderLayout.SOUTH);
+            sub1.add(enter_score, BorderLayout.NORTH);
             //sub1.setBackground(null);
 
             std = new stdInfo();
@@ -151,7 +159,7 @@ public class TeacherAddScore {
             frame.setVisible(true);
         }
 
-        public static void main (String[]args){
+        public static void main(String[]args){
             try {
                 new Login("Student01", "Student1234").loginWithUsernameAndPassword();
                 new TeacherAddScore(Config.createAndShowGUI());
