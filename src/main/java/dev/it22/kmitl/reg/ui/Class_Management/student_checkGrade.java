@@ -144,7 +144,6 @@ public class student_checkGrade {
         frame.setLayout(new BorderLayout());
         frame.add(setposition, BorderLayout.NORTH);
         frame.add(group_obj,BorderLayout.CENTER);
-        //frame.setSize(1000,700);
         frame.setVisible(true);
 
     }

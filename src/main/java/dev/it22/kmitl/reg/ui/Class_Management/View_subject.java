@@ -142,7 +142,6 @@ public class View_subject implements ActionListener {
         frame.add(alltitle,BorderLayout.NORTH); //north ใส่แถบข้างบนทั้งหมด
         frame.add(tableSub,BorderLayout.CENTER); //center ใส่ตาราง
         frame.add(setstu,BorderLayout.SOUTH); //south ปุ่มเพิ่มนักศึกษา
-        //frame.setSize(1000,700);
         frame.setVisible(true);
     }
     public static void main(String[] args) {

@@ -108,7 +108,6 @@ public class create_class implements ActionListener{
         frame.add(setposition,BorderLayout.NORTH);
         frame.add(setpositext,BorderLayout.CENTER);
         frame.setBackground(null);
-        frame.setSize(1000,700);
         frame.setVisible(true);
 
         // Set Row Selection Listener
