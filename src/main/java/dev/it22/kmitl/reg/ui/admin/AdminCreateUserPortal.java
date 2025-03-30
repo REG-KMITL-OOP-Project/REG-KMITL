@@ -68,18 +68,21 @@ public class AdminCreateUserPortal {
         System.out.println(new Dimension(innerPanel.getPreferredSize().width - 20, innerPanel.getPreferredSize().height/3));
         stdBtn.setBackground(Config.primaryColor_base);
         stdBtn.setFont(Config.HEADER_REGULAR[1]);
+        stdBtn.setForeground(Color.WHITE);
         stdBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         innerPanel.add(stdBtn);
 
         profBtn = new RoundedButton("สำหรับอาจารย์",20);
         profBtn.setBackground(Config.primaryColor_base);
         profBtn.setFont(Config.HEADER_REGULAR[1]);
+        profBtn.setForeground(Color.WHITE);
         profBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         innerPanel.add(profBtn);
 
         adminBtn = new RoundedButton("สำหรับเจ้าหน้าที่",20);
         adminBtn.setBackground(Config.primaryColor_base);
         adminBtn.setFont(Config.HEADER_REGULAR[1]);
+        adminBtn.setForeground(Color.WHITE);
         adminBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         innerPanel.add(adminBtn);
 
