@@ -96,6 +96,12 @@ public class AdminCreateUserPortal {
         adminBtn.setFont(Config.HEADER_REGULAR[1]);
         adminBtn.setForeground(Color.WHITE);
         adminBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        adminBtn.addActionListener(e -> {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new AdminCreateAdminView(frame);
+        });
         innerPanel.add(adminBtn);
 
         panel.add(innerPanel);
