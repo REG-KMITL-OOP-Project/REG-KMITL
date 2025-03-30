@@ -35,23 +35,23 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
         roomPan = new JPanel();
         numGroupLabel = new JLabel("จำนวนกลุ่มเรียน");
         numStuLabel = new JLabel("จำนวนนักศึกษาที่รับ");
-        typeLabel = new JLabel("กลุ่มเรียนที่");
+        typeLabel = new JLabel("วิชา");
         addGroup = new JLabel("              เพิ่มกลุ่มเรียน");
         date = new JLabel("วัน-เวลาเรียน");
         timeExam = new JLabel("วัน-เวลาสอบกลางภาค");
         timeExamFinal = new JLabel("วัน-เวลาสอบปลายภาค");
-        towLabel = new JLabel("อาคารเรียน");
-        roomLabel = new JLabel("ห้องเรียน");
+        //towLabel = new JLabel("อาคารเรียน");
+        //roomLabel = new JLabel("ห้องเรียน");
         numGroup = new RoundedTextField(22);
         time = new RoundedTextField(22);
         mid = new RoundedTextField(22);
         fi = new RoundedTextField(22);
-        room = new RoundedTextField(22);
+        //room = new RoundedTextField(22);
         numStu = new RoundedTextField(22);
         cancel = new RoundedButton("CANCEL" ,22);
         save = new RoundedButton("SAVE" ,22);
         type = new JComboBox();
-        tow = new JComboBox();
+        //tow = new JComboBox();
         regularFont = Config.NORMAL_REGULAR;
         innerFont = regularFont.deriveFont(15f);
 
@@ -69,8 +69,8 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
         groupPan.setBackground(null);
         numPan.setBackground(null);
         typePan.setBackground(null);
-        towPan.setBackground(null);
-        roomPan.setBackground(null);
+        //towPan.setBackground(null);
+        //roomPan.setBackground(null);
 
         panelHead.setLayout(new BorderLayout());
         panelHead.add(panelBig);
@@ -116,9 +116,9 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
         numGroup.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
 
         panelRek1.add(typePan);
-        type.addItem("1");
-        type.addItem("2");
-        type.addItem("3");
+        type.addItem("OOP");
+        type.addItem("DSA");
+        type.addItem("BFIT");
         type.setRenderer(new CustomCombobox());
         type.setMaximumRowCount(3);
         type.setFont(Config.NORMAL_REGULAR);
@@ -182,7 +182,7 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
 
         panelBig.add(panelRek2);
 
-        panelRek3.setPreferredSize(new Dimension((int)(frame.getWidth()),(int)(frame.getHeight() / 3.5) - 120));
+        /*panelRek3.setPreferredSize(new Dimension((int)(frame.getWidth()),(int)(frame.getHeight() / 3.5) - 120));
         towPan.setLayout(new BorderLayout());
         towPan.add(towLabel,BorderLayout.NORTH);
         towPan.add(tow);
@@ -215,7 +215,7 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
         room.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.8),(frame.getHeight() / 4) - 120));
         room.addFocusListener(this);
 
-        panelBig.add(panelRek3);
+        panelBig.add(panelRek3);*/
 
         panelRek5.add(panelCan);
         panelCan.setLayout( new FlowLayout(FlowLayout.LEFT,93,0));
@@ -302,18 +302,18 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
             showFi = true;
             fi.setText("   จ. 9:00 - 12:00");
             fi.setForeground(Color.GRAY);
-        }if (room.getText().isEmpty()) {
+        }/*if (room.getText().isEmpty()) {
             showRoom = true;
             room.setText("   M22");
             room.setForeground(Color.GRAY);
-        }
+        }*/
     }
     private RoundedButton yes , no ;
     private JDialog dialog ;
 
     public void actionPerformed(ActionEvent ev){
         if (ev.getSource() == cancel) {
-            if (!(numGroup.getText().equals("   3") && numStu.getText().equals("    200") && time.getText().equals("   จ. 8:00 - 20:00") && mid.getText().equals(("   จ. 9:00 - 12:00")) && fi.getText().equals(("   จ. 9:00 - 12:00")) && room.getText().equals(("   M22")) )){
+            if (!(numGroup.getText().equals("   3") && numStu.getText().equals("    200") && time.getText().equals("   จ. 8:00 - 20:00") && mid.getText().equals(("   จ. 9:00 - 12:00")) && fi.getText().equals(("   จ. 9:00 - 12:00")) /*&& room.getText().equals(("   M22"))*/ )){
                 dialog = Config.openFrame((int) (frame.getWidth() / 2), (int) (frame.getHeight() / 2));
                 JPanel panelD = new JPanel();
                 JPanel panelC = new JPanel();
@@ -372,7 +372,7 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
             dialog.setVisible(false);
         }else if (ev.getSource().equals(yes) || ev.getSource().equals(save)){
             if(ev.getSource().equals(save)){
-                if (numGroup.getText().equals("   3") && numStu.getText().equals("    200") && time.getText().equals("   จ. 8:00 - 20:00") && mid.getText().equals(("   จ. 9:00 - 12:00")) && fi.getText().equals(("   จ. 9:00 - 12:00")) && room.getText().equals(("   M22")) ) {
+                if (numGroup.getText().equals("   3") || numStu.getText().equals("    200") || time.getText().equals("   จ. 8:00 - 20:00") || mid.getText().equals(("   จ. 9:00 - 12:00")) || fi.getText().equals(("   จ. 9:00 - 12:00")) /*&& room.getText().equals(("   M22")) */) {
                     new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
                     return;
                 }
