@@ -13,7 +13,7 @@ public class TeacherAddGrade {
     private JFrame frame;
 //    private Account user;
     private JLabel add_score_student,name_subject, student;
-    private JPanel west, student_panel, cancel_panel, save_panel;
+    private JPanel west, student_panel, cancel_panel, save_panel, info_panel;
     private callData data_id_subject, data_id_student;
     private JButton button1;
     private RoundedButton cancel,save;
@@ -41,6 +41,8 @@ public class TeacherAddGrade {
         student_panel.add(student);
         student_panel.setBackground(null);
 
+        data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา");
+
         cancel_panel = new JPanel();
         cancel = new RoundedButton("CANCEL" ,22);
 
@@ -61,6 +63,9 @@ public class TeacherAddGrade {
         save.setFont(Config.HEADER_SEMIBOLD[2]);
         save.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
 
+        //fff
+        info_panel = new JPanel();
+        info_panel  = new
 
         frame.add(west, BorderLayout.WEST);
         frame.add(student, BorderLayout.CENTER);
