@@ -73,7 +73,7 @@ public class HomePage implements ActionListener {
             name  = new String[]{"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ออกจากระบบ"};
             source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/book.png", "source/calendar-days.png", "source/scroll-text.png", "source/log-out.png"};
         }else if(acc instanceof Prof){
-            border = 80;
+            border = 40;
             name  = new String[]{"ตารางสอน","ตารางสอบ","กรอกคะแนน","กรอกเกรด","ปฏิทินการศึกษา","ออกจากระบบ"};
             source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/scroll-text.png", "source/scroll-text.png", "source/calendar-days.png", "source/log-out.png"};
         }else if(acc instanceof Admin){
@@ -245,8 +245,10 @@ public class HomePage implements ActionListener {
             } else if (e.getSource().equals(button[2])) {
                 System.out.println("Prof3");
             } else if (e.getSource().equals(button[3])) {
+                System.out.println("Prof4");
+            } else if (e.getSource().equals(button[4])){
                 new CalendarPage(frame);
-            } else if (e.getSource().equals(button[4])) {
+            } else if (e.getSource().equals(button[5])) {
                 user.logout();
                 new LoginFrame(frame);
             } else if (e.getSource().equals(editButton)) {
@@ -254,7 +256,7 @@ public class HomePage implements ActionListener {
             }
         } else if(acc instanceof Admin) { //"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
-                new RegisterFrame(frame);
+
             } else if (e.getSource().equals(button[1])) {
                 new SubjectHomepage(frame);
             } else if (e.getSource().equals(button[2])) {
