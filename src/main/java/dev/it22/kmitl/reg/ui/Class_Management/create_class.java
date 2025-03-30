@@ -17,7 +17,7 @@ public class create_class implements ActionListener{
     private JScrollPane scrollPane;
     private DefaultTableModel tableModel;
     private RoundedButton enter_classButton,create_classButton;
-    private String columnNames[] = {"รหัสวิชา","ชื่อวิชา","อาจารย์ผู้สอน","ประเภท"};
+    private String columnNames[] = {"รหัสวิชา","ชื่อวิชา","กลุ่มเรียน","อาจารย์ผู้สอน"};
 
     public create_class(JFrame frame){
         this.frame = frame;
@@ -74,7 +74,7 @@ public class create_class implements ActionListener{
         table.setBackground(Config.bgColor_hard);
         table.setForeground(Color.WHITE);
         JTableHeader header = table.getTableHeader();
-        table.setRowHeight(30);
+        table.setRowHeight(40);
         header.setFont(Config.HEADER_SEMIBOLD[2]);
         table.getTableHeader().setReorderingAllowed(false);
         table .getTableHeader().setResizingAllowed(false);
