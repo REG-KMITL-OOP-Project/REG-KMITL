@@ -1,4 +1,4 @@
-package dev.it22.kmitl.reg.ui.Class_Management.component;
+package dev.it22.kmitl.reg.ui.Class_Management;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.utils.Config;
@@ -7,9 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.util.Arrays;
 
 public class teacherNameTable extends JPanel {
     private JTable name_table;
@@ -18,34 +16,23 @@ public class teacherNameTable extends JPanel {
     private String[][] name;
 
     public teacherNameTable() {
-        this("รายชื่ออาจารย์",new String[3], 1000);
+        this("รายชื่ออาจารย์",new String[5], 900);
     }
     public teacherNameTable(String[] name_data) {
-        this("รายชื่ออาจารย์",name_data, 1000);
+        this("รายชื่ออาจารย์",name_data, 900);
     }
     public teacherNameTable(String tableName, String[] name_data, int width) {
-        try{
-            UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
+//        try{
+//            UIManager.setLookAndFeel(new FlatLightLaf());
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
 
         name_column = new String[]{tableName};
         name = new String[name_data.length][1];
         for (int i = 0; i < name_data.length; i++) {
             name[i][0] = name_data[i];
         }
-
-        int row = 3;
-        if (5 > name_data.length && name_data.length >= 3) {
-            row = name_data.length;
-        }
-        else {
-            row = 5;
-        }
-
-
 
         DefaultTableModel model = new DefaultTableModel(name, name_column);
         name_table = new JTable(model);
@@ -78,7 +65,7 @@ public class teacherNameTable extends JPanel {
         name_table.setShowHorizontalLines(true);
 
         name_scroll = new JScrollPane(name_table);
-        name_scroll.setPreferredSize(new Dimension(width, (row * 48) + 38));
+        name_scroll.setPreferredSize(new Dimension(width, (3 * 48) + 33));
         name_scroll.setBorder(null);
         name_scroll.setBackground(null);
         name_scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -86,19 +73,18 @@ public class teacherNameTable extends JPanel {
 
         this.setLayout(new FlowLayout());
         this.add(name_scroll);
-        //this.add(name_scroll, BorderLayout.CENTER);
         this.setBackground(null);
         this.setBorder(null);
-        this.setPreferredSize(new Dimension(width, (row * 48) + 38));
+        this.setPreferredSize(new Dimension(width, (3 * 48) + 30));
     }
 
-    public static void main(String[] args) {
-
-        JFrame frame = new JFrame();
-        frame.setLayout(new FlowLayout(FlowLayout.CENTER));
-        frame.add(new teacherNameTable());
-        frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//
+//        JFrame frame = new JFrame();
+//        frame.setLayout(new FlowLayout(FlowLayout.CENTER));
+//        frame.add(new teacherNameTable());
+//        frame.pack();
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setVisible(true);
+//    }
 }

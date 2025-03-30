@@ -17,6 +17,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
     private JPanel panelSave = new JPanel() , panelCan = new JPanel();
     protected boolean showName, showCode, showTeacher;
     private JScrollPane name;
+    private teacherNameTable table;
 
     public AdminAddClassroom(JFrame frame){
         this.frame = frame;
@@ -127,20 +128,25 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         teacherName.setForeground(Color.GRAY);
         teacherName.setPreferredSize(new Dimension((int)(frame.getWidth() / 2),(frame.getHeight() / 4) - 120));
         teacherName.addFocusListener(this);
-
         panelRek3.add(panelPela1);
         panelPela1.setPreferredSize(new Dimension((int)(frame.getWidth() / 10.5),(frame.getHeight() / 4) - 120));
-
 
         panelRek3.add(add);
         add.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/5),(frame.getHeight() / 4) - 120));
         panelBig.add(panelRek3);
 
-        panelTeacher.add(name);
-        panelTeacher.setLayout(new BorderLayout());
-        name.setPreferredSize(new Dimension(200, (frame.getHeight() / 4) - 120));
-        name.setViewportView(panelTeacher1);
-        panelBig.add(panelTeacher);
+        table = new teacherNameTable();
+        panelBig.add(table);
+
+//        panelTeacher.add(name);
+//        panelTeacher.setLayout(new BorderLayout());
+//        name.setPreferredSize(new Dimension(200, (frame.getHeight() / 4) - 120));
+//        name.setViewportView(panelTeacher1);
+
+
+        //panelBig.add(panelTeacher);
+
+
 
         panelRek5.add(panelCan);
         panelCan.setLayout( new FlowLayout(FlowLayout.LEFT,93,0));
@@ -153,6 +159,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         save.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
 
         panelSave.add(save);
+
 
         panelBig.add(panelRek5);
 
