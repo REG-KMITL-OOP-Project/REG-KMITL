@@ -52,5 +52,6 @@ public class RoundedButton extends JButton {
     public boolean contains(int x, int y) {
         return new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), radius, radius).contains(x, y);
     }
+
 }
 
