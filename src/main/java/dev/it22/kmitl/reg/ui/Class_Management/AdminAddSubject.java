@@ -249,7 +249,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
         condition.setText("   รับเฉพาะนักศึกษาคณะไอที");
         condition.setFont(innerFont);
         condition.setForeground(Color.GRAY);
-        condition.setPreferredSize(new Dimension((int)(frame.getWidth() / 1.3),(frame.getHeight() / 4) - 120));
+        condition.setPreferredSize(new Dimension((int)(frame.getWidth() / 1.32),(frame.getHeight() / 4) - 120));
         condition.addFocusListener(this);
 
         panelBig.add(panelRek4);
