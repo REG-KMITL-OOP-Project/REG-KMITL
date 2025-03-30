@@ -83,6 +83,12 @@ public class AdminCreateUserPortal {
         profBtn.setFont(Config.HEADER_REGULAR[1]);
         profBtn.setForeground(Color.WHITE);
         profBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        profBtn.addActionListener(e -> {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new AdminCreateProfView(frame);
+        });
         innerPanel.add(profBtn);
 
         adminBtn = new RoundedButton("สำหรับเจ้าหน้าที่",20);
