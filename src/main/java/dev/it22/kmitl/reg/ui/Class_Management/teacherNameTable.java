@@ -78,6 +78,9 @@ public class teacherNameTable extends JPanel {
         this.setPreferredSize(new Dimension(width, (3 * 48) + 30));
     }
 
+    public JTable getName_table() {
+        return name_table;
+    }
 //    public static void main(String[] args) {
 //
 //        JFrame frame = new JFrame();
