@@ -30,12 +30,8 @@ public class TeacherAddScore {
     private stdInfo std;
 
     public TeacherAddScore(JFrame frame) {
-        this.frame = frame;
-//    private Account user;
-
-
-    public TeacherAddScore(JFrame frame) {
             this.frame = frame;
+            //    private Account user;
 //        user = new User().getUserAccount();
             regularFont = Config.NORMAL_REGULAR;
             innerFont = regularFont.deriveFont(15f);
