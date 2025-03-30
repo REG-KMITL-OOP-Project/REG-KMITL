@@ -75,7 +75,7 @@ public class HomePage implements ActionListener {
         }else if(acc instanceof Prof){
             border = 40;
             name  = new String[]{"ตารางสอน","ตารางสอบ","กรอกคะแนน","กรอกเกรด","ปฏิทินการศึกษา","ออกจากระบบ"};
-            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/scroll-text.png", "source/scroll-text.png", "source/calendar-days.png", "source/log-out.png"};
+            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/clipboard-pen-line.png", "source/file-pen-line.png", "source/calendar-days.png", "source/log-out.png"};
         }else if(acc instanceof Admin){
             border = 100;
             name  = new String[]{"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ออกจากระบบ"};
