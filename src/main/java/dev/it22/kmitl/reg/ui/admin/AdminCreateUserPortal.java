@@ -74,7 +74,7 @@ public class AdminCreateUserPortal {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            new AdminCreateStudent(frame);
+            new AdminCreateStudentView(frame);
         });
         innerPanel.add(stdBtn);
 

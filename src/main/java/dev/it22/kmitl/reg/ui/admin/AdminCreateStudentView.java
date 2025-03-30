@@ -1,6 +1,5 @@
 package dev.it22.kmitl.reg.ui.admin;
 
-import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
@@ -8,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class AdminCreateStudent {
+public class AdminCreateStudentView {
     JFrame frame;
     JPanel upperPanel, lowerPanel, northPanel;
     JPanel panel[][] , pan[];
@@ -18,7 +17,7 @@ public class AdminCreateStudent {
     JTextArea txtA;
     JLabel title,title2;
     RoundedButton btn, backBtn;
-    public AdminCreateStudent(JFrame frame) {
+    public AdminCreateStudentView(JFrame frame) {
         this.frame = frame;
         frame.setLayout(new BorderLayout());
 
@@ -169,6 +168,6 @@ public class AdminCreateStudent {
     }
 
     public static void main(String[] args) {
-        new AdminCreateStudent(Config.createAndShowGUI());
+        new AdminCreateStudentView(Config.createAndShowGUI());
     }
 }
