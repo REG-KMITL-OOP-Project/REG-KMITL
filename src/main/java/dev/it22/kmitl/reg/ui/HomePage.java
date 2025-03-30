@@ -3,14 +3,17 @@ package dev.it22.kmitl.reg.ui;
 import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.*;
-import dev.it22.kmitl.reg.ui.event.admin.AdminCalendarPage;
-import dev.it22.kmitl.reg.ui.event.examSch.ExamSchedulePage;
+import dev.it22.kmitl.reg.ui.event.admin.*;
+import dev.it22.kmitl.reg.ui.event.examSch.*;
 import dev.it22.kmitl.reg.ui.profile.LoginFrame;
 import dev.it22.kmitl.reg.ui.profile.RegisterFrame;
 import dev.it22.kmitl.reg.ui.transcript.TranscriptController;
+import dev.it22.kmitl.reg.ui.event.classSch.*;
+import dev.it22.kmitl.reg.ui.event.calendar.*;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
 import dev.it22.kmitl.reg.utils.RoundedButton;
+import dev.it22.kmitl.reg.ui.Classes_Management.SubjectHomepage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -71,8 +74,8 @@ public class HomePage implements ActionListener {
             source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/book.png", "source/calendar-days.png", "source/scroll-text.png", "source/log-out.png"};
         }else if(acc instanceof Prof){
             border = 80;
-            name  = new String[]{"Example 1","Example 2","Example 3","Example 4","Example 5"};
-            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/scroll-text.png", "source/scroll-text.png", "source/log-out.png"};
+            name  = new String[]{"ตารางสอน","ตารางสอบ","กรอกคะแนน","กรอกเกรด","ปฏิทินการศึกษา","ออกจากระบบ"};
+            source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/scroll-text.png", "source/scroll-text.png", "source/calendar-days.png", "source/log-out.png"};
         }else if(acc instanceof Admin){
             border = 100;
             name  = new String[]{"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ออกจากระบบ"};
@@ -219,13 +222,13 @@ public class HomePage implements ActionListener {
         }
         if(acc instanceof Student) { //"ตารางเรียน","ตารางสอบ","ดูคะแนน","ปฏิทินการศึกษา","ผลการเรียน","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
-                System.out.println("Student1");
+                new ClassSchedulePage(frame);
             } else if (e.getSource().equals(button[1])) {
                 new ExamSchedulePage(frame);
             } else if (e.getSource().equals(button[2])) {
                 System.out.println("Student3");
             } else if (e.getSource().equals(button[3])) {
-                System.out.println("Student4");
+                new CalendarPage(frame);
             } else if (e.getSource().equals(button[4])) {
                new TranscriptController(frame);
             } else if (e.getSource().equals(button[5])) {
@@ -236,13 +239,13 @@ public class HomePage implements ActionListener {
             }
         }else if(acc instanceof Prof) {
             if (e.getSource().equals(button[0])) {
-                System.out.println("Prof1");
+                new TeacherClassSchedulePage(frame);
             } else if (e.getSource().equals(button[1])) {
-                new ExamSchedulePage(frame);
+                new TeacherExamSchedulePage(frame);
             } else if (e.getSource().equals(button[2])) {
                 System.out.println("Prof3");
             } else if (e.getSource().equals(button[3])) {
-                System.out.println("Prof4");
+                new CalendarPage(frame);
             } else if (e.getSource().equals(button[4])) {
                 user.logout();
                 new LoginFrame(frame);
@@ -253,7 +256,7 @@ public class HomePage implements ActionListener {
             if (e.getSource().equals(button[0])) {
                 new RegisterFrame(frame);
             } else if (e.getSource().equals(button[1])) {
-                System.out.println("Admin2");
+                new SubjectHomepage(frame);
             } else if (e.getSource().equals(button[2])) {
                 new AdminCalendarPage(frame);
             } else if (e.getSource().equals(button[3])) {
@@ -283,8 +286,8 @@ public class HomePage implements ActionListener {
         JFrame config = Config.createAndShowGUI();
 
         try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-//            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
 //            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         }
