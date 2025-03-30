@@ -167,6 +167,7 @@ public class EditEventPage extends EventPage implements ActionListener {
                 frame.repaint();
                 new AdminCalendarPage (frame);
             }
+
         }
     }
 }
