@@ -20,12 +20,14 @@ public class create_class implements ActionListener{
     private String columnNames[] = {"รหัสวิชา","ชื่อวิชา","อาจารย์ผู้สอน","ประเภท"};
 
     public create_class(JFrame frame){
+        this.frame = frame;
         //Icon home
         ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home.png").getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH));
         home = new JButton(homeIcon);
         home.setBorderPainted(false);
         home.setContentAreaFilled(false);
         home.setFocusPainted(false);
+        home.addActionListener(this);
 
         ImageIcon logo = new ImageIcon(new ImageIcon("source/Logo.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
         JLabel regLabel = new JLabel(logo);
@@ -64,6 +66,7 @@ public class create_class implements ActionListener{
         create_classButton.setFont(Config.HEADER_SEMIBOLD[2]);
         create_classButton.setForeground(Color.BLACK);
         create_classButton.setBackground(Config.primaryColor_base);
+        create_classButton.addActionListener(this);
 
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
         table = new JTable(tableModel);
@@ -76,7 +79,7 @@ public class create_class implements ActionListener{
         table.getTableHeader().setReorderingAllowed(false);
         table .getTableHeader().setResizingAllowed(false);
 
- 
+
         Buttonpanel = new JPanel();
         Buttonpanel.setLayout(new FlowLayout());
         Buttonpanel.add(enter_classButton);
@@ -125,6 +128,16 @@ public class create_class implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource().equals(enter_classButton)){
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new View_subject(frame);
+        }else if(e.getSource().equals(create_classButton)){
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new AdminAddClassroom(frame);
+        }
     }
 }

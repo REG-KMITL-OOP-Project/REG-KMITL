@@ -1,13 +1,16 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
+import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public  class SubjectHomepage {
+public  class SubjectHomepage implements ActionListener {
     private JFrame frame;
     private JButton home;
     private JLabel regLabel;
@@ -19,11 +22,13 @@ public  class SubjectHomepage {
     private String columnNames[] = {"รหัสวิชา","ชื่อวิชา", "กลุ่มเรียน","ห้องเรียน","อาจารย์ผู้สอน","เงื่อนไข","หมายเหตุ","วันสอบ","รับ"};
 
     public SubjectHomepage(JFrame frame){
+        this.frame = frame;
         ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
         home = new JButton(homeIcon);
         home.setBorderPainted(false);
         home.setContentAreaFilled(false);
         home.setFocusPainted(false);
+        home.addActionListener(this);
         ImageIcon logo = new ImageIcon(new ImageIcon("source/Logo.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
         JLabel regLabel = new JLabel(logo);
         ICON = new JPanel();
@@ -33,9 +38,13 @@ public  class SubjectHomepage {
         ICON.setBackground(null);
 
         this.frame = frame;
-        addsubjec = new RoundedButton("เพิ่ม-เปลี่ยนวิชา",22);
+        addsubjec = new RoundedButton("เพิ่มวิชา",22);
         addtime = new RoundedButton("เพิ่มกลุ่มเรียน",22);
         addclass = new RoundedButton("ชั้นเรียน",22);
+
+        addsubjec.addActionListener(this);
+        addtime.addActionListener(this);
+        addclass.addActionListener(this);
 
         addsubjec.setFont(Config.HEADER_SEMIBOLD[2]);
         addtime.setFont(Config.HEADER_SEMIBOLD[2]);
@@ -113,9 +122,36 @@ public  class SubjectHomepage {
         frame.setLayout(new BorderLayout());
         frame.add(setposition, BorderLayout.NORTH);
         frame.add(tablesubject,BorderLayout.CENTER);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }
     public static void main(String[] args) {
         new SubjectHomepage(Config.createAndShowGUI());
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource().equals(addsubjec)){
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new AdminAddSubject(frame);
+        } else if (e.getSource().equals(addtime)) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new AdminAddGroupClass(frame);
+        } else if (e.getSource().equals(addclass)) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new create_class(frame);
+        } else if (e.getSource().equals(home)) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new HomePage(frame);
+        }
+
     }
 }

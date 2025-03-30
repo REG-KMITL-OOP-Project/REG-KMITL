@@ -6,8 +6,10 @@ import dev.it22.kmitl.reg.utils.RoundedButton;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class View_subject {
+public class View_subject implements ActionListener {
     private JFrame frame;
     private JButton home;
     private JPanel ICON,setposition,textname_id,combo_teach,obj_page,tableSub,titel,setstu;
@@ -19,6 +21,7 @@ public class View_subject {
     private String columnNames[] = {"รหัสนักศึกษา","ชื่อนักศึกษา"};
 
     public View_subject(JFrame frame){
+        this.frame = frame;
         //ปุ่มรูปบ้าน
         ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home.png").getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH));
         home = new JButton(homeIcon);
@@ -44,6 +47,7 @@ public class View_subject {
         idsubject = new JLabel("0670975");
         teacher = new JLabel("peter");
         addstudent = new RoundedButton("เพิ่มนักศึกษา",22);
+        addstudent.addActionListener(this);
 
         //เปลี่ยนฟอนและสีข้อความ
         addstudent.setFont(Config.HEADER_SEMIBOLD[2]);
@@ -121,10 +125,19 @@ public class View_subject {
         frame.setLayout(new BorderLayout());
         frame.add(setposition,BorderLayout.NORTH);
         frame.add(obj_page,BorderLayout.CENTER);
-        //frame.setSize(1000,700);
         frame.setVisible(true);
     }
     public static void main(String[] args) {
         new View_subject(Config.createAndShowGUI());
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource().equals(addstudent)){
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            //new AdminAddSubject(frame);
+        }
     }
 }

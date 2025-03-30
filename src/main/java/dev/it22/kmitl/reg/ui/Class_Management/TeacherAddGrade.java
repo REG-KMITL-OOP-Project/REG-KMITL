@@ -65,14 +65,14 @@ public class TeacherAddGrade {
 
         //fff
         info_panel = new JPanel();
-        info_panel  = new
+        //info_panel  = new
 
-        frame.add(west, BorderLayout.WEST);
-        frame.add(student, BorderLayout.CENTER);
-        frame.add(cancel, BorderLayout.EAST);
-        frame.add(save, BorderLayout.SOUTH);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        //frame.add(west, BorderLayout.WEST);
+        //frame.add(student, BorderLayout.CENTER);
+        //frame.add(cancel, BorderLayout.EAST);
+        //frame.add(save, BorderLayout.SOUTH);
+        //frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //frame.setVisible(true);
     }
 
     public static void main(String[] args) {
