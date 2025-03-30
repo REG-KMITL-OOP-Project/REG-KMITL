@@ -89,7 +89,7 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         enter_grade.setFont(Config.HEADER_SEMIBOLD[2]);
         enter_grade.setBackground(Color.WHITE);
 
-        grade = new JComboBox(new String[]{"A", "B", "C", "D", "F"});
+        grade = new JComboBox(new String[]{"A","B+", "B", "C+", "C", "D+", "D", "F", "S", "U"});
 
         sub1 = new JPanel();
         sub1.setLayout(new BorderLayout());
