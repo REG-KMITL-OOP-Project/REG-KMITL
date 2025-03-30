@@ -29,7 +29,7 @@ public class callData extends JPanel implements FocusListener, ActionListener {
         info.setText(text);
         info.setForeground(textcolor);
         info.setBackground(textBackcolor);
-        info.setFont(Config.NORMAL_REGULAR);
+        info.setFont(Config.HEADER_REGULAR[3]);
         info.setPreferredSize(new Dimension(300,30));
         info.addFocusListener(this);
 
@@ -37,7 +37,7 @@ public class callData extends JPanel implements FocusListener, ActionListener {
         showData = new RoundedButton(buttonText,20);
         showData.setForeground(buttoncolor);
         showData.setBackground(buttonBackcolor);
-        showData.setFont(Config.NORMAL_REGULAR);
+        showData.setFont(Config.HEADER_REGULAR[3]);
         showData.addActionListener(this);
 
         this.text = text;
@@ -47,6 +47,14 @@ public class callData extends JPanel implements FocusListener, ActionListener {
         this.setBackground(null);
         this.add(info);
         this.add(showData);
+    }
+
+    public void setInfoSize(int width,int height){
+        info.setPreferredSize(new Dimension(width,height));
+    }
+
+    public void setButtonSize(int width,int height){
+        showData.setPreferredSize(new Dimension(width,height));
     }
 
     @Override
