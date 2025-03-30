@@ -73,14 +73,12 @@ public class AdminCreateProfView {
         label = new JLabel[3][];
         label[0] = new JLabel[4];
         label[1] = new JLabel[4];
-        label[2] = new JLabel[2];
+        label[2] = new JLabel[1];
 
         txtF = new JTextField[3][];
         txtF[0] = new JTextField[4];
         txtF[1] = new JTextField[4];
         txtF[2] = new JTextField[1];
-
-        txtA = new JTextArea();
 
         name = new String[3][];
         name[0] = new String[]{"e-mail", "Username", "Password","รหัสอาจารย์"};
@@ -88,12 +86,7 @@ public class AdminCreateProfView {
         name[2] = new String[]{"เบอร์โทรศัพท์","ที่อยู่"};
 
         for(int i = 0; i < 3; i++){
-            if(i == 2) {
-                pan[i] = new JPanel();
-                pan[i].setLayout(new BoxLayout(pan[i], BoxLayout.Y_AXIS));
-            }else{
-                pan[i] = new JPanel(new GridLayout(panel[i].length, 1, 20, 15));
-            }
+            pan[i] = new JPanel(new GridLayout(4, 1, 20, 15));
             pan[i].setPreferredSize(new Dimension(frame.getWidth()/4, frame.getHeight()/4));
             pan[i].setBackground(null);
             for(int j = 0; j < label[i].length; j++){
@@ -101,41 +94,22 @@ public class AdminCreateProfView {
                 panel[i][j].setLayout(new BoxLayout(panel[i][j], BoxLayout.Y_AXIS));
                 panel[i][j].setBackground(null);
                 panel[i][j].setBorder(new EmptyBorder(5, 5, 5, 5));
-                if (i == 2 & j == 1){
-                    panel[i][j].add(Box.createRigidArea(new Dimension(0, 15)));
-                    label[i][j] = new JLabel(name[i][j]);
-                    label[i][j].setForeground(Color.WHITE);
-                    label[i][j].setFont(Config.HEADER_REGULAR[3]);
-                    label[i][j].setAlignmentX(Component.LEFT_ALIGNMENT);
-                    label[i][j].setBackground(null);
-                    panel[i][j].add(label[i][j]);
 
-                    txtA = new JTextArea();
-                    txtA.setBackground(null);
-                    txtA.setForeground(Color.WHITE);
-                    txtA.setFont(Config.HEADER_REGULAR[3]);
-                    txtA.setLineWrap(true);
-                    txtA.setAlignmentX(Component.LEFT_ALIGNMENT);
-                    txtA.setPreferredSize(new Dimension(frame.getWidth()/5, frame.getHeight()/3 - 20));
-                    txtA.setBorder(BorderFactory.createLineBorder(Config.primaryColor_base));
-                    panel[i][j].add(txtA);
-                }
-                else {
-                    label[i][j] = new JLabel(name[i][j]);
-                    label[i][j].setForeground(Color.WHITE);
-                    label[i][j].setFont(Config.HEADER_REGULAR[3]);
-                    label[i][j].setAlignmentX(Component.LEFT_ALIGNMENT);
-                    label[i][j].setBackground(null);
-                    panel[i][j].add(label[i][j]);
+                label[i][j] = new JLabel(name[i][j]);
+                label[i][j].setForeground(Color.WHITE);
+                label[i][j].setFont(Config.HEADER_REGULAR[3]);
+                label[i][j].setAlignmentX(Component.LEFT_ALIGNMENT);
+                label[i][j].setBackground(null);
+                panel[i][j].add(label[i][j]);
 
-                    txtF[i][j] = new JTextField();
-                    txtF[i][j].setBackground(null);
-                    txtF[i][j].setForeground(Color.WHITE);
-                    txtF[i][j].setFont(Config.HEADER_REGULAR[3]);
-                    txtF[i][j].setAlignmentX(Component.LEFT_ALIGNMENT);
-                    txtF[i][j].setBorder(BorderFactory.createLineBorder(Config.primaryColor_base));
-                    panel[i][j].add(txtF[i][j]);
-                }
+                txtF[i][j] = new JTextField();
+                txtF[i][j].setBackground(null);
+                txtF[i][j].setForeground(Color.WHITE);
+                txtF[i][j].setFont(Config.HEADER_REGULAR[3]);
+                txtF[i][j].setAlignmentX(Component.LEFT_ALIGNMENT);
+                txtF[i][j].setBorder(BorderFactory.createLineBorder(Config.primaryColor_base));
+                panel[i][j].add(txtF[i][j]);
+                
                 pan[i].add(panel[i][j]);
             }
             lowerPanel.add(pan[i]);
