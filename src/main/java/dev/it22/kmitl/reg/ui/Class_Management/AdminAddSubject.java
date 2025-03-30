@@ -1,14 +1,14 @@
 
 package dev.it22.kmitl.reg.ui.Class_Management;
-import dev.it22.kmitl.reg.utils.Config;
-import dev.it22.kmitl.reg.utils.CustomCombobox;
-import dev.it22.kmitl.reg.utils.RoundedButton;
-import dev.it22.kmitl.reg.utils.RoundedTextField;
+import dev.it22.kmitl.reg.ui.event.admin.AddDataEvent;
+import dev.it22.kmitl.reg.ui.event.admin.AdminCalendarPage;
+import dev.it22.kmitl.reg.utils.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class AdminAddSubject implements FocusListener {
+public class AdminAddSubject implements FocusListener ,  ActionListener {
     private JFrame frame ;
     private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelHead,panelYear,panelType,panelKit,panelGroup,panelBranch,panelCode,panelName,panelTeacher,panelNote,panelCondition,panelPela;
     private JLabel addSubject,yearLabel,typeLabel,kitLabel,groupLabel,branchLabel,codeLabel,nameLabel,teacherLabel,noteLabel,conditionLabel;
@@ -215,7 +215,7 @@ public class AdminAddSubject implements FocusListener {
 
         panelRek3.add(panelTeacher);
         showTeacher = true;
-        teacher.setText("  ธราวิเชษฐ์");
+        teacher.setText("  สมชาย");
         teacher.setFont(innerFont);
         teacher.setForeground(Color.GRAY);
         teacher.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.65),(frame.getHeight() / 4) - 120));
@@ -272,7 +272,8 @@ public class AdminAddSubject implements FocusListener {
         save.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
 
         panelSave.add(save);
-
+        cancel.addActionListener(this);
+        save.addActionListener(this);
         panelBig.add(panelRek5);
 
         panelHead.add(panelBig);
@@ -332,7 +333,7 @@ public class AdminAddSubject implements FocusListener {
 
         }if (teacher.getText().isEmpty()) {
             showTeacher = true;
-            teacher.setText("  ธราวิเชษฐ์");
+            teacher.setText("  สมชาย");
             teacher.setForeground(Color.GRAY);
         }if (note.getText().isEmpty()) {
             showNote = true;
@@ -342,6 +343,85 @@ public class AdminAddSubject implements FocusListener {
             showCondition = true;
             condition.setText("   รับเฉพาะนักศึกษาคณะไอที");
             condition.setForeground(Color.GRAY);
+        }
+    }
+    private RoundedButton yes , no ;
+    private JDialog dialog ;
+
+    public void actionPerformed(ActionEvent ev){
+        if (ev.getSource() == cancel) {
+            if (!(year.getText().equals("   25xx") && code.getText().equals("   06xxxxxx") && name.getText().equals("   OOP") && teacher.getText().equals(("  สมชาย")) && note.getText().equals(("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก")) && condition.getText().equals(("   รับเฉพาะนักศึกษาคณะไอที")) )){
+                dialog = Config.openFrame((int) (frame.getWidth() / 2), (int) (frame.getHeight() / 2));
+                JPanel panelD = new JPanel();
+                JPanel panelC = new JPanel();
+                JPanel panelButton = new JPanel();
+                JPanel panelHeader = new JPanel();
+                JPanel panelLayoutButton = new JPanel();
+                JPanel panelLayoutlHeader = new JPanel();
+                JLabel header = new JLabel("ARE YOU SURE WANT TO CANCEL");
+                yes = new RoundedButtonWithColor("YES", 22,Color.WHITE,Config.primaryColor_harder);
+                no = new RoundedButtonWithColor("NO", 22,Color.BLACK,new Color(255, 247, 237));
+
+                panelC.setBackground(null);
+                panelD.setBackground(null);
+                panelHeader.setBackground(null);
+                panelButton.setBackground(null);
+                panelLayoutButton.setBackground(null);
+                panelLayoutlHeader.setBackground(null);
+
+                dialog.setLayout(new BorderLayout());
+                panelLayoutlHeader.setLayout(new FlowLayout());
+                panelLayoutlHeader.add(header);
+                header.setForeground(Config.primaryColor_hard);
+                header.setFont(Config.HEADER_SEMIBOLD[1]);
+                panelHeader.setLayout(new BoxLayout(panelHeader, BoxLayout.Y_AXIS));
+                panelHeader.add(Box.createVerticalStrut(75));
+                panelHeader.add(panelLayoutlHeader);
+                dialog.add(panelHeader,BorderLayout.NORTH);
+
+                panelD.setLayout(new FlowLayout(FlowLayout.RIGHT, 30, 0));
+                yes.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 3.5), (frame.getHeight() / 4) - 120));
+                panelD.add(yes);
+                yes.addActionListener(this);
+
+                panelC.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 0));
+                no.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 3.5), (frame.getHeight() / 4) - 120));
+                panelC.add(no);
+                no.addActionListener(this);
+
+                panelButton.setLayout(new GridLayout(1, 2));
+                panelButton.add(panelC);
+                panelButton.add(panelD);
+                panelLayoutButton.setLayout(new BoxLayout(panelLayoutButton, BoxLayout.Y_AXIS));
+                panelLayoutButton.add(panelButton);
+                panelLayoutButton.add(Box.createVerticalStrut(100));
+                dialog.add(panelLayoutButton,BorderLayout.SOUTH);
+
+                dialog.setVisible(true);
+            }
+            else{
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                new SubjectHomepage(frame);
+            }
+        }else if (ev.getSource().equals(no)) {
+            dialog.setVisible(false);
+        }else if (ev.getSource().equals(yes) || ev.getSource().equals(save)){
+            if(ev.getSource().equals(save)){
+                if (year.getText().equals("   25xx") || code.getText().equals("   06xxxxxx") || name.getText().equals("   OOP") || teacher.getText().equals(("  สมชาย")) && note.getText().equals(("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก")) || condition.getText().equals(("   รับเฉพาะนักศึกษาคณะไอที")) ) {
+                    new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
+                    return;
+                }
+            }
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new SubjectHomepage (frame);
+
+            if (ev.getSource().equals(yes)) {
+                dialog.setVisible(false);
+            }
         }
     }
 }
