@@ -12,7 +12,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
     private JFrame frame ;
     private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelHead,panelYear,panelType,panelKit,panelGroup,panelBranch,panelCode,panelName,panelTeacher,panelNote,panelCondition,panelPela;
     private JLabel addSubject,yearLabel,typeLabel,kitLabel,groupLabel,branchLabel,codeLabel,nameLabel,teacherLabel,noteLabel,conditionLabel;
-    private RoundedTextField year,code,name,teacher,note,condition;
+    private RoundedTextField year,code,name/*,teacher*/,note,condition;
     private JComboBox type,kit,group,branch;
     private Font innerFont, regularFont;
     private RoundedButton cancel,save;
@@ -54,7 +54,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
         note = new RoundedTextField(22);
         code = new RoundedTextField(22);
         name = new RoundedTextField(22);
-        teacher = new RoundedTextField(22);
+        //teacher = new RoundedTextField(22);
         condition = new RoundedTextField(22);
         cancel = new RoundedButton("CANCEL" ,22);
         save = new RoundedButton("SAVE" ,22);
@@ -199,11 +199,17 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
         nameLabel.setForeground(Config.primaryColor_base);
         nameLabel.setFont(Config.HEADER_SEMIBOLD[2]);
 
-        panelTeacher.setLayout(new BorderLayout());
+        panelNote.setLayout(new BorderLayout());
+        panelNote.add(noteLabel,BorderLayout.NORTH);
+        panelNote.add(note);
+        noteLabel.setForeground(Config.primaryColor_base);
+        noteLabel.setFont(Config.HEADER_SEMIBOLD[2]);
+
+        /*panelTeacher.setLayout(new BorderLayout());
         panelTeacher.add(teacherLabel,BorderLayout.NORTH);
         panelTeacher.add(teacher);
         teacherLabel.setForeground(Config.primaryColor_base);
-        teacherLabel.setFont(Config.HEADER_SEMIBOLD[2]);
+        teacherLabel.setFont(Config.HEADER_SEMIBOLD[2]);*/
 
         panelRek3.add(panelName);
         showName = true;
@@ -213,30 +219,15 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
         name.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.65),(frame.getHeight() / 4) - 120));
         name.addFocusListener(this);
 
-        panelRek3.add(panelTeacher);
+        /*panelRek3.add(panelTeacher);
         showTeacher = true;
         teacher.setText("  สมชาย");
         teacher.setFont(innerFont);
         teacher.setForeground(Color.GRAY);
         teacher.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.65),(frame.getHeight() / 4) - 120));
-        teacher.addFocusListener(this);
+        teacher.addFocusListener(this);*/
 
-        panelBig.add(panelRek3);
-
-        panelRek4.setPreferredSize(new Dimension((int)(frame.getWidth()),(frame.getHeight() / 4) - 100));
-        panelNote.setLayout(new BorderLayout());
-        panelNote.add(noteLabel,BorderLayout.NORTH);
-        panelNote.add(note);
-        noteLabel.setForeground(Config.primaryColor_base);
-        noteLabel.setFont(Config.HEADER_SEMIBOLD[2]);
-
-        panelCondition.setLayout(new BorderLayout());
-        panelCondition.add(conditionLabel,BorderLayout.NORTH);
-        panelCondition.add(condition);
-        conditionLabel.setForeground(Config.primaryColor_base);
-        conditionLabel.setFont(Config.HEADER_SEMIBOLD[2]);
-
-        panelRek4.add(panelNote);
+        panelRek3.add(panelNote);
         showNote = true;
         note.setText("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก");
         note.setFont(innerFont);
@@ -244,12 +235,21 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
         note.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.65),(frame.getHeight() / 4) - 120));
         note.addFocusListener(this);
 
+        panelBig.add(panelRek3);
+
+        panelRek4.setPreferredSize(new Dimension((int)(frame.getWidth()),(frame.getHeight() / 4) - 100));
+        panelCondition.setLayout(new BorderLayout());
+        panelCondition.add(conditionLabel,BorderLayout.NORTH);
+        panelCondition.add(condition);
+        conditionLabel.setForeground(Config.primaryColor_base);
+        conditionLabel.setFont(Config.HEADER_SEMIBOLD[2]);
+
         panelRek4.add(panelCondition);
         showCondition = true;
         condition.setText("   รับเฉพาะนักศึกษาคณะไอที");
         condition.setFont(innerFont);
         condition.setForeground(Color.GRAY);
-        condition.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.65),(frame.getHeight() / 4) - 120));
+        condition.setPreferredSize(new Dimension((int)(frame.getWidth() / 1.3),(frame.getHeight() / 4) - 120));
         condition.addFocusListener(this);
 
         panelBig.add(panelRek4);
@@ -300,11 +300,11 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
             name.setForeground(Color.BLACK);
             showName = false;
 
-        }else if (fg.getSource().equals(teacher) && showTeacher) {
+        } /*else if (fg.getSource().equals(teacher) && showTeacher) {
             teacher.setText("");
             teacher.setForeground(Color.BLACK);
             showTeacher = false;
-        }else if (fg.getSource().equals(note) && showNote) {
+        }*/else if (fg.getSource().equals(note) && showNote) {
             note.setText("");
             note.setForeground(Color.BLACK);
             showNote = false;
@@ -331,11 +331,11 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
             name.setText("   OOP");
             name.setForeground(Color.GRAY);
 
-        }if (teacher.getText().isEmpty()) {
+        }/*if (teacher.getText().isEmpty()) {
             showTeacher = true;
             teacher.setText("  สมชาย");
             teacher.setForeground(Color.GRAY);
-        }if (note.getText().isEmpty()) {
+        }*/if (note.getText().isEmpty()) {
             showNote = true;
             note.setText("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก");
             note.setForeground(Color.GRAY);
@@ -350,7 +350,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
 
     public void actionPerformed(ActionEvent ev){
         if (ev.getSource() == cancel) {
-            if (!(year.getText().equals("   25xx") && code.getText().equals("   06xxxxxx") && name.getText().equals("   OOP") && teacher.getText().equals(("  สมชาย")) && note.getText().equals(("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก")) && condition.getText().equals(("   รับเฉพาะนักศึกษาคณะไอที")) )){
+            if (!(year.getText().equals("   25xx") && code.getText().equals("   06xxxxxx") && name.getText().equals("   OOP") && /*teacher.getText().equals(("  สมชาย")) && */note.getText().equals(("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก")) && condition.getText().equals(("   รับเฉพาะนักศึกษาคณะไอที")) )){
                 dialog = Config.openFrame((int) (frame.getWidth() / 2), (int) (frame.getHeight() / 2));
                 JPanel panelD = new JPanel();
                 JPanel panelC = new JPanel();
@@ -409,7 +409,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
             dialog.setVisible(false);
         }else if (ev.getSource().equals(yes) || ev.getSource().equals(save)){
             if(ev.getSource().equals(save)){
-                if (year.getText().equals("   25xx") || code.getText().equals("   06xxxxxx") || name.getText().equals("   OOP") || teacher.getText().equals(("  สมชาย")) && note.getText().equals(("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก")) || condition.getText().equals(("   รับเฉพาะนักศึกษาคณะไอที")) ) {
+                if (year.getText().equals("   25xx") || code.getText().equals("   06xxxxxx") || name.getText().equals("   OOP") ||/* teacher.getText().equals(("  สมชาย")) || */ note.getText().equals(("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก")) || condition.getText().equals(("   รับเฉพาะนักศึกษาคณะไอที")) ) {
                     new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
                     return;
                 }
