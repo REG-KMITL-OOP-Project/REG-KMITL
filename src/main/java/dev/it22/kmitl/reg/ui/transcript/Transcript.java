@@ -1,17 +1,12 @@
 package dev.it22.kmitl.reg.ui.transcript;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
-import com.itextpdf.text.pdf.draw.VerticalPositionMark;
-import dev.it22.kmitl.reg.controller.auth.User;
-import dev.it22.kmitl.reg.model.auth.Account;
-import dev.it22.kmitl.reg.model.auth.Student;
 
 public class Transcript {
     private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm");

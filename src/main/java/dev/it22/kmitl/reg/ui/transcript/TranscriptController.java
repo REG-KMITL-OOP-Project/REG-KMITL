@@ -1,5 +1,7 @@
 package dev.it22.kmitl.reg.ui.transcript;
 
+import dev.it22.kmitl.reg.controller.auth.Login;
+import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.utils.Config;
 
@@ -35,6 +37,15 @@ public class TranscriptController implements ActionListener {
     }
 
     public static void main(String[] args) {
+        try {
+            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+            //new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
+//            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
+            System.out.println(new User().getUserAccount());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         new TranscriptController(Config.createAndShowGUI());
     }
 }

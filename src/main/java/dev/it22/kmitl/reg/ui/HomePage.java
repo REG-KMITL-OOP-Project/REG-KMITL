@@ -286,8 +286,8 @@ public class HomePage implements ActionListener {
         JFrame config = Config.createAndShowGUI();
 
         try {
-//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
+            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+            //new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
 //            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         }

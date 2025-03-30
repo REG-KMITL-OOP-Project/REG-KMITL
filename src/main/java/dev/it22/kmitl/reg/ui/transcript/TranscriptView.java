@@ -3,7 +3,9 @@ package dev.it22.kmitl.reg.ui.transcript;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.HeaderCellRendererNoBottomLine;
 import dev.it22.kmitl.reg.utils.RoundedButton;
+import dev.it22.kmitl.reg.utils.TableCellRendererNoBottomLine;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -34,6 +36,8 @@ public class TranscriptView {
     private String[][] gradeList;
 
     public TranscriptView(JFrame frame) {
+
+        UIManager.put("TableHeader.hoverBackground", Color.white);
         this.frame = frame;
 
         transcHeader = new JLabel("Transcript", SwingConstants.CENTER);
@@ -168,6 +172,8 @@ public class TranscriptView {
         JPanel flowZeroParent = new JPanel();
         JPanel flowOneParent = new JPanel();
         JPanel flowTwoParent = new JPanel();
+        JPanel flowThreeParent = new JPanel();
+        JPanel flowFourParent = new JPanel();
 
         System.out.println(dateOB);
         inParent.add(header);
@@ -176,52 +182,95 @@ public class TranscriptView {
 
         studentName.setFont(normal);
 
-        flowZeroParent.setLayout(new FlowLayout(FlowLayout.LEFT));
+        inParent.setBackground(null);
+        flowZeroParent.setBackground(null);
+        flowOneParent.setBackground(null);
+        flowTwoParent.setBackground(null);
+        flowThreeParent.setBackground(null);
+        flowFourParent.setBackground(null);
+
+        flowZeroParent.setLayout(new FlowLayout(FlowLayout.LEFT,10,0));
         flowZeroParent.add(studentName);
         studentName.setPreferredSize(new Dimension(studentName.getPreferredSize().width+10, studentName.getPreferredSize().height));
-        flowZeroParent.setPreferredSize(new Dimension(flowZeroParent.getPreferredSize().width, flowZeroParent.getPreferredSize().height-7));
+        flowZeroParent.setPreferredSize(new Dimension(flowZeroParent.getPreferredSize().width, flowZeroParent.getPreferredSize().height));
 
-        flowOneParent.setLayout(new FlowLayout(FlowLayout.LEFT));
+        flowOneParent.setLayout(new FlowLayout(FlowLayout.LEFT,10,0));
         dateOb.setFont(normal);
         studentIDLabel.setFont(normal);
         flowOneParent.add(dateOb);
         flowOneParent.add(studentIDLabel);
         dateOb.setPreferredSize(new Dimension(parentPanel.getPreferredSize().width/2, dateOb.getPreferredSize().height));
         studentIDLabel.setPreferredSize(new Dimension(studentIDLabel.getPreferredSize().width, studentIDLabel.getPreferredSize().height));
-        flowOneParent.setPreferredSize(new Dimension(flowOneParent.getPreferredSize().width, flowOneParent.getPreferredSize().height-5));
+        flowOneParent.setPreferredSize(new Dimension(flowOneParent.getPreferredSize().width, flowOneParent.getPreferredSize().height));
 
-        flowTwoParent.setLayout(new FlowLayout(FlowLayout.LEFT));
+        flowTwoParent.setLayout(new FlowLayout(FlowLayout.LEFT,10,0));
         dateOa.setFont(normal);
         dateOG.setFont(normal);
         flowTwoParent.add(dateOa);
         flowTwoParent.add(dateOG);
-        flowTwoParent.setBackground(Config.primaryColor_hard);
         dateOa.setPreferredSize(new Dimension((int) (parentPanel.getPreferredSize().width/2), dateOa.getPreferredSize().height));
         dateOG.setPreferredSize(new Dimension(dateOG.getPreferredSize().width, dateOa.getPreferredSize().height));
-        flowTwoParent.setPreferredSize(new Dimension(parentPanel.getPreferredSize().width,  (int) ( frame.getHeight()/1.5)));
+        flowTwoParent.setPreferredSize(new Dimension(parentPanel.getPreferredSize().width,  flowTwoParent.getPreferredSize().height));
+
+        flowThreeParent.setLayout(new FlowLayout(FlowLayout.LEFT,10,0));
+        degreeLabel.setFont(normal);
+        flowThreeParent.add(degreeLabel);
+        degreeLabel.setPreferredSize(new Dimension((int) (parentPanel.getPreferredSize().width/2), degreeLabel.getPreferredSize().height));
+        flowThreeParent.setPreferredSize(new Dimension(parentPanel.getPreferredSize().width,  flowThreeParent.getPreferredSize().height));
+
+
+        flowFourParent.setLayout(new FlowLayout(FlowLayout.LEFT,10,0));
+        majorLabel.setFont(normal);
+        flowFourParent.add(majorLabel);
+        majorLabel.setPreferredSize(new Dimension((int) (parentPanel.getPreferredSize().width/2), majorLabel.getPreferredSize().height));
+        flowFourParent.setPreferredSize(new Dimension(parentPanel.getPreferredSize().width,  flowFourParent.getPreferredSize().height));
+
+        //flowThreeParent.setPreferredSize(new Dimension(parentPanel.getPreferredSize().width,  (int) ( frame.getHeight()/1.5)));
 
         parentPanel.add(inParent);
         parentPanel.add(flowZeroParent);
         parentPanel.add(flowOneParent);
         parentPanel.add(flowTwoParent);
+        parentPanel.add(flowThreeParent);
+        parentPanel.add(flowFourParent);
 
-        // กำหนดหัวคอลัมน์
         String[] columnNames = {"COURSE TITLE", "CREDIT", "GRADE", "COURSE TITLE", "CREDIT", "GRADE"};
 
-        // สร้างข้อมูลตัวอย่าง
         Object[][] data = {
                 {"Math", 3, "A", "Science", 4, "B+"},
                 {"History", 2, "B", "English", 3, "A-"},
                 {"Physics", 4, "C+", "Chemistry", 4, "B"}
         };
 
-        // สร้าง JTable พร้อมโมเดลข้อมูล
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         JTable table = new JTable(model);
 
-        // ใส่ JTable ลงใน JScrollPane เพื่อให้เลื่อนดูได้
-        JScrollPane scrollPane = new JScrollPane(table);
+        table.setDefaultRenderer(Object.class, new TableCellRendererNoBottomLine());
+        table.setEnabled(false);
+        table.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        table.setRowHeight(15);
 
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setBackground(Color.WHITE);
+        table.getTableHeader().setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, Color.BLACK));
+        table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getPreferredSize().width, (int)(table.getPreferredSize().height/2.6)));
+
+
+        for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setResizable(false);
+            table.getColumnModel().getColumn(i).setHeaderRenderer(new HeaderCellRendererNoBottomLine());
+            if (i == 0 || i == 3) {
+                table.getColumnModel().getColumn(i).setPreferredWidth(((parentPanel.getPreferredSize().width-20)/3));
+            }else {
+                table.getColumnModel().getColumn(i).setPreferredWidth((int)(((parentPanel.getPreferredSize().width-20)/12)));
+            }
+
+        }
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(0, 11, 20, 12));
         parentPanel.add(scrollPane);
+        parentPanel.setBackground(Color.WHITE);
     }
 }
