@@ -1,8 +1,11 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
+import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
+import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
+import dev.it22.kmitl.reg.ui.event.calendar.calendarData;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.CustomCombobox;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -17,13 +20,15 @@ import java.awt.event.FocusListener;
 public class TeacherAddGrade implements FocusListener, ActionListener {
     private JFrame frame;
 //    private Account user;
-    private JLabel add_score_student, student;
-    private JPanel west_panel, student_panel, cancel_panel, save_panel,save_cancel_panel, score_no_panel, pls_enter_score_panel, score_no_enter_score_panel;
+    private JLabel enter_grade, add_score_student, student;
+    private JPanel main_panel, sub1, sub2, sub3;
+    private JPanel west_panel, student_panel, student_pan, cancel_panel, save_panel,save_cancel_panel, score_no_panel, pls_enter_score_panel, score_no_enter_score_panel;
     private callData data_id_subject, data_id_student;
     private RoundedButton cancel,save;
-    private JComboBox score_no;
-    private JTextField pls_enter_score;
+    private JComboBox grade;
+    private JTextField  subject;
     private Font innerFont, regularFont;
+    private stdInfo std;
 
     public TeacherAddGrade(JFrame frame) {
         this.frame = frame;
@@ -31,30 +36,79 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         regularFont = Config.NORMAL_REGULAR;
         innerFont = regularFont.deriveFont(15f);
 
-
-        add_score_student = new JLabel("เพิ่มคะแนนนักศึกษา");
-        add_score_student.setForeground(Config.primaryColor_base);
-        add_score_student.setFont(Config.HEADER_SEMIBOLD[1]);
-
-        west_panel = new JPanel();
-        west_panel.setLayout(new FlowLayout());
-        west_panel.add(add_score_student);
-        west_panel.setBackground(null);
-
-        student = new JLabel("นักศึกษา");
-        student.setForeground(Config.primaryColor_base);
-        student.setFont(Config.HEADER_SEMIBOLD[1]);
-
-        student_panel = new JPanel();
-        student_panel.setLayout(new FlowLayout());
-        student_panel.add(student);
-        student_panel.setBackground(null);
-
         data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา");
 
         data_id_student = new callData("กรอกรหัสนักศึกษา","แสดงข้อมูล");
 
-        score_no = new JComboBox();
+
+        add_score_student = new JLabel("เพิ่มคะแนนนักศึกษา");
+        add_score_student.setForeground(Config.primaryColor_base);
+        add_score_student.setFont(Config.HEADER_SEMIBOLD[1]);
+        add_score_student.setHorizontalAlignment(SwingConstants.LEFT);
+        add_score_student.setBorder(BorderFactory.createEmptyBorder(5, 10, 0, 5));
+
+        west_panel = new JPanel();
+        west_panel.setLayout(new BorderLayout());
+        west_panel.add(add_score_student, BorderLayout.NORTH);
+
+
+        student_pan = new JPanel();
+        student_pan.add(data_id_subject);
+        student_pan.setBackground(null);
+        student_pan.setLayout(new FlowLayout());
+        student_pan.setBorder(BorderFactory.createEmptyBorder(5, 30, 5, 5));
+
+        subject = new JTextField("ชื่อวิชา", 10);
+        subject.setEditable(false);
+        subject.setForeground(Color.WHITE);
+        subject.setFont(Config.HEADER_SEMIBOLD[3]);
+        subject.setBorder(null);
+        subject.setBackground(Config.bgColor_hard);
+
+        west_panel.add(student_pan, BorderLayout.SOUTH);
+        west_panel.setBackground(null);
+        west_panel.setPreferredSize(new Dimension(1000, 80));
+        west_panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 5, 5));
+
+
+        student = new JLabel("นักศึกษา", JLabel.LEFT);
+        student.setForeground(Config.primaryColor_base);
+        student.setFont(Config.HEADER_SEMIBOLD[1]);
+        student.setBackground(null);
+
+        student_panel = new JPanel();
+        student_panel.setLayout(new BorderLayout());
+        student_panel.add(student, BorderLayout.NORTH);
+        student_panel.add(data_id_student, BorderLayout.SOUTH);
+        data_id_student.setBackground(null);
+        student_panel.setBorder(BorderFactory.createEmptyBorder(30, 35, 5, 5));
+        student_panel.setBackground(null);
+
+        enter_grade = new JLabel("เลือกเกรด");
+        enter_grade.setForeground(Config.bgColor_harder);
+        enter_grade.setFont(Config.HEADER_SEMIBOLD[2]);
+        enter_grade.setBackground(Color.WHITE);
+
+        grade = new JComboBox(new String[]{"A", "B", "C", "D", "F"});
+
+        sub1 = new JPanel();
+        sub1.setLayout(new BorderLayout());
+        sub1.add(grade, BorderLayout.SOUTH);
+        sub1.add(enter_grade, BorderLayout.NORTH);
+        //sub1.setBackground(null);
+
+        std = new stdInfo();
+        sub2 = new JPanel(new BorderLayout());
+        sub2.setBackground(null);
+        sub2.setBorder(BorderFactory.createEmptyBorder(5, 30, 5, 5));
+
+        sub2.add(std);
+
+        main_panel = new JPanel(new BorderLayout());
+        main_panel.add(sub1, BorderLayout.WEST);
+        main_panel.add(sub2, BorderLayout.CENTER);
+        main_panel.setPreferredSize(new Dimension(1000, 80));
+        main_panel.setBackground(null);
 
 
         cancel_panel = new JPanel();
@@ -63,7 +117,7 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         cancel_panel.add(cancel);
         cancel_panel.setLayout( new FlowLayout(FlowLayout.RIGHT,93,0));
 //        cancel.setForeground(Color.BLACK);
-//        cancel.setBackground(new Color(255,247,237));
+        cancel.setBackground(new Color(255,247,237));
         cancel.setForeground(new Color(255, 247, 237));
         cancel.setBackground(Config.primaryColor_base);
         cancel.setFont(Config.HEADER_SEMIBOLD[2]);
@@ -87,46 +141,31 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         save_cancel_panel.setLayout( new FlowLayout(FlowLayout.RIGHT,93,0));
         save_cancel_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-        score_no_panel = new JPanel();
-        score_no = new JComboBox();
-        score_no.addItem("คะแนนช่องที่");
-        score_no.addItem("1");
-        score_no.addItem("2");
-        score_no.addItem("3");
-        score_no.addItem("4");
-        score_no.setRenderer(new CustomCombobox());
-        score_no.setMaximumRowCount(4);
-        score_no.setFont(Config.NORMAL_REGULAR);
-        score_no.setPreferredSize(new Dimension((int)(frame.getWidth() / 5),(frame.getHeight() / 4) - 120));
-        score_no_panel.add(score_no);
-
-        pls_enter_score_panel = new JPanel();
-        pls_enter_score = new JTextField("กรอกคะแนน");
-        pls_enter_score.setText("กรอกคะแนน");
-        pls_enter_score.setFont(innerFont);
-        pls_enter_score.setPreferredSize(new Dimension(100 , 50));
-        pls_enter_score.addFocusListener(this);
-        score_no_panel.add(pls_enter_score);
-
-        score_no_enter_score_panel = new JPanel();
-        score_no_enter_score_panel.add(score_no_panel);
-        score_no_enter_score_panel.add(pls_enter_score_panel);
-        score_no_enter_score_panel.setLayout(new FlowLayout(FlowLayout.LEFT,93,0));
-        score_no_enter_score_panel.setBackground(null);
-        score_no_enter_score_panel.setFont(Config.HEADER_SEMIBOLD[2]);
 
 
-        frame.add(score_no_enter_score_panel, BorderLayout.CENTER);
-        frame.add(west_panel, BorderLayout.WEST);
-        frame.add(student_panel, BorderLayout.NORTH);
-        frame.add(save_cancel_panel, BorderLayout.SOUTH);
+        //frame.add(score_no_enter_score_panel, BorderLayout.CENTER);
+        frame.setLayout(new FlowLayout(FlowLayout.LEFT,93,0));
+
+        frame.add(west_panel);
+        frame.add(student_pan);
+        frame.add(subject);
+        frame.add(student_panel);
+        frame.add(main_panel);
+        frame.add(save_cancel_panel);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 
     public static void main(String[] args) {
-        new TeacherAddGrade(Config.createAndShowGUI());
+        try {
+            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+            new TeacherAddGrade(Config.createAndShowGUI());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     @Override
