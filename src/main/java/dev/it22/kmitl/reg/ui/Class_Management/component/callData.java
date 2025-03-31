@@ -1,6 +1,7 @@
 package dev.it22.kmitl.reg.ui.Class_Management.component;
 
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.ErrorModal;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 import dev.it22.kmitl.reg.utils.RoundedTextField;
 
@@ -65,7 +66,6 @@ public class callData extends JPanel implements FocusListener, ActionListener {
             showInfo = false;
         }
     }
-
     @Override
     public void focusLost(FocusEvent e) {
         if (info.getText().isEmpty()) {
@@ -74,10 +74,13 @@ public class callData extends JPanel implements FocusListener, ActionListener {
             info.setForeground(this.textcolor);
         }
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(showData)){
+            if (info.getText().equals("กรอกรหัสนักศึกษา")) {
+                new ErrorModal(new JFrame(), "กรุณากรอกข้อมูลให้ครบถ้วน");
+                return;
+        }
             showInfo = true;
             info.setText(this.text);
             info.setForeground(this.textcolor);
