@@ -9,10 +9,12 @@ import dev.it22.kmitl.reg.utils.RoundedTextField;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-public class addStudent implements FocusListener{
+public class addStudent implements FocusListener , ActionListener {
     private JFrame frame;
     private JLabel title,subjectName,subjectID,teacherName;
     private RoundedButtonWithColor cancel,save;
@@ -176,5 +178,8 @@ public class addStudent implements FocusListener{
             showName.setText("แสดงชื่อนักศึกษา");
             showName.setForeground(Color.GRAY);
         }
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
     }
 }
