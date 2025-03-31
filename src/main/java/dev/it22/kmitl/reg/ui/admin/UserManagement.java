@@ -1,5 +1,6 @@
 package dev.it22.kmitl.reg.ui.admin;
 
+import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
@@ -32,7 +33,18 @@ public class UserManagement {
         JPanel logoPanel = Config.createLogoAndTitle(Config.NORMAL_REGULAR, 50);
         headerPanel.add(logoPanel);
 
-        JPanel headerLogoGroup = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        RoundedButton homeBtn = new RoundedButton("",20);
+        homeBtn.setIcon(new ImageIcon(new ImageIcon("source/icon_schedule/house.png").getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)));
+        homeBtn.setBackground(Config.primaryColor_hard);
+        homeBtn.addActionListener(e -> {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new HomePage(frame);
+        });
+
+        JPanel headerLogoGroup = new JPanel();
+        headerLogoGroup.setLayout(new FlowLayout(FlowLayout.RIGHT));
         headerLogoGroup.setBackground(null);
         headerLogoGroup.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 50));
         headerLogoGroup.add(createButton("source/icon_schedule/bell.png", Color.WHITE));
@@ -64,6 +76,12 @@ public class UserManagement {
         createBtn.setForeground(Color.WHITE);
         createBtn.setPreferredSize(new Dimension(150, 40));
         createBtn.setBackground(Config.primaryColor_hard);
+        createBtn.addActionListener(e -> {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new AdminCreateUserPortal(frame);
+        });
         createBtnPanel.add(createBtn);
 
         titlePanel.add(createBtnPanel);

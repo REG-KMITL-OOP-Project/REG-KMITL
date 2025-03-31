@@ -10,7 +10,12 @@ public class RoundedTextField extends JTextField {
     public RoundedTextField(int radius) {
         super();
         this.radius = radius;
-        setOpaque(false); // Ensure transparency
+        setOpaque(false);
+
+        putClientProperty("JComponent.roundRect", true);
+        putClientProperty("JTextField.margin", new Insets(5, 10, 5, 10));
+
+        setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
     }
 
     @Override
@@ -19,7 +24,6 @@ public class RoundedTextField extends JTextField {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // Draw rounded background
         g2.setColor(getBackground());
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
 
