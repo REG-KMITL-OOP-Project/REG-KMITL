@@ -66,8 +66,8 @@ public class addStudent implements FocusListener , ActionListener {
         subjectName = new JLabel("ชื่อวิชา");
         subjectID = new JLabel("รหัสวิชา");
         teacherName = new JLabel("อาจารย์ประจำกลุ่มเรียน :");
-        cancel = new RoundedButtonWithColor ("CANCEL" ,22, new Color(255, 247, 237),Config.primaryColor_harder);
-        save = new RoundedButtonWithColor("SAVE" ,22,new Color(255, 247, 237),Config.primaryColor_base);
+        cancel = new RoundedButtonWithColor ("CANCEL" ,22, new Color(255, 247, 237),Config.primaryColor_base);
+        save = new RoundedButtonWithColor("SAVE" ,22,new Color(255, 247, 237),Config.primaryColor_harder);
         insertID = new callData("กรอกรหัสนักศึกษา",Config.bgColor_hard,Color.WHITE,"แสดงชื่อ",Color.WHITE,Config.primaryColor_base);
         section  = new JComboBox();
         regularFont = Config.NORMAL_REGULAR;
@@ -145,8 +145,8 @@ public class addStudent implements FocusListener , ActionListener {
         save.setPreferredSize(new Dimension((int)((frame.getWidth()-500)/2.7),(frame.getHeight() / 4) - 120));
         panelSave.add(save);
 
-        button.add(panelSave);
         button.add(panelCan);
+        button.add(panelSave);
         button.setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 0));
 
         allInfo.setLayout(new GridLayout(4,1));
