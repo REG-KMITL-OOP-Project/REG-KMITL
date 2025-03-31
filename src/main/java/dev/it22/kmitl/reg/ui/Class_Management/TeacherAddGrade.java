@@ -37,8 +37,10 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
 //        user = new User().getUserAccount();
 
         data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา");
-
         data_id_student = new callData("กรอกรหัสนักศึกษา","แสดงข้อมูล");
+        data_id_student.setInfoSize(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 40));
+        data_id_subject.setInfoSize(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 40));
+
 
 
         add_score_student = new JLabel("เพิ่มเกรดนักศึกษา");
@@ -56,7 +58,7 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         student_pan.add(data_id_subject);
         student_pan.setBackground(null);
         student_pan.setLayout(new FlowLayout());
-        student_pan.setBorder(BorderFactory.createEmptyBorder(5, 30, 20, 5));
+        student_pan.setBorder(BorderFactory.createEmptyBorder(5, 30, 10, 5));
 
         subject = new RoundedTextField( 25);
         subject.setText("  ชื่อวิชา : ");
@@ -67,14 +69,14 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         subject.setBackground(Config.bgColor_hard);
 
         subject_panel = new JPanel(new BorderLayout());
-        subject_panel.setPreferredSize(new Dimension(440, 50));
+        subject_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 45)));
         subject_panel.setBackground(null);
         subject_panel.add(subject);
-        subject_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 5));
+        subject_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 5));
 
         west_panel.add(student_pan, BorderLayout.SOUTH);
         west_panel.setBackground(null);
-        west_panel.setPreferredSize(new Dimension(1000, 80));
+        west_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 1000) , frame.getWidth() / (frame.getWidth() / 80)));
         west_panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 5, 5));
 
         student = new JLabel(" นักศึกษา", JLabel.LEFT);
@@ -100,32 +102,32 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
 
         sub3 = new JPanel();
         sub3.setLayout(new BorderLayout());
-        sub3.setPreferredSize(new Dimension(150, 30));
+        sub3.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 150) , frame.getWidth() / (frame.getWidth() / 30)));
         sub3.add(enter_grade);
         sub3.setBackground(null);
 
         grade = new JComboBox(new String[]{"A","B+", "B", "C+", "C", "D+", "D", "F", "S", "U"});
         grade.setFont(Config.HEADER_SEMIBOLD[3]);
-        grade.setPreferredSize(new Dimension(150, 40));
+        grade.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 150) , frame.getWidth() / (frame.getWidth() / 40)));
 
         sub1 = new JPanel();
         sub1.setLayout(new FlowLayout());
         sub1.add(sub3);
         sub1.add(grade);
         sub1.setBackground(null);
-        sub1.setPreferredSize(new Dimension(150, 30));
+        sub1.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 150) , frame.getWidth() / (frame.getWidth() / 30)));
 
         std = new stdInfo();
         sub2 = new JPanel(new BorderLayout());
         sub2.setBackground(null);
         sub2.setBorder(BorderFactory.createEmptyBorder(5, 40, 5, 5));
-        sub2.setPreferredSize(new Dimension(150, 110));
+        sub2.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 150) , frame.getWidth() / (frame.getWidth() / 110)));
         sub2.add(std);
 
         main_panel = new JPanel(new BorderLayout());
         main_panel.add(sub1, BorderLayout.WEST);
         main_panel.add(sub2, BorderLayout.CENTER);
-        main_panel.setPreferredSize(new Dimension(800, 110));
+        main_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 800) , frame.getWidth() / (frame.getWidth() / 110)));
         main_panel.setBorder(new EmptyBorder(5, 45, 5, 5));
         main_panel.setBackground(null);
 
@@ -155,13 +157,13 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         save_cancel_panel.add(cancel);
         save_cancel_panel.add(save);
         save_cancel_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
-        save_cancel_panel.setPreferredSize(new Dimension(1000,60));
+        save_cancel_panel.setPreferredSize(new Dimension((int)(frame.getWidth()/1.2) , frame.getWidth() / (frame.getWidth() / 60)));
         save_cancel_panel.setBackground(null);
 
 
         space = new JPanel();
         space.setBackground(null);
-        space.setPreferredSize(new Dimension(1000, 100));
+        space.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 1000) , frame.getWidth() / (frame.getWidth() / 100)));
 
         //frame.add(score_no_enter_score_panel, BorderLayout.CENTER);
         frame.setLayout(new FlowLayout(FlowLayout.LEFT,93,0));
