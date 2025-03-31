@@ -66,6 +66,7 @@ public class AdminAddEvent extends EventPage implements ActionListener {
 
     public void actionPerformed(ActionEvent ev){
         if (ev.getSource() == cancel) {
+
             if (!(eventName.getText().equals("   EVENT NAME") && dateStart.getText().equals("YYYY-MM-DD") && dateEnd.getText().equals("YYYY-MM-DD") && description.getText().equals(("   DESCRIPTION")))){
                 dialog = Config.openFrame((int) (frame.getWidth() / 2), (int) (frame.getHeight() / 2));
                 JPanel panelD = new JPanel();
@@ -148,6 +149,7 @@ public class AdminAddEvent extends EventPage implements ActionListener {
                 dialog.setVisible(false);
             }
         }
+
     }
 }
 
