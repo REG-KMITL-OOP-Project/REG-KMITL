@@ -33,7 +33,7 @@ public class UserManagement {
         JPanel logoPanel = Config.createLogoAndTitle(Config.NORMAL_REGULAR, 50);
         headerPanel.add(logoPanel);
 
-        RoundedButton homeBtn = new RoundedButton("",20);
+        RoundedButton homeBtn = new RoundedButton("", 20);
         homeBtn.setIcon(new ImageIcon(new ImageIcon("source/icon_schedule/house.png").getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)));
         homeBtn.setBackground(Config.primaryColor_hard);
         homeBtn.addActionListener(e -> {
