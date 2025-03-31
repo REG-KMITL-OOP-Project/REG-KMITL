@@ -10,7 +10,8 @@ public class UserRequestController {
     public boolean createRequest() {
         Database db = new Database();
         try {
-            int res = db.postQuery("INSERT INTO user_request (email, field_name, old_value, new_value, status) VALUES ('?','?','?','?','?');");
+            String query = "INSERT INTO user_request (email, field_name, old_value, new_value, status) VALUES (?, ?, ?, ?, ?)";
+            int res = db.postQuery(query, email, fieldName, oldValue, newValue, "pending");
             System.out.println("Create request success : " + res);
         } catch (Exception e) {
             e.printStackTrace();
