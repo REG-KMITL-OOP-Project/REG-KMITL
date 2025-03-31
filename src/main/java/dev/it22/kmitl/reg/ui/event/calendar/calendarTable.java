@@ -73,11 +73,11 @@ public class calendarTable extends JPanel {
         //day.setPreferredWidth(100);
         day.setPreferredWidth(frame.getWidth() / 14);
         TableColumn type = table_column.getColumnModel().getColumn(1);
-        type.setPreferredWidth(230);
-        //type.setPreferredWidth(frame.getWidth() / 6);
+        //type.setPreferredWidth(230);
+        type.setPreferredWidth((frame.getWidth() / 8)+(frame.getWidth()/40));
         TableColumn event = table_column.getColumnModel().getColumn(2);
-        event.setPreferredWidth(100);
-        //event.setPreferredWidth(frame.getWidth() / 14);
+        //event.setPreferredWidth(100);
+        event.setPreferredWidth(frame.getWidth() / 14);
 
         table_column.setShowVerticalLines(true);
         table_column.setShowHorizontalLines(true);
@@ -109,7 +109,7 @@ public class calendarTable extends JPanel {
 
         pn1 = new JPanel(new BorderLayout());
         pn1.add(table_Month);
-        pn1.setPreferredSize(new Dimension(150, table_column.getPreferredSize().height));
+        pn1.setPreferredSize(new Dimension(frame.getWidth()/10, table_column.getPreferredSize().height));
 
         //pn1.setBorder(BorderFactory.createLineBorder(Config.bgColor_hard));
         table_Month.setForeground(Config.primaryColor_base);
@@ -119,14 +119,15 @@ public class calendarTable extends JPanel {
         row = new JPanel(new BorderLayout());
         row.add(pn1, BorderLayout.WEST);
         row.setBackground(null);
-        row.setPreferredSize(new Dimension(150, table_column.getPreferredSize().height));
+        row.setPreferredSize(new Dimension(pn1.getPreferredSize().width, table_column.getPreferredSize().height));
 
 
         //combine
         com = new JPanel();
         com.setLayout(new BorderLayout());
         com.setBackground(null);
-        com.setPreferredSize(new Dimension(900, table_column.getPreferredSize().height + 10));
+        com.setPreferredSize(new Dimension(frame.getWidth() - (frame.getWidth()/ 4) - (frame.getWidth()/53), table_column.getPreferredSize().height + 10));
+        //com.setPreferredSize(new Dimension(900, table_column.getPreferredSize().height + 10));
         com.setBorder(BorderFactory.createEmptyBorder(5, 50, 5, 50));
         com.add(row, BorderLayout.WEST);
         com.add(column);
@@ -137,6 +138,10 @@ public class calendarTable extends JPanel {
 
     public JTable getTable() {
         return table_column;
+    }
+    public int getTableWidth(){
+        System.out.println(table_column.getPreferredSize().width + table_Month.getPreferredSize().width);
+        return column.getWidth() + table_Month.getPreferredSize().width;
     }
 
 }
