@@ -33,11 +33,11 @@ public class calendarTable extends JPanel {
     private JFrame frame;
 
     public calendarTable(String month) {
-        this(month,null,null);
+        this(month,Config.createAndShowGUI(),null);
     }
 
     public calendarTable(String month, String[][] events_data) {
-        this(month, null, events_data);
+        this(month, Config.createAndShowGUI(), events_data);
     }
 
     public calendarTable(String month, JFrame frame, String[][] events_data) {
@@ -55,7 +55,8 @@ public class calendarTable extends JPanel {
         DefaultTableModel model = new DefaultTableModel(events, event_column);
         table_column = new JTable(model);
         table_column.setEnabled(false);
-        table_column.setRowHeight(48);
+        //table_column.setRowHeight(48);
+        table_column.setRowHeight(frame.getHeight() / 12);
         table_column.setBorder(BorderFactory.createLineBorder(Config.bgColor_hard));
         table_column.setGridColor(Config.bgColor_harder);
 
@@ -69,11 +70,14 @@ public class calendarTable extends JPanel {
         }
 
         TableColumn day = table_column.getColumnModel().getColumn(0);
-        day.setPreferredWidth(100);
+        //day.setPreferredWidth(100);
+        day.setPreferredWidth(frame.getWidth() / 14);
         TableColumn type = table_column.getColumnModel().getColumn(1);
         type.setPreferredWidth(230);
+        //type.setPreferredWidth(frame.getWidth() / 6);
         TableColumn event = table_column.getColumnModel().getColumn(2);
         event.setPreferredWidth(100);
+        //event.setPreferredWidth(frame.getWidth() / 14);
 
         table_column.setShowVerticalLines(true);
         table_column.setShowHorizontalLines(true);
@@ -106,7 +110,6 @@ public class calendarTable extends JPanel {
         pn1 = new JPanel(new BorderLayout());
         pn1.add(table_Month);
         pn1.setPreferredSize(new Dimension(150, table_column.getPreferredSize().height));
-        //pn1.setPreferredSize(new Dimension(100, 384));
 
         //pn1.setBorder(BorderFactory.createLineBorder(Config.bgColor_hard));
         table_Month.setForeground(Config.primaryColor_base);
