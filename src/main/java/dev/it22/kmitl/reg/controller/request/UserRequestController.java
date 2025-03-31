@@ -19,6 +19,33 @@ public class UserRequestController {
         return true;
     }
 
+    public boolean sendRequest(String email, String fieldName, String oldValue, String newValue) {
+        Database db = new Database();
+        try {
+            int res = db.postQuery("INSERT INTO user_request (email, field_name, old_value, new_value, status) VALUES ('" + email + "','" + fieldName + "','" + oldValue + "','" + newValue + "','pending');");
+            System.out.println("Create request success : " + res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public String getOldValue(String email, String fieldName) {
+        Database db = new Database();
+        String oldValue = "";
+        try {
+            ResultSet rs = db.getQuery("SELECT " + fieldName + " FROM user WHERE email = '" + email + "';");
+            if (rs.next()) {
+                oldValue = rs.getString(fieldName);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return oldValue;
+    }
+
     public Vector<Vector<String>> getPendingRequests() {
         Vector<Vector<String>> data = new Vector<>();
         Database db = new Database();

@@ -2,6 +2,7 @@ package dev.it22.kmitl.reg.ui;
 
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RoundedButton;
+import dev.it22.kmitl.reg.controller.request.UserRequestController;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxUI;
@@ -13,15 +14,15 @@ public class RequestEditDataView {
         JDesktopPane desktopPane = new JDesktopPane();
         desktopPane.setOpaque(false);
         desktopPane.setBounds(0, 0, frame.getWidth(), frame.getHeight());
-        JInternalFrame internalFrame = new JInternalFrame("",false,true,false,false);
+        JInternalFrame internalFrame = new JInternalFrame("", false, true, false, false);
         ((javax.swing.plaf.basic.BasicInternalFrameUI) internalFrame.getUI()).setNorthPane(null);
         internalFrame.setFrameIcon(null);
         internalFrame.setSize(500, 500);
         internalFrame.setLocation(100, 100);
-        internalFrame.setBorder(BorderFactory.createEmptyBorder(50,50,50,50));
+        internalFrame.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         internalFrame.getContentPane().setLayout(new BorderLayout());
         internalFrame.setVisible(true);
-        internalFrame.setLocation((desktopPane.getWidth() - internalFrame.getWidth())/2, (desktopPane.getHeight() - internalFrame.getHeight())/2);
+        internalFrame.setLocation((desktopPane.getWidth() - internalFrame.getWidth()) / 2, (desktopPane.getHeight() - internalFrame.getHeight()) / 2);
         internalFrame.getContentPane().setBackground(Config.bgColor_hard);
 
         JPanel upperPanel = new JPanel(new BorderLayout());
@@ -62,7 +63,7 @@ public class RequestEditDataView {
         UIManager.put("ComboBox.foreground", Color.WHITE);
         UIManager.put("ComboBox.selectionBackground", Config.bgColor_hard);
         UIManager.put("CheckBox.border", BorderFactory.createEmptyBorder(0, 10, 0, 10));
-        String[] str = {"ที่อยู่","ชื่อ","นามสกุล"};
+        String[] str = {"ที่อยู่", "ชื่อ", "นามสกุล"};
         JComboBox<String> comboBox = new JComboBox<>(str);
         comboBox.setUI(new BasicComboBoxUI() {
             @Override
@@ -103,6 +104,24 @@ public class RequestEditDataView {
         changeBtn.setForeground(Color.WHITE);
         changeBtn.setBackground(Config.primaryColor_base);
         changeBtn.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        changeBtn.addActionListener(e -> {
+            String selectedField = "";
+            switch (comboBox.getSelectedItem().toString()) {
+                case "ที่อยู่" -> selectedField = "address";
+                case "ชื่อ" -> selectedField = "fname";
+                case "นามสกุล" -> selectedField = "lname";
+            }
+            String newValue = txt.getText().trim();
+            if (newValue.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "กรุณากรอกข้อมูลใหม่!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            String email = "67070174@kmutt.ac.th";
+            String oldValue = getOldValue("67070174@kmutt.ac.th", selectedField);
+
+            sendRequest(email, selectedField, oldValue, newValue);
+        });
         btnP.add(changeBtn);
         internalFrame.getContentPane().add(btnP, BorderLayout.SOUTH);
 
@@ -110,5 +129,20 @@ public class RequestEditDataView {
         desktopPane.add(internalFrame);
         layeredPane.add(desktopPane, JLayeredPane.PALETTE_LAYER);
         frame.setVisible(true);
+    }
+
+    public void sendRequest(String email, String fieldName, String oldValue, String newValue) {
+        UserRequestController userRequestController = new UserRequestController();
+        boolean success = userRequestController.sendRequest(email, fieldName, oldValue, newValue);
+        if (success) {
+            JOptionPane.showMessageDialog(null, "Request sent successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Failed to send request.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public String getOldValue(String email, String fieldName) {
+        UserRequestController userRequestController = new UserRequestController();
+        return userRequestController.getOldValue(email, fieldName);
     }
 }
