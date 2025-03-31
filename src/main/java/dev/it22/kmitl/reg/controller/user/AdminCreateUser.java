@@ -53,7 +53,7 @@ public class AdminCreateUser {
             System.out.println("Create Student success");
         }
     }
-    public  void createProf(String email,String username,String password,int prefix,String fname,String lname,String phone,String address,String prof_id,String faculty) throws Exception {
+    public  void createProf(String email,String username,String password,int prefix,String fname,String lname,String phone,String prof_id,String faculty) throws Exception {
         this.role = 3;
         this.email = email;
         this.username = username;
@@ -62,7 +62,6 @@ public class AdminCreateUser {
         this.fname = fname;
         this.lname = lname;
         this.phone = phone;
-        this.address = address;
         this.prof_id = prof_id;
         this.faculty = faculty;
         try{
@@ -71,17 +70,17 @@ public class AdminCreateUser {
         catch (Exception e) {
             throw new Exception("เกิดข้อผิดพลาดขณะสร้างบัญชี");
         }
-        // Update Prof data
         try{
             Database db = new Database();
-            int status = db.postQuery("UPDATE user SET role = "+this.role+", email = '"+this.email+"', prefix = "+this.prefix+", fname = '"+this.fname+"', lname = '"+this.lname+"', phone = '"+this.phone+"', address = '"+this.address+"', prof_id = '"+this.prof_id+"', faculty = '"+this.faculty+"' WHERE username = '"+this.username+"';");
+            int status = db.postQuery("UPDATE user SET role = "+this.role+", email = '"+this.email+"', prefix = "+this.prefix+", fname = '"+this.fname+"', lname = '"+this.lname+"', phone = '"+this.phone+"', prof_id = '"+this.prof_id+"', faculty = '"+this.faculty+"' WHERE username = '"+this.username+"';");
             if(status == 0){
                 throw new Exception("เกิดข้อผิดพลาดขณะอัพเดทข้อมูล");
             }
             System.out.println("Create Prof success");
         }
         catch (Exception e) {
-            System.out.println("Create Prof success");
+            System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
     }
 

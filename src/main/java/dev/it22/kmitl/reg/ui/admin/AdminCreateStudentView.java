@@ -206,7 +206,7 @@ public class AdminCreateStudentView {
                     frame.repaint();
                     new AdminCreateUserPortal(frame);
                 } catch (Exception ex) {
-                    new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง");
+                    new ErrorModal(frame, ex.getMessage());
                 }
             }
         });
