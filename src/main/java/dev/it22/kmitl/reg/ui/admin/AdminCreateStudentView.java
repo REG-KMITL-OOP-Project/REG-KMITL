@@ -219,16 +219,10 @@ public class AdminCreateStudentView {
                     String password = txtF[0][2].getText();
                     String std_id = txtF[0][3].getText();
 
-                    int prefix;
-                    try {
-                        prefix = Integer.parseInt(txtF[1][0].getText());
-                    } catch (NumberFormatException ex) {
-                        prefix = 1;
-                    }
-
+                    int prefix = comboBox[0].getSelectedIndex() + 1;
                     String fname = txtF[1][1].getText();
                     String lname = txtF[1][2].getText();
-                    String faculty = txtF[1][3].getText();
+                    String faculty = comboBox[1].getSelectedItem().toString();
 
                     String phone = txtF[2][0].getText();
                     String address = txtA.getText();
@@ -239,6 +233,42 @@ public class AdminCreateStudentView {
                             address.isEmpty() || major.isEmpty()) {
                         throw new Exception("กรุณากรอกข้อมูลให้ครบถ้วน");
                     }
+
+                    if (phone.length() != 10 || !phone.contains("0")) {
+                        throw new Exception("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง");
+                    }
+
+                    if (std_id.length() != 8) {
+                        throw new Exception("กรุณากรอกรหัสนักศึกษาให้ถูกต้อง");
+                    }
+                    if (email.length() < 5 || !email.contains("@")) {
+                        throw new Exception("กรุณากรอกอีเมลให้ถูกต้อง");
+                    }
+                    if (username.length() < 5) {
+                        throw new Exception("กรุณากรอกชื่อผู้ใช้ให้ถูกต้อง");
+                    }
+                    if (password.length() < 5) {
+                        throw new Exception("กรุณากรอกรหัสผ่านให้ถูกต้อง");
+                    }
+                    if (fname.length() < 2) {
+                        throw new Exception("กรุณากรอกชื่อให้ถูกต้อง");
+                    }
+                    if (lname.length() < 2) {
+                        throw new Exception("กรุณากรอกนามสกุลให้ถูกต้อง");
+                    }
+
+
+
+
+
+                    System.out.println("Data : ");
+                    System.out.println("email: " + email + " username: " + username +
+                            " password: " + password + " std_id: " + std_id +
+                            " prefix: " + prefix + " fname: " + fname +
+                            " lname: " + lname + " faculty: " + faculty +
+                            " phone: " + phone + " address: " + address +
+                            " major: " + major);
+                    System.out.println("-----------------");
 
                     new AdminCreateUser().createStudent(email, username, password, prefix,
                             fname, lname, phone, address,

@@ -160,12 +160,7 @@ public class AdminCreateAdminView {
                     String username = txtF[0][1].getText();
                     String password = txtF[0][2].getText();
 
-                    int prefix;
-                    try {
-                        prefix = Integer.parseInt(txtF[1][0].getText());
-                    } catch (NumberFormatException ex) {
-                        prefix = 1;
-                    }
+                    int prefix = comboBox.getSelectedIndex() + 1;
 
                     String fname = txtF[1][1].getText();
                     String lname = txtF[1][2].getText();
@@ -174,6 +169,24 @@ public class AdminCreateAdminView {
                             fname.isEmpty() || lname.isEmpty()) {
                         throw new Exception("กรุณากรอกข้อมูลให้ครบถ้วน");
                     }
+
+                    if (email.length() < 5 || !email.contains("@")) {
+                        throw new Exception("กรุณากรอกอีเมลให้ถูกต้อง");
+                    }
+                    if (username.length() < 5) {
+                        throw new Exception("กรุณากรอกชื่อผู้ใช้ให้ถูกต้อง");
+                    }
+                    if (password.length() < 5) {
+                        throw new Exception("กรุณากรอกรหัสผ่านให้ถูกต้อง");
+                    }
+                    if (fname.length() < 2) {
+                        throw new Exception("กรุณากรอกชื่อให้ถูกต้อง");
+                    }
+                    if (lname.length() < 2) {
+                        throw new Exception("กรุณากรอกนามสกุลให้ถูกต้อง");
+                    }
+
+
 
                     new AdminCreateUser().createAdmin(email, username, password, prefix,
                             fname, lname);

@@ -1,10 +1,8 @@
 package dev.it22.kmitl.reg.controller.user;
 
 import dev.it22.kmitl.reg.controller.auth.Register;
+import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.utils.Database;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 
 public class AdminCreateUser {
     private int role;
@@ -20,6 +18,12 @@ public class AdminCreateUser {
     private String prof_id;
     private String faculty;
     private String major;
+
+    public AdminCreateUser() {
+        if (!(new User().getUserAccount().getRole().getLevel() == 1)){
+            throw new RuntimeException("🔥ERROR : You are not admin");
+        }
+    }
 
     public void createStudent(String email,String username,String password,int prefix,String fname,String lname,String phone,String address,String std_id,String faculty,String major) throws Exception {
         this.role = 2;
@@ -50,7 +54,8 @@ public class AdminCreateUser {
             System.out.println("Create Student success");
         }
         catch (Exception e) {
-            System.out.println("Create Student success");
+            System.out.println("I Kwai Error isus");
+            throw new Exception("เกิดข้อผิดพลาดขณะอัพเดทข้อมูล ตรวจสอบข้อมูลให้มั่นใจว่าไม่ซ้ำกับข้อมูลในระบบ");
         }
     }
     public  void createProf(String email,String username,String password,int prefix,String fname,String lname,String phone,String prof_id,String faculty) throws Exception {
