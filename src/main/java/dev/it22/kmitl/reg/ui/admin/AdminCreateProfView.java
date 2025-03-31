@@ -8,6 +8,7 @@ import dev.it22.kmitl.reg.utils.SuccessModal;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,11 +18,13 @@ public class AdminCreateProfView {
     JPanel upperPanel, lowerPanel, northPanel;
     JPanel panel[][] , pan[];
     JLabel label[][];
-    String name[][];
+    JComboBox<String> comboBox[];
+    String name[][] , str[];
     JTextField txtF[][];
     JTextArea txtA;
     JLabel title,title2;
     RoundedButton btn, backBtn;
+    int combo = 0;
     public AdminCreateProfView(JFrame frame) {
         this.frame = frame;
         frame.setLayout(new BorderLayout());
@@ -90,6 +93,7 @@ public class AdminCreateProfView {
         name[1] = new String[]{"คำนำหน้า", "ชื่อ", "นามสกุล","คณะ"};
         name[2] = new String[]{"เบอร์โทรศัพท์","ที่อยู่"};
 
+        comboBox = new JComboBox[2];
         for(int i = 0; i < 3; i++){
             pan[i] = new JPanel(new GridLayout(4, 1, 20, 15));
             pan[i].setPreferredSize(new Dimension(frame.getWidth()/4, frame.getHeight()/4));
@@ -107,14 +111,54 @@ public class AdminCreateProfView {
                 label[i][j].setBackground(null);
                 panel[i][j].add(label[i][j]);
 
-                txtF[i][j] = new JTextField();
-                txtF[i][j].setBackground(null);
-                txtF[i][j].setForeground(Color.WHITE);
-                txtF[i][j].setFont(Config.HEADER_REGULAR[3]);
-                txtF[i][j].setAlignmentX(Component.LEFT_ALIGNMENT);
-                txtF[i][j].setBorder(BorderFactory.createLineBorder(Config.primaryColor_base));
-                panel[i][j].add(txtF[i][j]);
-                
+                if ((i == 1 & j == 0) || (i == 1 & j == 3)){
+                    UIManager.put("ComboBox.background", Config.bgColor_hard);
+                    UIManager.put("ComboBox.foreground", Color.WHITE);
+                    UIManager.put("ComboBox.selectionBackground", Config.bgColor_base);
+                    UIManager.put("ComboBox.selectionForeground", Config.primaryColor_hard);
+                    UIManager.put("CheckBox.border", BorderFactory.createEmptyBorder(0, 10, 0, 10));
+                    if (combo == 0){
+                        str = new String[]{"นาย","นางสาว","นาง"};
+                    }else{
+                        str = new String[]{"คณะวิศวกรรมศาสตร์",
+                                "คณะสถาปัตยกรรม ศิลปะและการออกแบบ",
+                                "คณะครุศาสตร์อุตสาหกรรมและเทคโนโลยี",
+                                "คณะเทคโนโลยีการเกษตร",
+                                "คณะวิทยาศาสตร์",
+                                "คณะเทคโนโลยีสารสนเทศ",
+                                "คณะอุตสาหกรรมอาหาร",
+                                "คณะบริหารธุรกิจ",
+                                "คณะศิลปศาสตร์",
+                                "คณะแพทยศาสตร์",
+                                "คณะทันตแพทยศาสตร์",
+                                "คณะพยาบาลศาสตร์"};
+                    }
+                    comboBox[combo] = new JComboBox<>(str);
+                    comboBox[combo].setUI(new BasicComboBoxUI() {
+                        @Override
+                        protected JButton createArrowButton() {
+                            JButton button = new JButton("▼");
+                            button.setBackground(null); // เปลี่ยนสีปุ่มเป็นสีแดง
+                            button.setForeground(Config.primaryColor_base); // เปลี่ยนสีตัวอักษรเป็นสีขาว
+                            button.setBorder(null);
+                            return button;
+                        }
+                    });
+                    comboBox[combo].setFont(Config.HEADER_SEMIBOLD[3]);
+                    comboBox[combo].setBorder(BorderFactory.createLineBorder(Config.primaryColor_base));
+                    comboBox[combo].setAlignmentX(Component.LEFT_ALIGNMENT);
+                    comboBox[combo].setForeground(Color.WHITE);
+                    panel[i][j].add(comboBox[combo]);
+                    combo += 1;
+                }else {
+                    txtF[i][j] = new JTextField();
+                    txtF[i][j].setBackground(null);
+                    txtF[i][j].setForeground(Color.WHITE);
+                    txtF[i][j].setFont(Config.HEADER_REGULAR[3]);
+                    txtF[i][j].setAlignmentX(Component.LEFT_ALIGNMENT);
+                    txtF[i][j].setBorder(BorderFactory.createLineBorder(Config.primaryColor_base));
+                    panel[i][j].add(txtF[i][j]);
+                }
                 pan[i].add(panel[i][j]);
             }
             lowerPanel.add(pan[i]);

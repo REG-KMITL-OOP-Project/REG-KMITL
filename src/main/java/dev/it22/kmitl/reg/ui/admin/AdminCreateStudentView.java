@@ -8,6 +8,7 @@ import dev.it22.kmitl.reg.utils.SuccessModal;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,11 +18,13 @@ public class AdminCreateStudentView {
     JPanel upperPanel, lowerPanel, northPanel;
     JPanel panel[][] , pan[];
     JLabel label[][];
-    String name[][];
+    JComboBox<String> comboBox[];
+    String name[][] , str[];
     JTextField txtF[][];
     JTextArea txtA;
     JLabel title,title2;
     RoundedButton btn, backBtn;
+    int combo = 0;
     public AdminCreateStudentView(JFrame frame) {
         this.frame = frame;
         frame.setLayout(new BorderLayout());
@@ -92,6 +95,8 @@ public class AdminCreateStudentView {
         name[1] = new String[]{"คำนำหน้า", "ชื่อ", "นามสกุล","คณะ"};
         name[2] = new String[]{"เบอร์โทรศัพท์","ที่อยู่","สาขา"};
 
+        comboBox = new JComboBox[2];
+
         for(int i = 0; i < 3; i++){
             if(i == 2) {
                 pan[i] = new JPanel();
@@ -133,7 +138,46 @@ public class AdminCreateStudentView {
                     label[i][j].setBackground(null);
                     panel[i][j].add(label[i][j]);
 
-                    if(i == 2 & j == 2){
+                    if ((i == 1 & j == 0) || (i == 1 & j == 3)){
+                        UIManager.put("ComboBox.background", Config.bgColor_hard);
+                        UIManager.put("ComboBox.foreground", Color.WHITE);
+                        UIManager.put("ComboBox.selectionBackground", Config.bgColor_base);
+                        UIManager.put("ComboBox.selectionForeground", Config.primaryColor_hard);
+                        UIManager.put("CheckBox.border", BorderFactory.createEmptyBorder(0, 10, 0, 10));
+                        if (combo == 0){
+                            str = new String[]{"นาย","นางสาว","นาง"};
+                        }else{
+                            str = new String[]{"คณะวิศวกรรมศาสตร์",
+                                    "คณะสถาปัตยกรรม ศิลปะและการออกแบบ",
+                                    "คณะครุศาสตร์อุตสาหกรรมและเทคโนโลยี",
+                                    "คณะเทคโนโลยีการเกษตร",
+                                    "คณะวิทยาศาสตร์",
+                                    "คณะเทคโนโลยีสารสนเทศ",
+                                    "คณะอุตสาหกรรมอาหาร",
+                                    "คณะบริหารธุรกิจ",
+                                    "คณะศิลปศาสตร์",
+                                    "คณะแพทยศาสตร์",
+                                    "คณะทันตแพทยศาสตร์",
+                                    "คณะพยาบาลศาสตร์"};
+                        }
+                        comboBox[combo] = new JComboBox<>(str);
+                        comboBox[combo].setUI(new BasicComboBoxUI() {
+                            @Override
+                            protected JButton createArrowButton() {
+                                JButton button = new JButton("▼");
+                                button.setBackground(null); // เปลี่ยนสีปุ่มเป็นสีแดง
+                                button.setForeground(Config.primaryColor_base); // เปลี่ยนสีตัวอักษรเป็นสีขาว
+                                button.setBorder(null);
+                                return button;
+                            }
+                        });
+                        comboBox[combo].setFont(Config.HEADER_SEMIBOLD[3]);
+                        comboBox[combo].setBorder(BorderFactory.createLineBorder(Config.primaryColor_base));
+                        comboBox[combo].setAlignmentX(Component.LEFT_ALIGNMENT);
+                        comboBox[combo].setForeground(Color.WHITE);
+                        panel[i][j].add(comboBox[combo]);
+                        combo += 1;
+                    }else if(i == 2 & j == 2){
                         txtF[i][1] = new JTextField();
                         txtF[i][1].setBackground(null);
                         txtF[i][1].setForeground(Color.WHITE);
