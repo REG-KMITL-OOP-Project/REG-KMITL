@@ -13,7 +13,7 @@ import dev.it22.kmitl.reg.ui.event.calendar.*;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
 import dev.it22.kmitl.reg.utils.RoundedButton;
-import dev.it22.kmitl.reg.ui.Classes_Management.SubjectHomepage;
+import dev.it22.kmitl.reg.ui.Class_Management.SubjectHomepage;
 
 import javax.swing.*;
 import java.awt.*;
