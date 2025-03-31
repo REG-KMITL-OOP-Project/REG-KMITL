@@ -16,8 +16,8 @@ public class descriptionPage extends EventPage implements ActionListener {
     private ArrayList<String> list;
     private boolean oneRecord = false;
     public descriptionPage(JFrame frame, String name, String type){
-        list = new EditDataEvent().getData(name,type);
         super(frame);
+        list = new EditDataEvent().getData(name,type);
         System.out.println(list);
         eventName.setText(list.get(0));
         dateStart.setText(list.get(2));
