@@ -1,5 +1,7 @@
 package dev.it22.kmitl.reg.ui;
 
+import dev.it22.kmitl.reg.controller.auth.User;
+import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 import dev.it22.kmitl.reg.controller.request.UserRequestController;
@@ -9,6 +11,9 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.awt.*;
 
 public class RequestEditDataView {
+    private final User user = new User();
+    private final Account acc = user.getUserAccount();
+
     public RequestEditDataView(JFrame frame) {
         JLayeredPane layeredPane = frame.getLayeredPane();
         JDesktopPane desktopPane = new JDesktopPane();
@@ -117,8 +122,8 @@ public class RequestEditDataView {
                 return;
             }
 
-            String email = "67070174@kmutt.ac.th";
-            String oldValue = getOldValue("67070174@kmutt.ac.th", selectedField);
+            String email = acc.getEmail();
+            String oldValue = getOldValue(email, selectedField);
 
             sendRequest(email, selectedField, oldValue, newValue);
         });
