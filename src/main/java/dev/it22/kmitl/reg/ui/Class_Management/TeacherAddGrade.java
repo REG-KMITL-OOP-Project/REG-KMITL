@@ -176,6 +176,9 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
+        cancel.addActionListener(this);
+        save.addActionListener(this);
     }
 
     public static void main(String[] args) {
@@ -192,6 +195,12 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == cancel) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new HomePage(frame);
+        }
+        else if (e.getSource() == save) {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
