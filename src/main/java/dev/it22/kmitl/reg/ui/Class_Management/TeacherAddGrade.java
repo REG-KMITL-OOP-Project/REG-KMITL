@@ -22,7 +22,7 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
 //    private Account user;
     private JLabel enter_grade, add_score_student, student;
     private JPanel main_panel, sub1, sub2, sub3;
-    private JPanel west_panel, student_panel, student_pan, cancel_panel, save_panel,save_cancel_panel, score_no_panel, pls_enter_score_panel, score_no_enter_score_panel;
+    private JPanel west_panel, student_panel, student_pan, cancel_panel, save_panel,save_cancel_panel;
     private callData data_id_subject, data_id_student;
     private RoundedButton cancel,save;
     private JComboBox grade;

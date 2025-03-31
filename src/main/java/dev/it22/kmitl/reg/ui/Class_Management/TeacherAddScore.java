@@ -21,9 +21,10 @@ public class TeacherAddScore {
     private JFrame frame;
     private JLabel enter_score, add_score_student, student;
     private JPanel main_panel, sub1, sub2, sub3;
-    private JPanel west_panel, student_panel, student_pan, cancel_panel, save_panel, save_cancel_panel, score_no_panel, pls_enter_score_panel, score_no_enter_score_panel;
+    private JPanel west_panel, student_panel, student_pan, cancel_panel, save_panel, save_cancel_panel, score_no_panel ,score_no_panel2, pls_enter_score_panel, score_no_enter_score_panel;
     private callData data_id_subject, data_id_student;
     private RoundedButton cancel, save;
+    private JComboBox no_of_score;
     private JTextField score;
     private JTextField subject;
     private Font innerFont, regularFont;
@@ -84,7 +85,7 @@ public class TeacherAddScore {
             student_panel.setBorder(BorderFactory.createEmptyBorder(30, 35, 5, 5));
             student_panel.setBackground(null);
 
-            enter_score = new JLabel("เลือกเกรด");
+            enter_score = new JLabel("กรอกคะแนน");
             enter_score.setForeground(Config.bgColor_harder);
             enter_score.setFont(Config.HEADER_SEMIBOLD[2]);
             enter_score.setBackground(Color.WHITE);
@@ -109,6 +110,25 @@ public class TeacherAddScore {
             main_panel.add(sub2, BorderLayout.CENTER);
             main_panel.setPreferredSize(new Dimension(1000, 80));
             main_panel.setBackground(null);
+
+            score_no_panel = new JPanel();
+            score_no_panel2 = new JPanel();
+            main_panel.add(score_no_panel, BorderLayout.SOUTH);
+            no_of_score = new JComboBox();
+            score_no_panel.add(score_no_panel2);
+            score_no_panel2.setPreferredSize(new Dimension((int)(frame.getWidth() / 8),(frame.getHeight() / 4) - 120));
+            score_no_panel2.add(no_of_score);
+            no_of_score.addItem("คะแนนนช่องที่");
+            no_of_score.addItem("1");
+            no_of_score.addItem("2");
+            no_of_score.addItem("3");
+            no_of_score.addItem("4");
+            no_of_score.setRenderer(new CustomCombobox());
+            no_of_score.setMaximumRowCount(4);
+            no_of_score.setFont(Config.NORMAL_REGULAR);
+            no_of_score.setFont(innerFont);
+            no_of_score.setPreferredSize(new Dimension((int)(frame.getWidth() / 5),(frame.getHeight() / 4) - 120));
+
 
 
             cancel_panel = new JPanel();
@@ -151,6 +171,7 @@ public class TeacherAddScore {
             frame.add(student_panel);
             frame.add(main_panel);
             frame.add(save_cancel_panel);
+            frame.add(score_no_panel);
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             frame.setVisible(true);
         }
