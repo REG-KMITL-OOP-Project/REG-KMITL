@@ -59,7 +59,7 @@ public class ClassScheduleTable extends JPanel{
         table_day.setBackground(Color.WHITE);
         table_day.setShowHorizontalLines(false);
         //table_day.setPreferredSize(new java.awt.Dimension(100, 414));
-        table_day.setPreferredSize(new java.awt.Dimension(frame.getWidth() / 15, (table_day.getRowHeight() * 8) + (frame.getHeight()/28)));
+        table_day.setPreferredSize(new java.awt.Dimension(frame.getWidth() / (frame.getWidth()/110), frame.getHeight()/ (frame.getHeight()/432)));
 
         DefaultTableCellRenderer Renderer = new DefaultTableCellRenderer();
         Renderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -68,7 +68,7 @@ public class ClassScheduleTable extends JPanel{
         }
 
         JTableHeader header = table_day.getTableHeader();
-        header.setPreferredSize(new Dimension(frame.getWidth()/51,frame.getHeight()/28));
+        header.setPreferredSize(new Dimension(table_day.getPreferredSize().width,frame.getHeight()/28));
         header.setBackground(Config.primaryColor_hard);
         header.setForeground(Color.WHITE);
         header.setBorder(null);
@@ -84,7 +84,7 @@ public class ClassScheduleTable extends JPanel{
         pn1.setBorder(null);
         pn1.add(scroll);
         //pn1.setPreferredSize(new Dimension(100, 389));
-        pn1.setPreferredSize(new Dimension(frame.getWidth() / 15, table_day.getHeight()));
+        pn1.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth()/100), frame.getHeight()/ (frame.getHeight()/389)));
         pn1.setBackground(null);
 
         row = new JPanel(new BorderLayout());
@@ -93,28 +93,28 @@ public class ClassScheduleTable extends JPanel{
         row.setBackground(Color.cyan);
         row.setBorder(new EmptyBorder(-6,0,0,0));
         //row.setPreferredSize(new Dimension(100, 389));
-        row.setPreferredSize(new Dimension(frame.getWidth() / 12, table_day.getHeight()));
+        row.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth()/100), frame.getHeight()/ (frame.getHeight()/389)));
 
         //column_ClassTable
         DefaultTableModel model = new DefaultTableModel(schedule, time_column);
         table_column = new JTable(model);
         table_column.setEnabled(false);
-        table_column.setRowHeight(48);
+        table_column.setRowHeight(frame.getHeight() / 15);
         table_column.setBorder(BorderFactory.createLineBorder(Config.bgColor_base.darker()));
         table_column.setGridColor(Config.bgColor_base);
         table_column.setFont(Config.NORMAL_REGULAR);
         table_column.setForeground(Color.white);
         table_column.setShowGrid(true);
-        table_column.setBorder(BorderFactory.createEmptyBorder(0,-5,-10,-3));
+        table_column.setBorder(BorderFactory.createEmptyBorder(0,-5,10,-3));
         table_column.setBackground(Config.bgColor_base.darker());
         //table_column.setPreferredSize(new Dimension(1300,334));
-        table_column.setPreferredSize(new Dimension(frame.getWidth() - (frame.getWidth() / 7),table_day.getHeight()));
+        table_column.setPreferredSize(new Dimension((int)(frame.getWidth() / (double)(frame.getWidth()/1300)),table_column.getRowHeight() * 7));
         //table_column.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table_column.getTableHeader().setResizingAllowed(true);
 
         JTableHeader header_c = table_column.getTableHeader();
         //header_c.setPreferredSize(new Dimension(30,30));
-        header_c.setPreferredSize(new Dimension(frame.getWidth() / 4,frame.getHeight()/28));
+        header_c.setPreferredSize(new Dimension(header.getPreferredSize().width,header.getPreferredSize().height));
         header_c.setBackground(Config.primaryColor_hard);
         header_c.setForeground(Color.WHITE);
         header_c.setFont(Config.HEADER_SEMIBOLD[3]);
@@ -125,14 +125,14 @@ public class ClassScheduleTable extends JPanel{
         Renderer.setHorizontalAlignment(SwingConstants.CENTER);
         for (int i = 0; i < table_column.getColumnCount(); i++) {
             table_column.getColumnModel().getColumn(i).setCellRenderer(Renderer);
-            table_column.getColumnModel().getColumn(i).setPreferredWidth(frame.getWidth() / 4);
+            //table_column.getColumnModel().getColumn(i).setPreferredWidth(frame.getWidth() / 4);
         }
 
         JPanel t_c = new JPanel(new BorderLayout());
         t_c.setBackground(null);
         t_c.setBorder(null);
         //t_c.setPreferredSize(new Dimension(1300,335));
-        t_c.setPreferredSize(new Dimension(frame.getWidth() + (frame.getWidth() / 7), table_day.getRowHeight() * 8));
+        t_c.setPreferredSize(new Dimension(frame.getWidth(), table_column.getRowHeight() * 7));
         t_c.add(header_c, BorderLayout.NORTH);
         t_c.add(table_column, BorderLayout.CENTER);
 
@@ -140,7 +140,7 @@ public class ClassScheduleTable extends JPanel{
 
         scroll_1.setBackground(Config.bgColor_base.darker());
         scroll_1.setBorder(null);
-        scroll_1.setPreferredSize(new Dimension(frame.getWidth() - (frame.getWidth() / 15),table_day.getRowHeight() * 8));
+        scroll_1.setPreferredSize(new Dimension((int)(frame.getHeight() / (double)(frame.getHeight()/1000)), table_column.getRowHeight() * 8));
         //scroll_1.setPreferredSize(new Dimension(1000,414));
 
 
@@ -149,7 +149,7 @@ public class ClassScheduleTable extends JPanel{
         com.setLayout(new BorderLayout());
         com.setBackground(null);
         //com.setPreferredSize(new Dimension(1100, 414));
-        com.setPreferredSize(new Dimension(frame.getWidth() - (frame.getWidth()/15), table_day.getRowHeight() * 9));
+        com.setPreferredSize(new Dimension(frame.getWidth() - (frame.getWidth()/15), (table_column.getRowHeight() * 8) + header_c.getPreferredSize().height));
         com.setBorder(BorderFactory.createEmptyBorder(0, 0, 35, 0));
         com.add(row, BorderLayout.WEST);
         com.add(scroll_1);
@@ -157,7 +157,7 @@ public class ClassScheduleTable extends JPanel{
         this.setLayout(new FlowLayout());
         this.setBackground(null);
         //this.setPreferredSize(new Dimension(1100, 414));
-        this.setPreferredSize(new Dimension(frame.getWidth() - (frame.getWidth()/11), table_day.getRowHeight() * 9));
+        this.setPreferredSize(new Dimension(frame.getWidth() - (frame.getWidth()/11), table_column.getRowHeight() * 8));
         this.setBorder(BorderFactory.createEmptyBorder(0, 0, 35, 0));
         this.add(com);
 
