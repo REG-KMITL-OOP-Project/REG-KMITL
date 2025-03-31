@@ -27,13 +27,13 @@ public class AdminCreateUserPortal {
         btnPanel.setBorder(new EmptyBorder(35, 20, 0, 0));
         RoundedButton backBtn = new RoundedButton("",20);
         backBtn.setBackground(Config.primaryColor_base);
-        backBtn.setIcon(new ImageIcon(new ImageIcon("source/house.png").getImage().getScaledInstance(45,45,Image.SCALE_SMOOTH)));
+        backBtn.setIcon(new ImageIcon(new ImageIcon("source/undo.png").getImage().getScaledInstance(45,45,Image.SCALE_SMOOTH)));
         backBtn.setPreferredSize(new Dimension(50,50));
         backBtn.addActionListener(e -> {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            new HomePage(frame);
+            new UserManagement(frame);
         });
         btnPanel.add(backBtn);
         upperPanel.add(btnPanel, BorderLayout.EAST);
