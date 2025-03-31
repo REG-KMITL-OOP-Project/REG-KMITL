@@ -16,7 +16,7 @@ public class create_class implements ActionListener{
     private JLabel text;
     private JScrollPane scrollPane;
     private DefaultTableModel tableModel;
-    private RoundedButton enter_classButton,create_classButton;
+    private RoundedButton enter_classButton,create_classButton,back;
     private String columnNames[] = {"รหัสวิชา","ชื่อวิชา","กลุ่มเรียน","อาจารย์ผู้สอน"};
 
     public create_class(JFrame frame){
@@ -79,9 +79,17 @@ public class create_class implements ActionListener{
         table.getTableHeader().setReorderingAllowed(false);
         table .getTableHeader().setResizingAllowed(false);
 
+        back = new RoundedButton("<--",22);
+        back.addActionListener(this);
+
+        //เปลี่ยนฟอนและสีข้อความ
+        back.setForeground(Color.BLACK);
+        back.setBackground(Config.primaryColor_base);
+        back.setFont(Config.HEADER_SEMIBOLD[2]);
 
         Buttonpanel = new JPanel();
         Buttonpanel.setLayout(new FlowLayout());
+        Buttonpanel.add(back);
         Buttonpanel.add(enter_classButton);
         Buttonpanel.add(create_classButton);
         Buttonpanel.setBackground(null);
@@ -137,6 +145,11 @@ public class create_class implements ActionListener{
             frame.revalidate();
             frame.repaint();
             new AdminAddClassroom(frame);
+        }else if(e.getSource().equals(back)) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new SubjectHomepage(frame);
         }
     }
 }

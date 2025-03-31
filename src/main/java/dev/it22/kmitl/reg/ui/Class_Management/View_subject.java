@@ -56,6 +56,7 @@ public class View_subject implements ActionListener {
         back.addActionListener(this);
 
         //เปลี่ยนฟอนและสีข้อความ
+        back.setFont(Config.HEADER_SEMIBOLD[2]);
         back.setForeground(Color.BLACK);
         back.setBackground(Config.primaryColor_base);
         addstudent.setFont(Config.HEADER_SEMIBOLD[2]);
