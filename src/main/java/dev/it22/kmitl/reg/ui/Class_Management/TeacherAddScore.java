@@ -32,6 +32,7 @@ public class TeacherAddScore implements FocusListener, ActionListener {
     private stdInfo std;
     private JTextArea text;
     private RoundedTextField subject;
+    private boolean scoreShow,textShow;
 
     public TeacherAddScore(JFrame frame) {
             this.frame = frame;
@@ -103,12 +104,16 @@ public class TeacherAddScore implements FocusListener, ActionListener {
             no_of_score.setFont(Config.HEADER_SEMIBOLD[3]);
             no_of_score.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 180) , frame.getWidth() / (frame.getWidth() / 30) ));
 
+            scoreShow = true;
             sub3 = new JPanel(new BorderLayout(20, 30));
             score = new JTextField(11);
+            score.setText("  กรอกคะแนน");
+            score.setForeground(Color.GRAY);
             score.setFont(Config.HEADER_SEMIBOLD[3]);
             sub3.add(score);
             sub3.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 180) , frame.getWidth() / (frame.getWidth() / 30) ));
             sub3.setBackground(null);
+            score.addFocusListener(this);
 
             sub1 = new JPanel();
             sub1.setLayout(new FlowLayout());
@@ -130,12 +135,14 @@ public class TeacherAddScore implements FocusListener, ActionListener {
             main_panel.setBorder(new EmptyBorder(5, 45, 5, 5));
             main_panel.setBackground(null);
 
-
-            text = new JTextArea();
+            textShow = true;
+            text = new JTextArea("  หมายเหตุ");
+            text.setForeground(Color.GRAY);
             text.setBackground(Config.bgColor_hard);
             text.setFont(Config.HEADER_SEMIBOLD[3]);
-            text.setForeground(Color.WHITE);
             text.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 100) , frame.getWidth() / (frame.getWidth() / 80) ));
+            text.addFocusListener(this);
+
 
             txt_sub = new JPanel(new BorderLayout());
             txt_sub.setBackground(null);
@@ -222,11 +229,29 @@ public class TeacherAddScore implements FocusListener, ActionListener {
 
         @Override
         public void focusGained(FocusEvent e) {
-
+            if (e.getSource().equals(score) && scoreShow){
+                    score.setText("");
+                    score.setForeground(Config.bgColor_base);
+                    scoreShow = false;
+            }
+            if (e.getSource().equals(text) && textShow){
+                    text.setText("");
+                    text.setForeground(Color.WHITE);
+                    textShow = false;
+            }
         }
 
         @Override
         public void focusLost(FocusEvent e) {
-
+            if (score.getText().isEmpty()) {
+                    scoreShow = true;
+                    score.setText("  กรอกคะแนน");
+                    score.setForeground(Color.GRAY);
+            }
+            if (text.getText().isEmpty()) {
+                    textShow = true;
+                    text.setText("  หมายเหตุ");
+                    text.setForeground(Color.GRAY);
+            }
         }
 }
