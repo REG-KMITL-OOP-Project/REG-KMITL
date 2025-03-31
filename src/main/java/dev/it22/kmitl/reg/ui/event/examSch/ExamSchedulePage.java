@@ -139,7 +139,7 @@ public class ExamSchedulePage{
         pn1.add(allInfo, BorderLayout.NORTH);
         
         //table
-        table = new ExamScheduleTable();
+        table = new ExamScheduleTable(frame);
         pn1.add(table, BorderLayout.CENTER);
 
         frame.setLayout(new BorderLayout());

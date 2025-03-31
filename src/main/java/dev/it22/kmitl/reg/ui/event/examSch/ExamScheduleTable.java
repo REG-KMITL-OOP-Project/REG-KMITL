@@ -30,7 +30,7 @@ public class ExamScheduleTable extends JPanel {
     private examTableData aaa;
 
 
-    public ExamScheduleTable(){
+    public ExamScheduleTable(JFrame frame){
         try{
             aaa = new examTableData();
 
@@ -72,22 +72,28 @@ public class ExamScheduleTable extends JPanel {
 
         //เปลี่ยนขนาดช่อง
         TableColumn day = examSchedule.getColumnModel().getColumn(0);
-        day.setPreferredWidth(200);
+        day.setPreferredWidth(frame.getWidth() / 6);
+        //day.setPreferredWidth(200);
 
         TableColumn time = examSchedule.getColumnModel().getColumn(1);
-        time.setPreferredWidth(190);
+        time.setPreferredWidth(frame.getWidth() / 7);
+        //time.setPreferredWidth(190);
 
         TableColumn id = examSchedule.getColumnModel().getColumn(2);
-        id.setPreferredWidth(175);
+        id.setPreferredWidth(frame.getWidth() / 8);
+        //id.setPreferredWidth(175);
 
         TableColumn subject = examSchedule.getColumnModel().getColumn(3);
-        subject.setPreferredWidth(295);
+        subject.setPreferredWidth((frame.getWidth() / 3) - (frame.getWidth() / 31));
+        //subject.setPreferredWidth(295);
 
         TableColumn examType = examSchedule.getColumnModel().getColumn(4);
-        examType.setPreferredWidth(146);
+        examType.setPreferredWidth(frame.getWidth() / 10);
+        //examType.setPreferredWidth(146);
 
         TableColumn room = examSchedule.getColumnModel().getColumn(5);
-        room.setPreferredWidth(146);
+        room.setPreferredWidth(frame.getWidth() / 10);
+        //room.setPreferredWidth(146);
 
         // กำหนดขนาดที่แน่นอน
         examSchedule.setPreferredScrollableViewportSize(new Dimension(
