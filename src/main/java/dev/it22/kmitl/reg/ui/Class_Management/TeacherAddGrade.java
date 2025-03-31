@@ -5,6 +5,7 @@ import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
 import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
+import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.ui.event.calendar.calendarData;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.CustomCombobox;
@@ -40,7 +41,7 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         data_id_student = new callData("กรอกรหัสนักศึกษา","แสดงข้อมูล");
 
 
-        add_score_student = new JLabel("เพิ่มคะแนนนักศึกษา");
+        add_score_student = new JLabel("เพิ่มเกรดนักศึกษา");
         add_score_student.setForeground(Config.primaryColor_base);
         add_score_student.setFont(Config.HEADER_SEMIBOLD[1]);
         add_score_student.setHorizontalAlignment(SwingConstants.LEFT);
@@ -90,7 +91,7 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         student_panel.setBackground(null);
 
         enter_grade = new RoundedTextField(22);
-        enter_grade.setText("กรอกคะแนน");
+        enter_grade.setText("กรอกเกรด");
         enter_grade.setEditable(false);
         enter_grade.setForeground(Config.bgColor_hard);
         enter_grade.setFont(Config.HEADER_SEMIBOLD[2]);
@@ -190,7 +191,12 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if (e.getSource() == cancel) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new HomePage(frame);
+        }
     }
 
     @Override
