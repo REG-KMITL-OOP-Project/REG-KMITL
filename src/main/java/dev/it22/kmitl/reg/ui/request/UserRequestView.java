@@ -2,6 +2,7 @@ package dev.it22.kmitl.reg.ui.request;
 
 import dev.it22.kmitl.reg.controller.request.UserRequestController;
 import dev.it22.kmitl.reg.ui.HomePage;
+import dev.it22.kmitl.reg.ui.admin.UserManagement;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
@@ -43,7 +44,7 @@ public class UserRequestView {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            new HomePage(frame);
+            new UserManagement(frame);
         });
         returnPanel.add(returnBtn);
         upperPanel.add(returnPanel, BorderLayout.EAST);

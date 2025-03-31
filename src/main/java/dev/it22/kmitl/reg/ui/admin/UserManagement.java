@@ -1,7 +1,9 @@
 package dev.it22.kmitl.reg.ui.admin;
 
+import dev.it22.kmitl.reg.controller.user.AdminCreateUser;
 import dev.it22.kmitl.reg.controller.user.UserController;
 import dev.it22.kmitl.reg.ui.HomePage;
+import dev.it22.kmitl.reg.ui.request.UserRequestView;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
@@ -13,6 +15,9 @@ import java.util.Vector;
 
 public class UserManagement {
     JFrame frame;
+    JPanel upperPanel , lowerPanel , btnPanel , uplowPanel , innerPanel;
+    RoundedButton reqBtn , homeBtn , addBtn;
+    JLabel title;
     DefaultTableModel tableModel;
     JTable table;
     UserController ctl = new UserController();
@@ -21,99 +26,91 @@ public class UserManagement {
         this.frame = frame;
         frame.setLayout(new BorderLayout());
 
-        // Header
-        JPanel headerPanel = createHeaderPanel();
-        frame.add(headerPanel, BorderLayout.NORTH);
+        upperPanel = new JPanel(new BorderLayout());
+        upperPanel.setBorder(new EmptyBorder(10, 0, 10, 50));
+        upperPanel.setBackground(null);
+        upperPanel.add(Config.createLogoAndTitle(Config.HEADER_SEMIBOLD[3],50), BorderLayout.WEST);
 
-        // Body
-        JPanel bodyPanel = createBodyPanel();
-        frame.add(bodyPanel, BorderLayout.CENTER);
+        btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        btnPanel.setBackground(null);
+        btnPanel.setBorder(new EmptyBorder(35, 20, 0, 0));
 
-        frame.setVisible(true);
-    }
+        reqBtn = new RoundedButton("",20);
+        reqBtn.setIcon(new ImageIcon(new ImageIcon("source/icon_schedule/bell.png").getImage().getScaledInstance(25,25,Image.SCALE_SMOOTH)));
+        reqBtn.setBackground(Color.WHITE);
+        reqBtn.setPreferredSize(new Dimension(40, 40));
+        reqBtn.addActionListener(e -> {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new UserRequestView(frame);
+        });
+        btnPanel.add(reqBtn);
 
-    private JPanel createHeaderPanel() {
-        JPanel headerPanel = new JPanel(new BorderLayout());
-        headerPanel.setBackground(Config.bgColor_hard);
-        headerPanel.setPreferredSize(new Dimension(frame.getWidth(), 80));
-
-        // Logo
-        JPanel logoPanel = Config.createLogoAndTitle(Config.NORMAL_REGULAR, 40);
-        headerPanel.add(logoPanel, BorderLayout.WEST);
-
-        // ปุ่มแจ้งเตือน และ Home
-        JPanel headerButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        headerButtonPanel.setBackground(Config.bgColor_hard);
-        headerButtonPanel.setBorder(new EmptyBorder(40, 0, 10, 50));
-
-        RoundedButton notificationBtn = createButton("source/icon_schedule/bell.png", Color.WHITE);
-        RoundedButton homeBtn = createButton("source/icon_schedule/house.png", Config.primaryColor_hard);
+        homeBtn = new RoundedButton("",20);
+        homeBtn.setIcon(new ImageIcon(new ImageIcon("source/icon_schedule/house.png").getImage().getScaledInstance(25,25,Image.SCALE_SMOOTH)));
+        homeBtn.setBackground(Config.primaryColor_base);
+        homeBtn.setPreferredSize(new Dimension(40, 40));
         homeBtn.addActionListener(e -> {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
             new HomePage(frame);
         });
+        btnPanel.add(homeBtn);
+        upperPanel.add(btnPanel, BorderLayout.EAST);
 
-        headerButtonPanel.add(notificationBtn);
-        headerButtonPanel.add(homeBtn);
+        lowerPanel = new JPanel(new BorderLayout());
+        lowerPanel.setBackground(null);
+        lowerPanel.setBorder(new EmptyBorder(10, 50, 10, 50));
 
-        headerPanel.add(headerButtonPanel, BorderLayout.EAST);
-        return headerPanel;
-    }
+        uplowPanel = new JPanel(new BorderLayout());
+        uplowPanel.setBackground(null);
 
-    private JPanel createBodyPanel() {
-        JPanel bodyPanel = new JPanel();
-        bodyPanel.setLayout(new BorderLayout());
-        bodyPanel.setBackground(Config.bgColor_hard);
-        bodyPanel.setBorder(new EmptyBorder(20, 50, 50, 50));
+        title = new JLabel("Users");
+        title.setFont(Config.HEADER_SEMIBOLD[0]);
+        title.setForeground(Color.WHITE);
+        uplowPanel.add(title, BorderLayout.WEST);
 
-        // Title + ปุ่มเพิ่มผู้ใช้
-        JPanel titlePanel = new JPanel(new BorderLayout());
-        titlePanel.setBackground(Config.bgColor_hard);
-
-        JLabel titleLabel = new JLabel("Users");
-        titleLabel.setFont(Config.HEADER_SEMIBOLD[0]);
-        titleLabel.setForeground(Color.WHITE);
-        titlePanel.add(titleLabel, BorderLayout.WEST);
-
-        RoundedButton createBtn = new RoundedButton("+ เพิ่มผู้ใช้", 10);
-        createBtn.setFont(Config.HEADER_SEMIBOLD[2]);
-        createBtn.setForeground(Color.WHITE);
-        createBtn.setPreferredSize(new Dimension(150, 40));
-        createBtn.setBackground(Config.primaryColor_hard);
-        createBtn.addActionListener(e -> {
+        addBtn = new RoundedButton("+ เพิ่มผู้ใช้",20);
+        addBtn.setFont(Config.HEADER_SEMIBOLD[2]);
+        addBtn.setForeground(Color.WHITE);
+        addBtn.setPreferredSize(new Dimension(120, 30));
+        addBtn.setBackground(Config.primaryColor_base);
+        addBtn.addActionListener(e -> {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
             new AdminCreateUserPortal(frame);
         });
+        uplowPanel.add(addBtn, BorderLayout.EAST);
 
-        JPanel createBtnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        createBtnPanel.setBackground(Config.bgColor_hard);
-        createBtnPanel.add(createBtn);
-        titlePanel.add(createBtnPanel, BorderLayout.EAST);
+        lowerPanel.add(uplowPanel, BorderLayout.NORTH);
 
-        bodyPanel.add(titlePanel, BorderLayout.NORTH);
+        innerPanel = new JPanel(new BorderLayout());
+        innerPanel.setBackground(null);
+        innerPanel.setBorder(new EmptyBorder(10, 0, 10, 0));
 
-        // Table Setup
         String[] columns = {"ID", "Role", "Student ID", "Professor ID", "Section", "Email", "Prefix", "First Name", "Last Name", "Faculty", "Major", "Address", "Phone Number"};
         tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel);
+        table.setGridColor(Color.GRAY);
+        table.setBackground(null);
+        table.setShowGrid(true);
         table.setFont(Config.NORMAL_REGULAR);
 
         JScrollPane scrollPane = new JScrollPane(table);
-        bodyPanel.add(scrollPane, BorderLayout.CENTER);
-
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        scrollPane.setBackground(null);
         loadData();
-        return bodyPanel;
-    }
 
-    private RoundedButton createButton(String iconPath, Color backgroundColor) {
-        RoundedButton button = new RoundedButton("", 20);
-        button.setIcon(new ImageIcon(new ImageIcon(iconPath).getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)));
-        button.setBackground(backgroundColor);
-        return button;
+        innerPanel.add(scrollPane, BorderLayout.CENTER);
+        lowerPanel.add(innerPanel, BorderLayout.CENTER);
+
+
+        frame.add(upperPanel, BorderLayout.NORTH);
+        frame.add(lowerPanel, BorderLayout.CENTER);
+        frame.setVisible(true);
     }
 
     public void loadData() {
