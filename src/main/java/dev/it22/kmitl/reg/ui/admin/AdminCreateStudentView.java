@@ -1,11 +1,16 @@
 package dev.it22.kmitl.reg.ui.admin;
 
+import dev.it22.kmitl.reg.controller.user.AdminCreateUser;
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.ErrorModal;
 import dev.it22.kmitl.reg.utils.RoundedButton;
+import dev.it22.kmitl.reg.utils.SuccessModal;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AdminCreateStudentView {
     JFrame frame;
@@ -160,6 +165,48 @@ public class AdminCreateStudentView {
         btn.setBackground(Config.primaryColor_base);
         btn.setPreferredSize(new Dimension(100, 40));
         btnPanel.add(btn);
+
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String email = txtF[0][0].getText();
+                    String username = txtF[0][1].getText();
+                    String password = txtF[0][2].getText();
+                    String std_id = txtF[0][3].getText();
+
+                    int prefix;
+                    try {
+                        prefix = Integer.parseInt(txtF[1][0].getText());
+                    } catch (NumberFormatException ex) {
+                        prefix = 1;
+                    }
+
+                    String fname = txtF[1][1].getText();
+                    String lname = txtF[1][2].getText();
+                    String faculty = txtF[1][3].getText();
+
+                    String phone = txtF[2][0].getText();
+                    String address = txtA.getText();
+                    String major = txtF[2][1].getText();
+
+                    if (email.isEmpty() || username.isEmpty() || password.isEmpty() || std_id.isEmpty() ||
+                            fname.isEmpty() || lname.isEmpty() || faculty.isEmpty() || phone.isEmpty() ||
+                            address.isEmpty() || major.isEmpty()) {
+                        throw new Exception("กรุณากรอกข้อมูลให้ครบถ้วน");
+                    }
+
+                    new AdminCreateUser().createStudent(email, username, password, prefix,
+                            fname, lname, phone, address,
+                            std_id, faculty, major);
+
+                    new SuccessModal(frame,"สร้างบัญชีผู้ใช้สำเร็จ");
+
+                } catch (Exception ex) {
+                    new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง");
+                }
+            }
+        });
 
         frame.add(northPanel, BorderLayout.NORTH);
         frame.add(btnPanel, BorderLayout.SOUTH);
