@@ -151,8 +151,8 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
 
 
         save_cancel_panel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 0));
-        save_cancel_panel.add(save);
         save_cancel_panel.add(cancel);
+        save_cancel_panel.add(save);
         save_cancel_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
         save_cancel_panel.setPreferredSize(new Dimension(1000,60));
         save_cancel_panel.setBackground(null);
