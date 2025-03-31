@@ -65,14 +65,14 @@ public class TeacherAddScore {
             subject.setBackground(Config.bgColor_hard);
 
             subject_panel = new JPanel(new BorderLayout());
-            subject_panel.setPreferredSize(new Dimension(440, 50));
+            subject_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 50)));
             subject_panel.setBackground(null);
             subject_panel.add(subject);
             subject_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 5));
 
             west_panel.add(student_pan, BorderLayout.SOUTH);
             west_panel.setBackground(null);
-            west_panel.setPreferredSize(new Dimension(1000, 80));
+            west_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 1000) , frame.getWidth() / (frame.getWidth() / 80) ));
             west_panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 5, 5));
 
 
@@ -98,13 +98,13 @@ public class TeacherAddScore {
             no_of_score.setMaximumRowCount(4);
             no_of_score.setFont(Config.NORMAL_REGULAR);
             no_of_score.setFont(Config.HEADER_SEMIBOLD[3]);
-            no_of_score.setPreferredSize(new Dimension(180, 30));
+            no_of_score.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 180) , frame.getWidth() / (frame.getWidth() / 30) ));
 
             sub3 = new JPanel(new BorderLayout(20, 30));
             score = new JTextField(11);
             score.setFont(Config.HEADER_SEMIBOLD[3]);
             sub3.add(score);
-            sub3.setPreferredSize(new Dimension(180, 30));
+            sub3.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 180) , frame.getWidth() / (frame.getWidth() / 30) ));
             sub3.setBackground(null);
 
             sub1 = new JPanel();
@@ -112,7 +112,7 @@ public class TeacherAddScore {
             sub1.setBackground(null);
             sub1.add(no_of_score);
             sub1.add(sub3);
-            sub1.setPreferredSize(new Dimension(180, 100));
+            sub1.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 180) , frame.getWidth() / (frame.getWidth() / 100) ));
 
             std = new stdInfo();
             sub2 = new JPanel(new BorderLayout());
@@ -123,7 +123,7 @@ public class TeacherAddScore {
             main_panel = new JPanel(new BorderLayout());
             main_panel.add(sub1, BorderLayout.WEST);
             main_panel.add(sub2, BorderLayout.CENTER);
-            main_panel.setPreferredSize(new Dimension(800, 80));
+            main_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 800) , frame.getWidth() / (frame.getWidth() / 80) ));
             main_panel.setBorder(new EmptyBorder(5, 45, 5, 5));
             main_panel.setBackground(null);
 
@@ -132,16 +132,16 @@ public class TeacherAddScore {
             text.setBackground(Config.bgColor_hard);
             text.setFont(Config.HEADER_SEMIBOLD[3]);
             text.setForeground(Color.WHITE);
-            text.setPreferredSize(new Dimension(100, 80));
+            text.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 100) , frame.getWidth() / (frame.getWidth() / 80) ));
 
             txt_sub = new JPanel(new BorderLayout());
             txt_sub.setBackground(null);
             txt_sub.add(text, BorderLayout.CENTER);
-            txt_sub.setPreferredSize(new Dimension(1000, 80));
+            txt_sub.setPreferredSize(new Dimension((int)(frame.getWidth() / 1.3) , frame.getWidth() / (frame.getWidth() / 80) ));
 
             txt_panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             txt_panel.setBackground(null);
-            txt_panel.setPreferredSize(new Dimension(1000, 200));
+            txt_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 1000) , frame.getWidth() / (frame.getWidth() / 200) ));
             txt_panel.setBorder(new EmptyBorder(5, 40, 5, 5));
             txt_panel.add(txt_sub, BorderLayout.CENTER);
 
@@ -171,7 +171,7 @@ public class TeacherAddScore {
             save_cancel_panel.add(cancel);
             save_cancel_panel.add(save);
             save_cancel_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
-            save_cancel_panel.setPreferredSize(new Dimension(1000,60));
+            save_cancel_panel.setPreferredSize(new Dimension((int)(frame.getWidth()/1.2) ,frame.getWidth() / (frame.getWidth() / 600) ));
             save_cancel_panel.setBackground(null);
 
             frame_pan = new JPanel(new FlowLayout(FlowLayout.LEFT, 93, 0));
