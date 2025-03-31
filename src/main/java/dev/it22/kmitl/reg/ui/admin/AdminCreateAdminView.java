@@ -186,7 +186,12 @@ public class AdminCreateAdminView {
                         throw new Exception("กรุณากรอกนามสกุลให้ถูกต้อง");
                     }
 
-
+                    System.out.println("Data : ");
+                    System.out.println("email: " + email + " username: " + username +
+                            " password: " + password +
+                            " prefix: " + prefix + " fname: " + fname +
+                            " lname: " + lname );
+                    System.out.println("-----------------");
 
                     new AdminCreateUser().createAdmin(email, username, password, prefix,
                             fname, lname);
