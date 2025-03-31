@@ -12,10 +12,10 @@ import java.awt.event.ActionListener;
 public class View_subject implements ActionListener {
     private JFrame frame;
     private JButton home;
-    private JPanel ICON,setposition,textname_id,combo_teach,obj_page,tableSub,titel,setstu,alltitle;
+    private JPanel ICON,setposition,textname_id,combo_teach,obj_page,tableSub,titel,setstu,alltitle,buttonpanel;
     private JLabel namesubject,idsubject,teacher;
     private JComboBox group;
-    private RoundedButton addstudent;
+    private RoundedButton addstudent,back;
     private JTable tablesubject;
     private JScrollPane showdetail_table;
     private String columnNames[] = {"รหัสนักศึกษา","ชื่อนักศึกษา"};
@@ -52,7 +52,12 @@ public class View_subject implements ActionListener {
         addstudent = new RoundedButton("เพิ่มนักศึกษา",22);
         addstudent.addActionListener(this);
 
+        back = new RoundedButton("<--",22);
+        back.addActionListener(this);
+
         //เปลี่ยนฟอนและสีข้อความ
+        back.setForeground(Color.BLACK);
+        back.setBackground(Config.primaryColor_base);
         addstudent.setFont(Config.HEADER_SEMIBOLD[2]);
         addstudent.setForeground(Color.BLACK);
         addstudent.setBackground(Config.primaryColor_base);
@@ -63,9 +68,15 @@ public class View_subject implements ActionListener {
         teacher.setFont(Config.HEADER_SEMIBOLD[2]);
         teacher.setForeground(Color.WHITE);
 
+        buttonpanel = new JPanel();
+        buttonpanel.setLayout(new FlowLayout());
+        buttonpanel.add(back);
+        buttonpanel.add(addstudent);
+        buttonpanel.setBackground(null);
+
         setstu = new JPanel(); //น้องบรรทัดข้างล่างนี้ตรงเลข 180 คือขยับตำแหน่งปุ่ม ลองไปปรับให้ตรงกับตารางต่อเอง
         setstu.setLayout(new FlowLayout(FlowLayout.RIGHT,180,0));
-        setstu.add(addstudent);
+        setstu.add(buttonpanel);
         setstu.setBackground(null);
         setstu.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
 
@@ -155,6 +166,11 @@ public class View_subject implements ActionListener {
             frame.revalidate();
             frame.repaint();
             //new AdminAddSubject(frame);
+        } else if (e.getSource().equals(back)) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new create_class(frame);
         }
     }
 }

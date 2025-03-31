@@ -18,7 +18,7 @@ public class student_checkGrade {
     private JPanel grouptf,grouptc,mixtf_tc,center,south,groupinputuse,table,group_obj,ICON,setposition;
     private JTable tablescore;
     private JScrollPane showdetail_Subject;
-    private String columnNames[] = {"รหัสวิชา","ชื่อวิชา","1","2","3","4"};
+    private String columnNames[] = {"รหัสวิชา","ชื่อวิชา","1","2","3","4","เกรด"};
 
     public student_checkGrade(JFrame frame){
         title = new JLabel("ตรวจสอบผลการเรียน");
