@@ -4,12 +4,15 @@ import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.*;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
+import dev.it22.kmitl.reg.ui.event.component.seletedItemCombobox;
 import dev.it22.kmitl.reg.utils.Config;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
-public class TeacherExamSchedulePage{
+public class TeacherExamSchedulePage implements ActionListener, seletedItemCombobox {
     private JFrame frame;
     private JPanel pn1 ;
 
@@ -30,6 +33,9 @@ public class TeacherExamSchedulePage{
     private String years[] = {"2568", "2567", "2566"};
     private String semesters[] = {"เทอม 1", "เทอม 2"};
     private String exams[] = {"กลางภาค","ปลายภาค"};
+    private Font innerFont, regularFont;
+    private String yearItem,semItem,examItem;
+
 
 
     public TeacherExamSchedulePage(JFrame frame){
@@ -59,6 +65,9 @@ public class TeacherExamSchedulePage{
         choseExam.setBackground(null);
         profInfo.setBackground(null);
 
+        regularFont = Config.NORMAL_REGULAR;
+        innerFont = regularFont.deriveFont(12f);
+
 //        ID = new JLabel("รหัส : ");
 //        name = new JLabel("ชื่อ : ");
 
@@ -76,11 +85,8 @@ public class TeacherExamSchedulePage{
         exam = new JComboBox(exams);
 
         //change font in combobox
-        JComboBox<String> semester = new JComboBox<>(semesters);
-        semester.setFont(Config.NORMAL_REGULAR);
-
-        JComboBox<String> exam = new JComboBox<>(exams);
-        exam.setFont(Config.NORMAL_REGULAR);
+        semester.setFont(innerFont);
+        exam.setFont(innerFont);
 
 
         //body-schedule
@@ -88,6 +94,7 @@ public class TeacherExamSchedulePage{
         choseYear.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         choseYear.setLayout(new GridLayout(1, 1));
         choseYear.add(year);
+
 
         //panel-semester
         choseSem.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
@@ -98,6 +105,10 @@ public class TeacherExamSchedulePage{
         //panel-exam button
         choseExam.setLayout(new GridLayout(1, 1));
         choseExam.add(exam);
+
+        year.addActionListener(this);
+        semester.addActionListener(this);
+        exam.addActionListener(this);
 
         //panel-studentInfo
         profInfo.setLayout(new GridLayout(1, 2));
@@ -152,5 +163,37 @@ public class TeacherExamSchedulePage{
             System.out.println(e.getMessage());
         }
     }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == year){
+            yearItem = selectedItem(year);
+        }
+        if (e.getSource() == semester){
+            semItem = selectedItem(semester);
+        }
+        if (e.getSource() == exam){
+            examItem = selectedItem(exam);
+        }
+    }
 
+    @Override
+    public String selectedItem(JComboBox comboBox){
+        String selectedItem = (String) comboBox.getSelectedItem();
+        return selectedItem;
+    }
+
+    @Override
+    public String getYearItem() {
+        return yearItem;
+    }
+
+    @Override
+    public String getSemItem(){
+        return semItem;
+    }
+
+    @Override
+    public String getExamItem() {
+        return examItem;
+    }
 }
