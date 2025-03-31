@@ -7,24 +7,11 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 public class UserRequestController {
-    public boolean createRequest() {
-        Database db = new Database();
-        try {
-            String query = "INSERT INTO user_request (email, field_name, old_value, new_value, status) VALUES (?, ?, ?, ?, ?)";
-            int res = db.postQuery(query, email, fieldName, oldValue, newValue, "pending");
-            System.out.println("Create request success : " + res);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
     public boolean sendRequest(String email, String fieldName, String oldValue, String newValue) {
         Database db = new Database();
         try {
-            String query = "INSERT INTO user_request (email, field_name, old_value, new_value, status) VALUES (?, ?, ?, ?, 'pending')";
-            int res = db.postPreparedQuery(query, email, fieldName, oldValue, newValue);
+            String query = "INSERT INTO user_request (email, field_name, old_value, new_value, status) VALUES ('" + email + "', '" + fieldName + "', '" + oldValue + "', '" + newValue + "', 'pending');";
+            int res = db.postQuery(query);
             System.out.println("Create request success : " + res);
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,12 +62,12 @@ public class UserRequestController {
     public boolean approveRequest(int id, String email, String fieldName, String newValue) {
         Database db = new Database();
         try {
-            String updateRequestQuery = "UPDATE user_request SET status = 'approved' WHERE id = ?";
-            int res = db.postPreparedQuery(updateRequestQuery, id);
+            String updateRequestQuery = "UPDATE user_request SET status = 'approved' WHERE id = " + id + ";";
+            int res = db.postQuery(updateRequestQuery);
             System.out.println("Approve request success : " + res);
 
-            String updateUserQuery = "UPDATE user SET " + fieldName + " = ? WHERE email = ?";
-            int res2 = db.postPreparedQuery(updateUserQuery, newValue, email);
+            String updateUserQuery = "UPDATE user SET " + fieldName + " = '" + newValue + "' WHERE email = '" + email + "';";
+            int res2 = db.postQuery(updateUserQuery);
             System.out.println("Update user success : " + res2);
         } catch (Exception e) {
             e.printStackTrace();
