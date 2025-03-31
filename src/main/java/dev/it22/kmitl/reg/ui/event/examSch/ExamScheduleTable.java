@@ -47,7 +47,7 @@ public class ExamScheduleTable extends JPanel {
         examSchedule.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         examSchedule.setGridColor(Config.bgColor_hard);
         examSchedule.setShowGrid(true);
-        examSchedule.setRowHeight(40);
+        examSchedule.setRowHeight(frame.getWidth() / (frame.getWidth()/40));
         examSchedule.setBorder(BorderFactory.createLineBorder(Config.bgColor_hard));
         examSchedule.setFont(innerFont);
 
@@ -56,7 +56,7 @@ public class ExamScheduleTable extends JPanel {
         header.setBackground(Config.primaryColor_hard);
         header.setForeground(Color.WHITE);
         header.setFont(Config.HEADER_SEMIBOLD[3]);
-        header.setPreferredSize(new Dimension(500,40));
+        header.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth()/500), frame.getHeight() / (frame.getHeight() /40)));
         header.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, Config.bgColor_hard));
 
         //ปิดไม่ให้แก้ขนาด & เลื่อนตารางไปมา
