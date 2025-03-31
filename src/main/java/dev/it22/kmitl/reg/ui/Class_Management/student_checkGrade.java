@@ -2,44 +2,46 @@ package dev.it22.kmitl.reg.ui.Class_Management;
 
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RoundedButton;
+import dev.it22.kmitl.reg.utils.RoundedTextField;
 
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 public class student_checkGrade {
     private JFrame frame;
-    private JLabel title;
-    private JTextField id,name,faculty,major;
-    private JComboBox year,semester;
+    private JLabel title,id, name, faculty, major;
+    private JComboBox year, semester;
     private RoundedButton checkgrade;
     private JButton home;
-    private JPanel grouptf,grouptc,mixtf_tc,center,south,groupinputuse,table,group_obj,ICON,setposition;
+    private JPanel grouptf, grouptc, mixtf_tc, center, south, groupinputuse, table, group_obj, ICON, setposition;
     private JTable tablescore;
     private JScrollPane showdetail_Subject;
-    private String columnNames[] = {"รหัสวิชา","ชื่อวิชา","1","2","3","4","เกรด"};
+    private String columnNames[] = {"รหัสวิชา", "ชื่อวิชา", "1", "2", "3", "4", "เกรด"};
 
-    public student_checkGrade(JFrame frame){
+    public student_checkGrade(JFrame frame) {
         title = new JLabel("ตรวจสอบผลการเรียน");
-        id = new JTextField("รหัสนักศึกษา",8);
-        name = new JTextField("ชื่อ-นามสกุล", 20);
-        faculty = new JTextField("คณะ",20);
-        major = new JTextField("สาขา",20);
+        id = new JLabel();
+        name = new JLabel();
+        faculty = new JLabel();
+        major = new JLabel();
         semester = new JComboBox();
         semester.addItem("ภาคการศึกษา");
         year = new JComboBox();
         year.addItem("ปีการศึกษา");
-        checkgrade = new RoundedButton("ดูผลการเรียน",22);
+        checkgrade = new RoundedButton("ดูผลการเรียน", 22);
 
         //Icon home
-        ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
+        ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         home = new JButton(homeIcon);
         home.setBorderPainted(false);
         home.setContentAreaFilled(false);
         home.setFocusPainted(false);
 
-        ImageIcon logo = new ImageIcon(new ImageIcon("source/Logo.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
+        ImageIcon logo = new ImageIcon(new ImageIcon("source/Logo.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         JLabel regLabel = new JLabel(logo);
         ICON = new JPanel();
         ICON.setLayout(new FlowLayout());
@@ -57,9 +59,13 @@ public class student_checkGrade {
         title.setFont(Config.HEADER_SEMIBOLD[2]);
         title.setForeground(Color.ORANGE);
         id.setFont(Config.HEADER_SEMIBOLD[2]);
+        id.setForeground(Color.WHITE);
         name.setFont(Config.HEADER_SEMIBOLD[2]);
+        name.setForeground(Color.WHITE);
         faculty.setFont(Config.HEADER_SEMIBOLD[2]);
+        faculty.setForeground(Color.WHITE);
         major.setFont(Config.HEADER_SEMIBOLD[2]);
+        major.setForeground(Color.WHITE);
         semester.setFont(Config.HEADER_SEMIBOLD[2]);
         year.setFont(Config.HEADER_SEMIBOLD[2]);
         checkgrade.setFont(Config.HEADER_SEMIBOLD[2]);
@@ -97,16 +103,16 @@ public class student_checkGrade {
 
         //setlayout
         mixtf_tc = new JPanel();
-        mixtf_tc.setLayout(new GridLayout(2,1));
+        mixtf_tc.setLayout(new GridLayout(2, 1));
         mixtf_tc.add(grouptf);
         mixtf_tc.add(grouptc);
         mixtf_tc.setBackground(null);
 
         groupinputuse = new JPanel();
         groupinputuse.setLayout(new BorderLayout());
-        groupinputuse.add(center,BorderLayout.NORTH);
-        groupinputuse.add(mixtf_tc,BorderLayout.CENTER);
-        groupinputuse.add(south,BorderLayout.SOUTH);
+        groupinputuse.add(center, BorderLayout.NORTH);
+        groupinputuse.add(mixtf_tc, BorderLayout.CENTER);
+        groupinputuse.add(south, BorderLayout.SOUTH);
         groupinputuse.setBackground(null);
 
         //tablescore
@@ -135,19 +141,21 @@ public class student_checkGrade {
         //group obj in page
         group_obj = new JPanel();
         group_obj.setLayout(new BorderLayout());
-        group_obj.add(groupinputuse,BorderLayout.CENTER);
-        group_obj.add(table,BorderLayout.SOUTH);
+        group_obj.add(groupinputuse, BorderLayout.CENTER);
+        group_obj.add(table, BorderLayout.SOUTH);
         group_obj.setBackground(null);
 
 
         this.frame = frame;
         frame.setLayout(new BorderLayout());
         frame.add(setposition, BorderLayout.NORTH);
-        frame.add(group_obj,BorderLayout.CENTER);
+        frame.add(group_obj, BorderLayout.CENTER);
         frame.setVisible(true);
 
     }
+
     public static void main(String[] args) {
         new student_checkGrade(Config.createAndShowGUI());
     }
+
 }
