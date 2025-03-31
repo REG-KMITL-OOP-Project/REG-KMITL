@@ -201,7 +201,10 @@ public class AdminCreateStudentView {
                             std_id, faculty, major);
 
                     new SuccessModal(frame,"สร้างบัญชีผู้ใช้สำเร็จ");
-
+                    frame.getContentPane().removeAll();
+                    frame.revalidate();
+                    frame.repaint();
+                    new AdminCreateUserPortal(frame);
                 } catch (Exception ex) {
                     new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง");
                 }

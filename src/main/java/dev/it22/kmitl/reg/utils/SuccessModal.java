@@ -41,7 +41,7 @@ public class SuccessModal implements ActionListener {
         contentPanel.setBackground(null);
 
         JLabel duocrossPic = new JLabel();
-        duocrossPic.setIcon(new ImageIcon(new ImageIcon("source/ajbankmeme.jpg").getImage().getScaledInstance(60,60,Image.SCALE_SMOOTH)));
+        duocrossPic.setIcon(new ImageIcon(new ImageIcon("source/duo.png").getImage().getScaledInstance(60,60,Image.SCALE_SMOOTH)));
         duocrossPic.setBorder(BorderFactory.createEmptyBorder(0,0,0,10));
         contentPanel.add(duocrossPic);
 
