@@ -111,7 +111,7 @@ public class AdminCreateStudentView {
                 panel[i][j].setLayout(new BoxLayout(panel[i][j], BoxLayout.Y_AXIS));
                 panel[i][j].setBackground(null);
                 panel[i][j].setBorder(new EmptyBorder(5, 5, 5, 5));
-                if (i == 2 & j == 1){
+                if (i == 2 && j == 1){
                     panel[i][j].add(Box.createRigidArea(new Dimension(0, 15)));
                     label[i][j] = new JLabel(name[i][j]);
                     label[i][j].setForeground(Color.WHITE);
