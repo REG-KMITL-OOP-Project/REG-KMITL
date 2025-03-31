@@ -9,6 +9,7 @@ import dev.it22.kmitl.reg.ui.event.calendar.calendarData;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.CustomCombobox;
 import dev.it22.kmitl.reg.utils.RoundedButton;
+import dev.it22.kmitl.reg.utils.RoundedTextField;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -26,9 +27,10 @@ public class TeacherAddScore {
     private callData data_id_subject, data_id_student;
     private RoundedButton cancel, save;
     private JComboBox no_of_score;
-    private JTextField score, subject;
+    private JTextField score;
     private stdInfo std;
     private JTextArea text;
+    private RoundedTextField subject;
 
     public TeacherAddScore(JFrame frame) {
             this.frame = frame;
@@ -54,7 +56,8 @@ public class TeacherAddScore {
             student_pan.setLayout(new FlowLayout());
             student_pan.setBorder(BorderFactory.createEmptyBorder(5, 30, 5, 5));
 
-            subject = new JTextField("  ชื่อวิชา : ", 18);
+            subject = new RoundedTextField( 25);
+            subject.setText("  ชื่อวิชา : ");
             subject.setEditable(false);
             subject.setForeground(Color.WHITE);
             subject.setFont(Config.HEADER_SEMIBOLD[3]);
@@ -62,9 +65,10 @@ public class TeacherAddScore {
             subject.setBackground(Config.bgColor_hard);
 
             subject_panel = new JPanel(new BorderLayout());
-            subject_panel.setPreferredSize(new Dimension(440, 30));
+            subject_panel.setPreferredSize(new Dimension(440, 50));
             subject_panel.setBackground(null);
             subject_panel.add(subject);
+            subject_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 5));
 
             west_panel.add(student_pan, BorderLayout.SOUTH);
             west_panel.setBackground(null);
