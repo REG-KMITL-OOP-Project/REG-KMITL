@@ -203,7 +203,7 @@ public class AdminCreateStudentView {
                     new SuccessModal(frame,"สร้างบัญชีผู้ใช้สำเร็จ");
 
                 } catch (Exception ex) {
-                    new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง");
+                    new ErrorModal(frame, ex.getMessage());
                 }
             }
         });
