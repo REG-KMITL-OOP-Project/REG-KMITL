@@ -7,6 +7,7 @@ import dev.it22.kmitl.reg.utils.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 
 public class AdminAddSubject implements FocusListener ,  ActionListener {
     private JFrame frame ;
@@ -412,6 +413,13 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
                 if (year.getText().equals("   25xx") || code.getText().equals("   06xxxxxx") || name.getText().equals("   OOP") ||/* teacher.getText().equals(("  สมชาย")) || */ note.getText().equals(("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก")) || condition.getText().equals(("   รับเฉพาะนักศึกษาคณะไอที")) ) {
                     new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
                     return;
+                }else{
+                    try {
+                        int db = new Database().postQuery("INSERT INTO course ( course_code, course_name, credits) VALUES ('"+ code.getText() +"' ,'"+ name.getText() +"' ,'"+ ((String)(kit.getSelectedItem())) +"');");
+                    }catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
             frame.getContentPane().removeAll();
