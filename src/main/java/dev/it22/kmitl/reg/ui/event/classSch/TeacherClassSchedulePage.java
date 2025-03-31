@@ -8,6 +8,7 @@ import dev.it22.kmitl.reg.model.auth.Prof;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
 import dev.it22.kmitl.reg.ui.event.component.seletedItemCombobox;
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.ErrorModal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -169,9 +170,17 @@ public class TeacherClassSchedulePage implements ActionListener, seletedItemComb
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == year){
             yearItem = selectedItem(year);
+            if (year.getSelectedIndex() != 0){
+                new ErrorModal(frame, "ขออภัย ยังไม่มีข้อมูลในขณะนี้");
+                year.setSelectedIndex(0);
+            }
         }
         if (e.getSource() == semester){
             semItem = selectedItem(semester);
+            if (semester.getSelectedIndex() != 0){
+                new ErrorModal(frame, "ขออภัย ยังไม่มีข้อมูลในขณะนี้");
+                semester.setSelectedIndex(0);
+            }
         }
     }
 
