@@ -20,9 +20,11 @@ public class RequestEditDataView {
     public RequestEditDataView(JFrame frame) {
         this.frame = frame;
         JLayeredPane layeredPane = frame.getLayeredPane();
+
         JDesktopPane desktopPane = new JDesktopPane();
         desktopPane.setOpaque(false);
         desktopPane.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+
         JInternalFrame internalFrame = new JInternalFrame("", false, true, false, false);
         ((javax.swing.plaf.basic.BasicInternalFrameUI) internalFrame.getUI()).setNorthPane(null);
         internalFrame.setFrameIcon(null);
@@ -30,9 +32,9 @@ public class RequestEditDataView {
         internalFrame.setLocation(100, 100);
         internalFrame.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         internalFrame.getContentPane().setLayout(new BorderLayout());
-        internalFrame.setVisible(true);
         internalFrame.setLocation((desktopPane.getWidth() - internalFrame.getWidth()) / 2, (desktopPane.getHeight() - internalFrame.getHeight()) / 2);
         internalFrame.getContentPane().setBackground(Config.bgColor_hard);
+        internalFrame.setVisible(true);
 
         JPanel upperPanel = new JPanel(new BorderLayout());
         upperPanel.setBackground(Config.bgColor_hard);

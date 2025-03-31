@@ -3,6 +3,7 @@ package dev.it22.kmitl.reg.ui;
 import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.*;
+import dev.it22.kmitl.reg.ui.admin.UserManagement;
 import dev.it22.kmitl.reg.ui.event.admin.*;
 import dev.it22.kmitl.reg.ui.event.examSch.*;
 import dev.it22.kmitl.reg.ui.profile.LoginFrame;
@@ -256,8 +257,7 @@ public class HomePage implements ActionListener {
             }
         } else if (acc instanceof Admin) { //"จัดการผู้ใช้","จัดการชั้นเรียน","จัดการเหตุการณ์","ตั้งค่า"
             if (e.getSource().equals(button[0])) {
-//                new RegisterFrame(frame);
-                new UserRequestView(frame);
+                new UserManagement(frame);
             } else if (e.getSource().equals(button[1])) {
                 new SubjectHomepage(frame);
             } else if (e.getSource().equals(button[2])) {
@@ -274,9 +274,9 @@ public class HomePage implements ActionListener {
         JFrame config = Config.createAndShowGUI();
 
         try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
             //new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
-//            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
+            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         } catch (Exception e) {
             System.out.println(e.getMessage());
