@@ -66,7 +66,6 @@ public class callData extends JPanel implements FocusListener, ActionListener {
             showInfo = false;
         }
     }
-
     @Override
     public void focusLost(FocusEvent e) {
         if (info.getText().isEmpty()) {
@@ -75,11 +74,10 @@ public class callData extends JPanel implements FocusListener, ActionListener {
             info.setForeground(this.textcolor);
         }
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(showData)){
-            if (info.getText().equals("กรอกรหัสนักศึกษา") ) {
+            if (info.getText().equals("กรอกรหัสนักศึกษา")) {
                 new ErrorModal(new JFrame(), "กรุณากรอกข้อมูลให้ครบถ้วน");
                 return;
         }
