@@ -2,6 +2,7 @@ package dev.it22.kmitl.reg.ui.Class_Management;
 
 import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
 import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
+import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.CustomCombobox;
 import dev.it22.kmitl.reg.utils.RoundedButtonWithColor;
@@ -100,7 +101,7 @@ public class addStudent implements FocusListener , ActionListener {
         section.addItem("2");
         section.addItem("3");
         section.setRenderer(new CustomCombobox());
-        section.setMaximumRowCount(3);
+        section.setMaximumRowCount(4);
         section.setFont(Config.NORMAL_REGULAR);
         section.setFont(innerFont);
         section.setPreferredSize(new Dimension((int)(frame.getWidth() / 6),(frame.getHeight() / 4) - 120));
@@ -161,6 +162,9 @@ public class addStudent implements FocusListener , ActionListener {
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
+        cancel.addActionListener(this);
+        save.addActionListener(this);
     }
 
     public static void main(String[] args) {
@@ -181,5 +185,17 @@ public class addStudent implements FocusListener , ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == cancel) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new View_subject(frame);
+        }
+        else if (e.getSource() == save) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new addStudent(frame);
+        }
     }
 }
