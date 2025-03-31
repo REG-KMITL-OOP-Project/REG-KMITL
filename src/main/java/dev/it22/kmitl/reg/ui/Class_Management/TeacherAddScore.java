@@ -5,6 +5,7 @@ import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
 import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
+import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.ui.event.calendar.calendarData;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.CustomCombobox;
@@ -19,7 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-public class TeacherAddScore {
+public class TeacherAddScore implements FocusListener, ActionListener {
     private JFrame frame;
     private JLabel add_score_student, student;
     private JPanel main_panel, sub1, sub2, sub3, txt_panel, txt_sub, frame_pan;
@@ -188,6 +189,9 @@ public class TeacherAddScore {
             frame.add(frame_pan);
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             frame.setVisible(true);
+
+            cancel.addActionListener(this);
+            save.addActionListener(this);
         }
 
         public static void main(String[]args){
@@ -198,4 +202,29 @@ public class TeacherAddScore {
                 System.out.println(e.getMessage());
             }
         }
-    }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == cancel) {
+                        frame.getContentPane().removeAll();
+                        frame.revalidate();
+                        frame.repaint();
+                        new HomePage(frame);
+                }
+                else if (e.getSource() == save) {
+                        frame.getContentPane().removeAll();
+                        frame.revalidate();
+                        frame.repaint();
+                        new HomePage(frame);
+                }
+        }
+
+        @Override
+        public void focusGained(FocusEvent e) {
+
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+
+        }
+}
