@@ -12,7 +12,7 @@ public class TranscriptModel {
     private Account user = new User().getUserAccount();
 
     private String name = user.getFullName(),
-            dateOB = "July 14, 2006",
+            dateOB = "N/A",
             dateOA = (Integer.valueOf("25" +(((Student)user).getStudentId().charAt(0) +"" + ((Student)user).getStudentId().charAt(1))) - 543)+"",
             degree = "Bachelor of Science",
             major = ((Student)user).getMajor(),
