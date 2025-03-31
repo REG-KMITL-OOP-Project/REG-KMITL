@@ -135,7 +135,7 @@ public class ClassSchedulePage{
 
 
         //table
-          table = new ClassScheduleTable();
+          table = new ClassScheduleTable(frame);
           pn1.add(table, BorderLayout.CENTER);
 
         frame.setLayout(new BorderLayout());
