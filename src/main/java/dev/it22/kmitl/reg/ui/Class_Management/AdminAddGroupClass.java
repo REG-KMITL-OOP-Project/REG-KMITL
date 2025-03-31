@@ -37,7 +37,7 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
         numStuLabel = new JLabel("จำนวนนักศึกษาที่รับ");
         typeLabel = new JLabel("วิชา");
         addGroup = new JLabel("              เพิ่มกลุ่มเรียน");
-        date = new JLabel("วัน-เวลาเรียน");
+        //date = new JLabel("วัน-เวลาเรียน");
         timeExam = new JLabel("วัน-เวลาสอบกลางภาค");
         timeExamFinal = new JLabel("วัน-เวลาสอบปลายภาค");
         //towLabel = new JLabel("อาคารเรียน");
@@ -135,12 +135,13 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
         panelBig.add(panelRek1);
 
         panelRek2.setPreferredSize(new Dimension((int)(frame.getWidth()),(int)(frame.getHeight() / 3.5) - 150));
-        panelTime.setLayout(new BorderLayout());
+        /*panelTime.setLayout(new BorderLayout());
         panelTime.add(date,BorderLayout.NORTH);
         panelTime.add(time);
             date.setForeground(Config.primaryColor_base);
             date.setFont(Config.HEADER_SEMIBOLD[2]);
             date.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        */
 
         panelTimeExamMid.setLayout(new BorderLayout());
         panelTimeExamMid.add(timeExam,BorderLayout.NORTH);
@@ -156,20 +157,20 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
             timeExamFinal.setFont(Config.HEADER_SEMIBOLD[2]);
             timeExamFinal.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
 
-        panelRek2.add(panelTime);
+        /*panelRek2.add(panelTime);
         showTime = true;
         time.setText("   จ. 8:00 - 20:00");
         time.setFont(innerFont);
         time.setForeground(Color.GRAY);
         time.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
         time.addFocusListener(this);
-
+        */
         panelRek2.add(panelTimeExamMid);
         showMid = true;
         mid.setText("   จ. 9:00 - 12:00");
         mid.setFont(innerFont);
         mid.setForeground(Color.GRAY);
-        mid.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
+        mid.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.65),(frame.getHeight() / 4) - 120));
         mid.addFocusListener(this);
 
         panelRek2.add(panelTimeExamFinal);
@@ -177,7 +178,7 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
         fi.setText("   จ. 9:00 - 12:00");
         fi.setFont(innerFont);
         fi.setForeground(Color.GRAY);
-        fi.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
+        fi.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.65),(frame.getHeight() / 4) - 120));
         fi.addFocusListener(this);
 
         panelBig.add(panelRek2);
@@ -258,12 +259,11 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
             numStu.setForeground(Color.BLACK);
             showStu = false;
 
-        }else if (fg.getSource().equals(time) && showTime){
+        }/*else if (fg.getSource().equals(time) && showTime){
             time.setText("");
             time.setForeground(Color.BLACK);
             showTime = false;
-
-        }else if (fg.getSource().equals(mid) && showMid) {
+        }*/else if (fg.getSource().equals(mid) && showMid) {
             mid.setText("");
             mid.setForeground(Color.BLACK);
             showMid = false;
@@ -271,11 +271,11 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
             fi.setText("");
             fi.setForeground(Color.BLACK);
             showFi = false;
-        }else if (fg.getSource().equals(room) && showRoom) {
+        }/*else if (fg.getSource().equals(room) && showRoom) {
             room.setText("");
             room.setForeground(Color.BLACK);
             showRoom = false;
-        }
+        }*/
     }public void focusLost(FocusEvent e){
         if (numGroup.getText().isEmpty()) {
             showGroup = true;
@@ -289,12 +289,12 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
             numStu.setForeground(Color.GRAY);
         }
 
-        if (time.getText().isEmpty()) {
+        /*if (time.getText().isEmpty()) {
             showTime = true;
             time.setText("   จ. 8:00 - 20:00");
             time.setForeground(Color.GRAY);
 
-        }if (mid.getText().isEmpty()) {
+        }*/if (mid.getText().isEmpty()) {
             showMid = true;
             mid.setText("   จ. 9:00 - 12:00");
             mid.setForeground(Color.GRAY);
@@ -313,7 +313,7 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
 
     public void actionPerformed(ActionEvent ev){
         if (ev.getSource() == cancel) {
-            if (!(numGroup.getText().equals("   3") && numStu.getText().equals("    200") && time.getText().equals("   จ. 8:00 - 20:00") && mid.getText().equals(("   จ. 9:00 - 12:00")) && fi.getText().equals(("   จ. 9:00 - 12:00")) /*&& room.getText().equals(("   M22"))*/ )){
+            if (!(numGroup.getText().equals("   3") && numStu.getText().equals("    200") && /*time.getText().equals("   จ. 8:00 - 20:00") && */mid.getText().equals(("   จ. 9:00 - 12:00")) && fi.getText().equals(("   จ. 9:00 - 12:00")) /*&& room.getText().equals(("   M22"))*/ )){
                 dialog = Config.openFrame((int) (frame.getWidth() / 2), (int) (frame.getHeight() / 2));
                 JPanel panelD = new JPanel();
                 JPanel panelC = new JPanel();
@@ -372,7 +372,7 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
             dialog.setVisible(false);
         }else if (ev.getSource().equals(yes) || ev.getSource().equals(save)){
             if(ev.getSource().equals(save)){
-                if (numGroup.getText().equals("   3") || numStu.getText().equals("    200") || time.getText().equals("   จ. 8:00 - 20:00") || mid.getText().equals(("   จ. 9:00 - 12:00")) || fi.getText().equals(("   จ. 9:00 - 12:00")) /*&& room.getText().equals(("   M22")) */) {
+                if (numGroup.getText().equals("   3") || numStu.getText().equals("    200") ||/* time.getText().equals("   จ. 8:00 - 20:00") || */mid.getText().equals(("   จ. 9:00 - 12:00")) || fi.getText().equals(("   จ. 9:00 - 12:00")) /*&& room.getText().equals(("   M22")) */) {
                     new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
                     return;
                 }
