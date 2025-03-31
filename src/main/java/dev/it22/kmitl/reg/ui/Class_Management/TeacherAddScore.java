@@ -39,6 +39,8 @@ public class TeacherAddScore {
 
             data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา");
             data_id_student = new callData("กรอกรหัสนักศึกษา", "แสดงข้อมูล");
+            data_id_student.setInfoSize(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 40));
+            data_id_subject.setInfoSize(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 40));
 
             add_score_student = new JLabel("เพิ่มคะแนนนักศึกษา");
             add_score_student.setForeground(Config.primaryColor_base);
@@ -65,10 +67,10 @@ public class TeacherAddScore {
             subject.setBackground(Config.bgColor_hard);
 
             subject_panel = new JPanel(new BorderLayout());
-            subject_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 50)));
+            subject_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() /45)));
             subject_panel.setBackground(null);
             subject_panel.add(subject);
-            subject_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 5));
+            subject_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
 
             west_panel.add(student_pan, BorderLayout.SOUTH);
             west_panel.setBackground(null);
