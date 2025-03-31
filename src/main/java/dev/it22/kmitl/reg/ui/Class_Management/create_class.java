@@ -104,6 +104,7 @@ public class create_class implements ActionListener{
         tableButton.setLayout(new BorderLayout());
         tableButton.add(lowerPanel,BorderLayout.CENTER);
         tableButton.add(Buttonpanel,BorderLayout.SOUTH);
+        tableButton.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
         tableButton.setBackground(null);
 
         setpositext = new JPanel();
