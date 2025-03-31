@@ -166,7 +166,7 @@ public class View_subject implements ActionListener {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            //new AdminAddSubject(frame);
+            new addStudent(frame);
         } else if (e.getSource().equals(back)) {
             frame.getContentPane().removeAll();
             frame.revalidate();
