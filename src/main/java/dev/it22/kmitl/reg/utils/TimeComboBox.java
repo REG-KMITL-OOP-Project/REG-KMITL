@@ -10,6 +10,7 @@ public class TimeComboBox extends JComboBox{
         DateTimeFormatter dft = DateTimeFormatter.ofPattern("HH:mm:ss");
         for(LocalTime time = LocalTime.of(6,0); time.isBefore(LocalTime.of(22, 00)); time = time.plusHours(1)) {
             this.addItem(time.format(dft));
+            this.setRenderer(new CustomCombobox());
         }
     }
 

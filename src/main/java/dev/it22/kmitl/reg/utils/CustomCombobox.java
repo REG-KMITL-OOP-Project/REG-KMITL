@@ -7,7 +7,7 @@ public class CustomCombobox extends DefaultListCellRenderer{
     @Override
     public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        c.setPreferredSize(new Dimension(200, 35));  // Optional: change item height
+        c.setPreferredSize(new Dimension(200, 35));  // change cell item weight & height
         return c;
     }
 }
