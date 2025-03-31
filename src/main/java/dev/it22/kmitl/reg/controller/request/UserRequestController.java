@@ -75,9 +75,12 @@ public class UserRequestController {
     public boolean approveRequest(int id, String email, String fieldName, String newValue) {
         Database db = new Database();
         try {
-            int res = db.postQuery("UPDATE user_request SET status = 'approved' WHERE id = " + id + ";");
+            String updateRequestQuery = "UPDATE user_request SET status = 'approved' WHERE id = ?";
+            int res = db.postPreparedQuery(updateRequestQuery, id);
             System.out.println("Approve request success : " + res);
-            int res2 = db.postQuery("UPDATE user SET " + fieldName + " = '" + newValue + "' WHERE email = '" + email + "';");
+
+            String updateUserQuery = "UPDATE user SET " + fieldName + " = ? WHERE email = ?";
+            int res2 = db.postPreparedQuery(updateUserQuery, newValue, email);
             System.out.println("Update user success : " + res2);
         } catch (Exception e) {
             e.printStackTrace();
