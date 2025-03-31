@@ -5,6 +5,7 @@ import dev.it22.kmitl.reg.utils.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 
 public class AdminAddGroupClass implements FocusListener , ActionListener {
     private JFrame frame ;
@@ -249,6 +250,11 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
         new AdminAddGroupClass(Config.createAndShowGUI());
     }
     public void focusGained(FocusEvent fg){
+        try{
+            int db = new Database().postQuery("INSERT INTO section");
+        } catch (Exception e) {
+
+        }
         if (fg.getSource().equals(numGroup) && showGroup){
             numGroup.setText("");
             numGroup.setForeground(Color.BLACK);
