@@ -10,14 +10,14 @@ import java.util.ArrayList;
 
 public class AdminAddClassroom implements FocusListener, ActionListener {
     private JFrame frame ;
-    private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek5,panelHead,panelRek22,panelPela,panelPela1,panelRek33;
+    private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek5,panelHead,panelRek22,panelPela,panelPela1,panelRek33, panelRek4;
     private JLabel addGroup;
-    private RoundedTextField subjectName,subjectCode,teacherName;
-    private JComboBox group,type;
+    private RoundedTextField subjectCode,teacherName, room;
+    private JComboBox subjectName,group,type, tow;
     private Font innerFont, regularFont;
     private RoundedButtonWithColor cancel,save,add;
     private JPanel panelSave = new JPanel() , panelCan = new JPanel();
-    protected boolean showName, showCode, showTeacher;
+    protected boolean showRoom, showCode, showTeacher;
     private teacherNameTable table;
     private String [] nameCher ;
 
@@ -28,13 +28,16 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         panelRek1 = new JPanel();
         panelRek2 = new JPanel();
         panelRek3 = new JPanel();
+        panelRek4 = new JPanel();
         panelRek5 = new JPanel();
         panelRek22 = new JPanel();
         panelPela = new JPanel();
         panelPela1 = new JPanel();
         panelRek33 = new JPanel();
         addGroup = new JLabel("              สร้างห้องเรียน");
-        subjectName = new RoundedTextField(22);
+        room = new RoundedTextField(22);
+        tow = new JComboBox();
+        subjectName = new JComboBox();
         teacherName = new RoundedTextField(22);
         subjectCode = new RoundedTextField(22);
         cancel = new RoundedButtonWithColor ("CANCEL" ,22,Color.BLACK,new Color(255,247,237));
@@ -51,6 +54,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         panelRek1.setBackground(null);
         panelRek2.setBackground(null);
         panelRek3.setBackground(null);
+        panelRek4.setBackground(null);
         panelRek5.setBackground(null);
         panelCan.setBackground(null);
         panelSave.setBackground(null);
@@ -70,10 +74,9 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         panelHead.add(addGroup,BorderLayout.NORTH);
 
         panelRek1.add(subjectName);
-        showName = true;
-        subjectName.setText("   ชื่อวิชา");
+        subjectName.addItem("   ชื่อวิชา");
+        subjectName.addItem("   Oop");
         subjectName.setFont(innerFont);
-        subjectName.setForeground(Color.GRAY);
         subjectName.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.3),(frame.getHeight() / 4) - 120));
         subjectName.addFocusListener(this);
 
@@ -97,7 +100,6 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         group.addItem("3");
         group.setRenderer(new CustomCombobox());
         group.setMaximumRowCount(3);
-        group.setFont(Config.NORMAL_REGULAR);
         group.setFont(innerFont);
         group.setPreferredSize(new Dimension((int)(frame.getWidth() / 5),(frame.getHeight() / 4) - 120));
 
@@ -110,11 +112,30 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         type.addItem("ปฏิบัติ");
         type.setRenderer(new CustomCombobox());
         type.setMaximumRowCount(3);
-        type.setFont(Config.NORMAL_REGULAR);
         type.setFont(innerFont);
         type.setPreferredSize(new Dimension((int)(frame.getWidth() / 5),(frame.getHeight() / 4) - 120));
 
         panelBig.add(panelRek2);
+
+        panelRek4.add(tow);
+        tow.addItem("เลือกอาคาร");
+        tow.addItem("IT");
+        tow.addItem("อาคารพระเทพ");
+        tow.addItem("คณะบริหาร");
+        tow.setRenderer(new CustomCombobox());
+        tow.setMaximumRowCount(3);
+        tow.setFont(innerFont);
+        tow.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.3),(frame.getHeight() / 4) - 120));
+
+        panelRek4.add(room);
+        showRoom = true;
+        room.setText("   เลือกห้อง");
+        room.setFont(innerFont);
+        room.setForeground(Color.GRAY);
+        room.setPreferredSize(new Dimension((int)(frame.getWidth() / 3.5),(frame.getHeight() / 4) - 120));
+        room.addFocusListener(this);
+
+        panelBig.add(panelRek4);
 
         panelRek3.setLayout(new FlowLayout(FlowLayout.LEFT));
         panelRek3.add(panelRek33);
@@ -163,12 +184,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
     }
     @Override
     public void focusGained(FocusEvent fg){
-        if (fg.getSource().equals(subjectName) && showName){
-            subjectName.setText("");
-            subjectName.setForeground(Color.BLACK);
-            showName = false;
-
-        }else if(fg.getSource().equals(subjectCode) && showCode){
+        if(fg.getSource().equals(subjectCode) && showCode){
             subjectCode.setText("");
             subjectCode.setForeground(Color.BLACK);
             showCode = false;
@@ -177,14 +193,13 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
             teacherName.setText("");
             teacherName.setForeground(Color.BLACK);
             showTeacher = false;
+        }else if (fg.getSource().equals(room) && showRoom) {
+            room.setText("");
+            room.setForeground(Color.BLACK);
+            showRoom = false;
         }
     }@Override
     public void focusLost(FocusEvent e){
-        if (subjectName.getText().isEmpty()) {
-            showName = true;
-            subjectName.setText("   ชื่อวิชา");
-            subjectName.setForeground(Color.GRAY);
-        }
         if(subjectCode.getText().isEmpty()){
             showCode = true;
             subjectCode.setText("   รหัสวิชา");
@@ -194,6 +209,11 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
             showTeacher = true;
             teacherName.setText("   เพิ่มชื่อผู้สอน");
             teacherName.setForeground(Color.GRAY);
+        }
+        if (room.getText().isEmpty()) {
+            showRoom = true;
+            room.setText("   เลือกห้อง");
+            room.setForeground(Color.GRAY);
         }
     }
     int index = 0;
@@ -215,7 +235,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
             }
         }
         if (ev.getSource() == cancel) {
-            if (!(subjectName.getText().equals("   ชื่อวิชา") && subjectCode.getText().equals("   รหัสวิชา") )){
+            if (!(subjectName.getSelectedIndex() == 0 && subjectCode.getText().equals("   รหัสวิชา") )){
                 dialog = Config.openFrame((int) (frame.getWidth() / 2), (int) (frame.getHeight() / 2));
                 JPanel panelD = new JPanel();
                 JPanel panelC = new JPanel();
@@ -274,9 +294,35 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
             dialog.setVisible(false);
         }else if (ev.getSource().equals(yes) || ev.getSource().equals(save)){
             if(ev.getSource().equals(save)){
-                if (subjectName.getText().equals("   ชื่อวิชา") && subjectCode.getText().equals("   รหัสวิชา") ) {
-                    new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
-                    return;
+                if (subjectName.getSelectedIndex() == 0 || subjectCode.getText().equals("   รหัสวิชา") || (group.getSelectedIndex()) == 0 || (type.getSelectedIndex()) == 0 || table.getName_table().getModel().getValueAt(0,0) == null || tow.getSelectedIndex() == 0 || room.getText().equals("   เลือกห้อง")) {
+                    if (subjectName.getSelectedIndex() == 0 || subjectCode.getText().equals("   รหัสวิชา")){
+                        new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
+                        return;
+                    }else if (!subjectCode.getText().isEmpty()){
+                        try{
+                            Double.parseDouble(subjectCode.getText());
+                        }catch (NumberFormatException e){
+                            new ErrorModal(frame, "กรุณากรอกรหัสวิชาเป็นตัวเลขให้ถูกต้อง");
+                            return;
+                        }
+                    }
+                    if (group.getSelectedIndex() == 0){
+                        new ErrorModal(frame, "กรุณาเลือกกลุ่มเรียนให้ถูกต้อง");
+                        return;
+                    } else if (type.getSelectedIndex() == 0){
+                        new ErrorModal(frame, "กรุณาเลือกประเภทให้ถูกต้อง");
+                        return;
+                    }else if (room.getText().equals("   เลือกห้อง")){
+                        new ErrorModal(frame, "กรุณาเลือกห้องเรียนให้ถูกต้อง");
+                        return;
+                    }  else if (tow.getSelectedIndex() == 0){
+                        new ErrorModal(frame, "กรุณาเลือกอาคารให้ถูกต้อง");
+                        return;
+                    }
+                    else if (table.getName_table().getModel().getValueAt(0,0) == null) {
+                        new ErrorModal(frame, "กรุณากรอกชื่ออาจารย์ผู้สอนให้ถูกต้อง");
+                        return;
+                    }
                 }
             }
             frame.getContentPane().removeAll();
