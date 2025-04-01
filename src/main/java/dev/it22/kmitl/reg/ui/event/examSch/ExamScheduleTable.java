@@ -17,22 +17,12 @@ public class ExamScheduleTable extends JPanel {
     private JTable examSchedule;
     private JScrollPane scrollPane;
     private String columnNames[] = {"วัน/เดือน/ปี","เวลา", "รหัสวิชา","วิชา","ประเภท","ห้องสอบ"};
-    private Object testData[][] = {
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","ทฤษฎี","L123"},
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","ปฏิบัติ","L123"},
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","ปฏิบัติ","L123"},
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","ปฏิบัติ","L123"},
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","ปฏิบัติ","L123"},
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","L123"},
-            {"DD/MM/YY","09.30-18.00","060111222","OOP","practical","L123"}
-    };
 
-    private examTableData aaa;
-
+    private examTableData data;
 
     public ExamScheduleTable(JFrame frame){
         try{
-            aaa = new examTableData();
+            data = new examTableData();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -42,7 +32,7 @@ public class ExamScheduleTable extends JPanel {
         innerFont = regularFont.deriveFont(15f);
 
         //All about JTable
-        DefaultTableModel model = new DefaultTableModel(aaa.getData(), columnNames);
+        DefaultTableModel model = new DefaultTableModel(data.getData(), columnNames);
         examSchedule = new JTable(model);
         examSchedule.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         examSchedule.setGridColor(Config.bgColor_hard);
