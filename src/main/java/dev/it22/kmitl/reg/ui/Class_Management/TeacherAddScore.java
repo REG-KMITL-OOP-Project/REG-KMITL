@@ -209,7 +209,7 @@ public class TeacherAddScore implements FocusListener, ActionListener {
             } else if (text.getText().isEmpty() || text.getText().equals("  หมายเหตุ")) {
                 JOptionPane.showMessageDialog(frame, "กรุณากรอกหมายเหตุ", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                String enrollmentId = "670701741";
+                String enrollmentId = "670701742";
                 float scoreValue = Float.parseFloat(score.getText());
                 int scoreIndex = no_of_score.getSelectedIndex();
 
@@ -229,8 +229,12 @@ public class TeacherAddScore implements FocusListener, ActionListener {
                         break;
                 }
 
-                scoreController.addScore(scoreModel);
-                JOptionPane.showMessageDialog(frame, "คะแนนถูกบันทึกเรียบร้อยแล้ว", "Success", JOptionPane.INFORMATION_MESSAGE);
+                if (scoreController.getScoreByEnrollmentId(enrollmentId)) {
+                    scoreController.createScore(enrollmentId);
+                } else {
+                    scoreController.addScore(scoreModel);
+                }
+                JOptionPane.showMessageDialog(frame, "Yes", "Success", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
