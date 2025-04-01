@@ -42,8 +42,7 @@ public class examTableData {
                         "WHERE u.std_id ="+ ((Student) user).getStudentId();*/
 
             } else if (user instanceof Prof) {
-                q = "SELECT subject, midterm_date, midterm_start_time, midterm_end_time, course_id,room ," +
-                        "type FROM exam WHERE prof_id =" + ((Prof)user).getProf_id();
+                q = "SELECT e.*, s.* FROM exam e JOIN section s ON e.section_id = s.section_id AND e.course_id = s.course_id WHERE s.prof_id = '"+ ((Prof)user).getProf_id()+"';";
             }
             ResultSet rs = db.getQuery(q);
 
