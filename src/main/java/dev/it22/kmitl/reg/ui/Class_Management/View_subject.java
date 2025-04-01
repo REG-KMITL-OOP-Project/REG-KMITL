@@ -1,5 +1,7 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
+import dev.it22.kmitl.reg.controller.score.ScoreDatabase;
+import dev.it22.kmitl.reg.controller.subject.Subject;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.Database;
 import dev.it22.kmitl.reg.utils.ErrorModal;
@@ -23,12 +25,18 @@ public class View_subject implements ActionListener {
     private JScrollPane showdetail_table;
     private String columnNames[] = {"รหัสนักศึกษา","ชื่อนักศึกษา"};
     private String courseCode,courseName, teacherName;
+    private ResultSet subjectRs;
+    private DefaultTableModel model = new DefaultTableModel(null, columnNames);
 
     public View_subject(JFrame frame, String course_code, String course_name, String teacherName) {
         this.frame = frame;
         this.courseCode = course_code;
         this.courseName = course_name;
         this.teacherName = teacherName;
+
+        //first call
+
+
         //ปุ่มรูปบ้าน
         ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home.png").getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH));
         home = new JButton(homeIcon);
@@ -91,6 +99,36 @@ public class View_subject implements ActionListener {
         group = new JComboBox<>();
         group.addItem("กลุ่มเรียน");
         group.setFont(Config.HEADER_SEMIBOLD[2]);
+        group.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int groupNum = 0;
+                try{
+                    groupNum = Integer.valueOf(group.getSelectedItem().toString());
+                } catch (Exception ev){
+                    new ErrorModal(frame, "กรุณาเลือกกลุ่มเรียน");
+                    return;
+                }
+                try{
+                    subjectRs = new Subject().getCourseByIdWithSection(courseCode,groupNum);
+                    model.setRowCount(0); // Clear the table before adding new data
+                    while (subjectRs.next()) {
+                        System.out.println("---");
+                        System.out.println("std_id: " + subjectRs.getString("std_id"));
+                        ResultSet stdrs = new ScoreDatabase().getStudentData(subjectRs.getString("std_id"));
+                        String name = stdrs.getString("fname");
+                        model.addRow( new Object[]{
+                                subjectRs.getString("std_id"),
+                                name
+                        });
+                    }
+                }
+                catch (Exception er){
+                    new ErrorModal(frame, "ไม่สามารถดึงข้อมูลได้");
+                }
+
+            }
+        });
 
         //รวมชื่อและรหัสวิชาไว้ด้วยกัน
         textname_id = new JPanel();
@@ -117,6 +155,23 @@ public class View_subject implements ActionListener {
         DefaultTableModel model = new DefaultTableModel(null, columnNames);
         tablesubject = new JTable(model);
         tablesubject.setRowHeight(30);
+
+        try{
+            subjectRs = new Subject().getCourseByIdWithSection(courseCode,1);
+            while (subjectRs.next()) {
+                System.out.println("---");
+                System.out.println("std_id: " + subjectRs.getString("std_id"));
+                ResultSet stdrs = new ScoreDatabase().getStudentData(subjectRs.getString("std_id"));
+                String name = stdrs.getString("fname");
+                model.addRow( new Object[]{
+                        subjectRs.getString("std_id"),
+                        name
+                });
+            }
+        }
+        catch (Exception e){
+            new ErrorModal(frame, "ไม่สามารถดึงข้อมูลได้");
+        }
 
         JTableHeader header = tablesubject.getTableHeader();
         header.setFont(Config.HEADER_SEMIBOLD[2]);
@@ -173,7 +228,8 @@ public class View_subject implements ActionListener {
         frame.setVisible(true);
     }
     public static void main(String[] args) {
-        //new View_subject(Config.createAndShowGUI());
+        JFrame frame = new Config().createAndShowGUI();
+        new View_subject(frame,"06016408","dawdwadwa","dawdwadwa");
     }
 
     @Override

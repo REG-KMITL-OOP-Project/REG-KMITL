@@ -20,10 +20,6 @@ public class ScoreDatabase {
     public ResultSet getSubjectData(String subjectId) throws Exception {
         String sql = "SELECT * FROM course WHERE course_code = '" + subjectId + "'";
         ResultSet rs = db.getQuery(sql);
-        // not found subject
-        if (!rs.next()) {
-            throw new Exception("Subject ID not found: " + subjectId);
-        }
         return rs;
     }
 
