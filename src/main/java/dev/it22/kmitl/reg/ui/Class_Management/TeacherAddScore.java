@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.ResultSet;
 
 public class TeacherAddScore implements FocusListener, ActionListener {
     private JFrame frame;
@@ -37,13 +38,16 @@ public class TeacherAddScore implements FocusListener, ActionListener {
     private boolean scoreShow, textShow;
     private ScoreController scoreController = new ScoreController();
 
+
+
+
     public TeacherAddScore(JFrame frame) {
         this.frame = frame;
         //    private Account user;
 //        user = new User().getUserAccount();
 
-        data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา");
-        data_id_student = new callData("กรอกรหัสนักศึกษา", "แสดงข้อมูล");
+        data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา", frame);
+        data_id_student = new callData("กรอกรหัสนักศึกษา", "แสดงข้อมูล", frame);
         data_id_student.setInfoSize(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 40));
         data_id_subject.setInfoSize(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 40));
 
@@ -138,18 +142,8 @@ public class TeacherAddScore implements FocusListener, ActionListener {
         main_panel.setBorder(new EmptyBorder(5, 45, 5, 5));
         main_panel.setBackground(null);
 
-        textShow = true;
-        text = new JTextArea("  หมายเหตุ");
-        text.setForeground(Color.GRAY);
-        text.setBackground(Config.bgColor_hard);
-        text.setFont(Config.HEADER_SEMIBOLD[3]);
-        text.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 100), frame.getWidth() / (frame.getWidth() / 80)));
-        text.addFocusListener(this);
-
-
         txt_sub = new JPanel(new BorderLayout());
         txt_sub.setBackground(null);
-        txt_sub.add(text, BorderLayout.CENTER);
         txt_sub.setPreferredSize(new Dimension((int) (frame.getWidth() / 1.3), frame.getWidth() / (frame.getWidth() / 80)));
 
         txt_panel = new JPanel(new FlowLayout(FlowLayout.LEFT));

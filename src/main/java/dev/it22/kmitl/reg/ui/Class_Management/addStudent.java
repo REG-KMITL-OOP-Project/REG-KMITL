@@ -75,7 +75,7 @@ public class addStudent implements FocusListener, ActionListener {
         teacherName = new JLabel("อาจารย์ประจำกลุ่มเรียน :");
         cancel = new RoundedButtonWithColor("CANCEL", 22, new Color(255, 247, 237), Config.primaryColor_base);
         save = new RoundedButtonWithColor("SAVE", 22, new Color(255, 247, 237), Config.primaryColor_harder);
-        insertID = new callData("กรอกรหัสนักศึกษา", Config.bgColor_hard, Color.WHITE, "แสดงชื่อ", Color.WHITE, Config.primaryColor_base);
+        insertID = new callData("กรอกรหัสนักศึกษา", Config.bgColor_hard, Color.WHITE, "แสดงชื่อ", Color.WHITE, Config.primaryColor_base , frame);
         section = new JLabel("กลุ่มเรียนที่ : " + groupNum);
         regularFont = Config.NORMAL_REGULAR;
         innerFont = regularFont.deriveFont(15f);

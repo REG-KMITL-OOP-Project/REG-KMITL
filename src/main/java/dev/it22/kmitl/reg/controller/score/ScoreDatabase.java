@@ -10,12 +10,20 @@ public class ScoreDatabase {
     public ResultSet getStudentData(String studentId) throws Exception {
         String sql = "SELECT * FROM user WHERE std_id = '" + studentId + "'";
         ResultSet rs = db.getQuery(sql);
+        // not found student
+        if (!rs.next()) {
+            throw new Exception("Student ID not found: " + studentId);
+        }
         return rs;
     }
 
     public ResultSet getSubjectData(String subjectId) throws Exception {
-        String sql = "SELECT * FROM course WHERE course_id = '" + subjectId + "'";
+        String sql = "SELECT * FROM course WHERE course_code = '" + subjectId + "'";
         ResultSet rs = db.getQuery(sql);
+        // not found subject
+        if (!rs.next()) {
+            throw new Exception("Subject ID not found: " + subjectId);
+        }
         return rs;
     }
 
@@ -71,7 +79,8 @@ public class ScoreDatabase {
 
     public static void main(String[] args) {
         try {
-            new ScoreDatabase().getEnrollmentId("67070174","06016408");
+            String enrollID = new ScoreDatabase().getEnrollmentId("67070174","06016408");
+            new ScoreDatabase().addScore(enrollID, 3, 50);
         }
         catch (Exception e) {
             e.printStackTrace();

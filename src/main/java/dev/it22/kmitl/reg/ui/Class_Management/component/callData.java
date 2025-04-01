@@ -1,10 +1,13 @@
 package dev.it22.kmitl.reg.ui.Class_Management.component;
 
 import dev.it22.kmitl.reg.controller.enrollment.EnrollmentController;
+import dev.it22.kmitl.reg.controller.score.ScoreDatabase;
+import dev.it22.kmitl.reg.ui.Class_Management.TeacherAddScore;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.ErrorModal;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 import dev.it22.kmitl.reg.utils.RoundedTextField;
+import dev.it22.kmitl.reg.ui.Class_Management.TeacherAddScore.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.ResultSet;
 
 public class callData extends JPanel implements FocusListener, ActionListener {
     private RoundedButton showData;
@@ -20,12 +24,13 @@ public class callData extends JPanel implements FocusListener, ActionListener {
     private String text;
     private Color textcolor;
     private EnrollmentController enrollmentController = new EnrollmentController();
+    private JFrame frame;
 
-    public callData(String text, String buttonText) {
-        this(text, Config.bgColor_base, Config.primaryColor_base, buttonText, Color.white, Config.primaryColor_harder);
+    public callData(String text, String buttonText , JFrame frame) {
+        this(text, Config.bgColor_base, Config.primaryColor_base, buttonText, Color.white, Config.primaryColor_harder , frame);
     }
 
-    public callData(String text, Color textcolor, Color textBackcolor, String buttonText, Color buttoncolor, Color buttonBackcolor) {
+    public callData(String text, Color textcolor, Color textBackcolor, String buttonText, Color buttoncolor, Color buttonBackcolor, JFrame frame) {
 
         info = new RoundedTextField(22);
         showInfo = true;
@@ -80,11 +85,21 @@ public class callData extends JPanel implements FocusListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(showData)) {
-            info.setText(enrollmentController.getStudentById("67070174"));
-            showInfo = true;
-            info.setText(this.text);
-            info.setForeground(this.textcolor);
+        if (e.getActionCommand().equals("แสดงชื่อวิชา")){
+            try {
+                ResultSet subjectrs = new ScoreDatabase().getSubjectData(info.getText());
+                stdInfo.setSubject(subjectrs);
+            } catch (Exception ex) {
+                new ErrorModal(frame, ex.getMessage());
+            }
+        }
+        if (e.getActionCommand().equals("แสดงข้อมูล")){
+            try {
+                ResultSet teacherrs = new ScoreDatabase().getStudentData(info.getText());
+                stdInfo.setSubject(teacherrs);
+            } catch (Exception ex) {
+                new ErrorModal(frame, ex.getMessage());
+            }
         }
     }
 
