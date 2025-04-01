@@ -2,6 +2,8 @@ package dev.it22.kmitl.reg.ui.Class_Management;
 
 import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.CustomCombobox;
+import dev.it22.kmitl.reg.utils.FacultyComboBox;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
 import javax.swing.*;
@@ -16,7 +18,8 @@ public  class SubjectHomepage implements ActionListener {
     private JLabel regLabel;
     private RoundedButton addclass,addtime,addsubjec;
     private JPanel botton,combobox,tablesubject,ICON,groupbotton_box,setposition,setlayout;
-    private JComboBox Faculty,Semester;
+    private JComboBox Semester;
+    private FacultyComboBox Faculty;
     private JTable table;
     private JScrollPane showdetail_Subject;
     private String columnNames[] = {"รหัสวิชา","ชื่อวิชา", "กลุ่มเรียน","ห้องเรียน","อาจารย์ผู้สอน","เงื่อนไข","หมายเหตุ","วันสอบ","รับ"};
@@ -66,12 +69,13 @@ public  class SubjectHomepage implements ActionListener {
         botton.setLayout(new FlowLayout());
         botton.setBackground(null);
 
-        Faculty = new JComboBox();
-        Faculty.addItem("คณะ");
+        Faculty = new FacultyComboBox("คณะ");
+        Faculty.setRenderer(new CustomCombobox(50,35));
         Faculty.setFont(Config.HEADER_SEMIBOLD[2]);
 
         Semester = new JComboBox();
         Semester.addItem("ภาคการศึกษา");
+        Semester.setRenderer(new CustomCombobox(115,35));
         Semester.setFont(Config.HEADER_SEMIBOLD[2]);
 
         combobox = new JPanel();
@@ -86,6 +90,8 @@ public  class SubjectHomepage implements ActionListener {
         JTableHeader header = table.getTableHeader();
         table.setRowHeight(30);
         header.setFont(Config.HEADER_SEMIBOLD[2]);
+
+        
 
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setResizingAllowed(false);
