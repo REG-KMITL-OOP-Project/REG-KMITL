@@ -67,7 +67,6 @@ public class examTableData {
                 data[5] = room;
 
                 allDataList.add(data);
-                System.out.println(allDataList);
             }
 
             //เอา list มาทำเป็น array
