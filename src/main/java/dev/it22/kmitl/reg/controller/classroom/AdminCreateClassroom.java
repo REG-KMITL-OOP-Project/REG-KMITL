@@ -18,6 +18,8 @@ public class AdminCreateClassroom {
             }
             String sql = "UPDATE `section` SET "+"`day_of_week` = '"+dayOfWeek+"', `start_time` = '"+startTime+"', `end_time` = '"+ endTime +"', `building` = '"+building+"', `room` = '"+room+"', `section` = '"+section+"', `prof_name` = '"+teacherName+"'"+"  WHERE `section`.`section_id` = '"+ ( "" + courseId + sectionCode) +"';";
             db.postQuery(sql);
+            sql = "UPDATE `exam` SET `type` = '"+ type +"', `prof_name` = '" + teacherName + "';";
+            db.postQuery(sql);
         }
         catch (Exception e) {
             throw new Exception("ตรวจสอบให้แน่ใจว่า Section และ Course ID ถูกต้อง");

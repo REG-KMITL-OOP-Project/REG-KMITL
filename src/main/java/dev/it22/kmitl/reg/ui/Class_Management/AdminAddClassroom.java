@@ -53,7 +53,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         add = new RoundedButtonWithColor("ADD" ,22,new Color(255, 247, 237),Config.primaryColor_base);
         group = new JComboBox();
         type = new JComboBox();
-        dayToStudy = new DayComboBox();
+        dayToStudy = new DayComboBox("เลือกวันเรียน");
         nameCher = new String[5];
         regularFont = Config.NORMAL_REGULAR;
         innerFont = regularFont.deriveFont(15f);
@@ -148,7 +148,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
 
         panelRek2.add(type);
         type.addItem("ประเภท");
-        type.addItem("ทฤษฏี");
+        type.addItem("ทฤษฎี");
         type.addItem("ปฏิบัติ");
         type.setRenderer(new CustomCombobox());
         type.setMaximumRowCount(3);
@@ -178,8 +178,8 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         room.setPreferredSize(new Dimension((int)(frame.getWidth() / 5.6),(frame.getHeight() / 4) - 120));
         room.addFocusListener(this);
 
-        timetostudy = new TimeComboBox();
-        timetofree = new TimeComboBox();
+        timetostudy = new TimeComboBox("เลือกเวลาเริ่มคาบ");
+        timetofree = new TimeComboBox("เลือกเวลาหมดคาบ");
 
         panelRek4.add(dayToStudy);
         dayToStudy.setMaximumRowCount(3);
