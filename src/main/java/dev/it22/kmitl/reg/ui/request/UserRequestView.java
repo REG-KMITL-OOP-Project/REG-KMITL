@@ -63,7 +63,9 @@ public class UserRequestView {
         String[] columns = {"Request ID", "User Email", "Field Name", "Current Value", "New Value", "Status", "Created At"};
         tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel);
-        table.setForeground(Color.WHITE);
+        table.setForeground(Color.BLACK);
+        table.setGridColor(Color.GRAY);
+        table.setShowGrid(true);
         table.setFont(Config.NORMAL_REGULAR);
 
         scrollPane = new JScrollPane(table);
