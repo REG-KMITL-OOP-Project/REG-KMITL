@@ -103,17 +103,17 @@ public class examTableData {
         System.out.println("Exam Item: " + comboBoxHandler.getExamItem());
     }
 
-    public static void main(String[] args) {
-        try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-            examTableData exData = new examTableData();
-            exData.SelectedItem(new ExamSchedulePage(Config.createAndShowGUI()));
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
+//    public static void main(String[] args) {
+//        try {
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            examTableData exData = new examTableData();
+//            exData.SelectedItem(new ExamSchedulePage(Config.createAndShowGUI()));
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//
 
     //get subject name from another table
     public String getCourseName(String id) throws SQLException {
