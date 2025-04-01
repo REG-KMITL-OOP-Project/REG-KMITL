@@ -1,26 +1,36 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
+import dev.it22.kmitl.reg.controller.auth.Login;
+
+import java.sql.ResultSet;
+
+import dev.it22.kmitl.reg.controller.auth.User;
+import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.Database;
 import dev.it22.kmitl.reg.utils.RoundedButton;
-import dev.it22.kmitl.reg.utils.RoundedTextField;
 
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.sql.SQLException;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import dev.it22.kmitl.reg.controller.grade.GradeController;
+
 public class student_checkGrade {
     private JFrame frame;
-    private JLabel title,id, name, faculty, major;
-    private JComboBox year, semester;
+    private JLabel title, id, name, faculty, major;
     private RoundedButton checkgrade;
     private JButton home;
     private JPanel grouptf, grouptc, mixtf_tc, center, south, groupinputuse, table, group_obj, ICON, setposition;
     private JTable tablescore;
     private JScrollPane showdetail_Subject;
     private String columnNames[] = {"รหัสวิชา", "ชื่อวิชา", "1", "2", "3", "4", "เกรด"};
+    DefaultTableModel model;
+    private final User user = new User();
+    private final Account acc = user.getUserAccount();
 
     public student_checkGrade(JFrame frame) {
         title = new JLabel("ตรวจสอบผลการเรียน");
@@ -28,10 +38,6 @@ public class student_checkGrade {
         name = new JLabel();
         faculty = new JLabel();
         major = new JLabel();
-        semester = new JComboBox();
-        semester.addItem("ภาคการศึกษา");
-        year = new JComboBox();
-        year.addItem("ปีการศึกษา");
         checkgrade = new RoundedButton("ดูผลการเรียน", 22);
 
         //Icon home
@@ -66,8 +72,6 @@ public class student_checkGrade {
         faculty.setForeground(Color.WHITE);
         major.setFont(Config.HEADER_SEMIBOLD[2]);
         major.setForeground(Color.WHITE);
-        semester.setFont(Config.HEADER_SEMIBOLD[2]);
-        year.setFont(Config.HEADER_SEMIBOLD[2]);
         checkgrade.setFont(Config.HEADER_SEMIBOLD[2]);
 
         checkgrade.setForeground(Color.BLACK);
@@ -85,8 +89,6 @@ public class student_checkGrade {
         grouptc = new JPanel();
         grouptc.setLayout(new FlowLayout());
         grouptc.add(major);
-        grouptc.add(semester);
-        grouptc.add(year);
         grouptc.setBackground(null);
 
         //setposition title
@@ -116,7 +118,7 @@ public class student_checkGrade {
         groupinputuse.setBackground(null);
 
         //tablescore
-        DefaultTableModel model = new DefaultTableModel(null, columnNames);
+        model = new DefaultTableModel(columnNames, 0);
         tablescore = new JTable(model);
         JTableHeader header = tablescore.getTableHeader();
         tablescore.setRowHeight(30);
@@ -145,17 +147,36 @@ public class student_checkGrade {
         group_obj.add(table, BorderLayout.SOUTH);
         group_obj.setBackground(null);
 
-
         this.frame = frame;
         frame.setLayout(new BorderLayout());
         frame.add(setposition, BorderLayout.NORTH);
         frame.add(group_obj, BorderLayout.CENTER);
         frame.setVisible(true);
 
+        checkgrade.addActionListener(e -> {
+            String sql = "SELECT std_id FROM user WHERE email = '" + acc.getEmail() + "'";
+            Database db = new Database();
+            String studentId = "";
+            try {
+                ResultSet rs = db.getQuery(sql);
+                if (rs.next()) {
+                    studentId = rs.getString("std_id");
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            loadData(studentId);
+        });
     }
 
-    public static void main(String[] args) {
+    public void loadData(String studentId) {
+        model.setRowCount(0);
+        for (Vector<String> row : new GradeController().getGrades(studentId)) {
+            model.addRow(row);
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
         new student_checkGrade(Config.createAndShowGUI());
     }
-
 }

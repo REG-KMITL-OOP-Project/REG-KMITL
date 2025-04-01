@@ -38,9 +38,9 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
 //        user = new User().getUserAccount();
 
         data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา", frame);
-        data_id_student = new callData("กรอกรหัสนักศึกษา","แสดงข้อมูล", frame);
-        data_id_student.setInfoSize(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 40));
-        data_id_subject.setInfoSize(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 40));
+        data_id_student = new callData("กรอกรหัสนักศึกษา", "แสดงข้อมูล", frame);
+        data_id_student.setInfoSize(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 40));
+        data_id_subject.setInfoSize(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 40));
 
 
         add_score_student = new JLabel("เพิ่มเกรดนักศึกษา");
