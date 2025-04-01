@@ -97,6 +97,7 @@ public class callData extends JPanel implements FocusListener, ActionListener {
             try {
                 ResultSet teacherrs = new ScoreDatabase().getStudentData(info.getText());
                 stdInfo.setSubject(teacherrs);
+                stdInfo.setInfo();
             } catch (Exception ex) {
                 new ErrorModal(frame, ex.getMessage());
             }

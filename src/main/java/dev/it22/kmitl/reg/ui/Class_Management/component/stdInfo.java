@@ -11,7 +11,7 @@ import java.awt.*;
 import java.sql.ResultSet;
 
 public class stdInfo extends JPanel{
-    private JLabel ID, name, faculty, branch;
+    private static JLabel ID, name, faculty, branch;
     private Account user;
     private static ResultSet subject_data;
     private static ResultSet student_data;
@@ -25,7 +25,7 @@ public class stdInfo extends JPanel{
     }
 
     public stdInfo(){
-        user = new User().getUserAccount();
+//        user = new User().getUserAccount();
 
         ID = new JLabel("รหัสนักศึกษา : ");
         name = new JLabel("ชื่อ : ");
@@ -60,5 +60,16 @@ public class stdInfo extends JPanel{
         this.add(ID);
         this.add(faculty);
         this.add(branch);
+    }
+    public static void setInfo(){
+        try {
+            stdInfo.ID.setText("รหัสนักศึกษา : " + subject_data.getString("std_id"));
+            stdInfo.name.setText("ชื่อ : " + subject_data.getString("fname") + " " + subject_data.getString("lname"));
+            stdInfo.faculty.setText("คณะ : " + subject_data.getString("faculty"));
+            stdInfo.branch.setText("สาขา : " + subject_data.getString("major"));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
