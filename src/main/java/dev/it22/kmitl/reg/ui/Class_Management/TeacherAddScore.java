@@ -213,7 +213,7 @@ public class TeacherAddScore implements FocusListener, ActionListener {
                 float scoreValue = Float.parseFloat(score.getText());
                 int scoreIndex = no_of_score.getSelectedIndex();
 
-                ScoreModel scoreModel = new ScoreModel(enrollmentId, 0);
+                ScoreModel scoreModel = new ScoreModel(enrollmentId, 0, 0, 0, 0);
                 switch (scoreIndex) {
                     case 0:
                         scoreModel.setScore1(scoreValue);

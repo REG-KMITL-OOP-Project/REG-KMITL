@@ -8,7 +8,7 @@ public class ScoreModel {
     private float score3;
     private float score4;
 
-    public ScoreModel(String enrollmentId, float score) {
+    public ScoreModel(String enrollmentId, float score1, float score2, float score3, float score4) {
         this.enrollmentId = enrollmentId;
         this.score1 = score1;
         this.score2 = score2;
