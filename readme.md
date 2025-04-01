@@ -1,20 +1,7 @@
 # REG KMITL | Java OOP Project
 โพรเจกต์แอปพลิเคชั่นสำนักทะเบียน สร้างจาก Java Application
 
-## Run | การรันโปรเจกต์
-### Prerequisites
-- [Java 23](https://www.oracle.com/th/java/technologies/downloads/)
-
-### Download Jar File
-You can dowload jar file in `Github Releases` you can see it at the right side of the page.
-
-### Run the application
-- Open terminal and run the following command
-```bash
-java -jar reg-kmitl.jar
-```
-
-### Account for testing
+## Account for testing
 #### Student
 ```
 Username : Student01
@@ -31,7 +18,7 @@ Username : Admin01
 Password : Admin1234
 ```
 
-### Note
+## Note
 - if project is not work , my database is not available for public access. You can run the project by using your own database by self build project.
 
 ## Build | การสร้างโปรเจกต์
