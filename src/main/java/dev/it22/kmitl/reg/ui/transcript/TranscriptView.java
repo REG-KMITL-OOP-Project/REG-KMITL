@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class TranscriptView {
     private JFrame frame;
@@ -30,10 +31,10 @@ public class TranscriptView {
             dateOG = "N/A";
 
     private String []semester;
-    private String [][] subject;
-    private String[][] subjectNumberList;
-    private int[][] creditsList;
-    private String[][] gradeList;
+    private ArrayList<ArrayList<String>> subject;
+    private ArrayList<ArrayList<String>> subjectNumberList;
+    private ArrayList<ArrayList<String>> creditsList;
+    private ArrayList<ArrayList<String>> gradeList;
 
     public TranscriptView(JFrame frame) {
 
@@ -107,8 +108,7 @@ public class TranscriptView {
         topMidPanel.add(textPanel2);
 
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        transcriptPanel.setPreferredSize(new Dimension((int) (frame.getHeight()/1.368316831683168), (int)(frame.getHeight()/1.368316831683168) ));
-        transcriptPanel.setSize(new Dimension((int) (frame.getHeight()/1.368316831683168), (int)(frame.getHeight()/1.368316831683168) ));
+        transcriptPanel.setPreferredSize(new Dimension((int) (frame.getHeight()/1.368316831683168/1.414285714285714), (int)(frame.getHeight()/1.368316831683168) ));
         centerPanel.add(transcriptPanel);
 
         generateTranscript(transcriptPanel);
@@ -124,7 +124,7 @@ public class TranscriptView {
         download.setBackground(Config.primaryColor_hard);
         download.setForeground(new Color(255, 255, 255));
         download.setFont(Config.HEADER_SEMIBOLD[2]);
-        download.setPreferredSize(new Dimension((int) (frame.getHeight()/1.368316831683168),frame.getHeight()/12));
+        download.setPreferredSize(new Dimension((int) (frame.getHeight()/1.368316831683168/1.414285714285714),frame.getHeight()/12));
 
         textPanel1.add(transcHeader);
         textPanel1.setPreferredSize(new Dimension(frame.getWidth(),frame.getHeight()/17));
@@ -135,7 +135,7 @@ public class TranscriptView {
         frame.setVisible(true);
     }
 
-    public void setData(String name,String dateOB,String dateOA,String degree, String major, String studentID, String[] semester, String [][] subject, String[][] subjectNumberList, int[][] creditsList, String[][] gradeList ){
+    public void setData(String name, String dateOB, String dateOA, String degree, String major, String studentID, String[] semester, ArrayList<ArrayList<String>> subject, ArrayList<ArrayList<String>> subjectNumberList, ArrayList<ArrayList<String>> creditsList, ArrayList<ArrayList<String>> gradeList ){
         this.name=name;
         this.dateOB=dateOB;
         this.dateOA=dateOA;
@@ -175,7 +175,6 @@ public class TranscriptView {
         JPanel flowThreeParent = new JPanel();
         JPanel flowFourParent = new JPanel();
 
-        System.out.println(dateOB);
         inParent.add(header);
         header.setFont(Config.HEADER_SEMIBOLD[3]);
         header.setPreferredSize(new Dimension(parentPanel.getPreferredSize().width, header.getPreferredSize().height));
@@ -236,10 +235,69 @@ public class TranscriptView {
 
         String[] columnNames = {"COURSE TITLE", "CREDIT", "GRADE", "COURSE TITLE", "CREDIT", "GRADE"};
 
+        int allCredit = 0;
+        ArrayList<String> gpsList =  new ArrayList<>();
+        for (int i = 0; i < creditsList.size(); i++) {
+            double gps1 = 0.0;
+            double credit1 = 0.0;
+            for (int k = 0; k < creditsList.get(i).size(); k++) {
+                credit1 += Double.parseDouble(creditsList.get(i).get(k));
+                allCredit += Integer.parseInt(creditsList.get(i).get(k));
+                double j = 0;
+                if (gradeList.get(i).get(k).equals("A")){
+                    j = 4;
+                }
+                else if (gradeList.get(i).get(k).equals("B+")){
+                    j = 3.5;
+                }
+                else if (gradeList.get(i).get(k).equals("B")){
+                    j = 3;
+                }
+                else if (gradeList.get(i).get(k).equals("C+")){
+                    j = 2.5;
+                }
+                else if (gradeList.get(i).get(k).equals("C")){
+                    j = 2;
+                }
+                else if (gradeList.get(i).get(k).equals("D+")){
+                    j = 1.5;
+                }
+                else if (gradeList.get(i).get(k).equals("D")){
+                    j = 1;
+                }
+                else if (gradeList.get(i).get(k).equals("F")){
+                    j = 0;
+                }
+                gps1 += j * Double.parseDouble(creditsList.get(i).get(k));
+            }
+            gps1 = gps1 / credit1;
+            gpsList.add(String.format("%.2f", gps1));
+        }
+
+        ArrayList<String> gpaList = new ArrayList<>();
+        double gps1 = 0.0;
+        for (int i = 0; i < gpsList.size(); i++) {
+            gps1 += Double.parseDouble(gpsList.get(i));
+            gpaList.add(String.format("%.2f",gps1 / (i + 1)));
+        }
+
         Object[][] data = {
-                {"Math", 3, "A", "Science", 4, "B+"},
-                {"History", 2, "B", "English", 3, "A-"},
-                {"Physics", 4, "C+", "Chemistry", 4, "B"}
+                {"                           "+semester[0], "", "", "","",""},
+                {subjectNumberList.get(0).get(0) + " " + subject.get(0).get(0), creditsList.get(0).get(0), gradeList.get(0).get(0), "", "", ""},
+                {subjectNumberList.get(0).get(1) + " " + subject.get(0).get(1), creditsList.get(0).get(1), gradeList.get(0).get(1), "", "", ""},
+                {subjectNumberList.get(0).get(2) + " " + subject.get(0).get(2), creditsList.get(0).get(2), gradeList.get(0).get(2), "", "", ""},
+                {subjectNumberList.get(0).get(3) + " " + subject.get(0).get(3), creditsList.get(0).get(3), gradeList.get(0).get(3), "", "", ""},
+                {"                             GPS : " + gpsList.get(0) + "                 GPA : " + gpaList.get(0), "", "", "", "", ""},
+                {"","","", "","",""},
+                {"                         "+semester[1], "", "", "","",""},
+                {subjectNumberList.get(1).get(0) + " " + subject.get(1).get(0), creditsList.get(1).get(0), gradeList.get(1).get(0), "", "", ""},
+                {subjectNumberList.get(1).get(1) + " " +subject.get(1).get(1), creditsList.get(1).get(1), gradeList.get(1).get(1), "", "", ""},
+                {subjectNumberList.get(1).get(2) + " " +subject.get(1).get(2), creditsList.get(1).get(2), gradeList.get(1).get(2), "", "", ""},
+                {subjectNumberList.get(1).get(3) + " " +subject.get(1).get(3), creditsList.get(1).get(3), gradeList.get(1).get(3), "", "", ""},
+                {"                            GPS : " + gpsList.get(1) + "                  GPA : " + gpaList.get(1), "", "", "", "", ""},
+                {"","","", "","",""},
+                {"                  Total  number of credit earned:  "+ allCredit , "", "", "", "", ""},
+                {"                          Cumulative GPA:  "+ gpaList.getLast() , "", "", "", "", ""},
         };
 
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
@@ -254,19 +312,28 @@ public class TranscriptView {
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setBackground(Color.WHITE);
         table.getTableHeader().setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, Color.BLACK));
-        table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getPreferredSize().width, (int)(table.getPreferredSize().height/2.6)));
+        //table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getPreferredSize().width, (int)(table.getPreferredSize().height/2.6)));
 
 
         for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
             table.getColumnModel().getColumn(i).setResizable(false);
             table.getColumnModel().getColumn(i).setHeaderRenderer(new HeaderCellRendererNoBottomLine());
             if (i == 0 || i == 3) {
-                table.getColumnModel().getColumn(i).setPreferredWidth(((parentPanel.getPreferredSize().width-20)/3));
+                table.getColumnModel().getColumn(i).setPreferredWidth((int)((parentPanel.getPreferredSize().width)/1.3));
             }else {
-                table.getColumnModel().getColumn(i).setPreferredWidth((int)(((parentPanel.getPreferredSize().width-20)/12)));
+                table.getColumnModel().getColumn(i).setPreferredWidth((int)(((parentPanel.getPreferredSize().width)/12)));
             }
 
         }
+
+        String[] a = {" ", "", "", "", "", ""};
+        model.addRow(a);
+        a[0] = "----------------------------- Transcript Closed -----------------------------";
+        model.addRow(a);
+        a[0] = "Checked by   ______________________________________________";
+        model.addRow(a);
+        a[0] = "                                              (Xx Xxxxxxxxx Xxxxxxxxxxxxx)";
+        model.addRow(a);
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBorder(BorderFactory.createEmptyBorder(0, 11, 20, 12));

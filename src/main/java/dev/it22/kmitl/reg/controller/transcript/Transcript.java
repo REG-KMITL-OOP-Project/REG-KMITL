@@ -1,8 +1,9 @@
-package dev.it22.kmitl.reg.ui.transcript;
+package dev.it22.kmitl.reg.controller.transcript;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import com.itextpdf.text.*;
@@ -21,6 +22,8 @@ public class Transcript {
             studentID,
             dateOG = "N/A";
 
+    double gpa = 0.0;
+
     Font headerFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
     Font tableHeaderFont = new Font(Font.FontFamily.TIMES_ROMAN, 7f, Font.BOLD);
     Font insideHeaderFont = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
@@ -37,12 +40,12 @@ public class Transcript {
 
 
     String []semester;
-    String [][] subject;
-    String[][] subjectNumberList;
-    int[][] creditsList;
-    String[][] gradeList;
+    ArrayList<ArrayList<String>> subject;
+    ArrayList<ArrayList<String>> subjectNumberList;
+    ArrayList<ArrayList<String>> creditsList;
+    ArrayList<ArrayList<String>> gradeList;
 
-    public Transcript(String name,String dateOB,String dateOA,String degree, String major, String studentID, String[] semester, String [][] subject, String[][] subjectNumberList, int[][] creditsList, String[][] gradeList ) {
+    public Transcript(String name, String dateOB, String dateOA, String degree, String major, String studentID, String[] semester, ArrayList<ArrayList<String>> subject, ArrayList<ArrayList<String>> subjectNumberList, ArrayList<ArrayList<String>> creditsList, ArrayList<ArrayList<String>> gradeList ) {
         this.name=name;
         this.dateOB=dateOB;
         this.dateOA=dateOA;
@@ -188,7 +191,6 @@ public class Transcript {
             document.add(footer);
 
             document.close();
-            System.out.println("Student ID: ");
         }catch (FileNotFoundException | DocumentException e) {
             e.printStackTrace();
         }
@@ -207,17 +209,19 @@ public class Transcript {
         PdfPCell cell = new PdfPCell();
         cell.setPaddingTop(-5);
         cell.setNoWrap(true);
-        for (int i = 0; i<subject.length; i++){
+        int allCredit = 0;
+        int i1 = 0;
+        for (int i = 0; i<subject.size(); i++){
             Chunk underLText = new Chunk(semester[i], insideHeaderFont);
             underLText.setUnderline(0.3f, -1);
             Paragraph semesterP = new Paragraph("                              ", insideHeaderFont);
             semesterP.add(underLText);
             //semesterP.setAlignment(Element.ALIGN_CENTER);
             cell.addElement(semesterP);
-            for (int j = 0; j<subject[i].length; j++) {
-                Chunk subjectNumber = new Chunk(subjectNumberList[i][j] + " ", insideFont);
+            for (int j = 0; j<subject.get(i).size(); j++) {
+                Chunk subjectNumber = new Chunk(subjectNumberList.get(i).get(j) + " ", insideFont);
                 subjectNumber.setWordSpacing(4f);
-                Chunk subjectChunk = new Chunk(subject[i][j], insideFont);
+                Chunk subjectChunk = new Chunk(subject.get(i).get(j), insideFont);
                 Paragraph subjectP = new Paragraph();
                 subjectP.add(subjectNumber);
                 subjectP.add(subjectChunk);
@@ -226,13 +230,21 @@ public class Transcript {
                 subjectP.setIndentationLeft(1f);
                 cell.addElement(subjectP);
             }
-            Paragraph gradeP = new Paragraph("GPS : 3.75          GPA : 3.75", gradeHeaderFont);
+            double gps = getGPS(creditsList.get(i), gradeList.get(i));
+            gpa += gps;
+            Paragraph gradeP = new Paragraph("GPS : "+ String.format("%.2f", gps) +"          GPA : "+ String.format("%.2f", gpa/ (i+1)), gradeHeaderFont);
             gradeP.setIndentationLeft(70.5f);
             cell.addElement(gradeP);
+            i1 = i;
         }
-        footerFormat(cell,"Total  number of credit earned:  21\n",11f, insideFooterFont, 35f);
+        for (int k = 0; k<creditsList.size(); k++){
+            for (int l = 0; l<creditsList.get(k).size(); l++){
+                allCredit += Double.parseDouble(creditsList.get(k).get(l));
+            }
+        }
+        footerFormat(cell,"Total  number of credit earned:  "+ allCredit +"\n",11f, insideFooterFont, 35f);
 
-        footerFormat(cell,"Cumulative GPA:  3.75", insideFooterFont, 52.8f);
+        footerFormat(cell,"Cumulative GPA:  "+ gpa/ (i1+1), insideFooterFont, 52.8f);
 
         footerFormat(cell,"-------------------------------- Transcript Closed --------------------------------", 0.1f, gradeHeaderFont);
 
@@ -262,21 +274,21 @@ public class Transcript {
         PdfPCell cell = new PdfPCell();
         cell.setPaddingTop(-4.6f);
         cell.setNoWrap(true);
-        for (int i = 0; i<subject.length; i++){
+        for (int i = 0; i<subject.size(); i++){
             Chunk enterChunk = new Chunk(" ", insideHeaderFont);
             Paragraph semesterP = new Paragraph(enterChunk);
             semesterP.setSpacingAfter(0.25f);
             //semesterP.setAlignment(Element.ALIGN_CENTER);
             cell.addElement(semesterP);
-            for (int j = 0; j<subject[i].length; j++) {
+            for (int j = 0; j<subject.get(i).size(); j++) {
                 Paragraph subjectP = new Paragraph();
                 if (type.equals("credit")) {
-                    subjectP = new Paragraph(creditsList[i][j] + "", insideFont);
+                    subjectP = new Paragraph(creditsList.get(i).get(j) + "", insideFont);
                     subjectP.setIndentationLeft(leftIndent +0.5f);
                 }
                 else if (type.equals("grade")) {
                     try {
-                        subjectP = new Paragraph(gradeList[i][j], insideFont);
+                        subjectP = new Paragraph(gradeList.get(i).get(j), insideFont);
                     }
                     catch (ArrayIndexOutOfBoundsException e) {
                         subjectP = new Paragraph("", insideFont);
@@ -292,11 +304,39 @@ public class Transcript {
         return cell;
     }
 
-    private PdfPCell createCreditCell(String text, Font font, float padding) {
-        PdfPCell cell = new PdfPCell(new Phrase(text,font));
-        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        cell.setPaddingTop(padding);
-        cell.setNoWrap(true);
-        return cell;
+    public double getGPS(ArrayList<String> creditsList, ArrayList<String> gradeList){
+        double gps = 0;
+        double credits = 0;
+        for (int i = 0; i<creditsList.size(); i++){
+            credits += Double.parseDouble(creditsList.get(i));
+            double j = 0;
+            if (gradeList.get(i).equals("A")){
+                j = 4;
+            }
+            else if (gradeList.get(i).equals("B+")){
+                j = 3.5;
+            }
+            else if (gradeList.get(i).equals("B")){
+                j = 3;
+            }
+            else if (gradeList.get(i).equals("C+")){
+                j = 2.5;
+            }
+            else if (gradeList.get(i).equals("C")){
+                j = 2;
+            }
+            else if (gradeList.get(i).equals("D+")){
+                j = 1.5;
+            }
+            else if (gradeList.get(i).equals("D")){
+                j = 1;
+            }
+            else if (gradeList.get(i).equals("F")){
+                j = 0;
+            }
+            gps += Double.parseDouble(creditsList.get(i)) * j;
+        }
+        gps /= credits;
+        return gps;
     }
 }

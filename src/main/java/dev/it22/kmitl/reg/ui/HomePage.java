@@ -7,7 +7,7 @@ import dev.it22.kmitl.reg.ui.admin.UserManagement;
 import dev.it22.kmitl.reg.ui.event.admin.*;
 import dev.it22.kmitl.reg.ui.event.examSch.*;
 import dev.it22.kmitl.reg.ui.profile.LoginFrame;
-import dev.it22.kmitl.reg.ui.transcript.TranscriptController;
+import dev.it22.kmitl.reg.controller.transcript.TranscriptController;
 import dev.it22.kmitl.reg.ui.event.classSch.*;
 import dev.it22.kmitl.reg.ui.event.calendar.*;
 import dev.it22.kmitl.reg.ui.Class_Management.*;
