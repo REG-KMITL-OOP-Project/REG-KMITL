@@ -30,7 +30,7 @@ public class ExamScheduleTable extends JPanel {
     private examTableData aaa;
 
 
-    public ExamScheduleTable(){
+    public ExamScheduleTable(JFrame frame){
         try{
             aaa = new examTableData();
 
@@ -47,7 +47,7 @@ public class ExamScheduleTable extends JPanel {
         examSchedule.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         examSchedule.setGridColor(Config.bgColor_hard);
         examSchedule.setShowGrid(true);
-        examSchedule.setRowHeight(40);
+        examSchedule.setRowHeight(frame.getWidth() / (frame.getWidth()/40));
         examSchedule.setBorder(BorderFactory.createLineBorder(Config.bgColor_hard));
         examSchedule.setFont(innerFont);
 
@@ -56,7 +56,7 @@ public class ExamScheduleTable extends JPanel {
         header.setBackground(Config.primaryColor_hard);
         header.setForeground(Color.WHITE);
         header.setFont(Config.HEADER_SEMIBOLD[3]);
-        header.setPreferredSize(new Dimension(500,40));
+        header.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth()/500), frame.getHeight() / (frame.getHeight() /40)));
         header.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, Config.bgColor_hard));
 
         //ปิดไม่ให้แก้ขนาด & เลื่อนตารางไปมา
@@ -72,22 +72,28 @@ public class ExamScheduleTable extends JPanel {
 
         //เปลี่ยนขนาดช่อง
         TableColumn day = examSchedule.getColumnModel().getColumn(0);
-        day.setPreferredWidth(225);
+        day.setPreferredWidth(frame.getWidth() / 6);
+        //day.setPreferredWidth(200);
 
         TableColumn time = examSchedule.getColumnModel().getColumn(1);
-        time.setPreferredWidth(225);
+        time.setPreferredWidth(frame.getWidth() / 7);
+        //time.setPreferredWidth(190);
 
         TableColumn id = examSchedule.getColumnModel().getColumn(2);
-        id.setPreferredWidth(185);
+        id.setPreferredWidth(frame.getWidth() / 8);
+        //id.setPreferredWidth(175);
 
         TableColumn subject = examSchedule.getColumnModel().getColumn(3);
-        subject.setPreferredWidth(225);
+        subject.setPreferredWidth((frame.getWidth() / 3) - (frame.getWidth() / 31));
+        //subject.setPreferredWidth(295);
 
         TableColumn examType = examSchedule.getColumnModel().getColumn(4);
-        examType.setPreferredWidth(146);
+        examType.setPreferredWidth(frame.getWidth() / 10);
+        //examType.setPreferredWidth(146);
 
         TableColumn room = examSchedule.getColumnModel().getColumn(5);
-        room.setPreferredWidth(146);
+        room.setPreferredWidth(frame.getWidth() / 10);
+        //room.setPreferredWidth(146);
 
         // กำหนดขนาดที่แน่นอน
         examSchedule.setPreferredScrollableViewportSize(new Dimension(

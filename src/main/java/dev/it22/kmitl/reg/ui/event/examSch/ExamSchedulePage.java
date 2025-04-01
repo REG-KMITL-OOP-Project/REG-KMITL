@@ -7,12 +7,17 @@ import dev.it22.kmitl.reg.model.auth.*;
 import dev.it22.kmitl.reg.ui.event.classSch.ClassSchedulePage;
 import dev.it22.kmitl.reg.ui.event.classSch.ClassScheduleTable;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
+import dev.it22.kmitl.reg.ui.event.component.seletedItemCombobox;
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.ErrorModal;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
-public class ExamSchedulePage{
+public class ExamSchedulePage implements ActionListener, seletedItemCombobox {
     private JFrame frame;
     private JPanel pn1 ;
 
@@ -33,6 +38,10 @@ public class ExamSchedulePage{
     private String years[] = {"2568", "2567", "2566"};
     private String semesters[] = {"เทอม 1", "เทอม 2"};
     private String exams[] = {"กลางภาค","ปลายภาค"};
+    private Font innerFont, regularFont;
+    private String yearItem,semItem,examItem;
+
+
 
 
     public ExamSchedulePage(JFrame frame){
@@ -62,6 +71,9 @@ public class ExamSchedulePage{
         choseExam.setBackground(null);
         stdInfo.setBackground(null);
 
+        regularFont = Config.NORMAL_REGULAR;
+        innerFont = regularFont.deriveFont(12f);
+
 //        ID = new JLabel("รหัสนักศึกษา : ");
 //        name = new JLabel("ชื่อ : ");
 //        faculty = new JLabel("คณะ : ");
@@ -82,11 +94,8 @@ public class ExamSchedulePage{
         exam = new JComboBox(exams);
 
         //change font in combobox
-        JComboBox<String> semester = new JComboBox<>(semesters);
-        semester.setFont(Config.NORMAL_REGULAR);
-
-        JComboBox<String> exam = new JComboBox<>(exams);
-        exam.setFont(Config.NORMAL_REGULAR);
+        semester.setFont(innerFont);
+        exam.setFont(innerFont);
 
 
         //body-schedule
@@ -104,6 +113,10 @@ public class ExamSchedulePage{
         //panel-exam button
         choseExam.setLayout(new GridLayout(1, 1));
         choseExam.add(exam);
+
+        year.addActionListener(this);
+        semester.addActionListener(this);
+        exam.addActionListener(this);
 
         //panel-studentInfo
         stdInfo.setLayout(new GridLayout(2, 2));
@@ -139,7 +152,7 @@ public class ExamSchedulePage{
         pn1.add(allInfo, BorderLayout.NORTH);
         
         //table
-        table = new ExamScheduleTable();
+        table = new ExamScheduleTable(frame);
         pn1.add(table, BorderLayout.CENTER);
 
         frame.setLayout(new BorderLayout());
@@ -160,5 +173,49 @@ public class ExamSchedulePage{
             System.out.println(e.getMessage());
         }
     }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == year){
+            yearItem = selectedItem(year);
+            if (year.getSelectedIndex() != 0){
+                new ErrorModal(frame, "ขออภัย ยังไม่มีข้อมูลในขณะนี้");
+                year.setSelectedIndex(0);
+            }
+        }
+        if (e.getSource() == semester){
+            semItem = selectedItem(semester);
+            if (semester.getSelectedIndex() != 0){
+                new ErrorModal(frame, "ขออภัย ยังไม่มีข้อมูลในขณะนี้");
+                semester.setSelectedIndex(0);
+            }
+        }
+        if (e.getSource() == exam){
+            examItem = selectedItem(exam);
+            if (exam.getSelectedIndex() != 0){
+                new ErrorModal(frame, "ขออภัย ยังไม่มีข้อมูลในขณะนี้");
+                exam.setSelectedIndex(0);
+            }
+        }
+    }
 
+    @Override
+    public String selectedItem(JComboBox comboBox){
+        String selectedItem = (String) comboBox.getSelectedItem();
+        return selectedItem;
+    }
+
+    @Override
+    public String getYearItem() {
+        return yearItem;
+    }
+
+    @Override
+    public String getSemItem(){
+        return semItem;
+    }
+
+    @Override
+    public String getExamItem() {
+        return examItem;
+    }
 }
