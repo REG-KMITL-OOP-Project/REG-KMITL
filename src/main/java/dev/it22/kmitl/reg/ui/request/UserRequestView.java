@@ -21,7 +21,6 @@ public class UserRequestView {
     JScrollPane scrollPane;
     UserRequestController ctl = new UserRequestController();
 
-
     public UserRequestView(JFrame frame) {
         this.frame = frame;
         frame.getContentPane().removeAll();

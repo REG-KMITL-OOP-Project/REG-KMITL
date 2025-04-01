@@ -37,12 +37,12 @@ public class AdminCalendarPage extends monthTableCalendar implements ActionListe
         create.setFont(Config.HEADER_SEMIBOLD[2]);
         create.setForeground(Config.primaryColor_hard);
         create.setBackground(Config.bgColor_base.darker());
-        create.setPreferredSize(new Dimension(800, 50));
+        create.setPreferredSize(new Dimension(frame.getWidth() - (frame.getWidth()/ 3) - (frame.getWidth()/53), frame.getHeight()/14));
         create.setBorder(null);
         create_panel = new JPanel();
         create_panel.setLayout(new FlowLayout());
         create_panel.add(create, BorderLayout.NORTH);
-        create_panel.setPreferredSize(new Dimension(800, 50));
+        create_panel.setPreferredSize(new Dimension(create.getPreferredSize().width, create.getPreferredSize().height));
         create_panel.setBackground(null);
         create_panel.setBorder(null);
 

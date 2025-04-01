@@ -1,11 +1,13 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
+import dev.it22.kmitl.reg.controller.subject.Subject;
 import dev.it22.kmitl.reg.utils.*;
 import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class AdminAddClassroom implements FocusListener, ActionListener {
@@ -19,6 +21,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
     private JPanel panelSave = new JPanel() , panelCan = new JPanel();
     protected boolean showRoom, showCode, showTeacher, showTime;
     private teacherNameTable table;
+    private String teacherNamebuffer;
     private String [] nameCher ;
     private TimeComboBox timetostudy, timetofree;
     private DayComboBox dayToStudy;
@@ -79,8 +82,42 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         panelHead.add(addGroup,BorderLayout.NORTH);
 
         panelRek1.add(subjectName);
-        subjectName.addItem("   ชื่อวิชา");
-        subjectName.addItem("   Oop");
+
+        try {
+            ResultSet allSubject = new Subject().getAllSubject();
+            while (allSubject.next()) {
+                subjectName.addItem(allSubject.getString(2));
+            }
+        }
+        catch (Exception e) {
+            new ErrorModal(frame, "ไม่สามารถดึงข้อมูลวิชาทั้งหมดได้");
+        }
+
+        subjectName.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    int selectedIndex = subjectName.getSelectedIndex();
+                    try {
+                        ResultSet allSubject = new Subject().getAllSubject();
+                        int currentIndex = 0;
+                        while (allSubject.next() && currentIndex < selectedIndex) {
+                            currentIndex++;
+                        }
+                        if (currentIndex == selectedIndex) {
+                            String subjectCodeValue = allSubject.getString(1);
+                            subjectCode.setText(subjectCodeValue);
+                            subjectCode.setForeground(Color.BLACK);
+                            showCode = false;
+                        }
+                    } catch (Exception e1) {
+                        new ErrorModal(frame, "ไม่สามารถดึงข้อมูลรหัสวิชาได้");
+                    }
+                }
+            }
+        });
+
         subjectName.setFont(innerFont);
         subjectName.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.3),(frame.getHeight() / 4) - 120));
         subjectName.addFocusListener(this);
@@ -267,13 +304,17 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
     public void actionPerformed(ActionEvent ev) {
         if (ev.getSource().equals(add)){
             if (!showTeacher) {
-                if (index < 5){
+                if (index < 1){
+                    teacherNamebuffer = teacherName.getText();
                     table.getName_table().getModel().setValueAt(teacherName.getText(), index, 0);
                     nameCher[index] = teacherName.getText();
                     index++ ;
                     showTeacher = true;
                     teacherName.setText("   เพิ่มชื่อผู้สอน");
                     teacherName.setForeground(Color.GRAY);
+                }
+                else {
+                    new ErrorModal(frame,"ตอนนี้ระบบสามารถเพิ่มชื่อผู้สอนได้เพียง 1 คน");
                 }
             }
         }
