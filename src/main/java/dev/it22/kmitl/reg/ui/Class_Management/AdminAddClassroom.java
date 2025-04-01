@@ -20,6 +20,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
     protected boolean showRoom, showCode, showTeacher, showTime;
     private teacherNameTable table;
     private String [] nameCher ;
+    private TimeComboBox timetostudy, timetofree;
 
     public AdminAddClassroom(JFrame frame){
         this.frame = frame;
@@ -134,16 +135,31 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         room.setText("   เลือกห้องเรียน");
         room.setFont(innerFont);
         room.setForeground(Color.GRAY);
-        room.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.78),(frame.getHeight() / 4) - 120));
+        room.setPreferredSize(new Dimension((int)(frame.getWidth() / 5),(frame.getHeight() / 4) - 120));
         room.addFocusListener(this);
 
-        panelRek4.add(time);
+        timetostudy = new TimeComboBox();
+        timetofree = new TimeComboBox();
+        panelRek4.add(timetostudy);
+        timetostudy.setMaximumRowCount(3);
+        timetostudy.setFont(Config.NORMAL_REGULAR);
+        timetostudy.setFont(innerFont);
+        timetostudy.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
+        timetostudy.addActionListener(this);
         showTime = true;
-        time.setText("   วัน-เวลาเรียน");
-        time.setFont(innerFont);
-        time.setForeground(Color.GRAY);
-        time.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.78),(frame.getHeight() / 4) - 120));
-        time.addFocusListener(this);
+
+        panelRek4.add(timetofree);
+        //timetofree.setText("เลือกเวลาเริ่มเรียน");
+        timetofree.setMaximumRowCount(3);
+        timetofree.setFont(Config.NORMAL_REGULAR);
+        timetofree.setFont(innerFont);
+        timetofree.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
+        timetofree.addActionListener(this);
+        showTime = true;
+//        time.setText("   วัน-เวลาเรียน");
+//        time.setFont(innerFont);
+//        time.setForeground(Color.GRAY);
+//        time.setPreferredSize(new Dimension((int)(frame.getWidth() / 2.78),(frame.getHeight() / 4) - 120));
 
         panelBig.add(panelRek4);
 
