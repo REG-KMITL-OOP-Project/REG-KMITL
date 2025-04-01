@@ -36,8 +36,8 @@ public class TeacherAddScore implements FocusListener, ActionListener {
     private boolean scoreShow, textShow;
     private ScoreController scoreController = new ScoreController();
     private static ResultSet subject_data;
-    public  static String std_id = "";
-    public  static  String course_id = "";
+    public static String std_id = "";
+    public static String course_id = "";
 
     public static void setSubject(ResultSet subject) {
         TeacherAddScore.subject_data = subject;
