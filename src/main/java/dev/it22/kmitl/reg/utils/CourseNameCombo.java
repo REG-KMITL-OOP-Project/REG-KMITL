@@ -1,65 +1,56 @@
 package dev.it22.kmitl.reg.utils;
 
+import dev.it22.kmitl.reg.model.classroom.CourseData;
+
 import javax.swing.*;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class CourseNameCombo extends JComboBox {
-    ArrayList<ArrayList> course2 = new ArrayList<>();
-    ArrayList<String> course ;
+    CourseData course2;
     public CourseNameCombo() {
+        this(new CourseData("SELECT * FROM course"));
+    }
+
+    public CourseNameCombo(CourseData courseData) {
         super();
-        try {
-            ResultSet rs = new Database().getQuery("SELECT * FROM course");
-            while (rs.next()) {
-                course = new ArrayList<>();
-                course.add(rs.getString("course_code"));
-                course.add(rs.getString("course_name"));
-                course.add(rs.getString("credits"));
-                course.add(rs.getString("years"));
-                course.add(rs.getString("faculty_id"));
-                course.add(rs.getString("major_id"));
-                course.add(rs.getString("prerequisite"));
-                course.add(rs.getString("note"));
-                course2.add(course);
-                this.addItem(rs.getString("course_name"));
-                this.setRenderer(new CustomCombobox());
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
+        course2 = courseData;
+        for (int i = 0; i < courseData.getCourseName().size(); i++) {
+            this.addItem(courseData.getCourseName().get(i));
+            this.setRenderer(new CustomCombobox());
         }
     }
 
     public String getCourseCode() {
-        return (String) course2.get(this.getSelectedIndex()).get(0);
+        return course2.getCourseCode().get(this.getSelectedIndex());
     }
 
     public String getCourseName() {
-        return (String) course2.get(this.getSelectedIndex()).get(1);
+        return course2.getCourseName().get(this.getSelectedIndex());
     }
 
     public int getCredits() {
-        return Integer.valueOf((String) course2.get(this.getSelectedIndex()).get(2));
+        return course2.getCredits().get(this.getSelectedIndex());
     }
 
     public String getYears() {
-        return (String) course2.get(this.getSelectedIndex()).get(3);
+        return course2.getYears().get(this.getSelectedIndex());
     }
 
     public String getFacultyId() {
-        return (String) course2.get(this.getSelectedIndex()).get(4);
+        return course2.getFacultyID().get(this.getSelectedIndex());
     }
 
     public String getMajorId() {
-        return (String) course2.get(this.getSelectedIndex()).get(5);
+        return course2.getMajorID().get(this.getSelectedIndex());
     }
 
     public String getPrerequisite() {
-        return (String) course2.get(this.getSelectedIndex()).get(6);
+        return course2.getPrerequisite().get(this.getSelectedIndex());
     }
 
     public String getNote() {
-        return (String) course2.get(this.getSelectedIndex()).get(7);
+        return course2.getNote().get(this.getSelectedIndex());
     }
 
 }
