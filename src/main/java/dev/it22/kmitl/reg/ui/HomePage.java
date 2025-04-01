@@ -55,7 +55,7 @@ public class HomePage implements ActionListener {
 
         innerUpperPanel.setLayout(new BorderLayout());
         innerUpperPanel.add(Config.createLogoAndTitle(Config.HEADER_SEMIBOLD[3], 50), BorderLayout.NORTH);
-        innerUpperPanel.add(createWelcomePanel(), BorderLayout.CENTER);
+        innerUpperPanel.add(createWelcomePanel(acc), BorderLayout.CENTER);
         innerUpperPanel.setPreferredSize(new Dimension(frame.getWidth() * 2 / 3, upperPanel.getHeight()));
         innerUpperPanel.setBackground(null);
 
@@ -122,7 +122,7 @@ public class HomePage implements ActionListener {
     }
 
 
-    public JPanel createWelcomePanel() {
+    public JPanel createWelcomePanel(Account account) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 //        panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -136,12 +136,12 @@ public class HomePage implements ActionListener {
         topPanel.setMaximumSize(new Dimension(1000, 40));
         topPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        if (acc instanceof Student) {
+        if (account instanceof Student) {
             JLabel welcome = new JLabel("ยินดีต้อนรับ ");
             welcome.setForeground(Color.WHITE);
             welcome.setFont(Config.HEADER_SEMIBOLD[1]);
 
-            JLabel idLabel = new JLabel(((Student) acc).getStudentId());
+            JLabel idLabel = new JLabel(((Student) account).getStudentId());
             idLabel.setForeground(Config.primaryColor_base);
             idLabel.setFont(Config.HEADER_SEMIBOLD[1]);
 
@@ -155,7 +155,7 @@ public class HomePage implements ActionListener {
             topPanel.add(idLabel);
             topPanel.add(editButton);
 
-            JLabel nameLabel = new JLabel(" คุณ" + acc.getFirstName() + " " + acc.getLastName());
+            JLabel nameLabel = new JLabel(" คุณ" + account.getFirstName() + " " + account.getLastName());
             nameLabel.setBackground(null);
             nameLabel.setForeground(Config.primaryColor_base);
             nameLabel.setFont(Config.HEADER_SEMIBOLD[1]);
@@ -163,12 +163,12 @@ public class HomePage implements ActionListener {
 
             panel.add(topPanel);
             panel.add(nameLabel);
-        } else if (acc instanceof Prof) {
+        } else if (account instanceof Prof) {
             JLabel welcome = new JLabel("ยินดีต้อนรับ ");
             welcome.setForeground(Color.WHITE);
             welcome.setFont(Config.HEADER_SEMIBOLD[1]);
 
-            JLabel idLabel = new JLabel(((Prof) acc).getProf_id());
+            JLabel idLabel = new JLabel(((Prof) account).getProf_id());
             idLabel.setForeground(Config.primaryColor_base);
             idLabel.setFont(Config.HEADER_SEMIBOLD[1]);
 
@@ -182,7 +182,7 @@ public class HomePage implements ActionListener {
             topPanel.add(idLabel);
             topPanel.add(editButton);
 
-            JLabel nameLabel = new JLabel(" คุณ" + acc.getFirstName() + " " + acc.getLastName());
+            JLabel nameLabel = new JLabel(" คุณ" + account.getFirstName() + " " + account.getLastName());
             nameLabel.setBackground(null);
             nameLabel.setForeground(Config.primaryColor_base);
             nameLabel.setFont(Config.HEADER_SEMIBOLD[1]);
@@ -190,14 +190,14 @@ public class HomePage implements ActionListener {
 
             panel.add(topPanel);
             panel.add(nameLabel);
-        } else if (acc instanceof Admin) {
+        } else if (account instanceof Admin) {
             JLabel welcome = new JLabel("ยินดีต้อนรับ ");
             welcome.setForeground(Color.WHITE);
             welcome.setFont(Config.HEADER_SEMIBOLD[1]);
 
             topPanel.add(welcome);
 
-            JLabel nameLabel = new JLabel(" คุณ" + acc.getFirstName() + " " + acc.getLastName());
+            JLabel nameLabel = new JLabel(" คุณ" + account.getFirstName() + " " + account.getLastName());
             nameLabel.setBackground(null);
             nameLabel.setForeground(Config.primaryColor_base);
             nameLabel.setFont(Config.HEADER_SEMIBOLD[1]);
