@@ -10,7 +10,7 @@ public class EnrollmentController {
         this.EnrollmentDAO = new EnrollmentDAO();
     }
 
-    public void addEnrollment(String enrollmentId, String studentId, String sectionId) {
+    public void addEnrollment(String enrollmentId, String studentId, String sectionId) throws Exception {
         EnrollmentModel newEnrollment = new EnrollmentModel(enrollmentId, studentId, sectionId);
         EnrollmentDAO.addEnrollment(newEnrollment);
     }

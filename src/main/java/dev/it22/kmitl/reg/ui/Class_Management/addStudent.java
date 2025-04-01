@@ -198,29 +198,30 @@ public class addStudent implements FocusListener, ActionListener {
             frame.revalidate();
             frame.repaint();
             new View_subject(frame, courseCode, courseName, teacher);
-        } else if (e.getSource() == save) {
-            String stdID = insertID.getText();
-            String subjectID = courseCode;
-            String subjectName = courseName;
-            String teacherName = teacher;
-            String studentName = enrollmentController.getStudentById(stdID);
-            showName.setText(studentName);
-            String sectionID = subjectID;
-            switch (groupNum) {
-                case 1:
-                    sectionID += 'A';
-                    break;
-                case 2:
-                    sectionID += 'B';
-                    break;
-                case 3:
-                    sectionID += 'C';
-                    break;
-            }
-            int num = 1;
-            String enrollmentId;
-            while (true){
-                try{
+        }
+        if (e.getSource() == save) {
+            try {
+                String stdID = insertID.getText();
+                String subjectID = courseCode;
+                String subjectName = courseName;
+                String teacherName = teacher;
+                String studentName = enrollmentController.getStudentById(stdID);
+                showName.setText(studentName);
+                String sectionID = subjectID;
+                switch (groupNum) {
+                    case 1:
+                        sectionID += 'A';
+                        break;
+                    case 2:
+                        sectionID += 'B';
+                        break;
+                    case 3:
+                        sectionID += 'C';
+                        break;
+                }
+                int num = 1;
+                String enrollmentId;
+                while (true){
                     ResultSet db = new Database().getQuery("SELECT * FROM enrollment WHERE enrollment_id = '" + stdID + num + "';");
                     if (db.next()){}
                     else{
@@ -228,18 +229,19 @@ public class addStudent implements FocusListener, ActionListener {
                         break;
                     }
                     num++;
-                }catch (Exception ev){
-                    ev.printStackTrace();
                 }
+                if (stdID.isEmpty() || stdID.equals("กรอกรหัสนักศึกษา")) {
+                    new ErrorModal(frame, "กรุณากรอกรหัสนักศึกษา");
+                    return;
+                }
+                enrollmentController.addEnrollment(enrollmentId, stdID, sectionID);
+                new SuccessModal(frame, "Enroll successfully");
             }
-            if (stdID.isEmpty()) {
-                new ErrorModal(frame, "Please enter student id");
-                return;
+            catch (Exception ev){
+                new ErrorModal(frame, ev.getMessage());
             }
-            enrollmentController.addEnrollment(enrollmentId, stdID, sectionID);
-            new SuccessModal(frame, "Enroll successfully");
-        } else if (e.getSource() == showName) {
 
         }
+
     }
 }

@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EnrollmentDAO {
-    public void addEnrollment(EnrollmentModel enrollment) {
+    public void addEnrollment(EnrollmentModel enrollment) throws Exception {
         Database db = new Database();
         try {
             String query = "INSERT INTO enrollment (enrollment_id, std_id, section_id) VALUES ('" + enrollment.getEnrollmentId() + "', '" + enrollment.getStudentId() + "', '" + enrollment.getSectionId() + "');";
@@ -15,6 +15,7 @@ public class EnrollmentDAO {
             System.out.println("Enrollment success : " + res);
         } catch (Exception e) {
             e.printStackTrace();
+            throw new Exception(e);
         }
     }
 
