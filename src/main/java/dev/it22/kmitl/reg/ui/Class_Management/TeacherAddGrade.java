@@ -208,16 +208,27 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
             String subjectId = data_id_subject.getText();
 
             try {
+                // 1. ตรวจสอบค่าว่าง
+                if (gradeValue == null || studentId.isEmpty() || subjectId.isEmpty()) {
+                    throw new Exception("กรุณากรอกข้อมูลให้ครบทุกช่อง");
+                }
+
+                // 2. ดึง enrollment_id
                 String enrollmentId = gradeController.getEnrollmentId(studentId, subjectId);
                 if (enrollmentId == null) {
-                    new ErrorModal(frame, "Enrollment ID not found for student ID: " + studentId);
-                    return;
+                    throw new Exception("ไม่พบข้อมูลการลงทะเบียนของนักศึกษารหัสนี้");
                 }
-                gradeController.addGrade(enrollmentId, gradeValue);
 
-                new SuccessModal(frame, "Grade added successfully!");
-            } catch (Exception ex) {
-                new ErrorModal(frame, "An error occurred while adding the grade: " + ex.getMessage());
+                // 3. บันทึกเกรด
+                boolean success = gradeController.addGrade(enrollmentId, gradeValue);
+                if (!success) {
+                    throw new Exception("บันทึกเกรดไม่สำเร็จ");
+                }
+
+                new SuccessModal(frame, "บันทึกเกรดสำเร็จแล้ว!");
+
+            } catch (Exception error) {
+                new ErrorModal(frame, "เกิดข้อผิดพลาด: " + error.getMessage());
             }
         }
     }
@@ -235,10 +246,9 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
     public static void setSubject(ResultSet subject) {
         TeacherAddGrade.subject_data = subject;
         try {
-            TeacherAddGrade.subject.setText("ชื่อวิชา "+TeacherAddGrade.subject_data.getString("course_name"));
-        }
-        catch (Exception ex) {
-            new ErrorModal(TeacherAddGrade.frame,"Error");
+            TeacherAddGrade.subject.setText("ชื่อวิชา " + TeacherAddGrade.subject_data.getString("course_name"));
+        } catch (Exception ex) {
+            new ErrorModal(TeacherAddGrade.frame, "Error");
         }
     }
 }
