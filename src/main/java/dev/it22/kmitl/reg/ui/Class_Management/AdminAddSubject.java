@@ -415,7 +415,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
                     return;
                 }else{
                     try {
-                        int db = new Database().postQuery("INSERT INTO course ( course_code, course_name, credits, semester, faculty_id, major_id, prerequisite, note ) VALUES ('"+ code.getText() +"' ,'"+ name.getText() +"' ,'"+ ((String)(kit.getSelectedItem())) +"' ,'"+ year.getText() +"' ,'"+ group.getFacultyCode() +"' ,'"+ branch.getCode() +"' ,'"+ condition.getText() +"' ,'"+ note.getText() +"');");
+                        int db = new Database().postQuery("INSERT INTO course ( course_code, course_name, credits, years, faculty_id, major_id, prerequisite, note ) VALUES ('"+ code.getText() +"' ,'"+ name.getText() +"' ,'"+ ((String)(kit.getSelectedItem())) +"' ,'"+ year.getText() +"' ,'"+ group.getFacultyCode() +"' ,'"+ branch.getCode() +"' ,'"+ condition.getText() +"' ,'"+ note.getText() +"');");
                     }catch (Exception e) {
                         e.printStackTrace();
                     }
