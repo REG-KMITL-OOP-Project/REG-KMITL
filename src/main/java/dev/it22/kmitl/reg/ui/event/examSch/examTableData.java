@@ -29,7 +29,7 @@ public class examTableData {
         try {
             String q = null;
             if (user instanceof Student) {
-                q = "SELECT date, start_time, end_time, course_id,room ," +
+                q = "SELECT subject, midterm_date, midterm_start_time, midterm_end_time, course_id,room ," +
                         "type FROM exam WHERE section =" + ((Student) user).getSection();
 
                 /*q = "SELECT u.std_id, c.course_code, c.course_name, e.date AS exam_date, " +
@@ -42,18 +42,18 @@ public class examTableData {
                         "WHERE u.std_id ="+ ((Student) user).getStudentId();*/
 
             } else if (user instanceof Prof) {
-                q = "SELECT date, start_time, end_time, course_id,room ," +
+                q = "SELECT subject, midterm_date, midterm_start_time, midterm_end_time, course_id,room ," +
                         "type FROM exam WHERE prof_id =" + ((Prof)user).getProf_id();
             }
             ResultSet rs = db.getQuery(q);
 
             while (rs.next()) {
                 //ดึงข้อมูล
-                String dayOfWeek = rs.getString("date");
-                String startTime = rs.getString("start_time");
-                String endTime = rs.getString("end_time");
+                String dayOfWeek = rs.getString("midterm_date");
+                String startTime = rs.getString("midterm_start_time");
+                String endTime = rs.getString("midterm_end_time");
                 String courseId = rs.getString("course_id");
-                //String courseName = rs.getString("exam_subject");
+                String courseName = rs.getString("subject");
                 String type = rs.getString("type");
                 String room = rs.getString("room");
 
@@ -62,11 +62,12 @@ public class examTableData {
                 data[0] = this.formatDate(dayOfWeek);
                 data[1] = this.getTime(startTime,endTime);
                 data[2] = courseId;
-                data[3] = this.getCourseName(rs.getString("course_id"));
+                data[3] = courseName;
                 data[4] = type;
                 data[5] = room;
 
                 allDataList.add(data);
+                System.out.println(allDataList);
             }
 
             //เอา list มาทำเป็น array
