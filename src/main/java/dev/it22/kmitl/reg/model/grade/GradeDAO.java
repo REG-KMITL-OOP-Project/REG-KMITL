@@ -4,6 +4,7 @@ import dev.it22.kmitl.reg.model.grade.GradeModel;
 import dev.it22.kmitl.reg.utils.Database;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 public class GradeDAO {
@@ -37,15 +38,25 @@ public class GradeDAO {
         return subjectName;
     }
 
-    public void addGrade(String enrollmentId, String grade) {
+    public boolean addGrade(String enrollmentId, String grade) throws SQLException {
         Database db = new Database();
+        String checkSql = "SELECT COUNT(*) FROM grade WHERE enrollment_id = " + enrollmentId + ";";
+        ResultSet checkRes = db.getQuery(checkSql);
+        checkRes.next();
+        int count = checkRes.getInt(1);
+        if (count > 0) {
+            System.err.println("Error: Grade already exists for this enrollment");
+            return false;
+        }
         String sql = "INSERT INTO grade (enrollment_id, grade) VALUES ('" + enrollmentId + "', '" + grade + "');";
         try {
             int res = db.postQuery(sql);
             System.out.println("Add grade success : " + res);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public Vector<Vector<String>> getGrades(String studentId) {
