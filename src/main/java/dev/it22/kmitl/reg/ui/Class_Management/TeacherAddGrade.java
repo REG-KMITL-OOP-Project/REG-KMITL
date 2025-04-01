@@ -6,9 +6,7 @@ import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
 import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
 import dev.it22.kmitl.reg.ui.HomePage;
-import dev.it22.kmitl.reg.ui.event.calendar.calendarData;
 import dev.it22.kmitl.reg.utils.Config;
-import dev.it22.kmitl.reg.utils.CustomCombobox;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 import dev.it22.kmitl.reg.utils.RoundedTextField;
 
@@ -20,17 +18,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import dev.it22.kmitl.reg.controller.grade.GradeController;
+
 public class TeacherAddGrade implements FocusListener, ActionListener {
     private JFrame frame;
-//    private Account user;
+    //    private Account user;
     private JLabel add_score_student, student;
     private JPanel main_panel, sub1, sub2, sub3, space, subject_panel;
-    private JPanel west_panel, student_panel, student_pan, cancel_panel, save_panel,save_cancel_panel;
+    private JPanel west_panel, student_panel, student_pan, cancel_panel, save_panel, save_cancel_panel;
     private callData data_id_subject, data_id_student;
-    private RoundedButton cancel,save;
+    private RoundedButton cancel, save;
     private JComboBox grade;
     private stdInfo std;
     private RoundedTextField enter_grade, subject;
+    private GradeController gradeController = new GradeController();
 
     public TeacherAddGrade(JFrame frame) {
         this.frame = frame;
@@ -40,7 +41,6 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         data_id_student = new callData("กรอกรหัสนักศึกษา","แสดงข้อมูล", frame);
         data_id_student.setInfoSize(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 40));
         data_id_subject.setInfoSize(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 40));
-
 
 
         add_score_student = new JLabel("เพิ่มเกรดนักศึกษา");
@@ -60,7 +60,7 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         student_pan.setLayout(new FlowLayout());
         student_pan.setBorder(BorderFactory.createEmptyBorder(5, 30, 10, 5));
 
-        subject = new RoundedTextField( 25);
+        subject = new RoundedTextField(25);
         subject.setText("  ชื่อวิชา : ");
         subject.setEditable(false);
         subject.setForeground(Color.WHITE);
@@ -69,14 +69,14 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         subject.setBackground(Config.bgColor_hard);
 
         subject_panel = new JPanel(new BorderLayout());
-        subject_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 45)));
+        subject_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 45)));
         subject_panel.setBackground(null);
         subject_panel.add(subject);
         subject_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 5));
 
         west_panel.add(student_pan, BorderLayout.SOUTH);
         west_panel.setBackground(null);
-        west_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 1000) , frame.getWidth() / (frame.getWidth() / 80)));
+        west_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 1000), frame.getWidth() / (frame.getWidth() / 80)));
         west_panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 5, 5));
 
         student = new JLabel(" นักศึกษา", JLabel.LEFT);
@@ -102,32 +102,32 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
 
         sub3 = new JPanel();
         sub3.setLayout(new BorderLayout());
-        sub3.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 150) , frame.getWidth() / (frame.getWidth() / 30)));
+        sub3.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 150), frame.getWidth() / (frame.getWidth() / 30)));
         sub3.add(enter_grade);
         sub3.setBackground(null);
 
-        grade = new JComboBox(new String[]{"A","B+", "B", "C+", "C", "D+", "D", "F", "S", "U"});
+        grade = new JComboBox(new String[]{"A", "B+", "B", "C+", "C", "D+", "D", "F", "S", "U"});
         grade.setFont(Config.HEADER_SEMIBOLD[3]);
-        grade.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 150) , frame.getWidth() / (frame.getWidth() / 40)));
+        grade.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 150), frame.getWidth() / (frame.getWidth() / 40)));
 
         sub1 = new JPanel();
         sub1.setLayout(new FlowLayout());
         sub1.add(sub3);
         sub1.add(grade);
         sub1.setBackground(null);
-        sub1.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 150) , frame.getWidth() / (frame.getWidth() / 30)));
+        sub1.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 150), frame.getWidth() / (frame.getWidth() / 30)));
 
         std = new stdInfo();
         sub2 = new JPanel(new BorderLayout());
         sub2.setBackground(null);
         sub2.setBorder(BorderFactory.createEmptyBorder(5, 40, 5, 5));
-        sub2.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 150) , frame.getWidth() / (frame.getWidth() / 110)));
+        sub2.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 150), frame.getWidth() / (frame.getWidth() / 110)));
         sub2.add(std);
 
         main_panel = new JPanel(new BorderLayout());
         main_panel.add(sub1, BorderLayout.WEST);
         main_panel.add(sub2, BorderLayout.CENTER);
-        main_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 800) , frame.getWidth() / (frame.getWidth() / 110)));
+        main_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 800), frame.getWidth() / (frame.getWidth() / 110)));
         main_panel.setBorder(new EmptyBorder(5, 45, 5, 5));
         main_panel.setBackground(null);
 
@@ -157,16 +157,16 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         save_cancel_panel.add(cancel);
         save_cancel_panel.add(save);
         save_cancel_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
-        save_cancel_panel.setPreferredSize(new Dimension((int)(frame.getWidth()/1.2) , frame.getWidth() / (frame.getWidth() / 60)));
+        save_cancel_panel.setPreferredSize(new Dimension((int) (frame.getWidth() / 1.2), frame.getWidth() / (frame.getWidth() / 60)));
         save_cancel_panel.setBackground(null);
 
 
         space = new JPanel();
         space.setBackground(null);
-        space.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 1000) , frame.getWidth() / (frame.getWidth() / 100)));
+        space.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 1000), frame.getWidth() / (frame.getWidth() / 100)));
 
         //frame.add(score_no_enter_score_panel, BorderLayout.CENTER);
-        frame.setLayout(new FlowLayout(FlowLayout.LEFT,93,0));
+        frame.setLayout(new FlowLayout(FlowLayout.LEFT, 93, 0));
 
         frame.add(west_panel);
         frame.add(student_pan);
@@ -185,10 +185,9 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
 
     public static void main(String[] args) {
         try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+            new Login("Student01", "Student1234").loginWithUsernameAndPassword();
             new TeacherAddGrade(Config.createAndShowGUI());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -201,8 +200,24 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
             frame.revalidate();
             frame.repaint();
             new HomePage(frame);
-        }
-        else if (e.getSource() == save) {
+        } else if (e.getSource() == save) {
+            String gradeValue = (String) grade.getSelectedItem();
+            String studentId = data_id_student.getText();
+            String subjectId = data_id_subject.getText();
+
+            try {
+                String enrollmentId = gradeController.getEnrollmentId(studentId, subjectId);
+                if (enrollmentId == null) {
+                    JOptionPane.showMessageDialog(frame, "Enrollment ID not found for student ID: " + studentId);
+                    return;
+                }
+                gradeController.addGrade(enrollmentId, gradeValue);
+
+                JOptionPane.showMessageDialog(frame, "Grade added successfully!");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(frame, "An error occurred while adding the grade: " + ex.getMessage());
+            }
+
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
