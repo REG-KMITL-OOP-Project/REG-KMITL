@@ -6,13 +6,13 @@ import dev.it22.kmitl.reg.constant.UserRole;
 import java.util.Date;
 
 public abstract class Account {
-    protected String id;
-    protected UserRole role;
-    protected String email;
-    protected String username;
-    protected UserPrefix prefix;
-    protected String firstName;
-    protected String lastName;
+    private String id;
+    private UserRole role;
+    private String email;
+    private String username;
+    private UserPrefix prefix;
+    private String firstName;
+    private String lastName;
 
     public Account(String id,
                    UserRole role,
