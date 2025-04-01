@@ -116,12 +116,6 @@ public class create_class implements ActionListener{
         setpositext.add(tableButton,BorderLayout.CENTER);
         setpositext.setBackground(null);
 
-        frame.setLayout(new BorderLayout());
-        frame.add(setposition,BorderLayout.NORTH);
-        frame.add(setpositext,BorderLayout.CENTER);
-        frame.setBackground(null);
-        frame.setVisible(true);
-
         // Set Row Selection Listener
         table.getSelectionModel().addListSelectionListener(e -> {
             int selectedRow = table.getSelectedRow();
@@ -160,6 +154,11 @@ public class create_class implements ActionListener{
             e.printStackTrace();
         }
 
+        frame.setLayout(new BorderLayout());
+        frame.add(setposition,BorderLayout.NORTH);
+        frame.add(setpositext,BorderLayout.CENTER);
+        frame.setBackground(null);
+        frame.setVisible(true);
     }
     public static void main(String[] args) {
     new create_class(Config.createAndShowGUI());

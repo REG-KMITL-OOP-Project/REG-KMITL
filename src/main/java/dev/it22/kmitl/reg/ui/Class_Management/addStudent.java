@@ -4,10 +4,7 @@ import dev.it22.kmitl.reg.controller.enrollment.EnrollmentController;
 import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
 import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
 import dev.it22.kmitl.reg.ui.HomePage;
-import dev.it22.kmitl.reg.utils.Config;
-import dev.it22.kmitl.reg.utils.CustomCombobox;
-import dev.it22.kmitl.reg.utils.RoundedButtonWithColor;
-import dev.it22.kmitl.reg.utils.RoundedTextField;
+import dev.it22.kmitl.reg.utils.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,19 +12,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.ResultSet;
 
 public class addStudent implements FocusListener, ActionListener {
     private JFrame frame;
     private JLabel title, subjectName, subjectID, teacherName, section;
     private RoundedButtonWithColor cancel, save;
-    private RoundedTextField showName;
+    private static RoundedTextField showName;
     private callData insertID;
     private Font innerFont, regularFont;
     private JPanel button, subjectInfo, teacherInfo, stdInfo, titlePanel, allInfo,
             panelSave, panelCan, sectionPanel, subjectNamePanel, subjectIDPanel, pane;
     private boolean show;
     private EnrollmentController enrollmentController = new EnrollmentController();
-    private String courseCode, courseName, teacher;
+    public static String courseCode, courseName, teacher, studentName;
     private int groupNum;
 
 
@@ -153,6 +151,7 @@ public class addStudent implements FocusListener, ActionListener {
         allInfo.add(stdInfo);
         allInfo.add(button);
 
+
         frame.add(titlePanel, BorderLayout.NORTH);
         frame.add(allInfo, BorderLayout.CENTER);
 
@@ -166,6 +165,17 @@ public class addStudent implements FocusListener, ActionListener {
 
     public static void main(String[] args) {
         //new addStudent(Config.createAndShowGUI());
+    }
+
+    public static void call(){
+        studentName = studentName;
+        try{
+            ResultSet db = new Database().getQuery("SELECT * FROM user WHERE std_id = '" +studentName + "';");
+            db.next();
+            showName.setText(db.getString("fname") + " " + db.getString("lname"));
+        }catch (Exception ev){
+            ev.printStackTrace();
+        }
     }
 
     @Override
@@ -190,9 +200,9 @@ public class addStudent implements FocusListener, ActionListener {
             new View_subject(frame, courseCode, courseName, teacher);
         } else if (e.getSource() == save) {
             String stdID = insertID.getText();
-            String subjectID = "06016408";
-            String subjectName = "OBJECT-ORIENTED PROGRAMMING";
-            String teacherName = "แล้วแต่ แบงค์";
+            String subjectID = courseCode;
+            String subjectName = courseName;
+            String teacherName = teacher;
             String studentName = enrollmentController.getStudentById(stdID);
             showName.setText(studentName);
             String sectionID = subjectID;
@@ -207,7 +217,21 @@ public class addStudent implements FocusListener, ActionListener {
                     sectionID += 'C';
                     break;
             }
-            String enrollmentId = stdID + groupNum;
+            int num = 1;
+            String enrollmentId;
+            while (true){
+                try{
+                    ResultSet db = new Database().getQuery("SELECT * FROM enrollment WHERE enrollment_id = '" + stdID + num + "';");
+                    if (db.next()){}
+                    else{
+                        enrollmentId = stdID + num;
+                        break;
+                    }
+                    num++;
+                }catch (Exception ev){
+                    ev.printStackTrace();
+                }
+            }
             if (stdID.isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "Please enter student id", "Error", JOptionPane.ERROR_MESSAGE);
                 return;

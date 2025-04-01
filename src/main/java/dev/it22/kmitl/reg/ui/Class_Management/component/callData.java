@@ -3,6 +3,7 @@ package dev.it22.kmitl.reg.ui.Class_Management.component;
 import dev.it22.kmitl.reg.controller.enrollment.EnrollmentController;
 import dev.it22.kmitl.reg.controller.score.ScoreDatabase;
 import dev.it22.kmitl.reg.ui.Class_Management.TeacherAddScore;
+import dev.it22.kmitl.reg.ui.Class_Management.addStudent;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.ErrorModal;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -101,6 +102,14 @@ public class callData extends JPanel implements FocusListener, ActionListener {
                 stdInfo.setInfo();
                 System.out.println(info.getText());
                 TeacherAddScore.std_id = info.getText();
+            } catch (Exception ex) {
+                new ErrorModal(frame, ex.getMessage());
+            }
+        }
+        if (e.getActionCommand().equals("แสดงชื่อ")){
+            try {
+                addStudent.studentName = info.getText();
+                addStudent.call();
             } catch (Exception ex) {
                 new ErrorModal(frame, ex.getMessage());
             }
