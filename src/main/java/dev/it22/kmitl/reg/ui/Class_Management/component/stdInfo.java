@@ -16,28 +16,23 @@ public class stdInfo extends JPanel{
     private static ResultSet subject_data;
     private static ResultSet student_data;
 
-    public static void setSubject(ResultSet subject) {
-        stdInfo.subject_data = subject;
-
-    }
     public static void setStudentData(ResultSet student_data) {
         stdInfo.student_data = student_data;
     }
 
     public stdInfo(){
-//        user = new User().getUserAccount();
 
         ID = new JLabel("รหัสนักศึกษา : ");
         name = new JLabel("ชื่อ : ");
         faculty = new JLabel("คณะ : ");
         branch = new JLabel("สาขา : ");
 
-        if(stdInfo.subject_data != null){
+        if(stdInfo.student_data != null){
             try {
-                ID = new JLabel("รหัสนักศึกษา : " + subject_data.getString("std_id"));
-                name = new JLabel("ชื่อ : " + subject_data.getString("fname") + " " + subject_data.getString("lname"));
-                faculty = new JLabel("คณะ : " + subject_data.getString("faculty"));
-                branch = new JLabel("สาขา : " + subject_data.getString("major"));
+                ID = new JLabel("รหัสนักศึกษา : " + student_data.getString("std_id"));
+                name = new JLabel("ชื่อ : " + student_data.getString("fname") + " " + student_data.getString("lname"));
+                faculty = new JLabel("คณะ : " + student_data.getString("faculty"));
+                branch = new JLabel("สาขา : " + student_data.getString("major"));
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -63,10 +58,10 @@ public class stdInfo extends JPanel{
     }
     public static void setInfo(){
         try {
-            stdInfo.ID.setText("รหัสนักศึกษา : " + subject_data.getString("std_id"));
-            stdInfo.name.setText("ชื่อ : " + subject_data.getString("fname") + " " + subject_data.getString("lname"));
-            stdInfo.faculty.setText("คณะ : " + subject_data.getString("faculty"));
-            stdInfo.branch.setText("สาขา : " + subject_data.getString("major"));
+            stdInfo.ID.setText("รหัสนักศึกษา : " + student_data.getString("std_id"));
+            stdInfo.name.setText("ชื่อ : " + student_data.getString("fname") + " " + student_data.getString("lname"));
+            stdInfo.faculty.setText("คณะ : " + student_data.getString("faculty"));
+            stdInfo.branch.setText("สาขา : " + student_data.getString("major"));
         }
         catch (Exception e) {
             e.printStackTrace();

@@ -88,16 +88,19 @@ public class callData extends JPanel implements FocusListener, ActionListener {
         if (e.getActionCommand().equals("แสดงชื่อวิชา")){
             try {
                 ResultSet subjectrs = new ScoreDatabase().getSubjectData(info.getText());
-                stdInfo.setSubject(subjectrs);
+                TeacherAddScore.setSubject(subjectrs);
+                TeacherAddScore.course_id = info.getText();
             } catch (Exception ex) {
                 new ErrorModal(frame, ex.getMessage());
             }
         }
         if (e.getActionCommand().equals("แสดงข้อมูล")){
             try {
-                ResultSet teacherrs = new ScoreDatabase().getStudentData(info.getText());
-                stdInfo.setSubject(teacherrs);
+                ResultSet stdrs = new ScoreDatabase().getStudentData(info.getText());
+                stdInfo.setStudentData(stdrs);
                 stdInfo.setInfo();
+                System.out.println(info.getText());
+                TeacherAddScore.std_id = info.getText();
             } catch (Exception ex) {
                 new ErrorModal(frame, ex.getMessage());
             }

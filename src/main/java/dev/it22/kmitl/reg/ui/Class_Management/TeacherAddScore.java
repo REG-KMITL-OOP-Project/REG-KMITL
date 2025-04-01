@@ -2,16 +2,14 @@ package dev.it22.kmitl.reg.ui.Class_Management;
 
 import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
+import dev.it22.kmitl.reg.controller.score.ScoreDatabase;
 import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.model.score.ScoreModel;
 import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
 import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
 import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.ui.event.calendar.calendarData;
-import dev.it22.kmitl.reg.utils.Config;
-import dev.it22.kmitl.reg.utils.CustomCombobox;
-import dev.it22.kmitl.reg.utils.RoundedButton;
-import dev.it22.kmitl.reg.utils.RoundedTextField;
+import dev.it22.kmitl.reg.utils.*;
 import dev.it22.kmitl.reg.controller.score.ScoreController;
 
 import javax.swing.*;
@@ -24,7 +22,7 @@ import java.awt.event.FocusListener;
 import java.sql.ResultSet;
 
 public class TeacherAddScore implements FocusListener, ActionListener {
-    private JFrame frame;
+    private static JFrame frame;
     private JLabel add_score_student, student;
     private JPanel main_panel, sub1, sub2, sub3, txt_panel, txt_sub, frame_pan;
     private JPanel west_panel, student_panel, student_pan, cancel_panel, save_panel, save_cancel_panel, subject_panel;
@@ -34,17 +32,25 @@ public class TeacherAddScore implements FocusListener, ActionListener {
     private JTextField score;
     private stdInfo std;
     private JTextArea text;
-    private RoundedTextField subject;
+    private static RoundedTextField subject =  new RoundedTextField(25);;
     private boolean scoreShow, textShow;
     private ScoreController scoreController = new ScoreController();
+    private static ResultSet subject_data;
+    public  static String std_id = "";
+    public  static  String course_id = "";
 
-
-
+    public static void setSubject(ResultSet subject) {
+        TeacherAddScore.subject_data = subject;
+        try {
+            TeacherAddScore.subject.setText("ชื่อวิชา "+TeacherAddScore.subject_data.getString("course_name"));
+        }
+        catch (Exception ex) {
+            new ErrorModal(TeacherAddScore.frame,"Error");
+        }
+    }
 
     public TeacherAddScore(JFrame frame) {
         this.frame = frame;
-        //    private Account user;
-//        user = new User().getUserAccount();
 
         data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา", frame);
         data_id_student = new callData("กรอกรหัสนักศึกษา", "แสดงข้อมูล", frame);
@@ -67,7 +73,6 @@ public class TeacherAddScore implements FocusListener, ActionListener {
         student_pan.setLayout(new FlowLayout());
         student_pan.setBorder(BorderFactory.createEmptyBorder(5, 30, 5, 5));
 
-        subject = new RoundedTextField(25);
         subject.setText("  ชื่อวิชา : ");
         subject.setEditable(false);
         subject.setForeground(Color.WHITE);
@@ -199,36 +204,30 @@ public class TeacherAddScore implements FocusListener, ActionListener {
         cancel.addActionListener(this);
         save.addActionListener(e -> {
             if (score.getText().isEmpty() || score.getText().equals("  กรอกคะแนน")) {
-                JOptionPane.showMessageDialog(frame, "กรุณากรอกคะแนน", "Error", JOptionPane.ERROR_MESSAGE);
-            } else if (text.getText().isEmpty() || text.getText().equals("  หมายเหตุ")) {
-                JOptionPane.showMessageDialog(frame, "กรุณากรอกหมายเหตุ", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                String enrollmentId = "670701742";
-                float scoreValue = Float.parseFloat(score.getText());
-                int scoreIndex = no_of_score.getSelectedIndex();
+                new ErrorModal(frame,"กรุณากรอกคะแนน");
+                return;
+            }
 
-                ScoreModel scoreModel = new ScoreModel(enrollmentId, 0, 0, 0, 0);
-                switch (scoreIndex) {
-                    case 0:
-                        scoreModel.setScore1(scoreValue);
-                        break;
-                    case 1:
-                        scoreModel.setScore2(scoreValue);
-                        break;
-                    case 2:
-                        scoreModel.setScore3(scoreValue);
-                        break;
-                    case 3:
-                        scoreModel.setScore4(scoreValue);
-                        break;
-                }
+            if (course_id == null || course_id.isEmpty()) {
+                new ErrorModal(frame,"กรุณากรอกรหัสวิชา หากกรอกแล้วให้กดปุ่มแสดงชื่อวิชา");
+                return;
+            }
 
-                if (scoreController.getScoreByEnrollmentId(enrollmentId)) {
-                    scoreController.createScore(enrollmentId);
-                } else {
-                    scoreController.addScore(scoreModel);
+            if (std_id == null || std_id.isEmpty()) {
+                new ErrorModal(frame,"กรุณากรอกรหัสนักศึกษา หากกรอกแล้วให้กดปุ่มแสดงข้อมูล");
+                return;
+            }
+
+            try{
+                String enrollmenId = new ScoreDatabase().getEnrollmentId(TeacherAddScore.std_id,course_id);
+                if (enrollmenId == null){
+                    new ErrorModal(frame,"ไม่การลงทะเบียนวิชานี้");
                 }
-                JOptionPane.showMessageDialog(frame, "Yes", "Success", JOptionPane.INFORMATION_MESSAGE);
+                new ScoreDatabase().addScore(enrollmenId,no_of_score.getSelectedIndex()+1,Double.valueOf(score.getText()));
+                new SuccessModal(frame,"บันทึกคะแนนเรียบร้อย");
+            }
+            catch (Exception ex){
+                new ErrorModal(frame,ex.getMessage());
             }
         });
     }
