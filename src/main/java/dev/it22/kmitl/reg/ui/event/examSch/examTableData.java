@@ -1,7 +1,10 @@
 package dev.it22.kmitl.reg.ui.event.examSch;
 
 import dev.it22.kmitl.reg.model.auth.Account;
+import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.Database;
+
+import java.io.ObjectInputFilter;
 import java.sql.SQLException;
 import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
@@ -13,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import dev.it22.kmitl.reg.ui.event.component.seletedItemCombobox;
 
 public class examTableData {
     //database
@@ -22,6 +26,7 @@ public class examTableData {
     public examTableData() throws SQLException {
         user = new User().getUserAccount();
         db = new Database();
+
     }
 
     public String[][] getData() {
@@ -90,6 +95,25 @@ public class examTableData {
             String timeRange = start.substring(0, 5) + "-" + end.substring(0, 5);
             return (timeRange);
     }
+
+
+    public void SelectedItem(seletedItemCombobox comboBoxHandler) {
+        System.out.println("Year Item: " + comboBoxHandler.getYearItem());
+        System.out.println("Semester Item: " + comboBoxHandler.getSemItem());
+        System.out.println("Exam Item: " + comboBoxHandler.getExamItem());
+    }
+
+    public static void main(String[] args) {
+        try {
+            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+            examTableData exData = new examTableData();
+            exData.SelectedItem(new ExamSchedulePage(Config.createAndShowGUI()));
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
     //get subject name from another table
     public String getCourseName(String id) throws SQLException {

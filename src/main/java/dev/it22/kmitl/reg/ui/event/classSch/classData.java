@@ -5,6 +5,10 @@ import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.model.auth.Prof;
 import dev.it22.kmitl.reg.model.auth.Student;
+import dev.it22.kmitl.reg.ui.event.component.seletedItemCombobox;
+import dev.it22.kmitl.reg.ui.event.examSch.ExamSchedulePage;
+import dev.it22.kmitl.reg.ui.event.examSch.examTableData;
+import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.Database;
 
 import java.sql.ResultSet;
@@ -74,13 +78,21 @@ public class classData {
         return null;
     }
 
-    public static void main(String[] args) throws SQLException {
-        try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-            new classData();
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public void SelectedItem(seletedItemCombobox comboBoxHandler) {
+        System.out.println("Year Item: " + comboBoxHandler.getYearItem());
+        System.out.println("Semester Item: " + comboBoxHandler.getSemItem());
+        System.out.println("Exam Item: " + comboBoxHandler.getExamItem());
     }
+
+
+//    public static void main(String[] args) throws SQLException {
+//        try {
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            classData classCombo = new classData();
+//            classCombo.SelectedItem(new ClassSchedulePage(Config.createAndShowGUI()));
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 }
