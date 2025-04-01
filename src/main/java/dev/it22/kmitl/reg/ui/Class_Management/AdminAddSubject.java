@@ -120,7 +120,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
 
         panelRek1.add(panelYear);
         showYear = true;
-        year.setText("   1");
+        year.setText("   20xx");
         year.setFont(innerFont);
         year.setForeground(Color.GRAY);
         year.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
@@ -314,7 +314,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
     }public void focusLost(FocusEvent e){
         if (year.getText().isEmpty()) {
             showYear = true;
-            year.setText("   1");
+            year.setText("   20xx");
             year.setForeground(Color.GRAY);
         }
 
@@ -351,7 +351,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
             branch.refresh(group.getFacultyCode());
         }
         if (ev.getSource() == cancel) {
-            if (!(year.getText().equals("   25xx") && code.getText().equals("   06xxxxxx") && name.getText().equals("   OOP") && /*teacher.getText().equals(("  สมชาย")) && */note.getText().equals(("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก")) && condition.getText().equals(("   รับเฉพาะนักศึกษาคณะไอที")) )){
+            if (!(year.getText().equals("   20xx") && code.getText().equals("   06xxxxxx") && name.getText().equals("   OOP") && /*teacher.getText().equals(("  สมชาย")) && */note.getText().equals(("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก")) && condition.getText().equals(("   รับเฉพาะนักศึกษาคณะไอที")) )){
                 dialog = Config.openFrame((int) (frame.getWidth() / 2), (int) (frame.getHeight() / 2));
                 JPanel panelD = new JPanel();
                 JPanel panelC = new JPanel();
@@ -410,7 +410,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
             dialog.setVisible(false);
         }else if (ev.getSource().equals(yes) || ev.getSource().equals(save)){
             if(ev.getSource().equals(save)){
-                if (year.getText().equals("   25xx") || code.getText().equals("   06xxxxxx") || name.getText().equals("   OOP") ||/* teacher.getText().equals(("  สมชาย")) || */ note.getText().equals(("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก")) || condition.getText().equals(("   รับเฉพาะนักศึกษาคณะไอที")) ) {
+                if (year.getText().equals("   20xx") || code.getText().equals("   06xxxxxx") || name.getText().equals("   OOP") ||/* teacher.getText().equals(("  สมชาย")) || */ note.getText().equals(("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก")) || condition.getText().equals(("   รับเฉพาะนักศึกษาคณะไอที")) ) {
                     new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
                     return;
                 }else{
