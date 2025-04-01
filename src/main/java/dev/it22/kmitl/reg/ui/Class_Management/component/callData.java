@@ -2,6 +2,7 @@ package dev.it22.kmitl.reg.ui.Class_Management.component;
 
 import dev.it22.kmitl.reg.controller.enrollment.EnrollmentController;
 import dev.it22.kmitl.reg.controller.score.ScoreDatabase;
+import dev.it22.kmitl.reg.ui.Class_Management.TeacherAddGrade;
 import dev.it22.kmitl.reg.ui.Class_Management.TeacherAddScore;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.ErrorModal;
@@ -90,6 +91,8 @@ public class callData extends JPanel implements FocusListener, ActionListener {
                 ResultSet subjectrs = new ScoreDatabase().getSubjectData(info.getText());
                 TeacherAddScore.setSubject(subjectrs);
                 TeacherAddScore.course_id = info.getText();
+                TeacherAddGrade.setSubject(subjectrs);
+                TeacherAddGrade.course_id = info.getText();
             } catch (Exception ex) {
                 new ErrorModal(frame, ex.getMessage());
             }

@@ -6,9 +6,7 @@ import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
 import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
 import dev.it22.kmitl.reg.ui.HomePage;
-import dev.it22.kmitl.reg.utils.Config;
-import dev.it22.kmitl.reg.utils.RoundedButton;
-import dev.it22.kmitl.reg.utils.RoundedTextField;
+import dev.it22.kmitl.reg.utils.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -17,11 +15,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.ResultSet;
 
 import dev.it22.kmitl.reg.controller.grade.GradeController;
 
 public class TeacherAddGrade implements FocusListener, ActionListener {
-    private JFrame frame;
+    private static JFrame frame;
     //    private Account user;
     private JLabel add_score_student, student;
     private JPanel main_panel, sub1, sub2, sub3, space, subject_panel;
@@ -30,8 +29,11 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
     private RoundedButton cancel, save;
     private JComboBox grade;
     private stdInfo std;
-    private RoundedTextField enter_grade, subject;
+    private RoundedTextField enter_grade;
+    private static RoundedTextField subject;
     private GradeController gradeController = new GradeController();
+    private static ResultSet subject_data;
+    public static String course_id = "";
 
     public TeacherAddGrade(JFrame frame) {
         this.frame = frame;
@@ -185,7 +187,7 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
 
     public static void main(String[] args) {
         try {
-            new Login("Student01", "Student1234").loginWithUsernameAndPassword();
+            new Login("Admin01", "Admin1234").loginWithUsernameAndPassword();
             new TeacherAddGrade(Config.createAndShowGUI());
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -208,20 +210,15 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
             try {
                 String enrollmentId = gradeController.getEnrollmentId(studentId, subjectId);
                 if (enrollmentId == null) {
-                    JOptionPane.showMessageDialog(frame, "Enrollment ID not found for student ID: " + studentId);
+                    new ErrorModal(frame, "Enrollment ID not found for student ID: " + studentId);
                     return;
                 }
                 gradeController.addGrade(enrollmentId, gradeValue);
 
-                JOptionPane.showMessageDialog(frame, "Grade added successfully!");
+                new SuccessModal(frame, "Grade added successfully!");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(frame, "An error occurred while adding the grade: " + ex.getMessage());
+                new ErrorModal(frame, "An error occurred while adding the grade: " + ex.getMessage());
             }
-
-            frame.getContentPane().removeAll();
-            frame.revalidate();
-            frame.repaint();
-            new HomePage(frame);
         }
     }
 
@@ -233,5 +230,15 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
     @Override
     public void focusLost(FocusEvent e) {
 
+    }
+
+    public static void setSubject(ResultSet subject) {
+        TeacherAddGrade.subject_data = subject;
+        try {
+            TeacherAddGrade.subject.setText("ชื่อวิชา "+TeacherAddGrade.subject_data.getString("course_name"));
+        }
+        catch (Exception ex) {
+            new ErrorModal(TeacherAddGrade.frame,"Error");
+        }
     }
 }
