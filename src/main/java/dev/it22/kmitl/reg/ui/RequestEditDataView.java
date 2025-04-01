@@ -24,7 +24,7 @@ public class RequestEditDataView {
         JDesktopPane desktopPane = new JDesktopPane();
         desktopPane.setOpaque(false);
         desktopPane.setBounds(0, 0, frame.getWidth(), frame.getHeight());
-
+      
         JInternalFrame internalFrame = new JInternalFrame("", false, true, false, false);
         ((javax.swing.plaf.basic.BasicInternalFrameUI) internalFrame.getUI()).setNorthPane(null);
         internalFrame.setFrameIcon(null);

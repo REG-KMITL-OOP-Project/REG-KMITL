@@ -40,6 +40,8 @@ public class SemesterCategory extends JPanel{
         specialSem.setIcon(new changeColorCheckbox(Color.GREEN));
 
 
+        int worldWidth = (frame.getWidth()/4);
+        int worldHeight = frame.getHeight()/14;
         sm1 = new JPanel();
         sm2 = new JPanel();
         special = new JPanel();
@@ -47,18 +49,21 @@ public class SemesterCategory extends JPanel{
         //
         sm1.add(sem1);
         sm1.setLayout(new FlowLayout(FlowLayout.LEFT));
-        sm1.setPreferredSize(new Dimension(300, 50));
+        sm1.setPreferredSize(new Dimension(worldWidth, worldHeight));
         sm1.setBackground(Config.bgColor_base.darker());
+        sm1.setBorder(new EmptyBorder(0, 15, 0, 0));
         //
         sm2.add(sem2);
         sm2.setLayout(new FlowLayout(FlowLayout.LEFT));
-        sm2.setPreferredSize(new Dimension(300, 50));
+        sm2.setPreferredSize(new Dimension(worldWidth, worldHeight));
         sm2.setBackground(Config.bgColor_base.darker());
+        sm2.setBorder(new EmptyBorder(0, 15, 0, 0));
         //
         special.add(specialSem);
         special.setLayout(new FlowLayout(FlowLayout.LEFT));
-        special.setPreferredSize(new Dimension(300, 50));
+        special.setPreferredSize(new Dimension(worldWidth, worldHeight));
         special.setBackground(Config.bgColor_base.darker());
+        special.setBorder(new EmptyBorder(0, 15, 0, 0));
 
 
         pn1 = new JPanel();
@@ -66,7 +71,7 @@ public class SemesterCategory extends JPanel{
         pn1.add(sm1);
         pn1.add(sm2);
         pn1.add(special);
-        pn1.setPreferredSize(new Dimension(300, frame.getHeight()));
+        pn1.setPreferredSize(new Dimension(worldWidth, frame.getHeight()));
         pn1.setBorder(new EmptyBorder(25,0,15,0));
         pn1.setBackground(Config.bgColor_base.darker());
 
