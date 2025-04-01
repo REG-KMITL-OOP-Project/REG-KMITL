@@ -3,6 +3,7 @@ package dev.it22.kmitl.reg.ui.Class_Management;
 import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
+import dev.it22.kmitl.reg.model.score.ScoreModel;
 import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
 import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
 import dev.it22.kmitl.reg.ui.HomePage;
@@ -11,6 +12,7 @@ import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.CustomCombobox;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 import dev.it22.kmitl.reg.utils.RoundedTextField;
+import dev.it22.kmitl.reg.controller.score.ScoreController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -32,226 +34,256 @@ public class TeacherAddScore implements FocusListener, ActionListener {
     private stdInfo std;
     private JTextArea text;
     private RoundedTextField subject;
-    private boolean scoreShow,textShow;
+    private boolean scoreShow, textShow;
+    private ScoreController scoreController = new ScoreController();
 
     public TeacherAddScore(JFrame frame) {
-            this.frame = frame;
-            //    private Account user;
+        this.frame = frame;
+        //    private Account user;
 //        user = new User().getUserAccount();
 
-            data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา");
-            data_id_student = new callData("กรอกรหัสนักศึกษา", "แสดงข้อมูล");
-            data_id_student.setInfoSize(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 40));
-            data_id_subject.setInfoSize(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() / 40));
+        data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา");
+        data_id_student = new callData("กรอกรหัสนักศึกษา", "แสดงข้อมูล");
+        data_id_student.setInfoSize(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 40));
+        data_id_subject.setInfoSize(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 40));
 
-            add_score_student = new JLabel("เพิ่มคะแนนนักศึกษา");
-            add_score_student.setForeground(Config.primaryColor_base);
-            add_score_student.setFont(Config.HEADER_SEMIBOLD[1]);
-            add_score_student.setHorizontalAlignment(SwingConstants.LEFT);
-            add_score_student.setBorder(BorderFactory.createEmptyBorder(5, 10, 0, 5));
+        add_score_student = new JLabel("เพิ่มคะแนนนักศึกษา");
+        add_score_student.setForeground(Config.primaryColor_base);
+        add_score_student.setFont(Config.HEADER_SEMIBOLD[1]);
+        add_score_student.setHorizontalAlignment(SwingConstants.LEFT);
+        add_score_student.setBorder(BorderFactory.createEmptyBorder(5, 10, 0, 5));
 
-            west_panel = new JPanel();
-            west_panel.setLayout(new BorderLayout());
-            west_panel.add(add_score_student, BorderLayout.NORTH);
+        west_panel = new JPanel();
+        west_panel.setLayout(new BorderLayout());
+        west_panel.add(add_score_student, BorderLayout.NORTH);
 
-            student_pan = new JPanel();
-            student_pan.add(data_id_subject);
-            student_pan.setBackground(null);
-            student_pan.setLayout(new FlowLayout());
-            student_pan.setBorder(BorderFactory.createEmptyBorder(5, 30, 5, 5));
+        student_pan = new JPanel();
+        student_pan.add(data_id_subject);
+        student_pan.setBackground(null);
+        student_pan.setLayout(new FlowLayout());
+        student_pan.setBorder(BorderFactory.createEmptyBorder(5, 30, 5, 5));
 
-            subject = new RoundedTextField( 25);
-            subject.setText("  ชื่อวิชา : ");
-            subject.setEditable(false);
-            subject.setForeground(Color.WHITE);
-            subject.setFont(Config.HEADER_SEMIBOLD[3]);
-            subject.setBorder(null);
-            subject.setBackground(Config.bgColor_hard);
+        subject = new RoundedTextField(25);
+        subject.setText("  ชื่อวิชา : ");
+        subject.setEditable(false);
+        subject.setForeground(Color.WHITE);
+        subject.setFont(Config.HEADER_SEMIBOLD[3]);
+        subject.setBorder(null);
+        subject.setBackground(Config.bgColor_hard);
 
-            subject_panel = new JPanel(new BorderLayout());
-            subject_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 400) , frame.getWidth() / (frame.getWidth() /45)));
-            subject_panel.setBackground(null);
-            subject_panel.add(subject);
-            subject_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+        subject_panel = new JPanel(new BorderLayout());
+        subject_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 45)));
+        subject_panel.setBackground(null);
+        subject_panel.add(subject);
+        subject_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
 
-            west_panel.add(student_pan, BorderLayout.SOUTH);
-            west_panel.setBackground(null);
-            west_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 1000) , frame.getWidth() / (frame.getWidth() / 80) ));
-            west_panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 5, 5));
+        west_panel.add(student_pan, BorderLayout.SOUTH);
+        west_panel.setBackground(null);
+        west_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 1000), frame.getWidth() / (frame.getWidth() / 80)));
+        west_panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 5, 5));
 
 
-            student = new JLabel("นักศึกษา", JLabel.LEFT);
-            student.setForeground(Config.primaryColor_base);
-            student.setFont(Config.HEADER_SEMIBOLD[1]);
-            student.setBackground(null);
-            student.setBorder(new EmptyBorder(5, 5, 10, 5));
+        student = new JLabel("นักศึกษา", JLabel.LEFT);
+        student.setForeground(Config.primaryColor_base);
+        student.setFont(Config.HEADER_SEMIBOLD[1]);
+        student.setBackground(null);
+        student.setBorder(new EmptyBorder(5, 5, 10, 5));
 
-            student_panel = new JPanel();
-            student_panel.setLayout(new BorderLayout());
-            student_panel.add(student, BorderLayout.NORTH);
-            student_panel.add(data_id_student, BorderLayout.SOUTH);
-            data_id_student.setBackground(null);
-            student_panel.setBorder(BorderFactory.createEmptyBorder(30, 35, 5, 5));
-            student_panel.setBackground(null);
+        student_panel = new JPanel();
+        student_panel.setLayout(new BorderLayout());
+        student_panel.add(student, BorderLayout.NORTH);
+        student_panel.add(data_id_student, BorderLayout.SOUTH);
+        data_id_student.setBackground(null);
+        student_panel.setBorder(BorderFactory.createEmptyBorder(30, 35, 5, 5));
+        student_panel.setBackground(null);
 
-            no_of_score = new JComboBox();
-            no_of_score.addItem("คะแนนนช่องที่ 1");
-            no_of_score.addItem("คะแนนนช่องที่ 2");
-            no_of_score.addItem("คะแนนนช่องที่ 3");
-            no_of_score.addItem("คะแนนนช่องที่ 4");
-            no_of_score.setMaximumRowCount(4);
-            no_of_score.setFont(Config.NORMAL_REGULAR);
-            no_of_score.setFont(Config.HEADER_SEMIBOLD[3]);
-            no_of_score.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 180) , frame.getWidth() / (frame.getWidth() / 30) ));
+        no_of_score = new JComboBox();
+        no_of_score.addItem("คะแนนนช่องที่ 1");
+        no_of_score.addItem("คะแนนนช่องที่ 2");
+        no_of_score.addItem("คะแนนนช่องที่ 3");
+        no_of_score.addItem("คะแนนนช่องที่ 4");
+        no_of_score.setMaximumRowCount(4);
+        no_of_score.setFont(Config.NORMAL_REGULAR);
+        no_of_score.setFont(Config.HEADER_SEMIBOLD[3]);
+        no_of_score.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 180), frame.getWidth() / (frame.getWidth() / 30)));
 
+        scoreShow = true;
+        sub3 = new JPanel(new BorderLayout(20, 30));
+        score = new JTextField(11);
+        score.setText("  กรอกคะแนน");
+        score.setForeground(Color.GRAY);
+        score.setFont(Config.HEADER_SEMIBOLD[3]);
+        sub3.add(score);
+        sub3.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 180), frame.getWidth() / (frame.getWidth() / 30)));
+        sub3.setBackground(null);
+        score.addFocusListener(this);
+
+        sub1 = new JPanel();
+        sub1.setLayout(new FlowLayout());
+        sub1.setBackground(null);
+        sub1.add(no_of_score);
+        sub1.add(sub3);
+        sub1.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 180), frame.getWidth() / (frame.getWidth() / 100)));
+
+        std = new stdInfo();
+        sub2 = new JPanel(new BorderLayout());
+        sub2.setBackground(null);
+        sub2.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 5));
+        sub2.add(std);
+
+        main_panel = new JPanel(new BorderLayout());
+        main_panel.add(sub1, BorderLayout.WEST);
+        main_panel.add(sub2, BorderLayout.CENTER);
+        main_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 800), frame.getWidth() / (frame.getWidth() / 80)));
+        main_panel.setBorder(new EmptyBorder(5, 45, 5, 5));
+        main_panel.setBackground(null);
+
+        textShow = true;
+        text = new JTextArea("  หมายเหตุ");
+        text.setForeground(Color.GRAY);
+        text.setBackground(Config.bgColor_hard);
+        text.setFont(Config.HEADER_SEMIBOLD[3]);
+        text.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 100), frame.getWidth() / (frame.getWidth() / 80)));
+        text.addFocusListener(this);
+
+
+        txt_sub = new JPanel(new BorderLayout());
+        txt_sub.setBackground(null);
+        txt_sub.add(text, BorderLayout.CENTER);
+        txt_sub.setPreferredSize(new Dimension((int) (frame.getWidth() / 1.3), frame.getWidth() / (frame.getWidth() / 80)));
+
+        txt_panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        txt_panel.setBackground(null);
+        txt_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 1000), frame.getWidth() / (frame.getWidth() / 200)));
+        txt_panel.setBorder(new EmptyBorder(5, 40, 5, 5));
+        txt_panel.add(txt_sub, BorderLayout.CENTER);
+
+
+        cancel_panel = new JPanel();
+        cancel = new RoundedButton("CANCEL", 22);
+
+        cancel_panel.add(cancel);
+        cancel_panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 93, 0));
+        cancel.setBackground(Config.primaryColor_harder);
+        cancel.setForeground(new Color(255, 247, 237));
+        cancel.setFont(Config.HEADER_SEMIBOLD[2]);
+        cancel.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 3), (frame.getHeight() / 4) - 130));
+
+        save_panel = new JPanel();
+        save = new RoundedButton("SAVE", 22);
+
+        save_panel.add(save);
+        save_panel.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 0));
+        save.setForeground(new Color(255, 247, 237));
+        save.setBackground(Config.primaryColor_base);
+        save.setFont(Config.HEADER_SEMIBOLD[2]);
+        save.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 3), (frame.getHeight() / 4) - 130));
+
+
+        save_cancel_panel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 0));
+        save_cancel_panel.add(cancel);
+        save_cancel_panel.add(save);
+        save_cancel_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+        save_cancel_panel.setPreferredSize(new Dimension((int) (frame.getWidth() / 1.2), frame.getWidth() / (frame.getWidth() / 600)));
+        save_cancel_panel.setBackground(null);
+
+        frame_pan = new JPanel(new FlowLayout(FlowLayout.LEFT, 93, 0));
+        frame_pan.setBackground(null);
+        frame_pan.add(west_panel);
+        frame_pan.add(student_pan);
+        frame_pan.add(subject_panel);
+        frame_pan.add(student_panel);
+        frame_pan.add(main_panel);
+        frame_pan.add(txt_panel);
+        frame_pan.add(save_cancel_panel);
+
+        frame.setLayout(new BorderLayout(20, 20));
+        frame.add(frame_pan);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+        cancel.addActionListener(this);
+        save.addActionListener(e -> {
+            if (score.getText().isEmpty() || score.getText().equals("  กรอกคะแนน")) {
+                JOptionPane.showMessageDialog(frame, "กรุณากรอกคะแนน", "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (text.getText().isEmpty() || text.getText().equals("  หมายเหตุ")) {
+                JOptionPane.showMessageDialog(frame, "กรุณากรอกหมายเหตุ", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                String enrollmentId = "670701741";
+                float scoreValue = Float.parseFloat(score.getText());
+                int scoreIndex = no_of_score.getSelectedIndex();
+
+                ScoreModel scoreModel = new ScoreModel(enrollmentId, 0);
+                switch (scoreIndex) {
+                    case 0:
+                        scoreModel.setScore1(scoreValue);
+                        break;
+                    case 1:
+                        scoreModel.setScore2(scoreValue);
+                        break;
+                    case 2:
+                        scoreModel.setScore3(scoreValue);
+                        break;
+                    case 3:
+                        scoreModel.setScore4(scoreValue);
+                        break;
+                }
+
+                scoreController.addScore(scoreModel);
+                JOptionPane.showMessageDialog(frame, "คะแนนถูกบันทึกเรียบร้อยแล้ว", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        try {
+            new Login("Student01", "Student1234").loginWithUsernameAndPassword();
+            new TeacherAddScore(Config.createAndShowGUI());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == cancel) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new HomePage(frame);
+        } else if (e.getSource() == save) {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new HomePage(frame);
+        }
+    }
+
+    @Override
+    public void focusGained(FocusEvent e) {
+        if (e.getSource().equals(score) && scoreShow) {
+            score.setText("");
+            score.setForeground(Config.bgColor_base);
+            scoreShow = false;
+        }
+        if (e.getSource().equals(text) && textShow) {
+            text.setText("");
+            text.setForeground(Color.WHITE);
+            textShow = false;
+        }
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+        if (score.getText().isEmpty()) {
             scoreShow = true;
-            sub3 = new JPanel(new BorderLayout(20, 30));
-            score = new JTextField(11);
             score.setText("  กรอกคะแนน");
             score.setForeground(Color.GRAY);
-            score.setFont(Config.HEADER_SEMIBOLD[3]);
-            sub3.add(score);
-            sub3.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 180) , frame.getWidth() / (frame.getWidth() / 30) ));
-            sub3.setBackground(null);
-            score.addFocusListener(this);
-
-            sub1 = new JPanel();
-            sub1.setLayout(new FlowLayout());
-            sub1.setBackground(null);
-            sub1.add(no_of_score);
-            sub1.add(sub3);
-            sub1.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 180) , frame.getWidth() / (frame.getWidth() / 100) ));
-
-            std = new stdInfo();
-            sub2 = new JPanel(new BorderLayout());
-            sub2.setBackground(null);
-            sub2.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 5));
-            sub2.add(std);
-
-            main_panel = new JPanel(new BorderLayout());
-            main_panel.add(sub1, BorderLayout.WEST);
-            main_panel.add(sub2, BorderLayout.CENTER);
-            main_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 800) , frame.getWidth() / (frame.getWidth() / 80) ));
-            main_panel.setBorder(new EmptyBorder(5, 45, 5, 5));
-            main_panel.setBackground(null);
-
+        }
+        if (text.getText().isEmpty()) {
             textShow = true;
-            text = new JTextArea("  หมายเหตุ");
+            text.setText("  หมายเหตุ");
             text.setForeground(Color.GRAY);
-            text.setBackground(Config.bgColor_hard);
-            text.setFont(Config.HEADER_SEMIBOLD[3]);
-            text.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 100) , frame.getWidth() / (frame.getWidth() / 80) ));
-            text.addFocusListener(this);
-
-
-            txt_sub = new JPanel(new BorderLayout());
-            txt_sub.setBackground(null);
-            txt_sub.add(text, BorderLayout.CENTER);
-            txt_sub.setPreferredSize(new Dimension((int)(frame.getWidth() / 1.3) , frame.getWidth() / (frame.getWidth() / 80) ));
-
-            txt_panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            txt_panel.setBackground(null);
-            txt_panel.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 1000) , frame.getWidth() / (frame.getWidth() / 200) ));
-            txt_panel.setBorder(new EmptyBorder(5, 40, 5, 5));
-            txt_panel.add(txt_sub, BorderLayout.CENTER);
-
-
-            cancel_panel = new JPanel();
-            cancel = new RoundedButton("CANCEL", 22);
-
-            cancel_panel.add(cancel);
-            cancel_panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 93, 0));
-            cancel.setBackground(Config.primaryColor_harder);
-            cancel.setForeground(new Color(255, 247, 237));
-            cancel.setFont(Config.HEADER_SEMIBOLD[2]);
-            cancel.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 3), (frame.getHeight() / 4) - 130));
-
-            save_panel = new JPanel();
-            save = new RoundedButton("SAVE", 22);
-
-            save_panel.add(save);
-            save_panel.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 0));
-            save.setForeground(new Color(255, 247, 237));
-            save.setBackground(Config.primaryColor_base);
-            save.setFont(Config.HEADER_SEMIBOLD[2]);
-            save.setPreferredSize(new Dimension((int) ((frame.getWidth() - 500) / 3), (frame.getHeight() / 4) - 130));
-
-
-            save_cancel_panel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 0));
-            save_cancel_panel.add(cancel);
-            save_cancel_panel.add(save);
-            save_cancel_panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
-            save_cancel_panel.setPreferredSize(new Dimension((int)(frame.getWidth()/1.2) ,frame.getWidth() / (frame.getWidth() / 600) ));
-            save_cancel_panel.setBackground(null);
-
-            frame_pan = new JPanel(new FlowLayout(FlowLayout.LEFT, 93, 0));
-            frame_pan.setBackground(null);
-            frame_pan.add(west_panel);
-            frame_pan.add(student_pan);
-            frame_pan.add(subject_panel);
-            frame_pan.add(student_panel);
-            frame_pan.add(main_panel);
-            frame_pan.add(txt_panel);
-            frame_pan.add(save_cancel_panel);
-
-            frame.setLayout(new BorderLayout(20,20));
-            frame.add(frame_pan);
-            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            frame.setVisible(true);
-
-            cancel.addActionListener(this);
-            save.addActionListener(this);
         }
-
-        public static void main(String[]args){
-            try {
-                new Login("Student01", "Student1234").loginWithUsernameAndPassword();
-                new TeacherAddScore(Config.createAndShowGUI());
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == cancel) {
-                        frame.getContentPane().removeAll();
-                        frame.revalidate();
-                        frame.repaint();
-                        new HomePage(frame);
-                }
-                else if (e.getSource() == save) {
-                        frame.getContentPane().removeAll();
-                        frame.revalidate();
-                        frame.repaint();
-                        new HomePage(frame);
-                }
-        }
-
-        @Override
-        public void focusGained(FocusEvent e) {
-            if (e.getSource().equals(score) && scoreShow){
-                    score.setText("");
-                    score.setForeground(Config.bgColor_base);
-                    scoreShow = false;
-            }
-            if (e.getSource().equals(text) && textShow){
-                    text.setText("");
-                    text.setForeground(Color.WHITE);
-                    textShow = false;
-            }
-        }
-
-        @Override
-        public void focusLost(FocusEvent e) {
-            if (score.getText().isEmpty()) {
-                    scoreShow = true;
-                    score.setText("  กรอกคะแนน");
-                    score.setForeground(Color.GRAY);
-            }
-            if (text.getText().isEmpty()) {
-                    textShow = true;
-                    text.setText("  หมายเหตุ");
-                    text.setForeground(Color.GRAY);
-            }
-        }
+    }
 }
