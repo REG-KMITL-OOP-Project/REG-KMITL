@@ -1,5 +1,6 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
+import dev.it22.kmitl.reg.controller.classroom.AdminCreateClassroom;
 import dev.it22.kmitl.reg.controller.subject.Subject;
 import dev.it22.kmitl.reg.utils.*;
 import org.w3c.dom.ls.LSOutput;
@@ -378,7 +379,6 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
             dialog.setVisible(false);
         }else if (ev.getSource().equals(yes) || ev.getSource().equals(save)){
             if(ev.getSource().equals(save)){
-                if (subjectName.getSelectedIndex() == 0 || subjectCode.getText().equals("   รหัสวิชา") || (group.getSelectedIndex()) == 0 || (type.getSelectedIndex()) == 0 || table.getName_table().getModel().getValueAt(0,0) == null || tow.getSelectedIndex() == 0 || room.getText().equals("   เลือกห้องเรียน") || time.getText().equals("   วัน-เวลาเรียน")) {
                     if (!subjectCode.getText().isEmpty()){
                         try{
                             Double.parseDouble(subjectCode.getText());
@@ -387,9 +387,93 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
                             return;
                         }
                     }
-                    new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน");
-                    return;
-                }
+                    if (subjectName.getSelectedIndex() == 0 && subjectCode.getText().equals("   รหัสวิชา")) {
+                        new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน | กรุณาเลือกวิชา");
+                        return;
+                    }
+
+                    if (group.getSelectedIndex() == 0) {
+                        new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน | กรุณาเลือกกลุ่มเรียน");
+                        return;
+                    }
+
+                    if (type.getSelectedIndex() == 0) {
+                        new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน | กรุณาเลือกประเภท");
+                        return;
+                    }
+                    if (tow.getSelectedIndex() == 0) {
+                        new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน | กรุณาเลือกอาคาร");
+                        return;
+                    }
+                    if (room.getText().isEmpty() || room.getText().equals("   เลือกห้องเรียน")) {
+                        new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน | กรุณาเลือกห้องเรียน");
+                        return;
+                    }
+                    if (dayToStudy.getSelectedIndex() == 0) {
+                        new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน | กรุณาเลือกวันเรียน");
+                        return;
+                    }
+                    if (timetostudy.getSelectedIndex() == 0) {
+                        new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน | กรุณาเลือกเวลาเรียน");
+                        return;
+                    }
+                    if (timetofree.getSelectedIndex() == 0) {
+                        new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน | กรุณาเลือกเวลาเรียน");
+                        return;
+                    }
+                    if (teacherNamebuffer.length() == 0) {
+                        new ErrorModal(frame, "กรุณากรอกข้อมูลให้ครบถ้วน | กรุณาเพิ่มชื่อผู้สอน");
+                        return;
+                    }
+
+                    try {
+                        String sectionCode = "0" ;
+                        if (group.getSelectedIndex() == 1) {
+                            sectionCode = "A";
+                        }
+                        if (group.getSelectedIndex() == 2) {
+                            sectionCode = "B";
+                        }
+                        if (group.getSelectedIndex() == 3) {
+                            sectionCode = "C";
+                        }
+                        int rowCount = 0;
+                        String query = "SELECT COUNT(*) FROM section WHERE section_id = '" + subjectCode.getText() + sectionCode + "'";
+                        Database db = new Database();
+                        ResultSet rs = db.getQuery(query);
+                        if (rs.next()) {
+                            rowCount = rs.getInt(1);
+                        }
+                        if (rowCount == 0) {
+                            throw new Exception("ไม่พบข้อมูล Section ID โปรดสร้างกลุ่มเรียนก่อน");
+                        }
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        new ErrorModal(frame, "ไม่พบข้อมูล Section ID โปรดสร้างกลุ่มเรียนก่อน");
+                        return;
+                    }
+
+                    String courseId = subjectCode.getText();
+                    String dayOfWeek = dayToStudy.getSelectedItem().toString();
+                    String startTime = timetostudy.getSelectedItem().toString();
+                    String endTime = timetofree.getSelectedItem().toString();
+                    String building = tow.getSelectedItem().toString();
+                    String room = this.room.getText();
+                    int section = group.getSelectedIndex();
+                    String type = this.type.getSelectedItem().toString();
+                    String teacherName = teacherNamebuffer;
+
+                    try{
+                        new AdminCreateClassroom().create(courseId,dayOfWeek,startTime,endTime,building,room,section,type,teacherName);
+                        new SuccessModal(frame,"สร้างห้องเรียนสำเร็จ");
+                    }
+                    catch (Exception e){
+                        new ErrorModal(frame, e.getMessage());
+                        return;
+                    }
+
             }
             frame.getContentPane().removeAll();
             frame.revalidate();

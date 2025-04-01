@@ -16,7 +16,8 @@ public class AdminCreateClassroom {
             if (section == 3) {
                 sectionCode = "C";
             }
-            String sql = "UPDATE `section` SET  WHERE `section`.`section_id` = '"+ ( "" + courseId + sectionCode) +"'";
+            String sql = "UPDATE `section` SET "+"`day_of_week` = '"+dayOfWeek+"', `start_time` = '"+startTime+"', `end_time` = '"+ endTime +"', `building` = '"+building+"', `room` = '"+room+"', `section` = '"+section+"', `prof_name` = '"+teacherName+"'"+"  WHERE `section`.`section_id` = '"+ ( "" + courseId + sectionCode) +"';";
+            db.postQuery(sql);
         }
         catch (Exception e) {
             throw new Exception("ตรวจสอบให้แน่ใจว่า Section และ Course ID ถูกต้อง");
