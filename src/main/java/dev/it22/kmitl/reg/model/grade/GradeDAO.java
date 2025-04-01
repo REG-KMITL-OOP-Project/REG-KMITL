@@ -22,6 +22,21 @@ public class GradeDAO {
         return enrollment;
     }
 
+    public String getSubjectNameById(String courseCode) {
+        Database db = new Database();
+        String sql = "SELECT * FROM course WHERE course_code = '" + courseCode + "';";
+        String subjectName = "";
+        try {
+            ResultSet rs = db.getQuery(sql);
+            while (rs.next()) {
+                subjectName = rs.getString("course_name");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return subjectName;
+    }
+
     public void addGrade(String enrollmentId, String grade) {
         Database db = new Database();
         String sql = "INSERT INTO grade (enrollment_id, grade) VALUES ('" + enrollmentId + "', '" + grade + "');";
