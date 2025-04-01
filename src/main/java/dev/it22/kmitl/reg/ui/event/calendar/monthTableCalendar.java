@@ -104,17 +104,17 @@ public class monthTableCalendar implements MouseListener{
         }
     }
 
-    public static void main(String[] args) {
-        try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-            monthTableCalendar sample = new monthTableCalendar();
-            sample.testSizeData(new calendarData());
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
+//    public static void main(String[] args) {
+//        try {
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            monthTableCalendar sample = new monthTableCalendar();
+//            sample.testSizeData(new calendarData());
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//    }
 
 
     @Override
