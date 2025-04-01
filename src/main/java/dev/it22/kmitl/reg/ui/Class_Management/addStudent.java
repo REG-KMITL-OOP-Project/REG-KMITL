@@ -233,11 +233,11 @@ public class addStudent implements FocusListener, ActionListener {
                 }
             }
             if (stdID.isEmpty()) {
-                JOptionPane.showMessageDialog(frame, "Please enter student id", "Error", JOptionPane.ERROR_MESSAGE);
+                new ErrorModal(frame, "Please enter student id");
                 return;
             }
             enrollmentController.addEnrollment(enrollmentId, stdID, sectionID);
-            JOptionPane.showMessageDialog(frame, "Enroll successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            new SuccessModal(frame, "Enroll successfully");
         } else if (e.getSource() == showName) {
 
         }
