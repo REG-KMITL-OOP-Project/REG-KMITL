@@ -7,10 +7,10 @@ import dev.it22.kmitl.reg.ui.admin.UserManagement;
 import dev.it22.kmitl.reg.ui.event.admin.*;
 import dev.it22.kmitl.reg.ui.event.examSch.*;
 import dev.it22.kmitl.reg.ui.profile.LoginFrame;
-import dev.it22.kmitl.reg.ui.request.UserRequestView;
 import dev.it22.kmitl.reg.ui.transcript.TranscriptController;
 import dev.it22.kmitl.reg.ui.event.classSch.*;
 import dev.it22.kmitl.reg.ui.event.calendar.*;
+import dev.it22.kmitl.reg.ui.Class_Management.*;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RealTimeClock;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -227,7 +227,7 @@ public class HomePage implements ActionListener {
             } else if (e.getSource().equals(button[1])) {
                 new ExamSchedulePage(frame);
             } else if (e.getSource().equals(button[2])) {
-                System.out.println("Student3");
+                new student_checkGrade(frame);
             } else if (e.getSource().equals(button[3])) {
                 new CalendarPage(frame);
             } else if (e.getSource().equals(button[4])) {
@@ -244,9 +244,9 @@ public class HomePage implements ActionListener {
             } else if (e.getSource().equals(button[1])) {
                 new TeacherExamSchedulePage(frame);
             } else if (e.getSource().equals(button[2])) {
-                System.out.println("Prof3");
+                new TeacherAddScore(frame);
             } else if (e.getSource().equals(button[3])) {
-                System.out.println("Prof4");
+                new TeacherAddGrade(frame);
             } else if (e.getSource().equals(button[4])){
                 new CalendarPage(frame);
             } else if (e.getSource().equals(button[5])) {
@@ -274,8 +274,8 @@ public class HomePage implements ActionListener {
         JFrame config = Config.createAndShowGUI();
 
         try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-            //new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
             //new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         } catch (Exception e) {

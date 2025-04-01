@@ -1,4 +1,5 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
+import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.Database;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -29,7 +30,12 @@ public class create_class implements ActionListener{
         home.setBorderPainted(false);
         home.setContentAreaFilled(false);
         home.setFocusPainted(false);
-        home.addActionListener(this);
+        home.addActionListener(e -> {
+            frame.getContentPane().removeAll();
+            frame.revalidate();
+            frame.repaint();
+            new HomePage(frame);
+        });
 
         ImageIcon logo = new ImageIcon(new ImageIcon("source/Logo.png").getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH));
         JLabel regLabel = new JLabel(logo);
