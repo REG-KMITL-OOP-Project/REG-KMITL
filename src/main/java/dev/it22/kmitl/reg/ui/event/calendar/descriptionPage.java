@@ -31,10 +31,10 @@ public class descriptionPage extends EventPage implements ActionListener {
         description.setText(list.get(1));
         eventType.setSelectedItem(("   ")+(list.get(3)));
         showEventName = false; showDateStart = false; showDateEnd = false; showDescription = false;
-        eventName.setForeground(Color.black);
-        dateStart.setForeground(Color.black);
-        dateEnd.setForeground(Color.black);
-        description.setForeground(Color.black);
+        eventName.setForeground(Config.bgColor_base);
+        dateStart.setForeground(Config.bgColor_base);
+        dateEnd.setForeground(Config.bgColor_base);
+        description.setForeground(Config.bgColor_base);
 
         panelCan = new JPanel();
         panelCan.setBackground(null);
