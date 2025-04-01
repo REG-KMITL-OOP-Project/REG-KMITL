@@ -78,7 +78,24 @@ public  class SubjectHomepage implements ActionListener {
 
         Semester = new JComboBox();
         Semester.addItem("ภาคการศึกษา");
-        Semester.addItem("2025");
+        try{
+            ArrayList<String> semesters = new ArrayList<>();
+            ResultSet rs = new Database().getQuery("SELECT * FROM course");
+            rs.next();
+            Semester.addItem(rs.getString("years"));
+            semesters.add(rs.getString("years"));
+            while(rs.next()){
+                for (int i = 0; i < semesters.size(); i++){
+                    if (!semesters.get(i).equals(rs.getString("years"))){
+                        semesters.add(rs.getString("years"));
+                        Semester.addItem(rs.getString("years"));
+                        break;
+                    }
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         Semester.setRenderer(new CustomCombobox(115,35));
         Semester.setFont(Config.HEADER_SEMIBOLD[2]);
         Semester.addActionListener(this);
@@ -185,11 +202,14 @@ public  class SubjectHomepage implements ActionListener {
                 int count = 0;
                 ResultSet rs = new Database().getQuery("SELECT * FROM section WHERE course_id = '" + course.getCourseCode().get(i) + "';");
                 while (rs.next()) {
+                    ResultSet rs1 = new Database().getQuery("SELECT * FROM exam WHERE section = '" + rs.getString("section") + "' AND course_id = '" + course.getCourseCode().get(i) + "';");
+                    rs1.next();
                     if (count == 0) {
-                        String newModel[] = {course.getCourseCode().get(i), course.getCourseName().get(i), rs.getString("section"), rs.getString("room"), rs.getString("prof_name"), course.getPrerequisite().get(i), course.getNote().get(i), "", rs.getString("max_std") };
+                        String newModel[] = {course.getCourseCode().get(i), course.getCourseName().get(i), rs.getString("section"), rs.getString("room"), rs.getString("prof_name"), course.getPrerequisite().get(i), course.getNote().get(i), rs1.getString("midterm_date") + " " + rs1.getString("midterm_start_time") + " - " + rs1.getString("midterm_end_time"), rs.getString("max_std") };
+                        System.out.println(newModel);
                         model.addRow(newModel);
                     }else{
-                        String newModel[] = {"", "", rs.getString("section"), rs.getString("room"), rs.getString("prof_name"), course.getPrerequisite().get(i), course.getNote().get(i), "", rs.getString("max_std") };
+                        String newModel[] = {"", "", rs.getString("section"), rs.getString("room"), rs.getString("prof_name"), course.getPrerequisite().get(i), course.getNote().get(i),  rs1.getString("midterm_date") + " " + rs1.getString("midterm_start_time") + " - " + rs1.getString("midterm_end_time"), rs.getString("max_std") };
                         model.addRow(newModel);
                     }
                     count++;
