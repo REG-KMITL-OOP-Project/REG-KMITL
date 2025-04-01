@@ -2,6 +2,7 @@ package dev.it22.kmitl.reg.ui.request;
 
 import dev.it22.kmitl.reg.controller.request.UserRequestController;
 import dev.it22.kmitl.reg.ui.HomePage;
+import dev.it22.kmitl.reg.ui.admin.UserManagement;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
@@ -14,12 +15,11 @@ public class UserRequestView {
     JFrame frame;
     JPanel upperPanel, lowerPanel, buttonPanel;
     JLabel showLabel;
-    RoundedButton returnBtn;
+    RoundedButton returnBtn, approveButton, rejectButton;
     DefaultTableModel tableModel;
     JTable table;
     JScrollPane scrollPane;
     UserRequestController ctl = new UserRequestController();
-    JButton approveButton, rejectButton;
 
     public UserRequestView(JFrame frame) {
         this.frame = frame;
@@ -28,26 +28,31 @@ public class UserRequestView {
 
         // Upper Panel
         upperPanel = new JPanel(new BorderLayout());
-        upperPanel.setBackground(Config.bgColor_hard);
-        upperPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        upperPanel.setBackground(null);
+        upperPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 50));
         upperPanel.add(Config.createLogoAndTitle(Config.HEADER_SEMIBOLD[3], 50), BorderLayout.WEST);
 
+        JPanel returnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        returnPanel.setBackground(null);
+        returnPanel.setBorder(BorderFactory.createEmptyBorder(35, 20, 0, 0));
         returnBtn = new RoundedButton("", 20);
-        returnBtn.setIcon(new ImageIcon(new ImageIcon("source/undo.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        returnBtn.setPreferredSize(new Dimension(25, 25));
+        returnBtn.setBackground(Config.primaryColor_base);
+        returnBtn.setIcon(new ImageIcon(new ImageIcon("source/undo.png").getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH)));
+        returnBtn.setPreferredSize(new Dimension(40, 40));
         returnBtn.addActionListener(e -> {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            new HomePage(frame);
+            new UserManagement(frame);
         });
-        upperPanel.add(returnBtn, BorderLayout.EAST);
+        returnPanel.add(returnBtn);
+        upperPanel.add(returnPanel, BorderLayout.EAST);
         frame.add(upperPanel, BorderLayout.NORTH);
 
         // Lower Panel
         lowerPanel = new JPanel(new BorderLayout());
-        lowerPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
-        lowerPanel.setBackground(Config.bgColor_hard);
+        lowerPanel.setBorder(BorderFactory.createEmptyBorder(10, 50, 20, 50));
+        lowerPanel.setBackground(null);
 
         showLabel = new JLabel("List of Request");
         showLabel.setFont(Config.HEADER_SEMIBOLD[0]);
@@ -58,25 +63,35 @@ public class UserRequestView {
         String[] columns = {"Request ID", "User Email", "Field Name", "Current Value", "New Value", "Status", "Created At"};
         tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel);
-        table.setBackground(Config.bgColor_hard);
         table.setForeground(Color.WHITE);
+        table.setFont(Config.NORMAL_REGULAR);
 
         scrollPane = new JScrollPane(table);
+        scrollPane.setBackground(Config.bgColor_hard);
         lowerPanel.add(scrollPane, BorderLayout.CENTER);
 
         // Button Panel
         buttonPanel = new JPanel();
-        buttonPanel.setBackground(Config.bgColor_hard);
+        buttonPanel.setBackground(null);
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-        approveButton = new JButton("Approve");
+        approveButton = new RoundedButton("Approve",20);
+        approveButton.setBackground(Config.primaryColor_base);
         approveButton.setEnabled(false);  // ปุ่มจะถูกปิดใช้งานเมื่อไม่มีแถวที่เลือก
         approveButton.addActionListener(e -> approveRequest());
-        rejectButton = new JButton("Reject");
+        approveButton.setForeground(Color.WHITE);
+        approveButton.setFont(Config.HEADER_SEMIBOLD[2]);
+        approveButton.setPreferredSize(new Dimension(120, 40));
+        buttonPanel.add(approveButton);
+
+        rejectButton = new RoundedButton("Reject",20);
+        rejectButton.setBackground(Config.primaryColor_base);
         rejectButton.setEnabled(false);  // ปุ่มจะถูกปิดใช้งานเมื่อไม่มีแถวที่เลือก
         rejectButton.addActionListener(e -> rejectRequest());
-
-        buttonPanel.add(approveButton);
+        rejectButton.setForeground(Color.WHITE);
+        rejectButton.setFont(Config.HEADER_SEMIBOLD[2]);
+        rejectButton.setPreferredSize(new Dimension(120, 40));
         buttonPanel.add(rejectButton);
 
         frame.add(buttonPanel, BorderLayout.SOUTH);

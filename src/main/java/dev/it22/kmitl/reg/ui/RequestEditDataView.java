@@ -3,22 +3,28 @@ package dev.it22.kmitl.reg.ui;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.ErrorModal;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 import dev.it22.kmitl.reg.controller.request.UserRequestController;
+import dev.it22.kmitl.reg.utils.SuccessModal;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.awt.*;
 
 public class RequestEditDataView {
+    private JFrame frame;
     private final User user = new User();
     private final Account acc = user.getUserAccount();
 
     public RequestEditDataView(JFrame frame) {
+        this.frame = frame;
         JLayeredPane layeredPane = frame.getLayeredPane();
+
         JDesktopPane desktopPane = new JDesktopPane();
         desktopPane.setOpaque(false);
         desktopPane.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+      
         JInternalFrame internalFrame = new JInternalFrame("", false, true, false, false);
         ((javax.swing.plaf.basic.BasicInternalFrameUI) internalFrame.getUI()).setNorthPane(null);
         internalFrame.setFrameIcon(null);
@@ -26,9 +32,9 @@ public class RequestEditDataView {
         internalFrame.setLocation(100, 100);
         internalFrame.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         internalFrame.getContentPane().setLayout(new BorderLayout());
-        internalFrame.setVisible(true);
         internalFrame.setLocation((desktopPane.getWidth() - internalFrame.getWidth()) / 2, (desktopPane.getHeight() - internalFrame.getHeight()) / 2);
         internalFrame.getContentPane().setBackground(Config.bgColor_hard);
+        internalFrame.setVisible(true);
 
         JPanel upperPanel = new JPanel(new BorderLayout());
         upperPanel.setBackground(Config.bgColor_hard);
@@ -118,7 +124,7 @@ public class RequestEditDataView {
             }
             String newValue = txt.getText().trim();
             if (newValue.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "กรุณากรอกข้อมูลใหม่!", "Warning", JOptionPane.WARNING_MESSAGE);
+                new ErrorModal(frame,"ร้องขอเปลี่ยนข้อมูลไม่สำเร็จ กรุณาตรวจสอบข้อมูลอีกครั้ง");
                 return;
             }
 
@@ -140,9 +146,9 @@ public class RequestEditDataView {
         UserRequestController userRequestController = new UserRequestController();
         boolean success = userRequestController.sendRequest(email, fieldName, oldValue, newValue);
         if (success) {
-            JOptionPane.showMessageDialog(null, "Request sent successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            new SuccessModal(frame,"ร้องขอเปลี่ยนข้อมูลเสร็จสิ้น");
         } else {
-            JOptionPane.showMessageDialog(null, "Failed to send request.", "Error", JOptionPane.ERROR_MESSAGE);
+            new ErrorModal(frame,"เกิดข้อผิดพลาด ร้องขอเปลี่ยนข้อมูลไม่สำเร็จ");
         }
     }
 
