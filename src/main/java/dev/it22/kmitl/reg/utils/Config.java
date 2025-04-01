@@ -38,7 +38,7 @@ public class Config {
     }
 
     public static JFrame createAndShowGUI() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension screenSize = new Dimension(1536,864);
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("REG-KMITL");
@@ -47,7 +47,6 @@ public class Config {
         frame.setSize(new Dimension(screenSize.width * 4/5,screenSize.height *4/5));
         frame.setIconImage(new ImageIcon("source/Logo.png").getImage());
         frame.setLocationRelativeTo(null);
-        System.out.println(screenSize);
         return frame;
     }
     public static JPanel createLogoAndTitle(Font font,int squareSize) {

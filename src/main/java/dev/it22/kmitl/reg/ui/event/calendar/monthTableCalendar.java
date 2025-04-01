@@ -1,6 +1,9 @@
 package dev.it22.kmitl.reg.ui.event.calendar;
 
+import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.ui.event.admin.EditEventPage;
+import dev.it22.kmitl.reg.ui.event.examSch.ExamSchedulePage;
+import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
 import java.awt.*;
@@ -93,6 +96,25 @@ public class monthTableCalendar implements MouseListener{
     public JPanel getSpe() {
         return spe;
     }
+
+
+    public void testSizeData(calendarData data) {
+        for (int i = 1 ; i <= 12 ; i++ ){
+            System.out.println(data.getDataEvents(i).size());
+        }
+    }
+
+//    public static void main(String[] args) {
+//        try {
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            monthTableCalendar sample = new monthTableCalendar();
+//            sample.testSizeData(new calendarData());
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//    }
 
 
     @Override

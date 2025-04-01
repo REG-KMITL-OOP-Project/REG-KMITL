@@ -62,7 +62,7 @@ public class Database {
     }
 
 
-    public ResultSet getQuery(String query) throws SQLException {
+    public ResultSet getQuery(String query) throws  SQLException {
         System.out.println("💗 Try to execute query " + query);
         try{
 
@@ -71,11 +71,11 @@ public class Database {
         }
         catch (Exception e) {
             System.out.println("❤️‍🔥 Error executing query " + query + " : " + e.getMessage());
+            throw new SQLException("Database Error: " + e.getMessage());
         }
-        return null;
     }
 
-    public int postQuery(String query) throws SQLException {
+    public int postQuery(String query) throws  SQLException {
         System.out.println("💗 Try to execute query " + query);
         try{
             Statement stmt = conn.createStatement();
@@ -83,7 +83,7 @@ public class Database {
         }
         catch (Exception e) {
             System.out.println("❤️‍🔥 Error executing query " + query + " : " + e.getMessage());
+            throw new SQLException("Database Error: " + e.getMessage());
         }
-        return 0;
     }
 }

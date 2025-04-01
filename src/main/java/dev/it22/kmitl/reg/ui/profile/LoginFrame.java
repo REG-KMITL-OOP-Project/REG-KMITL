@@ -25,7 +25,6 @@ public class LoginFrame implements ActionListener {
 
     public LoginFrame(JFrame frame) {
         this.frame = frame;
-        frame.setTitle("Login");
         frame.setLayout(new BorderLayout());
         frame.getContentPane().setBackground(Config.bgColor_base);
         frame.add(Config.createLogoAndTitle(Config.HEADER_SEMIBOLD[3], 50), BorderLayout.NORTH);

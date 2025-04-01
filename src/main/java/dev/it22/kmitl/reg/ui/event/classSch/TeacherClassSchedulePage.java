@@ -6,12 +6,16 @@ import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.model.auth.Prof;
 import dev.it22.kmitl.reg.ui.event.component.newHeader;
+import dev.it22.kmitl.reg.ui.event.component.seletedItemCombobox;
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.ErrorModal;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class TeacherClassSchedulePage{
+public class TeacherClassSchedulePage implements ActionListener, seletedItemCombobox {
     private JFrame frame;
     private JPanel pn1 , pn2;
 
@@ -27,6 +31,10 @@ public class TeacherClassSchedulePage{
     private JComboBox year, semester, exam ;
     private String years[] = {"2568", "2567", "2566"};
     private String semesters[] = {"เทอม 1", "เทอม 2"};
+    private Font innerFont, regularFont;
+    private String yearItem,semItem,examItem;
+
+
 
     // table
     private ClassScheduleTable table;
@@ -65,6 +73,9 @@ public class TeacherClassSchedulePage{
         choseExam.setBackground(null);
         ProfInfo.setBackground(null);
 
+        regularFont = Config.NORMAL_REGULAR;
+        innerFont = regularFont.deriveFont(12f);
+
 
 //        ID = new JLabel("รหัส : ");
 //        name = new JLabel("ชื่อ : ");
@@ -82,8 +93,7 @@ public class TeacherClassSchedulePage{
         semester = new JComboBox(semesters);
 
         //change font in combobox
-        JComboBox<String> semester = new JComboBox<>(semesters);
-        semester.setFont(Config.NORMAL_REGULAR);
+        semester.setFont(innerFont);
 
 
         //panel-year
@@ -91,10 +101,12 @@ public class TeacherClassSchedulePage{
         choseYear.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         choseYear.setLayout(new GridLayout(1, 1));
         choseYear.add(year);
+        year.addActionListener(this);
 
         //panel-semester
         choseSem.setLayout(new GridLayout(1, 1));
         choseSem.add(semester);
+        semester.addActionListener(this);
 
 
         //panel-studentInfo
@@ -130,13 +142,14 @@ public class TeacherClassSchedulePage{
 
 
         //table
-        table = new ClassScheduleTable();
+        table = new ClassScheduleTable(frame);
         pn1.add(table, BorderLayout.CENTER);
 
         frame.setLayout(new BorderLayout());
         headerPanel = new newHeader("ตารางสอน", frame, table);
         frame.add(headerPanel, BorderLayout.NORTH);
         frame.add(pn1, BorderLayout.CENTER);
+
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -153,6 +166,42 @@ public class TeacherClassSchedulePage{
         }
 
     }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == year){
+            yearItem = selectedItem(year);
+            if (year.getSelectedIndex() != 0){
+                new ErrorModal(frame, "ขออภัย ยังไม่มีข้อมูลในขณะนี้");
+                year.setSelectedIndex(0);
+            }
+        }
+        if (e.getSource() == semester){
+            semItem = selectedItem(semester);
+            if (semester.getSelectedIndex() != 0){
+                new ErrorModal(frame, "ขออภัย ยังไม่มีข้อมูลในขณะนี้");
+                semester.setSelectedIndex(0);
+            }
+        }
+    }
 
+    @Override
+    public String selectedItem(JComboBox comboBox){
+        String selectedItem = (String) comboBox.getSelectedItem();
+        return selectedItem;
+    }
 
+    @Override
+    public String getYearItem() {
+        return yearItem;
+    }
+
+    @Override
+    public String getSemItem(){
+        return semItem;
+    }
+
+    @Override
+    public String getExamItem() {
+        return null;
+    }
 }
