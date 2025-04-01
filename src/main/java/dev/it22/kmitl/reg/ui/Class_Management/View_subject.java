@@ -103,6 +103,10 @@ public class View_subject implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int groupNum = 0;
+                DefaultTableModel model = new DefaultTableModel(null, columnNames);
+                tablesubject = new JTable(model);
+                tablesubject.setRowHeight(30);
+                tablesubject.setFont(Config.NORMAL_REGULAR);
                 try{
                     groupNum = Integer.valueOf(group.getSelectedItem().toString());
                 } catch (Exception ev){
@@ -111,17 +115,38 @@ public class View_subject implements ActionListener {
                 }
                 try{
                     subjectRs = new Subject().getCourseByIdWithSection(courseCode,groupNum);
-                    model.setRowCount(0); // Clear the table before adding new data
                     while (subjectRs.next()) {
                         System.out.println("---");
                         System.out.println("std_id: " + subjectRs.getString("std_id"));
                         ResultSet stdrs = new ScoreDatabase().getStudentData(subjectRs.getString("std_id"));
-                        String name = stdrs.getString("fname");
+                        String name = stdrs.getString("fname") + " " + stdrs.getString("lname");
                         model.addRow( new Object[]{
                                 subjectRs.getString("std_id"),
                                 name
                         });
                     }
+
+                    JTableHeader header = tablesubject.getTableHeader();
+                    header.setFont(Config.HEADER_SEMIBOLD[2]);
+                    header.setBackground(Config.primaryColor_harder);
+                    header.setForeground(Color.WHITE);
+                    header.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Config.primaryColor_harder));
+
+                    tablesubject.getTableHeader().setReorderingAllowed(false);
+                    tablesubject.getTableHeader().setResizingAllowed(false);
+
+                    for (int i = 0; i < tablesubject.getColumnCount(); i++) {
+                        tablesubject.getColumnModel().getColumn(i);
+                    }
+                    showdetail_table = new JScrollPane(tablesubject);
+                    showdetail_table.setPreferredSize(new Dimension(700, 400));
+                    showdetail_table.setBackground(null);
+
+                    tableSub.removeAll();
+                    tableSub.revalidate();
+                    tableSub.repaint();
+                    tableSub.add(showdetail_table);
+                    tableSub.setBackground(null);
                 }
                 catch (Exception er){
                     new ErrorModal(frame, "ไม่สามารถดึงข้อมูลได้");
@@ -155,6 +180,7 @@ public class View_subject implements ActionListener {
         DefaultTableModel model = new DefaultTableModel(null, columnNames);
         tablesubject = new JTable(model);
         tablesubject.setRowHeight(30);
+        tablesubject.setFont(Config.NORMAL_REGULAR);
 
         try{
             subjectRs = new Subject().getCourseByIdWithSection(courseCode,1);
@@ -162,7 +188,7 @@ public class View_subject implements ActionListener {
                 System.out.println("---");
                 System.out.println("std_id: " + subjectRs.getString("std_id"));
                 ResultSet stdrs = new ScoreDatabase().getStudentData(subjectRs.getString("std_id"));
-                String name = stdrs.getString("fname");
+                String name = stdrs.getString("fname") + " " + stdrs.getString("lname");
                 model.addRow( new Object[]{
                         subjectRs.getString("std_id"),
                         name
