@@ -39,7 +39,7 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         this.frame = frame;
 //        user = new User().getUserAccount();
 
-        data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา", frame);
+        data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา ", frame);
         data_id_student = new callData("กรอกรหัสนักศึกษา", "แสดงข้อมูล", frame);
         data_id_student.setInfoSize(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 40));
         data_id_subject.setInfoSize(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 40));
@@ -246,7 +246,10 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
     public static void setSubject(ResultSet subject) {
         TeacherAddGrade.subject_data = subject;
         try {
-            TeacherAddGrade.subject.setText("ชื่อวิชา " + TeacherAddGrade.subject_data.getString("course_name"));
+            if (subject_data.next()) {
+                System.out.println(subject_data.getString("course_name"));
+                TeacherAddGrade.subject.setText("ชื่อวิชา " + TeacherAddGrade.subject_data.getString("course_name"));
+            }
         } catch (Exception ex) {
             new ErrorModal(TeacherAddGrade.frame, "Error");
         }

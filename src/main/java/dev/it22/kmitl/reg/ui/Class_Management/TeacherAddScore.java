@@ -42,7 +42,11 @@ public class TeacherAddScore implements FocusListener, ActionListener {
     public static void setSubject(ResultSet subject) {
         TeacherAddScore.subject_data = subject;
         try {
-            TeacherAddScore.subject.setText("ชื่อวิชา "+TeacherAddScore.subject_data.getString("course_name"));
+            if (subject_data.next()) {
+
+                course_id = subject_data.getString("course_code");
+                TeacherAddScore.subject.setText("ชื่อวิชา "+subject_data.getString("course_name"));
+            }
         }
         catch (Exception ex) {
             new ErrorModal(TeacherAddScore.frame,"Error");
@@ -203,11 +207,6 @@ public class TeacherAddScore implements FocusListener, ActionListener {
 
         cancel.addActionListener(this);
         save.addActionListener(e -> {
-            if (score.getText().isEmpty() || score.getText().equals("  กรอกคะแนน")) {
-                new ErrorModal(frame,"กรุณากรอกคะแนน");
-                return;
-            }
-
             if (course_id == null || course_id.isEmpty()) {
                 new ErrorModal(frame,"กรุณากรอกรหัสวิชา หากกรอกแล้วให้กดปุ่มแสดงชื่อวิชา");
                 return;
@@ -215,6 +214,10 @@ public class TeacherAddScore implements FocusListener, ActionListener {
 
             if (std_id == null || std_id.isEmpty()) {
                 new ErrorModal(frame,"กรุณากรอกรหัสนักศึกษา หากกรอกแล้วให้กดปุ่มแสดงข้อมูล");
+                return;
+            }
+            if (score.getText().isEmpty() || score.getText().equals("  กรอกคะแนน")) {
+                new ErrorModal(frame,"กรุณากรอกคะแนน");
                 return;
             }
 
