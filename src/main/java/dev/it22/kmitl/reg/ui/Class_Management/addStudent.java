@@ -18,23 +18,28 @@ import java.awt.event.FocusListener;
 
 public class addStudent implements FocusListener, ActionListener {
     private JFrame frame;
-    private JLabel title, subjectName, subjectID, teacherName;
+    private JLabel title, subjectName, subjectID, teacherName, section;
     private RoundedButtonWithColor cancel, save;
     private RoundedTextField showName;
     private callData insertID;
-    private JComboBox section;
     private Font innerFont, regularFont;
     private JPanel button, subjectInfo, teacherInfo, stdInfo, titlePanel, allInfo,
             panelSave, panelCan, sectionPanel, subjectNamePanel, subjectIDPanel, pane;
     private boolean show;
     private EnrollmentController enrollmentController = new EnrollmentController();
+    private String courseCode, courseName, teacher;
+    private int groupNum;
 
 
     private stdInfo s;
 
 
-    public addStudent(JFrame frame) {
+    public addStudent(JFrame frame, String courseCode, String courseName, String teacher, int groupNum) {
         this.frame = frame;
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.teacher = teacher;
+        this.groupNum = groupNum;
         frame.setLayout(new BorderLayout());
         frame.setBackground(null);
 
@@ -65,13 +70,13 @@ public class addStudent implements FocusListener, ActionListener {
         pane.setBackground(null);
 
         title = new JLabel("เพิ่มนักศึกษา");
-        subjectName = new JLabel("ชื่อวิชา");
-        subjectID = new JLabel("รหัสวิชา");
+        subjectName = new JLabel("ชื่อวิชา : "+courseName);
+        subjectID = new JLabel("รหัสวิชา : "+courseCode);
         teacherName = new JLabel("อาจารย์ประจำกลุ่มเรียน :");
         cancel = new RoundedButtonWithColor("CANCEL", 22, new Color(255, 247, 237), Config.primaryColor_base);
         save = new RoundedButtonWithColor("SAVE", 22, new Color(255, 247, 237), Config.primaryColor_harder);
         insertID = new callData("กรอกรหัสนักศึกษา", Config.bgColor_hard, Color.WHITE, "แสดงชื่อ", Color.WHITE, Config.primaryColor_base);
-        section = new JComboBox();
+        section = new JLabel("กลุ่มเรียนที่ : " + groupNum);
         regularFont = Config.NORMAL_REGULAR;
         innerFont = regularFont.deriveFont(15f);
 
@@ -95,22 +100,14 @@ public class addStudent implements FocusListener, ActionListener {
 
         subjectID.setFont(Config.HEADER_SEMIBOLD[2]);
         subjectID.setForeground(Color.WHITE);
-        subjectIDPanel.add(subjectID);
+        subjectNamePanel.add(subjectID);
 
-        section.addItem("กลุ่มเรียนที่");
-        section.addItem("1");
-        section.addItem("2");
-        section.addItem("3");
-        section.setRenderer(new CustomCombobox());
-        section.setMaximumRowCount(4);
-        section.setFont(Config.NORMAL_REGULAR);
-        section.setFont(innerFont);
-        section.setPreferredSize(new Dimension((int) (frame.getWidth() / 6), (frame.getHeight() / 4) - 120));
-        sectionPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
+        section.setFont(Config.HEADER_SEMIBOLD[2]);
+        section.setForeground(Color.WHITE);
+        sectionPanel.setLayout(new FlowLayout());
         sectionPanel.add(section);
 
         subjectInfo.add(subjectNamePanel);
-        subjectInfo.add(subjectIDPanel);
         subjectInfo.add(sectionPanel);
 
         teacherName.setFont(Config.HEADER_SEMIBOLD[2]);
@@ -168,7 +165,7 @@ public class addStudent implements FocusListener, ActionListener {
     }
 
     public static void main(String[] args) {
-        new addStudent(Config.createAndShowGUI());
+        //new addStudent(Config.createAndShowGUI());
     }
 
     @Override
@@ -190,7 +187,7 @@ public class addStudent implements FocusListener, ActionListener {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            new View_subject(frame);
+            new View_subject(frame, courseCode, courseName, teacher);
         } else if (e.getSource() == save) {
             String stdID = insertID.getText();
             String subjectID = "06016408";
@@ -199,7 +196,7 @@ public class addStudent implements FocusListener, ActionListener {
             String studentName = enrollmentController.getStudentById(stdID);
             showName.setText(studentName);
             String sectionID = subjectID;
-            switch (section.getSelectedIndex()) {
+            switch (groupNum) {
                 case 1:
                     sectionID += 'A';
                     break;
@@ -210,7 +207,7 @@ public class addStudent implements FocusListener, ActionListener {
                     sectionID += 'C';
                     break;
             }
-            String enrollmentId = stdID + section.getSelectedIndex();
+            String enrollmentId = stdID + groupNum;
             if (stdID.isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "Please enter student id", "Error", JOptionPane.ERROR_MESSAGE);
                 return;

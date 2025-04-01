@@ -1,18 +1,20 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
+import dev.it22.kmitl.reg.model.classroom.CourseData;
 import dev.it22.kmitl.reg.ui.HomePage;
-import dev.it22.kmitl.reg.utils.Config;
-import dev.it22.kmitl.reg.utils.CustomCombobox;
-import dev.it22.kmitl.reg.utils.FacultyComboBox;
-import dev.it22.kmitl.reg.utils.RoundedButton;
+import dev.it22.kmitl.reg.utils.*;
 
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public  class SubjectHomepage implements ActionListener {
+    private CourseData course;
+    private DefaultTableModel model;
     private JFrame frame;
     private JButton home;
     private JLabel regLabel;
@@ -72,11 +74,14 @@ public  class SubjectHomepage implements ActionListener {
         Faculty = new FacultyComboBox("คณะ");
         Faculty.setRenderer(new CustomCombobox(50,35));
         Faculty.setFont(Config.HEADER_SEMIBOLD[2]);
+        Faculty.addActionListener(this);
 
         Semester = new JComboBox();
         Semester.addItem("ภาคการศึกษา");
+        Semester.addItem("2025");
         Semester.setRenderer(new CustomCombobox(115,35));
         Semester.setFont(Config.HEADER_SEMIBOLD[2]);
+        Semester.addActionListener(this);
 
         combobox = new JPanel();
         combobox.add(Faculty);
@@ -85,24 +90,29 @@ public  class SubjectHomepage implements ActionListener {
         combobox.setBackground(null);
 
         //table//
-        DefaultTableModel model = new DefaultTableModel(null, columnNames);
+        model = new DefaultTableModel(null, columnNames);
         table = new JTable(model);
         JTableHeader header = table.getTableHeader();
         table.setRowHeight(30);
         header.setFont(Config.HEADER_SEMIBOLD[2]);
 
-        
 
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setResizingAllowed(false);
+        table.setFont(Config.NORMAL_REGULAR);
+        JTextField textFieldEditor = new JTextField();
+        textFieldEditor.setFont(Config.NORMAL_REGULAR);
 
         for (int i = 0; i < table.getColumnCount(); i++) {
-            table.getColumnModel().getColumn(i);
+            table.getColumnModel().getColumn(i).setCellEditor(new DefaultCellEditor(textFieldEditor));
         }
 
         showdetail_Subject = new JScrollPane(table);
         showdetail_Subject.setPreferredSize(new Dimension(1000, 400));
         showdetail_Subject.setBackground(null);
+        table.setPreferredScrollableViewportSize(new Dimension(300, 300));
+        table.setFillsViewportHeight(true);
+
 
         setlayout = new JPanel();
         setlayout.setLayout(new FlowLayout());
@@ -157,7 +167,36 @@ public  class SubjectHomepage implements ActionListener {
             frame.revalidate();
             frame.repaint();
             new HomePage(frame);
+        } else if (e.getSource().equals(Faculty) || e.getSource().equals(Semester)) {
+            course = new CourseData("SELECT * FROM course WHERE years = '" + Semester.getSelectedItem().toString() + "'AND faculty_id = '" + Faculty.getFacultyCode() + "';");
+            try {
+                refresh();
+            }catch (Exception e1) {
+                e1.printStackTrace();
+            }
         }
 
+    }
+
+    public void refresh(){
+        model.setRowCount(0);
+        for (int i=0; i < course.getCourseCode().size(); i++) {
+            try {
+                int count = 0;
+                ResultSet rs = new Database().getQuery("SELECT * FROM section WHERE course_id = '" + course.getCourseCode().get(i) + "';");
+                while (rs.next()) {
+                    if (count == 0) {
+                        String newModel[] = {course.getCourseCode().get(i), course.getCourseName().get(i), rs.getString("section"), rs.getString("room"), rs.getString("prof_name"), course.getPrerequisite().get(i), course.getNote().get(i), "", rs.getString("max_std") };
+                        model.addRow(newModel);
+                    }else{
+                        String newModel[] = {"", "", rs.getString("section"), rs.getString("room"), rs.getString("prof_name"), course.getPrerequisite().get(i), course.getNote().get(i), "", rs.getString("max_std") };
+                        model.addRow(newModel);
+                    }
+                    count++;
+                }
+            }catch ( Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 }

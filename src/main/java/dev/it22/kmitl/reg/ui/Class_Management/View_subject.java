@@ -1,6 +1,8 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.Database;
+import dev.it22.kmitl.reg.utils.ErrorModal;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
 import javax.swing.*;
@@ -8,6 +10,7 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 public class View_subject implements ActionListener {
     private JFrame frame;
@@ -19,9 +22,13 @@ public class View_subject implements ActionListener {
     private JTable tablesubject;
     private JScrollPane showdetail_table;
     private String columnNames[] = {"รหัสนักศึกษา","ชื่อนักศึกษา"};
+    private String courseCode,courseName, teacherName;
 
-    public View_subject(JFrame frame){
+    public View_subject(JFrame frame, String course_code, String course_name, String teacherName) {
         this.frame = frame;
+        this.courseCode = course_code;
+        this.courseName = course_name;
+        this.teacherName = teacherName;
         //ปุ่มรูปบ้าน
         ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home.png").getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH));
         home = new JButton(homeIcon);
@@ -43,9 +50,9 @@ public class View_subject implements ActionListener {
         setposition.add(ICON, BorderLayout.WEST);
         setposition.setBackground(null);
 
-        namesubject = new JLabel("sing");
-        idsubject = new JLabel("0670975");
-        teacher = new JLabel("ชื่ออาจารย์");
+        namesubject = new JLabel(course_name);
+        idsubject = new JLabel(course_code);
+        teacher = new JLabel("อาจารย์ : " + teacherName);
 
 //        teacher = new JLabel(((Prof) user).getFullName()); ชื่ออาจารย์
 
@@ -149,6 +156,15 @@ public class View_subject implements ActionListener {
         alltitle.add(setposition,BorderLayout.NORTH);
         alltitle.add(obj_page,BorderLayout.CENTER);
 
+        try {
+            ResultSet rs = new Database().getQuery("SELECT * FROM section WHERE course_id = '" + course_code + "';");
+            while (rs.next()) {
+                group.addItem(rs.getString("section"));
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
         this.frame = frame;
         frame.setLayout(new BorderLayout());
         frame.add(alltitle,BorderLayout.NORTH); //north ใส่แถบข้างบนทั้งหมด
@@ -157,16 +173,23 @@ public class View_subject implements ActionListener {
         frame.setVisible(true);
     }
     public static void main(String[] args) {
-        new View_subject(Config.createAndShowGUI());
+        //new View_subject(Config.createAndShowGUI());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(addstudent)){
+            int groupNum = 0;
+            try{
+                groupNum = Integer.valueOf(group.getSelectedItem().toString());
+            } catch (Exception ev){
+                new ErrorModal(frame, "กรุณาเลือกกลุ่มเรียน");
+                return;
+            }
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            new addStudent(frame);
+            new addStudent(frame, courseCode,courseName,teacherName, groupNum);
         } else if (e.getSource().equals(back)) {
             frame.getContentPane().removeAll();
             frame.revalidate();

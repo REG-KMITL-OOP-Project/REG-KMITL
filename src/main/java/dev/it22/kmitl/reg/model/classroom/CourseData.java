@@ -20,6 +20,7 @@ public class CourseData {
         try {
             ResultSet rs = new Database().getQuery(sql);
             while (rs.next()) {
+                System.out.println(rs.getString("course_code"));
                 courseCode.add( rs.getString("course_code"));
                 courseName.add( rs.getString("course_name"));
                 credits.add( rs.getInt("credits"));

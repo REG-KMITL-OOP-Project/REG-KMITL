@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class FacultyComboBox extends JComboBox {
     private ArrayList<String> list = new ArrayList();
+    private boolean notTop = false;
     public FacultyComboBox() {
         super();
         try {
@@ -22,6 +23,7 @@ public class FacultyComboBox extends JComboBox {
 
     public FacultyComboBox(String text) {
         super();
+        notTop = true;
         addItem(text);
         try {
             ResultSet rs = new Database().getQuery("SELECT * FROM faculty");
@@ -40,6 +42,10 @@ public class FacultyComboBox extends JComboBox {
     }
 
     public int getFacultyCode(){
-        return Integer.valueOf(list.get(this.getSelectedIndex()));
+        int index = this.getSelectedIndex();
+        if(notTop){
+            index--;
+        }
+        return Integer.valueOf(list.get(index));
     }
 }

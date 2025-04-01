@@ -1,5 +1,6 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.Database;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 
 import javax.swing.*;
@@ -7,6 +8,7 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 public class create_class implements ActionListener{
     private JFrame frame;
@@ -77,7 +79,8 @@ public class create_class implements ActionListener{
         table.setRowHeight(40);
         header.setFont(Config.HEADER_SEMIBOLD[2]);
         table.getTableHeader().setReorderingAllowed(false);
-        table .getTableHeader().setResizingAllowed(false);
+        table.getTableHeader().setResizingAllowed(false);
+        table.setFont(Config.NORMAL_REGULAR);
 
         back = new RoundedButton("<--",22);
         back.addActionListener(this);
@@ -123,11 +126,39 @@ public class create_class implements ActionListener{
         table.getSelectionModel().addListSelectionListener(e -> {
             int selectedRow = table.getSelectedRow();
             if (selectedRow != -1) {
+
                 enter_classButton.setEnabled(true);
             } else {
                 enter_classButton.setEnabled(false);
             }
         });
+
+        try {
+            ResultSet rs = new Database().getQuery("SELECT * FROM section");
+            String[] newModel = {"", "", "", ""};
+            boolean state = false;
+            while (rs.next()) {
+                ResultSet rs1 = new Database().getQuery("SELECT * FROM course WHERE course_code = '" + rs.getString("course_id") + "';");
+                if(newModel[0].equals(rs.getString("course_id"))){
+                    newModel[2] = rs.getString("section");
+                    newModel[3] = newModel[3] +","+ rs.getString("prof_name");
+                }else if(rs1.next()){
+                    if(state){
+                        tableModel.addRow(newModel);
+                    }
+                    state = true;
+                    newModel[0] = rs.getString("course_id");
+                    newModel[1] = rs1.getString("course_name");
+                    newModel[2] = rs.getString("section");
+                    newModel[3] = rs.getString("prof_name");
+                    System.out.println(newModel[3]);
+                }
+
+            }
+            tableModel.addRow(newModel);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
     public static void main(String[] args) {
@@ -140,7 +171,7 @@ public class create_class implements ActionListener{
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            new View_subject(frame);
+            new View_subject(frame, table.getValueAt(table.getSelectedRow(),0).toString(), table.getValueAt(table.getSelectedRow(),1).toString(), table.getValueAt(table.getSelectedRow(),3).toString());
         }else if(e.getSource().equals(create_classButton)){
             frame.getContentPane().removeAll();
             frame.revalidate();
