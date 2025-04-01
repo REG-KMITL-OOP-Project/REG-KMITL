@@ -21,6 +21,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
     private teacherNameTable table;
     private String [] nameCher ;
     private TimeComboBox timetostudy, timetofree;
+    private DayComboBox dayToStudy;
 
     public AdminAddClassroom(JFrame frame){
         this.frame = frame;
@@ -48,6 +49,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         add = new RoundedButtonWithColor("ADD" ,22,new Color(255, 247, 237),Config.primaryColor_base);
         group = new JComboBox();
         type = new JComboBox();
+        dayToStudy = new DayComboBox();
         nameCher = new String[5];
         regularFont = Config.NORMAL_REGULAR;
         innerFont = regularFont.deriveFont(15f);
@@ -135,16 +137,23 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         room.setText("   เลือกห้องเรียน");
         room.setFont(innerFont);
         room.setForeground(Color.GRAY);
-        room.setPreferredSize(new Dimension((int)(frame.getWidth() / 5),(frame.getHeight() / 4) - 120));
+        room.setPreferredSize(new Dimension((int)(frame.getWidth() / 5.6),(frame.getHeight() / 4) - 120));
         room.addFocusListener(this);
 
         timetostudy = new TimeComboBox();
         timetofree = new TimeComboBox();
+
+        panelRek4.add(dayToStudy);
+        dayToStudy.setMaximumRowCount(3);
+        dayToStudy.setFont(Config.NORMAL_REGULAR);
+        dayToStudy.setFont(innerFont);
+        dayToStudy.setPreferredSize(new Dimension((int)(frame.getWidth() / 5.61),(frame.getHeight() / 4) - 120));
+
         panelRek4.add(timetostudy);
         timetostudy.setMaximumRowCount(3);
         timetostudy.setFont(Config.NORMAL_REGULAR);
         timetostudy.setFont(innerFont);
-        timetostudy.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
+        timetostudy.setPreferredSize(new Dimension((int)(frame.getWidth() / 5.61),(frame.getHeight() / 4) - 120));
         timetostudy.addActionListener(this);
         showTime = true;
 
@@ -153,7 +162,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         timetofree.setMaximumRowCount(3);
         timetofree.setFont(Config.NORMAL_REGULAR);
         timetofree.setFont(innerFont);
-        timetofree.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
+        timetofree.setPreferredSize(new Dimension((int)(frame.getWidth() / 5.61),(frame.getHeight() / 4) - 120));
         timetofree.addActionListener(this);
         showTime = true;
 //        time.setText("   วัน-เวลาเรียน");
