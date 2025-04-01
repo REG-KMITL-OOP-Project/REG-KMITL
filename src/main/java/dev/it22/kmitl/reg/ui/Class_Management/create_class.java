@@ -150,7 +150,6 @@ public class create_class implements ActionListener{
                     newModel[1] = rs1.getString("course_name");
                     newModel[2] = rs.getString("section");
                     newModel[3] = rs.getString("prof_name");
-                    System.out.println(newModel[3]);
                 }
 
             }
