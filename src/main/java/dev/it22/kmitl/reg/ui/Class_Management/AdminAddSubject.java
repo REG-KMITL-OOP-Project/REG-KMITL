@@ -14,7 +14,9 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
     private JPanel panelBig,panelRek1,panelRek2,panelRek3,panelRek4,panelRek5,panelHead,panelYear,panelType,panelKit,panelGroup,panelBranch,panelCode,panelName,panelTeacher,panelNote,panelCondition,panelPela;
     private JLabel addSubject,yearLabel,typeLabel,kitLabel,groupLabel,branchLabel,codeLabel,nameLabel,teacherLabel,noteLabel,conditionLabel;
     private RoundedTextField year,code,name/*,teacher*/,note,condition;
-    private JComboBox type,kit,group,branch;
+    private JComboBox type,kit;
+    private FacultyComboBox group;
+    private MajorComboBox branch;
     private Font innerFont, regularFont;
     private RoundedButton cancel,save;
     private JPanel panelSave = new JPanel() , panelCan = new JPanel();
@@ -61,8 +63,8 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
         save = new RoundedButton("SAVE" ,22);
         type = new JComboBox();
         kit = new JComboBox();
-        group = new JComboBox();
-        branch = new JComboBox();
+        group = new FacultyComboBox();
+        branch = new MajorComboBox(group.getFacultyCode());
         regularFont = Config.NORMAL_REGULAR;
         innerFont = regularFont.deriveFont(15f);
 
@@ -118,7 +120,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
 
         panelRek1.add(panelYear);
         showYear = true;
-        year.setText("   25xx");
+        year.setText("   1");
         year.setFont(innerFont);
         year.setForeground(Color.GRAY);
         year.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
@@ -127,6 +129,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
         panelRek1.add(panelType);
         type.addItem("ทฤษฏี");
         type.addItem("ปฏิบัติ");
+        type.addItem("ทฤษฎี/ปฏิบัติ");
         type.setRenderer(new CustomCombobox());
         type.setMaximumRowCount(3);
         type.setFont(Config.NORMAL_REGULAR);
@@ -165,19 +168,13 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
         codeLabel.setFont(Config.HEADER_SEMIBOLD[2]);
 
         panelRek2.add(panelGroup);
-        group.addItem("เทคโนโลยีสารสนเทศ");
-        group.addItem("บริหารธุรกิจ");
-        group.setRenderer(new CustomCombobox());
         group.setMaximumRowCount(3);
         group.setFont(Config.NORMAL_REGULAR);
         group.setFont(innerFont);
         group.setPreferredSize(new Dimension((int)(frame.getWidth() / 4),(frame.getHeight() / 4) - 120));
+        group.addActionListener(this);
 
         panelRek2.add(panelBranch);
-        branch.addItem("เทคโนโลยีสารสนเทศ");
-        branch.addItem("วิทยาการข้อมูลและการวิเคราะห์เชิงธุรกิจ");
-        branch.addItem("เทคโนโลยีปัญญาประดิษฐ์");
-        branch.setRenderer(new CustomCombobox());
         branch.setMaximumRowCount(3);
         branch.setFont(Config.NORMAL_REGULAR);
         branch.setFont(innerFont);
@@ -317,7 +314,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
     }public void focusLost(FocusEvent e){
         if (year.getText().isEmpty()) {
             showYear = true;
-            year.setText("   25xx");
+            year.setText("   1");
             year.setForeground(Color.GRAY);
         }
 
@@ -350,6 +347,9 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
     private JDialog dialog ;
 
     public void actionPerformed(ActionEvent ev){
+        if(ev.getSource().equals(group)){
+            branch.refresh(group.getFacultyCode());
+        }
         if (ev.getSource() == cancel) {
             if (!(year.getText().equals("   25xx") && code.getText().equals("   06xxxxxx") && name.getText().equals("   OOP") && /*teacher.getText().equals(("  สมชาย")) && */note.getText().equals(("   รายวิชา หลักสูตร พ.ศ.2560 : สำหรับนักศึกษาเก็บตก")) && condition.getText().equals(("   รับเฉพาะนักศึกษาคณะไอที")) )){
                 dialog = Config.openFrame((int) (frame.getWidth() / 2), (int) (frame.getHeight() / 2));
@@ -415,7 +415,7 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
                     return;
                 }else{
                     try {
-                        int db = new Database().postQuery("INSERT INTO course ( course_id, max_std, section ) VALUES ('"+ code.getText() +"' ,'"+ name.getText() +"' ,'"+ ((String)(kit.getSelectedItem())) +"');");
+                        int db = new Database().postQuery("INSERT INTO course ( course_code, course_name, credits, semester, faculty_id, major_id, prerequisite, note ) VALUES ('"+ code.getText() +"' ,'"+ name.getText() +"' ,'"+ ((String)(kit.getSelectedItem())) +"' ,'"+ year.getText() +"' ,'"+ group.getFacultyCode() +"' ,'"+ branch.getCode() +"' ,'"+ condition.getText() +"' ,'"+ note.getText() +"');");
                     }catch (Exception e) {
                         e.printStackTrace();
                     }
