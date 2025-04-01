@@ -139,9 +139,5 @@ public class calendarTable extends JPanel {
     public JTable getTable() {
         return table_column;
     }
-    public int getTableWidth(){
-        System.out.println(table_column.getPreferredSize().width + table_Month.getPreferredSize().width);
-        return column.getWidth() + table_Month.getPreferredSize().width;
-    }
 
 }
