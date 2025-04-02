@@ -1,10 +1,8 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
 import dev.it22.kmitl.reg.controller.auth.Login;
-import dev.it22.kmitl.reg.controller.auth.User;
-import dev.it22.kmitl.reg.model.auth.Account;
-import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
-import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
+import dev.it22.kmitl.reg.ui.Class_Management.component.CallData;
+import dev.it22.kmitl.reg.ui.Class_Management.component.StdInfo;
 import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.utils.*;
 
@@ -25,10 +23,10 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
     private JLabel add_score_student, student;
     private JPanel main_panel, sub1, sub2, sub3, space, subject_panel;
     private JPanel west_panel, student_panel, student_pan, cancel_panel, save_panel, save_cancel_panel;
-    private callData data_id_subject, data_id_student;
+    private CallData data_id_subject, data_id_student;
     private RoundedButton cancel, save;
     private JComboBox grade;
-    private stdInfo std;
+    private StdInfo std;
     private RoundedTextField enter_grade;
     private static RoundedTextField subject;
     private GradeController gradeController = new GradeController();
@@ -39,8 +37,8 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         this.frame = frame;
 //        user = new User().getUserAccount();
 
-        data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา ", frame);
-        data_id_student = new callData("กรอกรหัสนักศึกษา", "แสดงข้อมูล", frame);
+        data_id_subject = new CallData("กรอกรหัสวิชา", "แสดงชื่อวิชา ", frame);
+        data_id_student = new CallData("กรอกรหัสนักศึกษา", "แสดงข้อมูล", frame);
         data_id_student.setInfoSize(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 40));
         data_id_subject.setInfoSize(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 40));
 
@@ -119,7 +117,7 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         sub1.setBackground(null);
         sub1.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 150), frame.getWidth() / (frame.getWidth() / 30)));
 
-        std = new stdInfo();
+        std = new StdInfo();
         sub2 = new JPanel(new BorderLayout());
         sub2.setBackground(null);
         sub2.setBorder(BorderFactory.createEmptyBorder(5, 40, 5, 5));

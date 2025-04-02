@@ -1,8 +1,8 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
 import dev.it22.kmitl.reg.controller.enrollment.EnrollmentController;
-import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
-import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
+import dev.it22.kmitl.reg.ui.Class_Management.component.CallData;
+import dev.it22.kmitl.reg.ui.Class_Management.component.StdInfo;
 import dev.it22.kmitl.reg.utils.*;
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class AddStudent implements FocusListener, ActionListener {
     private JLabel title, subjectName, subjectID, teacherName, section;
     private RoundedButtonWithColor cancel, save;
     private static RoundedTextField showName;
-    private callData insertID;
+    private CallData insertID;
     private Font innerFont, regularFont;
     private JPanel button, subjectInfo, teacherInfo, stdInfo, titlePanel, allInfo,
             panelSave, panelCan, sectionPanel, subjectNamePanel, subjectIDPanel, pane;
@@ -28,7 +28,7 @@ public class AddStudent implements FocusListener, ActionListener {
     private int groupNum;
 
 
-    private stdInfo s;
+    private StdInfo s;
 
 
     public AddStudent(JFrame frame, String courseCode, String courseName, String teacher, int groupNum) {
@@ -72,7 +72,7 @@ public class AddStudent implements FocusListener, ActionListener {
         teacherName = new JLabel("อาจารย์ประจำกลุ่มเรียน : " + teacher);
         cancel = new RoundedButtonWithColor("CANCEL", 22, new Color(255, 247, 237), Config.primaryColor_base);
         save = new RoundedButtonWithColor("SAVE", 22, new Color(255, 247, 237), Config.primaryColor_harder);
-        insertID = new callData("กรอกรหัสนักศึกษา", Config.bgColor_hard, Color.WHITE, "แสดงชื่อ", Color.WHITE, Config.primaryColor_base , frame);
+        insertID = new CallData("กรอกรหัสนักศึกษา", Config.bgColor_hard, Color.WHITE, "แสดงชื่อ", Color.WHITE, Config.primaryColor_base , frame);
         section = new JLabel("กลุ่มเรียนที่ : " + groupNum);
         regularFont = Config.NORMAL_REGULAR;
         innerFont = regularFont.deriveFont(15f);

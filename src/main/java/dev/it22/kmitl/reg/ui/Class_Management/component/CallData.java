@@ -2,9 +2,9 @@ package dev.it22.kmitl.reg.ui.Class_Management.component;
 
 import dev.it22.kmitl.reg.controller.enrollment.EnrollmentController;
 import dev.it22.kmitl.reg.controller.score.ScoreDatabase;
+import dev.it22.kmitl.reg.ui.Class_Management.AddStudent;
 import dev.it22.kmitl.reg.ui.Class_Management.TeacherAddGrade;
 import dev.it22.kmitl.reg.ui.Class_Management.TeacherAddScore;
-import dev.it22.kmitl.reg.ui.Class_Management.AddStudent;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.ErrorModal;
 import dev.it22.kmitl.reg.utils.RoundedButton;
@@ -18,7 +18,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.sql.ResultSet;
 
-public class callData extends JPanel implements FocusListener, ActionListener {
+public class CallData extends JPanel implements FocusListener, ActionListener {
     private RoundedButton showData;
     private RoundedTextField info;
     private boolean showInfo;
@@ -27,11 +27,11 @@ public class callData extends JPanel implements FocusListener, ActionListener {
     private EnrollmentController enrollmentController = new EnrollmentController();
     private JFrame frame;
 
-    public callData(String text, String buttonText , JFrame frame) {
+    public CallData(String text, String buttonText , JFrame frame) {
         this(text, Config.bgColor_base, Config.primaryColor_base, buttonText, Color.white, Config.primaryColor_harder , frame);
     }
 
-    public callData(String text, Color textcolor, Color textBackcolor, String buttonText, Color buttoncolor, Color buttonBackcolor, JFrame frame) {
+    public CallData(String text, Color textcolor, Color textBackcolor, String buttonText, Color buttoncolor, Color buttonBackcolor, JFrame frame) {
 
         info = new RoundedTextField(22);
         showInfo = true;
@@ -107,8 +107,8 @@ public class callData extends JPanel implements FocusListener, ActionListener {
         if (e.getActionCommand().equals("แสดงข้อมูล")){
             try {
                 ResultSet stdrs = new ScoreDatabase().getStudentData(info.getText());
-                stdInfo.setStudentData(stdrs);
-                stdInfo.setInfo();
+                StdInfo.setStudentData(stdrs);
+                StdInfo.setInfo();
                 System.out.println(info.getText());
                 TeacherAddScore.std_id = info.getText();
             } catch (Exception ex) {
@@ -118,7 +118,7 @@ public class callData extends JPanel implements FocusListener, ActionListener {
         if (e.getActionCommand().equals("แสดงชื่อ")){
             try {
                 AddStudent.studentName = info.getText();
-                AddStudent.call();
+                dev.it22.kmitl.reg.ui.Class_Management.AddStudent.call();
             } catch (Exception ex) {
                 new ErrorModal(frame, ex.getMessage());
             }
