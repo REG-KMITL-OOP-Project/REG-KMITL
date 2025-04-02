@@ -281,9 +281,11 @@ public class AdminAddGroupClass implements FocusListener , ActionListener {
 
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-}public static void main(String[] args) {
-        new AdminAddGroupClass(Config.createAndShowGUI());
-    }
+}
+//public static void main(String[] args) {
+//        new AdminAddGroupClass(Config.createAndShowGUI());
+//
+//    }
     public void focusGained(FocusEvent fg){
         if (fg.getSource().equals(numGroup) && showGroup){
             numGroup.setText("");

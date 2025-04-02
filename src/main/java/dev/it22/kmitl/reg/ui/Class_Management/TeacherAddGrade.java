@@ -183,15 +183,15 @@ public class TeacherAddGrade implements FocusListener, ActionListener {
         save.addActionListener(this);
     }
 
-    public static void main(String[] args) {
-        try {
-            new Login("Admin01", "Admin1234").loginWithUsernameAndPassword();
-            new TeacherAddGrade(Config.createAndShowGUI());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
+//    public static void main(String[] args) {
+//        try {
+//            new Login("Admin01", "Admin1234").loginWithUsernameAndPassword();
+//            new TeacherAddGrade(Config.createAndShowGUI());
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

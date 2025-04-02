@@ -162,9 +162,9 @@ public class AddStudent implements FocusListener, ActionListener {
         save.addActionListener(this);
     }
 
-    public static void main(String[] args) {
-        //new addStudent(Config.createAndShowGUI());
-    }
+//    public static void main(String[] args) {
+//        //new addStudent(Config.createAndShowGUI());
+//    }
 
     public static void call(){
         studentName = studentName;

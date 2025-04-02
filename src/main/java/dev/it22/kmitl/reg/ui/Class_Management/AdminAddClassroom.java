@@ -250,9 +250,10 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
 
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-    }public static void main(String[] args) {
-        new AdminAddClassroom(Config.createAndShowGUI());
     }
+//    public static void main(String[] args) {
+//        new AdminAddClassroom(Config.createAndShowGUI());
+//    }
     @Override
     public void focusGained(FocusEvent fg){
         if(fg.getSource().equals(subjectCode) && showCode){

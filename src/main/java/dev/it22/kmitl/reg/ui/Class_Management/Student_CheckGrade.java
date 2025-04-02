@@ -181,7 +181,7 @@ public class Student_CheckGrade {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        new Student_CheckGrade(Config.createAndShowGUI());
-    }
+//    public static void main(String[] args) throws Exception {
+//        new Student_CheckGrade(Config.createAndShowGUI());
+//    }
 }

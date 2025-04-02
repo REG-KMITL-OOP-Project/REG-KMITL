@@ -231,14 +231,14 @@ public class TeacherAddScore implements FocusListener, ActionListener {
         });
     }
 
-    public static void main(String[] args) {
-        try {
-            new Login("Student01", "Student1234").loginWithUsernameAndPassword();
-            new TeacherAddScore(Config.createAndShowGUI());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public static void main(String[] args) {
+//        try {
+//            new Login("Student01", "Student1234").loginWithUsernameAndPassword();
+//            new TeacherAddScore(Config.createAndShowGUI());
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

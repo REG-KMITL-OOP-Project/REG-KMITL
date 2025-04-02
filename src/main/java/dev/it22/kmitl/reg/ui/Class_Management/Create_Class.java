@@ -164,9 +164,9 @@ public class Create_Class implements ActionListener{
         frame.setBackground(null);
         frame.setVisible(true);
     }
-    public static void main(String[] args) {
-    new Create_Class(Config.createAndShowGUI());
-}
+//    public static void main(String[] args) {
+//    new Create_Class(Config.createAndShowGUI());
+//}
 
     @Override
     public void actionPerformed(ActionEvent e) {

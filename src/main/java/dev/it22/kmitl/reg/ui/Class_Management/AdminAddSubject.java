@@ -279,9 +279,11 @@ public class AdminAddSubject implements FocusListener ,  ActionListener {
 
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-    } public static void main(String[] args) {
-        new AdminAddSubject(Config.createAndShowGUI());
     }
+
+//    public static void main(String[] args) {
+//        new AdminAddSubject(Config.createAndShowGUI());
+//    }
     public void focusGained(FocusEvent fg){
         if (fg.getSource().equals(year) && showYear){
             year.setText("");

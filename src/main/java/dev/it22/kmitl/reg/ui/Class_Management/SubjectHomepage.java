@@ -158,9 +158,9 @@ public  class SubjectHomepage implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }
-    public static void main(String[] args) {
-        new SubjectHomepage(Config.createAndShowGUI());
-    }
+//    public static void main(String[] args) {
+//        new SubjectHomepage(Config.createAndShowGUI());
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
