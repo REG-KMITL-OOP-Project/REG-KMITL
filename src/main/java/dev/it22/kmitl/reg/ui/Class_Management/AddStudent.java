@@ -3,7 +3,6 @@ package dev.it22.kmitl.reg.ui.Class_Management;
 import dev.it22.kmitl.reg.controller.enrollment.EnrollmentController;
 import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
 import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
-import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.utils.*;
 
 import javax.swing.*;
@@ -14,7 +13,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.sql.ResultSet;
 
-public class addStudent implements FocusListener, ActionListener {
+public class AddStudent implements FocusListener, ActionListener {
     private JFrame frame;
     private JLabel title, subjectName, subjectID, teacherName, section;
     private RoundedButtonWithColor cancel, save;
@@ -32,7 +31,7 @@ public class addStudent implements FocusListener, ActionListener {
     private stdInfo s;
 
 
-    public addStudent(JFrame frame, String courseCode, String courseName, String teacher, int groupNum) {
+    public AddStudent(JFrame frame, String courseCode, String courseName, String teacher, int groupNum) {
         this.frame = frame;
         this.courseCode = courseCode;
         this.courseName = courseName;

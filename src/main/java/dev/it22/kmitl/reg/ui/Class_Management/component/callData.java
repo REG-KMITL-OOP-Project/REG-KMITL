@@ -4,12 +4,11 @@ import dev.it22.kmitl.reg.controller.enrollment.EnrollmentController;
 import dev.it22.kmitl.reg.controller.score.ScoreDatabase;
 import dev.it22.kmitl.reg.ui.Class_Management.TeacherAddGrade;
 import dev.it22.kmitl.reg.ui.Class_Management.TeacherAddScore;
-import dev.it22.kmitl.reg.ui.Class_Management.addStudent;
+import dev.it22.kmitl.reg.ui.Class_Management.AddStudent;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.ErrorModal;
 import dev.it22.kmitl.reg.utils.RoundedButton;
 import dev.it22.kmitl.reg.utils.RoundedTextField;
-import dev.it22.kmitl.reg.ui.Class_Management.TeacherAddScore.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -118,8 +117,8 @@ public class callData extends JPanel implements FocusListener, ActionListener {
         }
         if (e.getActionCommand().equals("แสดงชื่อ")){
             try {
-                addStudent.studentName = info.getText();
-                addStudent.call();
+                AddStudent.studentName = info.getText();
+                AddStudent.call();
             } catch (Exception ex) {
                 new ErrorModal(frame, ex.getMessage());
             }

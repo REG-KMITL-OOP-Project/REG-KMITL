@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
-public class create_class implements ActionListener{
+public class Create_Class implements ActionListener{
     private JFrame frame;
     private JButton home;
     private JPanel ICON,setposition,lowerPanel,tableButton,Buttonpanel,keeptext,setpositext;
@@ -22,7 +22,7 @@ public class create_class implements ActionListener{
     private RoundedButton enter_classButton,create_classButton,back;
     private String columnNames[] = {"รหัสวิชา","ชื่อวิชา","กลุ่มเรียน","อาจารย์ผู้สอน"};
 
-    public create_class(JFrame frame){
+    public Create_Class(JFrame frame){
         this.frame = frame;
         //Icon home
         ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home.png").getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH));
@@ -165,7 +165,7 @@ public class create_class implements ActionListener{
         frame.setVisible(true);
     }
     public static void main(String[] args) {
-    new create_class(Config.createAndShowGUI());
+    new Create_Class(Config.createAndShowGUI());
 }
 
     @Override

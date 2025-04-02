@@ -178,7 +178,7 @@ public  class SubjectHomepage implements ActionListener {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            new create_class(frame);
+            new Create_Class(frame);
         } else if (e.getSource().equals(home)) {
             frame.getContentPane().removeAll();
             frame.revalidate();
