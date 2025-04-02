@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class monthTableCalendar implements MouseListener{
+public class MonthTableCalendar implements MouseListener{
     private CalendarTable jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, nov_2, dec, jun_spe;
     private JPanel sem1, sem2, sem2_1, spe;
     private CalendarData data = new CalendarData();
 
-    public monthTableCalendar() {
+    public MonthTableCalendar() {
         jan = new CalendarTable("มกราคม", data.eventsData(1));
         feb = new CalendarTable("กุมภาพันธ์", data.eventsData(2));
         mar = new CalendarTable("มีนาคม", data.eventsData(3));

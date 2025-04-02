@@ -2,7 +2,7 @@ package dev.it22.kmitl.reg.ui.event.admin;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.controller.auth.Login;
-import dev.it22.kmitl.reg.ui.event.calendar.monthTableCalendar;
+import dev.it22.kmitl.reg.ui.event.calendar.MonthTableCalendar;
 import dev.it22.kmitl.reg.ui.event.component.NewHeader;
 import dev.it22.kmitl.reg.ui.event.calendar.SemesterCategory;
 import dev.it22.kmitl.reg.utils.Config;
@@ -12,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
-public class AdminCalendarPage extends monthTableCalendar implements ActionListener , ItemListener{
+public class AdminCalendarPage extends MonthTableCalendar implements ActionListener , ItemListener{
     private JFrame frame;
     private JPanel r_panel, pn1;
     private JScrollPane scrollPane;

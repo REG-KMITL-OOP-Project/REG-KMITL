@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
-public class CalendarPage extends monthTableCalendar implements ItemListener {
+public class CalendarPage extends MonthTableCalendar implements ItemListener {
     private JFrame frame;
     private JPanel r_panel, pn1;
     private JScrollPane scrollPane;
