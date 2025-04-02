@@ -151,15 +151,15 @@ public class AdminCalendarPage extends MonthTableCalendar implements ActionListe
         }catch (NullPointerException ex){}
     }
 
-    public static void main(String[] args) {
-        try {
-            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
-            new AdminCalendarPage(Config.createAndShowGUI());
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public static void main(String[] args) {
+//        try {
+//            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
+//            new AdminCalendarPage(Config.createAndShowGUI());
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 }
 
 

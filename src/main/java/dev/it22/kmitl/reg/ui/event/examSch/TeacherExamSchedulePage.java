@@ -156,15 +156,15 @@ public class TeacherExamSchedulePage implements ActionListener, SeletedItemCombo
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        try {
-            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
-            new TeacherExamSchedulePage(Config.createAndShowGUI());
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public static void main(String[] args) {
+//        try {
+//            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
+//            new TeacherExamSchedulePage(Config.createAndShowGUI());
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == year){

@@ -177,14 +177,14 @@ public class CalendarData {
             System.out.println(rs.getString("type"));
         }
     }
-    public static void main(String[] args) throws SQLException {
-        try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-            new CalendarData();
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public static void main(String[] args) throws SQLException {
+//        try {
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            new CalendarData();
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 }
 

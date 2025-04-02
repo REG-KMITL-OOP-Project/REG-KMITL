@@ -157,17 +157,15 @@ public class ClassSchedulePage implements ActionListener, SeletedItemCombobox {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-
-        try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-            new ClassSchedulePage(Config.createAndShowGUI());
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
+//    public static void main(String[] args) {
+//        try {
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            new ClassSchedulePage(Config.createAndShowGUI());
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == year){

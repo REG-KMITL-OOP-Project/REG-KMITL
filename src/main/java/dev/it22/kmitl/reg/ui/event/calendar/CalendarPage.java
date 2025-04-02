@@ -118,13 +118,13 @@ public class CalendarPage extends MonthTableCalendar implements ItemListener {
         }catch (NullPointerException ex){}
     }
 
-    public static void main(String[] args) {
-        try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-            new CalendarPage(Config.createAndShowGUI());
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public static void main(String[] args) {
+//        try {
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            new CalendarPage(Config.createAndShowGUI());
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 }
