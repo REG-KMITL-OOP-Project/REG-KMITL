@@ -5,8 +5,8 @@ import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.model.auth.Student;
-import dev.it22.kmitl.reg.ui.event.component.newHeader;
-import dev.it22.kmitl.reg.ui.event.component.seletedItemCombobox;
+import dev.it22.kmitl.reg.ui.event.component.NewHeader;
+import dev.it22.kmitl.reg.ui.event.component.SeletedItemCombobox;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.ErrorModal;
 
@@ -15,7 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ClassSchedulePage implements ActionListener, seletedItemCombobox {
+public class ClassSchedulePage implements ActionListener, SeletedItemCombobox {
     private JFrame frame;
     private JPanel pn1 , pn2;
 
@@ -149,7 +149,7 @@ public class ClassSchedulePage implements ActionListener, seletedItemCombobox {
           pn1.add(table, BorderLayout.CENTER);
 
         frame.setLayout(new BorderLayout());
-        headerPanel = new newHeader("ตารางเรียน", frame, table);
+        headerPanel = new NewHeader("ตารางเรียน", frame, table);
         frame.add(headerPanel, BorderLayout.NORTH);
         frame.add(pn1, BorderLayout.CENTER);
 
@@ -157,17 +157,15 @@ public class ClassSchedulePage implements ActionListener, seletedItemCombobox {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-
-        try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-            new ClassSchedulePage(Config.createAndShowGUI());
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
+//    public static void main(String[] args) {
+//        try {
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            new ClassSchedulePage(Config.createAndShowGUI());
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == year){

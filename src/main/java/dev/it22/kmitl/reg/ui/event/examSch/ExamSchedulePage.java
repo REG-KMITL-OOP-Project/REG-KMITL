@@ -1,13 +1,10 @@
 package dev.it22.kmitl.reg.ui.event.examSch;
 
-import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.*;
-import dev.it22.kmitl.reg.ui.event.classSch.ClassSchedulePage;
-import dev.it22.kmitl.reg.ui.event.classSch.ClassScheduleTable;
-import dev.it22.kmitl.reg.ui.event.component.newHeader;
-import dev.it22.kmitl.reg.ui.event.component.seletedItemCombobox;
+import dev.it22.kmitl.reg.ui.event.component.NewHeader;
+import dev.it22.kmitl.reg.ui.event.component.SeletedItemCombobox;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.ErrorModal;
 
@@ -17,7 +14,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
-public class ExamSchedulePage implements ActionListener, seletedItemCombobox {
+public class ExamSchedulePage implements ActionListener, SeletedItemCombobox {
     private JFrame frame;
     private JPanel pn1 ;
 
@@ -156,7 +153,7 @@ public class ExamSchedulePage implements ActionListener, seletedItemCombobox {
         pn1.add(table, BorderLayout.CENTER);
 
         frame.setLayout(new BorderLayout());
-        headerPanel = new newHeader("ตารางสอบ", frame, table);
+        headerPanel = new NewHeader("ตารางสอบ", frame, table);
         frame.add(headerPanel, BorderLayout.NORTH);
         frame.add(pn1, BorderLayout.CENTER);
 
@@ -164,15 +161,15 @@ public class ExamSchedulePage implements ActionListener, seletedItemCombobox {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-            new ExamSchedulePage(Config.createAndShowGUI());
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public static void main(String[] args) {
+//        try {
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            new ExamSchedulePage(Config.createAndShowGUI());
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == year){

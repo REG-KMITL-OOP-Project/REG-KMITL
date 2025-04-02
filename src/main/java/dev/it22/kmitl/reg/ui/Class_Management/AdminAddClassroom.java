@@ -3,13 +3,11 @@ package dev.it22.kmitl.reg.ui.Class_Management;
 import dev.it22.kmitl.reg.controller.classroom.AdminCreateClassroom;
 import dev.it22.kmitl.reg.controller.subject.Subject;
 import dev.it22.kmitl.reg.utils.*;
-import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 
 public class AdminAddClassroom implements FocusListener, ActionListener {
     private JFrame frame ;
@@ -21,7 +19,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
     private RoundedButtonWithColor cancel,save,add;
     private JPanel panelSave = new JPanel() , panelCan = new JPanel();
     protected boolean showRoom, showCode, showTeacher, showTime;
-    private teacherNameTable table;
+    private TeacherNameTable table;
     private String teacherNamebuffer;
     private String [] nameCher ;
     private TimeComboBox timetostudy, timetofree;
@@ -228,7 +226,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
         panelBig.add(panelRek3);
         add.addActionListener(this);
 
-        table = new teacherNameTable();
+        table = new TeacherNameTable();
         panelBig.add(table);
 
         panelRek5.add(panelCan);
@@ -252,9 +250,10 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
 
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-    }public static void main(String[] args) {
-        new AdminAddClassroom(Config.createAndShowGUI());
     }
+//    public static void main(String[] args) {
+//        new AdminAddClassroom(Config.createAndShowGUI());
+//    }
     @Override
     public void focusGained(FocusEvent fg){
         if(fg.getSource().equals(subjectCode) && showCode){
@@ -373,7 +372,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
                 frame.getContentPane().removeAll();
                 frame.revalidate();
                 frame.repaint();
-                new create_class(frame);
+                new Create_Class(frame);
             }
         }else if (ev.getSource().equals(no)) {
             dialog.setVisible(false);
@@ -478,7 +477,7 @@ public class AdminAddClassroom implements FocusListener, ActionListener {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            new create_class (frame);
+            new Create_Class(frame);
             if (ev.getSource().equals(yes)) {
                 dialog.setVisible(false);
             }

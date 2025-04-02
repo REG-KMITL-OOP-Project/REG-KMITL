@@ -57,9 +57,9 @@ public class AdminAddEvent extends EventPage implements ActionListener {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new AdminAddEvent (Config.createAndShowGUI());
-    }
+//    public static void main(String[] args) {
+//        new AdminAddEvent (Config.createAndShowGUI());
+//    }
 
     private RoundedButton yes , no ;
     private JDialog dialog ;

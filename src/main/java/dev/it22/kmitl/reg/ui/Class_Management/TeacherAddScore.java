@@ -1,14 +1,10 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
 import dev.it22.kmitl.reg.controller.auth.Login;
-import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.controller.score.ScoreDatabase;
-import dev.it22.kmitl.reg.model.auth.Account;
-import dev.it22.kmitl.reg.model.score.ScoreModel;
-import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
-import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
+import dev.it22.kmitl.reg.ui.Class_Management.component.CallData;
+import dev.it22.kmitl.reg.ui.Class_Management.component.StdInfo;
 import dev.it22.kmitl.reg.ui.HomePage;
-import dev.it22.kmitl.reg.ui.event.calendar.calendarData;
 import dev.it22.kmitl.reg.utils.*;
 import dev.it22.kmitl.reg.controller.score.ScoreController;
 
@@ -26,11 +22,11 @@ public class TeacherAddScore implements FocusListener, ActionListener {
     private JLabel add_score_student, student;
     private JPanel main_panel, sub1, sub2, sub3, txt_panel, txt_sub, frame_pan;
     private JPanel west_panel, student_panel, student_pan, cancel_panel, save_panel, save_cancel_panel, subject_panel;
-    private callData data_id_subject, data_id_student;
+    private CallData data_id_subject, data_id_student;
     private RoundedButton cancel, save;
     private JComboBox no_of_score;
     private JTextField score;
-    private stdInfo std;
+    private StdInfo std;
     private JTextArea text;
     private static RoundedTextField subject =  new RoundedTextField(25);;
     private boolean scoreShow, textShow;
@@ -56,8 +52,8 @@ public class TeacherAddScore implements FocusListener, ActionListener {
     public TeacherAddScore(JFrame frame) {
         this.frame = frame;
 
-        data_id_subject = new callData("กรอกรหัสวิชา", "แสดงชื่อวิชา", frame);
-        data_id_student = new callData("กรอกรหัสนักศึกษา", "แสดงข้อมูล", frame);
+        data_id_subject = new CallData("กรอกรหัสวิชา", "แสดงชื่อวิชา", frame);
+        data_id_student = new CallData("กรอกรหัสนักศึกษา", "แสดงข้อมูล", frame);
         data_id_student.setInfoSize(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 40));
         data_id_subject.setInfoSize(frame.getWidth() / (frame.getWidth() / 400), frame.getWidth() / (frame.getWidth() / 40));
 
@@ -138,7 +134,7 @@ public class TeacherAddScore implements FocusListener, ActionListener {
         sub1.add(sub3);
         sub1.setPreferredSize(new Dimension(frame.getWidth() / (frame.getWidth() / 180), frame.getWidth() / (frame.getWidth() / 100)));
 
-        std = new stdInfo();
+        std = new StdInfo();
         sub2 = new JPanel(new BorderLayout());
         sub2.setBackground(null);
         sub2.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 5));
@@ -235,14 +231,14 @@ public class TeacherAddScore implements FocusListener, ActionListener {
         });
     }
 
-    public static void main(String[] args) {
-        try {
-            new Login("Student01", "Student1234").loginWithUsernameAndPassword();
-            new TeacherAddScore(Config.createAndShowGUI());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public static void main(String[] args) {
+//        try {
+//            new Login("Student01", "Student1234").loginWithUsernameAndPassword();
+//            new TeacherAddScore(Config.createAndShowGUI());
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
