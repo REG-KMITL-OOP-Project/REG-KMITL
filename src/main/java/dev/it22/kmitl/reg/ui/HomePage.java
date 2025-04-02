@@ -75,7 +75,7 @@ public class HomePage implements ActionListener {
             source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/book.png", "source/calendar-days.png", "source/scroll-text.png", "source/log-out.png"};
         }else if(acc instanceof Prof){
             border = 40;
-            name  = new String[]{"ตารางสอน","ตารางสอบ","กรอกคะแนน","กรอกเกรด","ปฏิทินการศึกษา","ออกจากระบบ"};
+            name  = new String[]{"ตารางสอน","ตารางคุมสอบ","กรอกคะแนน","กรอกเกรด","ปฏิทินการศึกษา","ออกจากระบบ"};
             source = new String[]{"source/sheet.png", "source/book-open-check.png", "source/clipboard-pen-line.png", "source/file-pen-line.png", "source/calendar-days.png", "source/log-out.png"};
         }else if(acc instanceof Admin){
             border = 100;
@@ -275,8 +275,8 @@ public class HomePage implements ActionListener {
 
         try {
 //            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-//            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
-            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
+            new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
+//            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
             System.out.println(new User().getUserAccount());
         } catch (Exception e) {
             System.out.println(e.getMessage());
