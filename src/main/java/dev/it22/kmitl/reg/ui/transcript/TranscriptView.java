@@ -280,25 +280,29 @@ public class TranscriptView {
             gps1 += Double.parseDouble(gpsList.get(i));
             gpaList.add(String.format("%.2f",gps1 / (i + 1)));
         }
-
-        Object[][] data = {
-                {"                           "+semester[0], "", "", "","",""},
-                {subjectNumberList.get(0).get(0) + " " + subject.get(0).get(0), creditsList.get(0).get(0), gradeList.get(0).get(0), "", "", ""},
-                {subjectNumberList.get(0).get(1) + " " + subject.get(0).get(1), creditsList.get(0).get(1), gradeList.get(0).get(1), "", "", ""},
-                {subjectNumberList.get(0).get(2) + " " + subject.get(0).get(2), creditsList.get(0).get(2), gradeList.get(0).get(2), "", "", ""},
-                {subjectNumberList.get(0).get(3) + " " + subject.get(0).get(3), creditsList.get(0).get(3), gradeList.get(0).get(3), "", "", ""},
-                {"                             GPS : " + gpsList.get(0) + "                 GPA : " + gpaList.get(0), "", "", "", "", ""},
-                {"","","", "","",""},
-                {"                         "+semester[1], "", "", "","",""},
-                {subjectNumberList.get(1).get(0) + " " + subject.get(1).get(0), creditsList.get(1).get(0), gradeList.get(1).get(0), "", "", ""},
-                {subjectNumberList.get(1).get(1) + " " +subject.get(1).get(1), creditsList.get(1).get(1), gradeList.get(1).get(1), "", "", ""},
-                {subjectNumberList.get(1).get(2) + " " +subject.get(1).get(2), creditsList.get(1).get(2), gradeList.get(1).get(2), "", "", ""},
-                {subjectNumberList.get(1).get(3) + " " +subject.get(1).get(3), creditsList.get(1).get(3), gradeList.get(1).get(3), "", "", ""},
-                {"                            GPS : " + gpsList.get(1) + "                  GPA : " + gpaList.get(1), "", "", "", "", ""},
-                {"","","", "","",""},
-                {"                  Total  number of credit earned:  "+ allCredit , "", "", "", "", ""},
-                {"                          Cumulative GPA:  "+ gpaList.getLast() , "", "", "", "", ""},
-        };
+        Object[][] data ={};
+        try{
+            data = new Object[][]{
+                    {"                           "+semester[0], "", "", "","",""},
+                    {subjectNumberList.get(0).get(0) + " " + subject.get(0).get(0), creditsList.get(0).get(0), gradeList.get(0).get(0), "", "", ""},
+                    {subjectNumberList.get(0).get(1) + " " + subject.get(0).get(1), creditsList.get(0).get(1), gradeList.get(0).get(1), "", "", ""},
+                    {subjectNumberList.get(0).get(2) + " " + subject.get(0).get(2), creditsList.get(0).get(2), gradeList.get(0).get(2), "", "", ""},
+                    {subjectNumberList.get(0).get(3) + " " + subject.get(0).get(3), creditsList.get(0).get(3), gradeList.get(0).get(3), "", "", ""},
+                    {"                             GPS : " + gpsList.get(0) + "                 GPA : " + gpaList.get(0), "", "", "", "", ""},
+                    {"","","", "","",""},
+                    {"                         "+semester[1], "", "", "","",""},
+                    {subjectNumberList.get(1).get(0) + " " + subject.get(1).get(0), creditsList.get(1).get(0), gradeList.get(1).get(0), "", "", ""},
+                    {subjectNumberList.get(1).get(1) + " " +subject.get(1).get(1), creditsList.get(1).get(1), gradeList.get(1).get(1), "", "", ""},
+                    {subjectNumberList.get(1).get(2) + " " +subject.get(1).get(2), creditsList.get(1).get(2), gradeList.get(1).get(2), "", "", ""},
+                    {subjectNumberList.get(1).get(3) + " " +subject.get(1).get(3), creditsList.get(1).get(3), gradeList.get(1).get(3), "", "", ""},
+                    {"                            GPS : " + gpsList.get(1) + "                  GPA : " + gpaList.get(1), "", "", "", "", ""},
+                    {"","","", "","",""},
+                    {"                  Total  number of credit earned:  "+ allCredit , "", "", "", "", ""},
+                    {"                          Cumulative GPA:  "+ gpaList.getLast() , "", "", "", "", ""},
+        };}catch (Exception e){
+             data = new Object[][]{
+                    {"                           "+semester[0], "", "", "","",""},
+        };}
 
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         JTable table = new JTable(model);

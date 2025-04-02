@@ -29,7 +29,7 @@ public class TranscriptController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.getDownloadButton()) {
             model.getTranscript();
-            new SuccessModal(view.getFrame(), "ดาวน์โหลด transcript สำเร็จ");
+            new SuccessModal(view.getFrame(), "ดาวน์โหลด transcript เสร็จสิ้น สามารถดู transcript ได้ในโฟลเดอร์ download");
         }
         else if (e.getSource() == view.getHomeButton()) {
             view.getFrame().getContentPane().removeAll();
