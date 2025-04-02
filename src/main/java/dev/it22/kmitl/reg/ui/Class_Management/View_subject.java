@@ -167,18 +167,24 @@ public class View_subject implements ActionListener {
         textname_id.setLayout(new FlowLayout());
         textname_id.add(idsubject);
         textname_id.add(namesubject);
+        textname_id.setPreferredSize(new Dimension(frame.getWidth(), 40));
         textname_id.setBackground(null);
 
         //รวมกลุ่มเรียนและผู้สอนไว้บรรทัดเดียวกัน
         combo_teach = new JPanel();
-        combo_teach.setLayout(new FlowLayout(FlowLayout.CENTER,20,0));
-        combo_teach.add(group);
-        combo_teach.add(teacher);
+        combo_teach.setLayout(new BoxLayout(combo_teach, BoxLayout.Y_AXIS));
+        Panel panel1 = new Panel();
+        panel1.add(group);
+        Panel panel2 = new Panel();
+        panel2.add(teacher);
+        teacher.setAlignmentX(SwingConstants.CENTER);
+        combo_teach.add(panel2);
+        combo_teach.add(panel1);
         combo_teach.setBackground(null);
 
         //รวมtextnameกับcombo
         titel = new JPanel();
-        titel.setLayout(new GridLayout(2,1));
+        titel.setLayout(new BoxLayout(titel, BoxLayout.Y_AXIS));
         titel.add(textname_id);
         titel.add(combo_teach);
         titel.setBackground(null);

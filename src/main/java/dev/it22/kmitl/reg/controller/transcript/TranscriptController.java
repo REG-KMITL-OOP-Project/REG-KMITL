@@ -6,6 +6,7 @@ import dev.it22.kmitl.reg.model.transcript.TranscriptModel;
 import dev.it22.kmitl.reg.ui.HomePage;
 import dev.it22.kmitl.reg.ui.transcript.TranscriptView;
 import dev.it22.kmitl.reg.utils.Config;
+import dev.it22.kmitl.reg.utils.SuccessModal;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,7 @@ public class TranscriptController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.getDownloadButton()) {
             model.getTranscript();
+            new SuccessModal(view.getFrame(), "ดาวน์โหลด transcript เสร็จสิ้น สามารถดู transcript ได้ในโฟลเดอร์ download");
         }
         else if (e.getSource() == view.getHomeButton()) {
             view.getFrame().getContentPane().removeAll();
@@ -35,17 +37,5 @@ public class TranscriptController implements ActionListener {
             view.getFrame().repaint();
             new HomePage(view.getFrame());
         }
-    }
-
-    public static void main(String[] args) {
-        try {
-            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-            //new Login("Prof01","Prof1234").loginWithUsernameAndPassword();
-//            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        new TranscriptController(Config.createAndShowGUI());
     }
 }

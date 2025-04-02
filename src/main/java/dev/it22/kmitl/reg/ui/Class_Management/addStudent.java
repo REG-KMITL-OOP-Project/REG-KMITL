@@ -70,7 +70,7 @@ public class addStudent implements FocusListener, ActionListener {
         title = new JLabel("เพิ่มนักศึกษา");
         subjectName = new JLabel("ชื่อวิชา : "+courseName);
         subjectID = new JLabel("รหัสวิชา : "+courseCode);
-        teacherName = new JLabel("อาจารย์ประจำกลุ่มเรียน :");
+        teacherName = new JLabel("อาจารย์ประจำกลุ่มเรียน : " + teacher);
         cancel = new RoundedButtonWithColor("CANCEL", 22, new Color(255, 247, 237), Config.primaryColor_base);
         save = new RoundedButtonWithColor("SAVE", 22, new Color(255, 247, 237), Config.primaryColor_harder);
         insertID = new callData("กรอกรหัสนักศึกษา", Config.bgColor_hard, Color.WHITE, "แสดงชื่อ", Color.WHITE, Config.primaryColor_base , frame);

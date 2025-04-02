@@ -134,14 +134,13 @@ public class create_class implements ActionListener{
         });
 
         try {
-            ResultSet rs = new Database().getQuery("SELECT * FROM section");
+            ResultSet rs = new Database().getQuery("SELECT * FROM section WHERE building IS NOT NULL AND building <> ''");
             String[] newModel = {"", "", "", ""};
             boolean state = false;
             while (rs.next()) {
                 ResultSet rs1 = new Database().getQuery("SELECT * FROM course WHERE course_code = '" + rs.getString("course_id") + "';");
                 if(newModel[0].equals(rs.getString("course_id"))){
                     newModel[2] = rs.getString("section");
-                    newModel[3] = newModel[3] +","+ rs.getString("prof_name");
                 }else if(rs1.next()){
                     if(state){
                         tableModel.addRow(newModel);
@@ -151,7 +150,6 @@ public class create_class implements ActionListener{
                     newModel[1] = rs1.getString("course_name");
                     newModel[2] = rs.getString("section");
                     newModel[3] = rs.getString("prof_name");
-                    System.out.println(newModel[3]);
                 }
 
             }
