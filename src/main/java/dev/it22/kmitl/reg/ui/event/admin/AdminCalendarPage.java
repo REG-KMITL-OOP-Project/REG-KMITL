@@ -2,10 +2,8 @@ package dev.it22.kmitl.reg.ui.event.admin;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.controller.auth.Login;
-import dev.it22.kmitl.reg.ui.event.calendar.CalendarPage;
-import dev.it22.kmitl.reg.ui.event.calendar.calendarTable;
 import dev.it22.kmitl.reg.ui.event.calendar.monthTableCalendar;
-import dev.it22.kmitl.reg.ui.event.component.newHeader;
+import dev.it22.kmitl.reg.ui.event.component.NewHeader;
 import dev.it22.kmitl.reg.ui.event.calendar.SemesterCategory;
 import dev.it22.kmitl.reg.utils.Config;
 
@@ -18,7 +16,7 @@ public class AdminCalendarPage extends monthTableCalendar implements ActionListe
     private JFrame frame;
     private JPanel r_panel, pn1;
     private JScrollPane scrollPane;
-    private newHeader header;
+    private NewHeader header;
     private SemesterCategory category;
 
     private JButton create;
@@ -71,7 +69,7 @@ public class AdminCalendarPage extends monthTableCalendar implements ActionListe
         back_panel.add(create_panel, BorderLayout.NORTH);
         back_panel.add(scrollPane);
 
-        header = new newHeader("ปฏิทินการศึกษา", frame);
+        header = new NewHeader("ปฏิทินการศึกษา", frame);
         category = new SemesterCategory(frame);
         category.setBorder(new EmptyBorder(10,0,0,0));
         frame.add(header, BorderLayout.NORTH);

@@ -1,6 +1,5 @@
 package dev.it22.kmitl.reg.ui.event.calendar;
 
-import dev.it22.kmitl.reg.ui.event.admin.EditEventPage;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
@@ -8,12 +7,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-public class calendarTable extends JPanel {
+public class CalendarTable extends JPanel {
     //rowOFDay_ClassTable
     private JPanel row;
     private JTable table_Month;
@@ -32,15 +27,15 @@ public class calendarTable extends JPanel {
 
     private JFrame frame;
 
-    public calendarTable(String month) {
+    public CalendarTable(String month) {
         this(month,Config.createAndShowGUI(),null);
     }
 
-    public calendarTable(String month, String[][] events_data) {
+    public CalendarTable(String month, String[][] events_data) {
         this(month, Config.createAndShowGUI(), events_data);
     }
 
-    public calendarTable(String month, JFrame frame, String[][] events_data) {
+    public CalendarTable(String month, JFrame frame, String[][] events_data) {
         this.frame = frame;
 
         if (events_data.length > 0) {

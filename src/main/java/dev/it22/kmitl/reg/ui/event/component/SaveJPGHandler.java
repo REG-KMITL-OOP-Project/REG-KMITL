@@ -13,11 +13,11 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class saveJPGHandler implements ActionListener , MouseListener {
+public class SaveJPGHandler implements ActionListener , MouseListener {
     private JPanel table;
     private JFrame frame;
     private JDialog success;
-    public saveJPGHandler(JPanel panel, JFrame frame) {
+    public SaveJPGHandler(JPanel panel, JFrame frame) {
         this.table = panel;
         this.frame = frame;
 

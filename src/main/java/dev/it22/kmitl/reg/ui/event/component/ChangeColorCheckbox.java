@@ -3,11 +3,11 @@ package dev.it22.kmitl.reg.ui.event.component;
 import javax.swing.*;
 import java.awt.*;
 
-public class changeColorCheckbox implements Icon {
+public class ChangeColorCheckbox implements Icon {
     private final Icon orgIcon = UIManager.getIcon("CheckBox.icon");
     private Color color;
 
-    public changeColorCheckbox(Color color){
+    public ChangeColorCheckbox(Color color){
         this.color = color;
     }
 

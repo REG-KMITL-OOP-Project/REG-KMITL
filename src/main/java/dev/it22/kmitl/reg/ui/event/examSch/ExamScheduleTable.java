@@ -1,6 +1,5 @@
 package dev.it22.kmitl.reg.ui.event.examSch;
 
-import dev.it22.kmitl.reg.ui.event.classSch.classData;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
@@ -18,11 +17,11 @@ public class ExamScheduleTable extends JPanel {
     private JScrollPane scrollPane;
     private String columnNames[] = {"วัน/เดือน/ปี","เวลา", "รหัสวิชา","วิชา","ประเภท","ห้องสอบ"};
 
-    private examTableData data;
+    private ExamTableData data;
 
     public ExamScheduleTable(JFrame frame){
         try{
-            data = new examTableData();
+            data = new ExamTableData();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
