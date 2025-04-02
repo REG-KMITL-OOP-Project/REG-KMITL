@@ -280,26 +280,45 @@ public class TranscriptView {
             gps1 += Double.parseDouble(gpsList.get(i));
             gpaList.add(String.format("%.2f",gps1 / (i + 1)));
         }
-        Object[][] data ={};
+        Object[][] data ;
         try{
-            data = new Object[][]{
-                    {"                           "+semester[0], "", "", "","",""},
-                    {subjectNumberList.get(0).get(0) + " " + subject.get(0).get(0), creditsList.get(0).get(0), gradeList.get(0).get(0), "", "", ""},
-                    {subjectNumberList.get(0).get(1) + " " + subject.get(0).get(1), creditsList.get(0).get(1), gradeList.get(0).get(1), "", "", ""},
-                    {subjectNumberList.get(0).get(2) + " " + subject.get(0).get(2), creditsList.get(0).get(2), gradeList.get(0).get(2), "", "", ""},
-                    {subjectNumberList.get(0).get(3) + " " + subject.get(0).get(3), creditsList.get(0).get(3), gradeList.get(0).get(3), "", "", ""},
-                    {"                             GPS : " + gpsList.get(0) + "                 GPA : " + gpaList.get(0), "", "", "", "", ""},
-                    {"","","", "","",""},
-                    {"                         "+semester[1], "", "", "","",""},
-                    {subjectNumberList.get(1).get(0) + " " + subject.get(1).get(0), creditsList.get(1).get(0), gradeList.get(1).get(0), "", "", ""},
-                    {subjectNumberList.get(1).get(1) + " " +subject.get(1).get(1), creditsList.get(1).get(1), gradeList.get(1).get(1), "", "", ""},
-                    {subjectNumberList.get(1).get(2) + " " +subject.get(1).get(2), creditsList.get(1).get(2), gradeList.get(1).get(2), "", "", ""},
-                    {subjectNumberList.get(1).get(3) + " " +subject.get(1).get(3), creditsList.get(1).get(3), gradeList.get(1).get(3), "", "", ""},
-                    {"                            GPS : " + gpsList.get(1) + "                  GPA : " + gpaList.get(1), "", "", "", "", ""},
-                    {"","","", "","",""},
-                    {"                  Total  number of credit earned:  "+ allCredit , "", "", "", "", ""},
-                    {"                          Cumulative GPA:  "+ gpaList.getLast() , "", "", "", "", ""},
-        };}catch (Exception e){
+            ArrayList<Object[]> dataList = new ArrayList<>();
+
+            // Iterate through semesters
+            for (int i = 0; i < subject.size(); i++) {
+                dataList.add(new Object[]{"                           " + semester[i], "", "", "", "", ""});
+
+                if (i < subjectNumberList.size() && i < subject.size() && i < creditsList.size() && i < gradeList.size()) {
+                    int numSubjects = Math.min(subjectNumberList.get(i).size(), subject.get(i).size());
+
+                    for (int j = 0; j < numSubjects; j++) {
+                        dataList.add(new Object[]{
+                                subjectNumberList.get(i).get(j) + " " + subject.get(i).get(j),
+                                creditsList.get(i).get(j),
+                                gradeList.get(i).get(j),
+                                "", "", ""
+                        });
+                    }
+                }
+                if (i < gpsList.size() && i < gpaList.size()) {
+                    dataList.add(new Object[]{
+                            "                            GPS : " + gpsList.get(i) + "                  GPA : " + gpaList.get(i),
+                            "", "", "", "", ""
+                    });
+                }
+                dataList.add(new Object[]{"", "", "", "", "", ""});
+            }
+
+            // Add total credits and cumulative GPA
+            dataList.add(new Object[]{"                  Total number of credits earned:  " + allCredit, "", "", "", "", ""});
+
+            if (!gpaList.isEmpty()) {
+                dataList.add(new Object[]{"                          Cumulative GPA:  " + gpaList.get(gpaList.size() - 1), "", "", "", "", ""});
+            }
+
+            // Convert List to Array
+            data = dataList.toArray(new Object[0][]);
+        }catch (Exception e){
              data = new Object[][]{
                     {"                           "+semester[0], "", "", "","",""},
         };}
