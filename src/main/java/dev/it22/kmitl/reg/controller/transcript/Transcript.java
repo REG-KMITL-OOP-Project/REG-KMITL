@@ -244,7 +244,7 @@ public class Transcript {
         }
         footerFormat(cell,"Total  number of credit earned:  "+ allCredit +"\n",11f, insideFooterFont, 35f);
 
-        footerFormat(cell,"Cumulative GPA:  "+ gpa/ (i1+1), insideFooterFont, 52.8f);
+        footerFormat(cell,"Cumulative GPA:  "+ String.format("%.2f",gpa/ (i1+1)), insideFooterFont, 52.8f);
 
         footerFormat(cell,"-------------------------------- Transcript Closed --------------------------------", 0.1f, gradeHeaderFont);
 
