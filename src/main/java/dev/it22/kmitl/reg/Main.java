@@ -12,10 +12,11 @@ public class Main {
 
     public static void main(String[] args) {
         JFrame a = Config.createAndShowGUI();
-        try {
+        try{
             new LoginFrame(a);
-        } catch (Exception e) {
-            new ErrorModal(a, e.getMessage());
+        }
+        catch (Exception e){
+            new ErrorModal(a , e.getMessage());
         }
     }
 }

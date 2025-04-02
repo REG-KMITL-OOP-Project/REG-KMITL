@@ -5,65 +5,89 @@ import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.model.auth.Prof;
 import dev.it22.kmitl.reg.model.auth.Student;
 import dev.it22.kmitl.reg.ui.event.component.SeletedItemCombobox;
+import dev.it22.kmitl.reg.ui.event.examSch.ExamTableData;
 import dev.it22.kmitl.reg.utils.Database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 public class ClassData {
+    //database
     private Account user;
     private Database db;
 
     public ClassData() throws SQLException {
         user = new User().getUserAccount();
         db = new Database();
+
+        //this.getSubject("MON");
     }
 
-    public String[] getSubject(String day) {
+
+    public String[] getSubject(String day){
         String[] subject = new String[12];
-        Arrays.fill(subject, ""); // เติมค่าเริ่มต้นเป็นว่างเปล่า
-
-        try {
-            String query = null;
+        try{
+            String q = null;
             if (user instanceof Student) {
-                query = "SELECT s.room, c.course_code, c.course_name, s.section, s.start_time, s.end_time " +
-                        "FROM enrollment e " +
-                        "JOIN section s ON e.section_id = s.section_id " +
-                        "JOIN course c ON s.course_id = c.course_code " +
-                        "WHERE e.std_id = '" + ((Student) user).getStudentId() + "' " +
-                        "AND s.day_of_week = '" + day + "' ORDER BY s.start_time;";
-            } else if (user instanceof Prof) {
-                query = "SELECT s.room, c.course_code, c.course_name, s.section, s.start_time, s.end_time " +
-                        "FROM section s " +
-                        "JOIN course c ON s.course_id = c.course_code " +
-                        "WHERE s.prof_id = '" + ((Prof) user).getProf_id() + "' " +
-                        "AND s.day_of_week = '" + day + "' ORDER BY s.start_time;";
+                q = "SELECT room, course_id, section_id, section FROM section WHERE section = " + ((Student)user).getSection() + " AND day_of_week = '" + day + "'" ;
             }
-
-            if (query == null) return subject;
-
-            ResultSet rs = db.getQuery(query);
+            else if (user instanceof Prof){
+                q = "SELECT room, course_id, section_id, section FROM section WHERE prof_id = " + ((Prof)user).getProf_id() + " AND day_of_week = '" + day + "'" ;
+            }
+            ResultSet rs = db.getQuery(q);
+            int i = 0;
             while (rs.next()) {
-                String sub = "[" + rs.getString("room") + "] " + rs.getString("course_name") +
-                        " (SECTION " + rs.getString("section") + ")";
+                String[] ject;
+                String sub = "";
+                sub += "[" + rs.getString("room") + "] " + this.getCourseName(rs.getString("course_id")) + " (SECTION " + rs.getString("section") + ")";
+                //System.out.println(sub);
 
-                int startHour = Integer.parseInt(rs.getString("start_time").split(":")[0]);
-                int endHour = Integer.parseInt(rs.getString("end_time").split(":")[0]);
-
-                int startIndex = startHour - 8;
-                int endIndex = endHour - 9;
-
-                if (startIndex >= 0 && startIndex < 12 && endIndex >= 0 && endIndex < 12) {
-                    for (int i = startIndex; i <= endIndex; i++) {
-                        subject[i] = sub;
+                //add subject at table by time
+                ResultSet rc = db.getQuery("SELECT start_time, end_time FROM section WHERE section_id = '" + rs.getString("section_id") + "'");
+                while (rc.next()) {
+                    int start = Integer.parseInt(rc.getString("start_time").substring(0, 2)) - 8;
+                    int end = Integer.parseInt(rc.getString("end_time").substring(0, 2)) - 9;
+                    if (start < 0 || start > 12 || end < 0 || end > 12) {
+                        break;
                     }
+                    while (start <= end) {
+                        subject[start] = sub;
+                        start++;
+                    }
+                    //System.out.println(Arrays.deepToString(subject));
                 }
             }
+            //System.out.println(subject);
             return subject;
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }catch (SQLException e){
             return subject;
         }
     }
+
+    //get subject name from another table
+    public String getCourseName(String id) throws SQLException {
+        ResultSet rc = db.getQuery("SELECT course_name FROM course WHERE course_code = '" + id + "'");
+        while (rc.next()) {
+            return (rc.getString("course_name"));
+        }
+        return null;
+    }
+
+    public void SelectedItem(SeletedItemCombobox comboBoxHandler) {
+        System.out.println("Year Item: " + comboBoxHandler.getYearItem());
+        System.out.println("Semester Item: " + comboBoxHandler.getSemItem());
+        System.out.println("Exam Item: " + comboBoxHandler.getExamItem());
+    }
+
+
+//    public static void main(String[] args) throws SQLException {
+//        try {
+//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+//            classData classCombo = new classData();
+//            classCombo.SelectedItem(new ClassSchedulePage(Config.createAndShowGUI()));
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 }
