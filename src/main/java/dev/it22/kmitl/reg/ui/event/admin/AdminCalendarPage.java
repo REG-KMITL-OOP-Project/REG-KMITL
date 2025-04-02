@@ -2,8 +2,10 @@ package dev.it22.kmitl.reg.ui.event.admin;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.controller.auth.Login;
-import dev.it22.kmitl.reg.ui.event.calendar.MonthTableCalendar;
-import dev.it22.kmitl.reg.ui.event.component.NewHeader;
+import dev.it22.kmitl.reg.ui.event.calendar.CalendarPage;
+import dev.it22.kmitl.reg.ui.event.calendar.calendarTable;
+import dev.it22.kmitl.reg.ui.event.calendar.monthTableCalendar;
+import dev.it22.kmitl.reg.ui.event.component.newHeader;
 import dev.it22.kmitl.reg.ui.event.calendar.SemesterCategory;
 import dev.it22.kmitl.reg.utils.Config;
 
@@ -12,11 +14,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
-public class AdminCalendarPage extends MonthTableCalendar implements ActionListener , ItemListener{
+public class AdminCalendarPage extends monthTableCalendar implements ActionListener , ItemListener{
     private JFrame frame;
     private JPanel r_panel, pn1;
     private JScrollPane scrollPane;
-    private NewHeader header;
+    private newHeader header;
     private SemesterCategory category;
 
     private JButton create;
@@ -69,7 +71,7 @@ public class AdminCalendarPage extends MonthTableCalendar implements ActionListe
         back_panel.add(create_panel, BorderLayout.NORTH);
         back_panel.add(scrollPane);
 
-        header = new NewHeader("ปฏิทินการศึกษา", frame);
+        header = new newHeader("ปฏิทินการศึกษา", frame);
         category = new SemesterCategory(frame);
         category.setBorder(new EmptyBorder(10,0,0,0));
         frame.add(header, BorderLayout.NORTH);
@@ -151,15 +153,15 @@ public class AdminCalendarPage extends MonthTableCalendar implements ActionListe
         }catch (NullPointerException ex){}
     }
 
-//    public static void main(String[] args) {
-//        try {
-//            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
-//            new AdminCalendarPage(Config.createAndShowGUI());
-//        }
-//        catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
+    public static void main(String[] args) {
+        try {
+            new Login("Admin01","Admin1234").loginWithUsernameAndPassword();
+            new AdminCalendarPage(Config.createAndShowGUI());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
 
 

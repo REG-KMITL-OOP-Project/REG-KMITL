@@ -266,10 +266,10 @@ public class View_subject implements ActionListener {
         frame.add(setstu,BorderLayout.SOUTH); //south ปุ่มเพิ่มนักศึกษา
         frame.setVisible(true);
     }
-//    public static void main(String[] args) {
-//        JFrame frame = new Config().createAndShowGUI();
-//        new View_subject(frame,"06016408","dawdwadwa","dawdwadwa");
-//    }
+    public static void main(String[] args) {
+        JFrame frame = new Config().createAndShowGUI();
+        new View_subject(frame,"06016408","dawdwadwa","dawdwadwa");
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -284,12 +284,12 @@ public class View_subject implements ActionListener {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            new AddStudent(frame, courseCode,courseName,teacherName, groupNum);
+            new addStudent(frame, courseCode,courseName,teacherName, groupNum);
         } else if (e.getSource().equals(back)) {
             frame.getContentPane().removeAll();
             frame.revalidate();
             frame.repaint();
-            new Create_Class(frame);
+            new create_class(frame);
         }
     }
 }

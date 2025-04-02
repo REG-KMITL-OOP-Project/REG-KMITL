@@ -9,13 +9,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
-public class DescriptionPage extends EventPage implements ActionListener {
+public class descriptionPage extends EventPage implements ActionListener {
     private JPanel panelCan;
     private RoundedButtonWithColor back;
     private JLabel editEvent;
     private ArrayList<String> list;
     private boolean oneRecord = false;
-    public DescriptionPage(JFrame frame, String name, String type){
+    public descriptionPage(JFrame frame, String name, String type){
         super(frame);
         list = new EditDataEvent().getData(name,type);
         System.out.println(list);

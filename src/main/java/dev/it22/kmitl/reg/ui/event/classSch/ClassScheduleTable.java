@@ -31,7 +31,7 @@ public class ClassScheduleTable extends JPanel{
 
     public ClassScheduleTable(JFrame frame) {
         try{
-            ClassData subject = new ClassData();
+            classData subject = new classData();
             schedule = new String[7][1];
             //schedule[0] = subject.getSubject();
             schedule[0] = subject.getSubject("MON");

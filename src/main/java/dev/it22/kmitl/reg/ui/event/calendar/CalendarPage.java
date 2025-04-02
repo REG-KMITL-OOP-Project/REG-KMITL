@@ -2,7 +2,9 @@ package dev.it22.kmitl.reg.ui.event.calendar;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.controller.auth.Login;
-import dev.it22.kmitl.reg.ui.event.component.NewHeader;
+import dev.it22.kmitl.reg.ui.event.admin.EditEventPage;
+import dev.it22.kmitl.reg.ui.event.classSch.classData;
+import dev.it22.kmitl.reg.ui.event.component.newHeader;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
@@ -10,11 +12,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
-public class CalendarPage extends MonthTableCalendar implements ItemListener {
+public class CalendarPage extends monthTableCalendar implements ItemListener {
     private JFrame frame;
     private JPanel r_panel, pn1;
     private JScrollPane scrollPane;
-    private NewHeader header;
+    private newHeader header;
     private SemesterCategory category;
 
     public CalendarPage(JFrame frame) {
@@ -45,7 +47,7 @@ public class CalendarPage extends MonthTableCalendar implements ItemListener {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(12);
 
-        header = new NewHeader("ปฏิทินการศึกษา", frame);
+        header = new newHeader("ปฏิทินการศึกษา", frame);
         category = new SemesterCategory(frame);
         category.setBorder(new EmptyBorder(10,0,0,0));
         frame.add(header, BorderLayout.NORTH);
@@ -99,7 +101,7 @@ public class CalendarPage extends MonthTableCalendar implements ItemListener {
                 frame.getContentPane().removeAll();
                 frame.revalidate();
                 frame.repaint();
-                new DescriptionPage(frame, (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1), (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),2));
+                new descriptionPage(frame, (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1), (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),2));
             }
         }catch (NullPointerException ex){}
 
@@ -113,18 +115,18 @@ public class CalendarPage extends MonthTableCalendar implements ItemListener {
                 frame.getContentPane().removeAll();
                 frame.revalidate();
                 frame.repaint();
-                new DescriptionPage(frame, (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1), (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),2));
+                new descriptionPage(frame, (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),1), (String) ((JTable)e.getSource()).getValueAt(((JTable)e.getSource()).rowAtPoint(e.getPoint()),2));
             }
         }catch (NullPointerException ex){}
     }
 
-//    public static void main(String[] args) {
-//        try {
-//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-//            new CalendarPage(Config.createAndShowGUI());
-//        }
-//        catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
+    public static void main(String[] args) {
+        try {
+            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+            new CalendarPage(Config.createAndShowGUI());
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

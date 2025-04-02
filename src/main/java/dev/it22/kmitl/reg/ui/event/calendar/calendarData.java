@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CalendarData {
+public class calendarData {
     //database
     private Account user;
     private Database db;
@@ -18,7 +18,7 @@ public class CalendarData {
 
     private String[][] events;
 
-    public CalendarData() {
+    public calendarData() {
         try {
             user = new User().getUserAccount();
             db = new Database();
@@ -177,14 +177,14 @@ public class CalendarData {
             System.out.println(rs.getString("type"));
         }
     }
-//    public static void main(String[] args) throws SQLException {
-//        try {
-//            new Login("Student01","Student1234").loginWithUsernameAndPassword();
-//            new CalendarData();
-//        }
-//        catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
+    public static void main(String[] args) throws SQLException {
+        try {
+            new Login("Student01","Student1234").loginWithUsernameAndPassword();
+            new calendarData();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
 

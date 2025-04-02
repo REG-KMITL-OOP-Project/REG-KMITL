@@ -1,5 +1,7 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
+import dev.it22.kmitl.reg.controller.auth.Login;
+
 import java.sql.ResultSet;
 
 import dev.it22.kmitl.reg.controller.auth.User;
@@ -18,7 +20,7 @@ import javax.swing.table.JTableHeader;
 
 import dev.it22.kmitl.reg.controller.grade.GradeController;
 
-public class Student_CheckGrade {
+public class student_checkGrade {
     private JFrame frame;
     private JLabel title, id, name, faculty, major;
     private RoundedButton checkgrade;
@@ -31,7 +33,7 @@ public class Student_CheckGrade {
     private final User user = new User();
     private final Account acc = user.getUserAccount();
 
-    public Student_CheckGrade(JFrame frame) {
+    public student_checkGrade(JFrame frame) {
         title = new JLabel("ตรวจสอบผลการเรียน");
         id = new JLabel();
         name = new JLabel();
@@ -181,7 +183,7 @@ public class Student_CheckGrade {
         }
     }
 
-//    public static void main(String[] args) throws Exception {
-//        new Student_CheckGrade(Config.createAndShowGUI());
-//    }
+    public static void main(String[] args) throws Exception {
+        new student_checkGrade(Config.createAndShowGUI());
+    }
 }

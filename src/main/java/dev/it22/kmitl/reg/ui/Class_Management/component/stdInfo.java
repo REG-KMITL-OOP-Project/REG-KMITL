@@ -1,30 +1,33 @@
 package dev.it22.kmitl.reg.ui.Class_Management.component;
 
+import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
+import dev.it22.kmitl.reg.model.auth.Student;
+import dev.it22.kmitl.reg.ui.Class_Management.TeacherAddScore;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
 import java.awt.*;
 import java.sql.ResultSet;
 
-public class StdInfo extends JPanel{
+public class stdInfo extends JPanel{
     private static JLabel ID, name, faculty, branch;
     private Account user;
     private static ResultSet subject_data;
     private static ResultSet student_data;
 
     public static void setStudentData(ResultSet student_data) {
-        StdInfo.student_data = student_data;
+        stdInfo.student_data = student_data;
     }
 
-    public StdInfo(){
+    public stdInfo(){
 
         ID = new JLabel("รหัสนักศึกษา : ");
         name = new JLabel("ชื่อ : ");
         faculty = new JLabel("คณะ : ");
         branch = new JLabel("สาขา : ");
 
-        if(StdInfo.student_data != null){
+        if(stdInfo.student_data != null){
             try {
                 ID = new JLabel("รหัสนักศึกษา : " + student_data.getString("std_id"));
                 name = new JLabel("ชื่อ : " + student_data.getString("fname") + " " + student_data.getString("lname"));
@@ -55,10 +58,10 @@ public class StdInfo extends JPanel{
     }
     public static void setInfo(){
         try {
-            StdInfo.ID.setText("รหัสนักศึกษา : " + student_data.getString("std_id"));
-            StdInfo.name.setText("ชื่อ : " + student_data.getString("fname") + " " + student_data.getString("lname"));
-            StdInfo.faculty.setText("คณะ : " + student_data.getString("faculty"));
-            StdInfo.branch.setText("สาขา : " + student_data.getString("major"));
+            stdInfo.ID.setText("รหัสนักศึกษา : " + student_data.getString("std_id"));
+            stdInfo.name.setText("ชื่อ : " + student_data.getString("fname") + " " + student_data.getString("lname"));
+            stdInfo.faculty.setText("คณะ : " + student_data.getString("faculty"));
+            stdInfo.branch.setText("สาขา : " + student_data.getString("major"));
         }
         catch (Exception e) {
             e.printStackTrace();

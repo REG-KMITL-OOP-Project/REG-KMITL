@@ -5,7 +5,7 @@ import dev.it22.kmitl.reg.utils.Config;
 import javax.swing.*;
 import java.awt.*;
 
-public class HeaderMenu extends JMenuBar {
+public class headerMenu extends JMenuBar {
 
     //head-menubar
     private JMenu ETC;
@@ -15,15 +15,15 @@ public class HeaderMenu extends JMenuBar {
     private JButton home;
     private JPanel SchPanel;
 
-    public HeaderMenu(JFrame frame) {
+    public headerMenu(JFrame frame) {
         this("No title", frame, null);
     }
 
-    public HeaderMenu(String title, JFrame frame, JPanel table) {
+    public headerMenu(String title, JFrame frame, JPanel table) {
         this(title, frame, "source/icon_schedule/icon_etc.png", table );
     }
 
-    public HeaderMenu(String title, JFrame frame, String filePath, JPanel table) {
+    public headerMenu(String title, JFrame frame, String filePath, JPanel table) {
 
         ETC = new JMenu("ETC");
         savePDF = new JMenuItem("Save PDF");
@@ -109,7 +109,7 @@ public class HeaderMenu extends JMenuBar {
         //set event handler
         home.addActionListener(new HomeButtonHandler(frame));
 
-        saveJPG.addActionListener(new SaveJPGHandler(table, frame));
+        saveJPG.addActionListener(new saveJPGHandler(table, frame));
     }
     public JButton getHome() {
         return home;

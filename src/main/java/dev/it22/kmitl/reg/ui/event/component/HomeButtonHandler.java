@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class HomeButtonHandler implements ActionListener {
     private JFrame frame;
-    private HeaderMenu menubar;
+    private headerMenu menubar;
     public HomeButtonHandler(JFrame frame) {
         this.frame = frame;
     }

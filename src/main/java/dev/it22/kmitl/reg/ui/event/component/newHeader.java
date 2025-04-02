@@ -6,21 +6,21 @@ import dev.it22.kmitl.reg.utils.RoundedButton;
 import javax.swing.*;
 import java.awt.*;
 
-public class NewHeader extends JPanel {
+public class newHeader extends JPanel {
     private JLabel text;
     private JButton home;
     private RoundedButton saveJPG;
     private JPanel left,right, allPanel;
 
-    public NewHeader(JFrame frame) {
+    public newHeader(JFrame frame) {
         this("No title", frame, null);
     }
 
-    public NewHeader(String title, JFrame frame, JPanel table) {
+    public newHeader(String title, JFrame frame, JPanel table) {
         this(title, frame, "source/icon_schedule/icon_etc.png", table);
     }
 
-    public NewHeader(String title, JFrame frame, String filePath, JPanel table) {
+    public newHeader(String title, JFrame frame, String filePath, JPanel table) {
 
         // Home Button
         ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home_re.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
@@ -66,10 +66,10 @@ public class NewHeader extends JPanel {
 
         // Set event handlers
         home.addActionListener(new HomeButtonHandler(frame));
-        saveJPG.addActionListener(new SaveJPGHandler(table, frame));
+        saveJPG.addActionListener(new saveJPGHandler(table, frame));
     }
 
-    public NewHeader(String title, JFrame frame) {
+    public newHeader(String title, JFrame frame) {
 
         // Home Button
         ImageIcon homeIcon = new ImageIcon(new ImageIcon("source/icon_schedule/icon_home_re.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));

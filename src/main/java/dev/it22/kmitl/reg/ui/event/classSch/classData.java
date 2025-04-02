@@ -1,22 +1,27 @@
 package dev.it22.kmitl.reg.ui.event.classSch;
 
+import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.model.auth.Prof;
 import dev.it22.kmitl.reg.model.auth.Student;
-import dev.it22.kmitl.reg.ui.event.component.SeletedItemCombobox;
-import dev.it22.kmitl.reg.ui.event.examSch.ExamTableData;
+import dev.it22.kmitl.reg.ui.event.component.seletedItemCombobox;
+import dev.it22.kmitl.reg.ui.event.examSch.ExamSchedulePage;
+import dev.it22.kmitl.reg.ui.event.examSch.examTableData;
+import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.Database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
-public class ClassData {
+public class classData {
     //database
     private Account user;
     private Database db;
 
-    public ClassData() throws SQLException {
+    public classData() throws SQLException {
         user = new User().getUserAccount();
         db = new Database();
 
@@ -73,7 +78,7 @@ public class ClassData {
         return null;
     }
 
-    public void SelectedItem(SeletedItemCombobox comboBoxHandler) {
+    public void SelectedItem(seletedItemCombobox comboBoxHandler) {
         System.out.println("Year Item: " + comboBoxHandler.getYearItem());
         System.out.println("Semester Item: " + comboBoxHandler.getSemItem());
         System.out.println("Exam Item: " + comboBoxHandler.getExamItem());

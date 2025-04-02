@@ -1,11 +1,15 @@
 package dev.it22.kmitl.reg.ui.event.calendar;
 
-import dev.it22.kmitl.reg.ui.event.component.ChangeColorCheckbox;
+import dev.it22.kmitl.reg.ui.event.component.changeColorCheckbox;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class SemesterCategory extends JPanel{
     private JFrame frame;
@@ -31,9 +35,9 @@ public class SemesterCategory extends JPanel{
         sem2.setForeground(Color.WHITE);
         specialSem.setForeground(Color.WHITE);
 
-        sem1.setIcon(new ChangeColorCheckbox(Color.RED));
-        sem2.setIcon(new ChangeColorCheckbox(Config.primaryColor_hard));
-        specialSem.setIcon(new ChangeColorCheckbox(Color.GREEN));
+        sem1.setIcon(new changeColorCheckbox(Color.RED));
+        sem2.setIcon(new changeColorCheckbox(Config.primaryColor_hard));
+        specialSem.setIcon(new changeColorCheckbox(Color.GREEN));
 
 
         int worldWidth = (frame.getWidth()/4);

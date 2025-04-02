@@ -227,7 +227,7 @@ public class HomePage implements ActionListener {
             } else if (e.getSource().equals(button[1])) {
                 new ExamSchedulePage(frame);
             } else if (e.getSource().equals(button[2])) {
-                new Student_CheckGrade(frame);
+                new student_checkGrade(frame);
             } else if (e.getSource().equals(button[3])) {
                 new CalendarPage(frame);
             } else if (e.getSource().equals(button[4])) {

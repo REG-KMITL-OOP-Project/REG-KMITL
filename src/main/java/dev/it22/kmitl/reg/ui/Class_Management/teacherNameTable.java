@@ -1,5 +1,6 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import dev.it22.kmitl.reg.utils.Config;
 
 import javax.swing.*;
@@ -8,19 +9,19 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 
-public class TeacherNameTable extends JPanel {
+public class teacherNameTable extends JPanel {
     private JTable name_table;
     private JScrollPane name_scroll;
     private String[] name_column;
     private String[][] name;
 
-    public TeacherNameTable() {
+    public teacherNameTable() {
         this("รายชื่ออาจารย์",new String[5], 900);
     }
-    public TeacherNameTable(String[] name_data) {
+    public teacherNameTable(String[] name_data) {
         this("รายชื่ออาจารย์",name_data, 900);
     }
-    public TeacherNameTable(String tableName, String[] name_data, int width) {
+    public teacherNameTable(String tableName, String[] name_data, int width) {
 //        try{
 //            UIManager.setLookAndFeel(new FlatLightLaf());
 //        } catch (Exception e){

@@ -1,29 +1,36 @@
 package dev.it22.kmitl.reg.ui.event.calendar;
 
+import dev.it22.kmitl.reg.controller.auth.Login;
+import dev.it22.kmitl.reg.ui.event.admin.EditEventPage;
+import dev.it22.kmitl.reg.ui.event.examSch.ExamSchedulePage;
+import dev.it22.kmitl.reg.utils.Config;
+
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class MonthTableCalendar implements MouseListener{
-    private CalendarTable jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, nov_2, dec, jun_spe;
+public class monthTableCalendar implements MouseListener{
+    private calendarTable jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, nov_2, dec, jun_spe;
     private JPanel sem1, sem2, sem2_1, spe;
-    private CalendarData data = new CalendarData();
+    private calendarData data = new calendarData();
 
-    public MonthTableCalendar() {
-        jan = new CalendarTable("มกราคม", data.eventsData(1));
-        feb = new CalendarTable("กุมภาพันธ์", data.eventsData(2));
-        mar = new CalendarTable("มีนาคม", data.eventsData(3));
-        apr = new CalendarTable("เมษายน", data.eventsData(4));
-        may = new CalendarTable("พฤษภาคม", data.eventsData(5));
-        jun = new CalendarTable("มิถุนายน", data.eventsData(6));
-        jul = new CalendarTable("กรกฎาคม", data.eventsData(7));
-        aug = new CalendarTable("สิงหาคม", data.eventsData(8));
-        sep = new CalendarTable("กันยายน", data.eventsData(9));
-        oct = new CalendarTable("ตุลาคม", data.eventsData(10));
-        nov = new CalendarTable("พฤศจิกายน", data.eventsData(11));
-        nov_2 = new CalendarTable("พฤศจิกายน", data.eventsData(11));
-        dec = new CalendarTable("ธันวาคม", data.eventsData(12));
-        jun_spe = new CalendarTable("มิถุนายน", data.eventsData(61));
+    public monthTableCalendar() {
+        jan = new calendarTable("มกราคม", data.eventsData(1));
+        feb = new calendarTable("กุมภาพันธ์", data.eventsData(2));
+        mar = new calendarTable("มีนาคม", data.eventsData(3));
+        apr = new calendarTable("เมษายน", data.eventsData(4));
+        may = new calendarTable("พฤษภาคม", data.eventsData(5));
+        jun = new calendarTable("มิถุนายน", data.eventsData(6));
+        jul = new calendarTable("กรกฎาคม", data.eventsData(7));
+        aug = new calendarTable("สิงหาคม", data.eventsData(8));
+        sep = new calendarTable("กันยายน", data.eventsData(9));
+        oct = new calendarTable("ตุลาคม", data.eventsData(10));
+        nov = new calendarTable("พฤศจิกายน", data.eventsData(11));
+        nov_2 = new calendarTable("พฤศจิกายน", data.eventsData(11));
+        dec = new calendarTable("ธันวาคม", data.eventsData(12));
+        jun_spe = new calendarTable("มิถุนายน", data.eventsData(61));
 
         sem1 = new JPanel();
         sem1.setBackground(null);
@@ -91,7 +98,7 @@ public class MonthTableCalendar implements MouseListener{
     }
 
 
-    public void testSizeData(CalendarData data) {
+    public void testSizeData(calendarData data) {
         for (int i = 1 ; i <= 12 ; i++ ){
             System.out.println(data.getDataEvents(i).size());
         }
@@ -125,43 +132,43 @@ public class MonthTableCalendar implements MouseListener{
     @Override
     public void mouseExited(MouseEvent e) {}
 
-    public CalendarTable getJan() {
+    public calendarTable getJan() {
         return jan;
     }
-    public CalendarTable getFeb() {
+    public calendarTable getFeb() {
         return feb;
     }
-    public CalendarTable getMar() {
+    public calendarTable getMar() {
         return mar;
     }
-    public CalendarTable getApr() {
+    public calendarTable getApr() {
         return apr;
     }
-    public CalendarTable getMay() {
+    public calendarTable getMay() {
         return may;
     }
-    public CalendarTable getJun() {
+    public calendarTable getJun() {
         return jun;
     }
-    public CalendarTable getJul() {
+    public calendarTable getJul() {
         return jul;
     }
-    public CalendarTable getAug() {
+    public calendarTable getAug() {
         return aug;
     }
-    public CalendarTable getSep() {
+    public calendarTable getSep() {
         return sep;
     }
-    public CalendarTable getOct() {
+    public calendarTable getOct() {
         return oct;
     }
-    public CalendarTable getNov() {
+    public calendarTable getNov() {
         return nov;
     }
-    public CalendarTable getDec() {
+    public calendarTable getDec() {
         return dec;
     }
-    public CalendarTable getNov_2() {return nov_2;}
+    public calendarTable getNov_2() {return nov_2;}
 
 }
 

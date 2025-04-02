@@ -75,6 +75,10 @@ public class EditEventPage extends EventPage implements ActionListener {
         frame.setVisible(true);
     }
 
+    public static void main(String[] args) {
+        //new EditEventPage(Config.createAndShowGUI());
+    }
+
     private RoundedButtonWithColor del , cal ;
     private JDialog dialog ;
 
