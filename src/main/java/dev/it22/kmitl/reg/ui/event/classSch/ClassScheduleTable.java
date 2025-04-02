@@ -11,8 +11,7 @@ import java.awt.*;
 import java.sql.SQLException;
 
 public class ClassScheduleTable extends JPanel {
-    private JPanel row, column, com;
-    private JScrollPane scroll, scroll_1;
+    private JScrollPane scroll;
     private JTable table_day, table_column;
     private String day_time_column[] = {"     "};
     private String day[][] = {{"วันจันทร์"}, {"วันอังคาร"}, {"วันพุธ"}, {"วันพฤหัสบดี"}, {"วันศุกร์"}, {"วันเสาร์"}, {"วันอาทิตย์"}};
@@ -34,68 +33,58 @@ public class ClassScheduleTable extends JPanel {
             throw new RuntimeException(e);
         }
 
+        // Day Table
         DefaultTableModel model_day = new DefaultTableModel(day, day_time_column);
-        table_day = new JTable(model_day);
-        table_day.setRowHeight(frame.getHeight() / 15);
-        table_day.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-        table_day.setGridColor(Color.WHITE);
-        table_day.setFont(Config.NORMAL_REGULAR);
-        table_day.setEnabled(false);
-        table_day.setBackground(Color.WHITE);
-        table_day.setShowHorizontalLines(false);
-        table_day.setPreferredSize(new Dimension(frame.getWidth() / 11, frame.getHeight() / 2));
-
-        JTableHeader header = table_day.getTableHeader();
-        header.setPreferredSize(new Dimension(table_day.getPreferredSize().width, frame.getHeight() / 28));
-        header.setBackground(Config.primaryColor_hard);
-        header.setForeground(Color.WHITE);
-        header.setFont(Config.HEADER_SEMIBOLD[3]);
-        header.setResizingAllowed(false);
-        header.setReorderingAllowed(false);
-
+        table_day = createTable(model_day, frame);
         scroll = new JScrollPane(table_day);
         scroll.setBorder(null);
-        row = new JPanel(new BorderLayout());
+
+        JPanel row = new JPanel(new BorderLayout());
         row.add(scroll);
-        row.setBackground(Color.cyan);
-        row.setBorder(new EmptyBorder(-6, 0, 0, 0));
+        row.setBackground(Config.bgColor_base);
         row.setPreferredSize(new Dimension(frame.getWidth() / 11, frame.getHeight() / 2));
 
-        DefaultTableModel model = new DefaultTableModel(schedule, time_column);
-        table_column = new JTable(model);
-        table_column.setEnabled(false);
-        table_column.setRowHeight(frame.getHeight() / 15);
-        table_column.setBorder(BorderFactory.createLineBorder(Config.bgColor_base.darker()));
-        table_column.setGridColor(Config.bgColor_base);
-        table_column.setFont(Config.NORMAL_REGULAR);
-        table_column.setForeground(Color.white);
-        table_column.setBackground(Config.bgColor_base.darker());
-        table_column.setPreferredSize(new Dimension(frame.getWidth(), table_column.getRowHeight() * 7));
+        // Schedule Table
+        DefaultTableModel model_schedule = new DefaultTableModel(schedule, time_column);
+        table_column = createTable(model_schedule, frame);
 
-        JTableHeader header_c = table_column.getTableHeader();
-        header_c.setPreferredSize(new Dimension(header.getPreferredSize().width, header.getPreferredSize().height));
-        header_c.setBackground(Config.primaryColor_hard);
-        header_c.setForeground(Color.WHITE);
-        header_c.setFont(Config.HEADER_SEMIBOLD[3]);
-        header_c.setBorder(null);
-        header_c.setReorderingAllowed(false);
-
-        scroll_1 = new JScrollPane(table_column);
+        JScrollPane scroll_1 = new JScrollPane(table_column);
         scroll_1.setBackground(Config.bgColor_base.darker());
         scroll_1.setBorder(null);
-        scroll_1.setPreferredSize(new Dimension(frame.getWidth(), table_column.getRowHeight() * 8));
 
-        com = new JPanel(new BorderLayout());
+        JPanel com = new JPanel(new BorderLayout());
         com.setBackground(null);
-        com.setPreferredSize(new Dimension(frame.getWidth() - frame.getWidth() / 15, table_column.getRowHeight() * 8 + header_c.getPreferredSize().height));
-        com.setBorder(BorderFactory.createEmptyBorder(0, 0, 35, 0));
+        com.setPreferredSize(new Dimension(frame.getWidth() - frame.getWidth() / 15, frame.getHeight() / 2));
         com.add(row, BorderLayout.WEST);
-        com.add(scroll_1);
+        com.add(scroll_1, BorderLayout.CENTER);
 
         this.setLayout(new FlowLayout());
         this.setBackground(null);
-        this.setPreferredSize(new Dimension(frame.getWidth() - frame.getWidth() / 11, table_column.getRowHeight() * 8));
-        this.setBorder(BorderFactory.createEmptyBorder(0, 0, 35, 0));
         this.add(com);
+    }
+
+    // Helper function to create and style tables
+
+    private JTable createTable(DefaultTableModel model, JFrame frame) {
+        JTable table = new JTable(model);
+        table.setRowHeight(30); // Adjusted for uniformity
+        table.setFont(Config.NORMAL_REGULAR.deriveFont(15f)); // Same font size as ExamScheduleTable
+        table.setGridColor(Config.bgColor_base.darker());
+        table.setShowGrid(true);
+        table.setForeground(Color.white);
+        table.setBackground(Config.bgColor_base.darker()); // Adjusted for consistency
+
+        JTableHeader header = table.getTableHeader();
+        header.setBackground(Config.primaryColor_hard);
+        header.setForeground(Color.WHITE);
+        header.setFont(Config.HEADER_SEMIBOLD[3]);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+
+        return table;
     }
 }

@@ -16,7 +16,7 @@ import javax.swing.*;
 
 public class ExamSchedulePage implements ActionListener, SeletedItemCombobox {
     private JFrame frame;
-    private JPanel pn1 ;
+    private JPanel pn1;
 
     //user-data
     private Account user;
@@ -25,23 +25,21 @@ public class ExamSchedulePage implements ActionListener, SeletedItemCombobox {
     private JPanel headerPanel;
 
     //body-information
-    private JPanel allInfo, testFormat, allchosen, choseYear,choseSem,choseExam, stdInfo;
+    private JPanel allInfo, testFormat, allchosen, choseYear, choseSem, choseExam, stdInfo;
     private JLabel ID, name, faculty, branch;
-    private JComboBox year, semester, exam ;
+    private JComboBox year, semester, exam;
 
     // table
     private ExamScheduleTable table;
 
     private String years[] = {"2568", "2567", "2566"};
     private String semesters[] = {"เทอม 1", "เทอม 2"};
-    private String exams[] = {"กลางภาค","ปลายภาค"};
+    private String exams[] = {"กลางภาค", "ปลายภาค"};
     private Font innerFont, regularFont;
-    private String yearItem,semItem,examItem;
+    private String yearItem, semItem, examItem;
 
 
-
-
-    public ExamSchedulePage(JFrame frame){
+    public ExamSchedulePage(JFrame frame) {
         this.frame = frame;
         pn1 = new JPanel();
         pn1.setBackground(null);
@@ -56,7 +54,7 @@ public class ExamSchedulePage implements ActionListener, SeletedItemCombobox {
         allchosen = new JPanel();
 
         choseYear = new JPanel();
-        choseSem= new JPanel();
+        choseSem = new JPanel();
         choseExam = new JPanel();
         stdInfo = new JPanel();
 
@@ -76,10 +74,10 @@ public class ExamSchedulePage implements ActionListener, SeletedItemCombobox {
 //        faculty = new JLabel("คณะ : ");
 //        branch = new JLabel("สาขา : ");
 
-        ID = new JLabel("รหัสนักศึกษา : "+ ((Student) user).getStudentId());
-        name = new JLabel("ชื่อ : "+ ((Student) user).getFullName());
-        faculty = new JLabel("คณะ : "+ ((Student) user).getFaculty());
-        branch = new JLabel("สาขา : "+ ((Student) user).getMajor());
+        ID = new JLabel("รหัสนักศึกษา : " + ((Student) user).getStudentId());
+        name = new JLabel("ชื่อ : " + ((Student) user).getFullName());
+        faculty = new JLabel("คณะ : " + ((Student) user).getFaculty());
+        branch = new JLabel("สาขา : " + ((Student) user).getMajor());
 
         ID.setForeground(Color.WHITE);
         name.setForeground(Color.WHITE);
@@ -147,10 +145,11 @@ public class ExamSchedulePage implements ActionListener, SeletedItemCombobox {
 
         pn1.setLayout(new BorderLayout());
         pn1.add(allInfo, BorderLayout.NORTH);
-        
+
         //table
-        table = new ExamScheduleTable(frame);
+        table = new ExamScheduleTable(frame, this);
         pn1.add(table, BorderLayout.CENTER);
+        pn1.setBorder(BorderFactory.createEmptyBorder(0, 40, 100, 40));
 
         frame.setLayout(new BorderLayout());
         headerPanel = new NewHeader("ตารางสอบ", frame, table);
@@ -161,7 +160,7 @@ public class ExamSchedulePage implements ActionListener, SeletedItemCombobox {
         frame.setVisible(true);
     }
 
-//    public static void main(String[] args) {
+    //    public static void main(String[] args) {
 //        try {
 //            new Login("Student01","Student1234").loginWithUsernameAndPassword();
 //            new ExamSchedulePage(Config.createAndShowGUI());
@@ -172,23 +171,23 @@ public class ExamSchedulePage implements ActionListener, SeletedItemCombobox {
 //    }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == year){
+        if (e.getSource() == year) {
             yearItem = selectedItem(year);
-            if (year.getSelectedIndex() != 0){
+            if (year.getSelectedIndex() != 0) {
                 new ErrorModal(frame, "ขออภัย ยังไม่มีข้อมูลในขณะนี้");
                 year.setSelectedIndex(0);
             }
         }
-        if (e.getSource() == semester){
+        if (e.getSource() == semester) {
             semItem = selectedItem(semester);
-            if (semester.getSelectedIndex() != 0){
+            if (semester.getSelectedIndex() != 0) {
                 new ErrorModal(frame, "ขออภัย ยังไม่มีข้อมูลในขณะนี้");
                 semester.setSelectedIndex(0);
             }
         }
-        if (e.getSource() == exam){
+        if (e.getSource() == exam) {
             examItem = selectedItem(exam);
-            if (exam.getSelectedIndex() != 0){
+            if (exam.getSelectedIndex() != 0) {
                 new ErrorModal(frame, "ขออภัย ยังไม่มีข้อมูลในขณะนี้");
                 exam.setSelectedIndex(0);
             }
@@ -196,7 +195,7 @@ public class ExamSchedulePage implements ActionListener, SeletedItemCombobox {
     }
 
     @Override
-    public String selectedItem(JComboBox comboBox){
+    public String selectedItem(JComboBox comboBox) {
         String selectedItem = (String) comboBox.getSelectedItem();
         return selectedItem;
     }
@@ -207,7 +206,7 @@ public class ExamSchedulePage implements ActionListener, SeletedItemCombobox {
     }
 
     @Override
-    public String getSemItem(){
+    public String getSemItem() {
         return semItem;
     }
 
