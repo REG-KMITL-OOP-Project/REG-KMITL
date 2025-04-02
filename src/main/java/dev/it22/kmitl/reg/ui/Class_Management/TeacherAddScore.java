@@ -1,14 +1,10 @@
 package dev.it22.kmitl.reg.ui.Class_Management;
 
 import dev.it22.kmitl.reg.controller.auth.Login;
-import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.controller.score.ScoreDatabase;
-import dev.it22.kmitl.reg.model.auth.Account;
-import dev.it22.kmitl.reg.model.score.ScoreModel;
 import dev.it22.kmitl.reg.ui.Class_Management.component.callData;
 import dev.it22.kmitl.reg.ui.Class_Management.component.stdInfo;
 import dev.it22.kmitl.reg.ui.HomePage;
-import dev.it22.kmitl.reg.ui.event.calendar.calendarData;
 import dev.it22.kmitl.reg.utils.*;
 import dev.it22.kmitl.reg.controller.score.ScoreController;
 

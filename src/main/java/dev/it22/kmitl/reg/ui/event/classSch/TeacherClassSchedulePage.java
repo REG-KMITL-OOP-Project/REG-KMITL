@@ -5,8 +5,8 @@ import dev.it22.kmitl.reg.controller.auth.Login;
 import dev.it22.kmitl.reg.controller.auth.User;
 import dev.it22.kmitl.reg.model.auth.Account;
 import dev.it22.kmitl.reg.model.auth.Prof;
-import dev.it22.kmitl.reg.ui.event.component.newHeader;
-import dev.it22.kmitl.reg.ui.event.component.seletedItemCombobox;
+import dev.it22.kmitl.reg.ui.event.component.NewHeader;
+import dev.it22.kmitl.reg.ui.event.component.SeletedItemCombobox;
 import dev.it22.kmitl.reg.utils.Config;
 import dev.it22.kmitl.reg.utils.ErrorModal;
 
@@ -15,7 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TeacherClassSchedulePage implements ActionListener, seletedItemCombobox {
+public class TeacherClassSchedulePage implements ActionListener, SeletedItemCombobox {
     private JFrame frame;
     private JPanel pn1 , pn2;
 
@@ -146,7 +146,7 @@ public class TeacherClassSchedulePage implements ActionListener, seletedItemComb
         pn1.add(table, BorderLayout.CENTER);
 
         frame.setLayout(new BorderLayout());
-        headerPanel = new newHeader("ตารางสอน", frame, table);
+        headerPanel = new NewHeader("ตารางสอน", frame, table);
         frame.add(headerPanel, BorderLayout.NORTH);
         frame.add(pn1, BorderLayout.CENTER);
 
